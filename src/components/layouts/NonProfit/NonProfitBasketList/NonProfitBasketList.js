@@ -1,5 +1,5 @@
 import React from 'react';
-import NonProfiBasket from './NonProfitBasket/NonProfitBasket';
+import NonProfitBasket from './NonProfitBasket/NonProfitBasket';
 
 class NonProfitBasketList extends React.Component {
   constructor() {
@@ -9,7 +9,7 @@ class NonProfitBasketList extends React.Component {
   render() {
     return (
       <section>
-        <NonProfiBasket />
+        <NonProfitBasket />
       </section>
     );
   }
