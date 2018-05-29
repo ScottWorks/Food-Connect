@@ -1,6 +1,6 @@
 import React from 'react'
 
-class NonProfit extends React.Component {
+class NonProfitBasketList extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -9,11 +9,11 @@ class NonProfit extends React.Component {
   }
   render() {
     return (
-      <div className="NonProfit">
+      <div className="NonProfitBasketList">
 
       </div>
     )
   }
 }
 
-export default NonProfit
+export default NonProfitBasketList
