@@ -28,7 +28,7 @@ app.get('/api/auth/logout');
 app.get('/api/auth/register')
 
 // LANDING ENDPOINTS
-
+app.get('/api/statistics')
 
 // BUSINESS ENDPOINTS
 // Business Basket-Endpoints
