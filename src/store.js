@@ -1,13 +1,13 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import reducer from './redux/reducer';
 import promiseMiddleware from 'redux-promise-middleware';
-import adminReducer from './ducks/adminReducer';
+import authReducer from './ducks/authReducer';
 import businessReucer from './ducks/businessReducer';
 import nonProfitReducer from './ducks/non-profitReducer'
 
 
 const reducers = {
-    adminReducer,
+    authReducer,
     businessReducer,
     nonProfitReducer
 }
