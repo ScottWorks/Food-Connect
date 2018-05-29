@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
+import { HashRouter } from 'react-router-dom'
+import routes from './routes/routes'
 import './App.css';
-import Footer from "./components/components/Footer/Footer";
-import Header from "./components/components/Header/Header";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Header />
-        <Footer />
-      </div>
-    );
-  }
+class App extends Component{
+ render() {
+   return (
+     <div className="App">
+       <HashRouter>
+         {routes}
+       </HashRouter>
+     </div>
+   );
+ }
 }
 
 export default App;
