@@ -1,11 +1,19 @@
-import React, {Component} from 'react'
+import React, { Component } from "react";
+// import {Link} from "react-router-dom";
+import Footer from "./components/components/Footer/Footer";
+import Header from "./components/components/Header/Header";
 
-export default class LandingPage extends Component {
-    render() {
+class LandingPage extends Component{
+    render(){
         return(
-            <div>
-                This is the landing page.
-            </div>
+            <div className="">
+                <Header/>
+                 This is the landing page.
+                <Footer/>
+            </div> 
         )
- }
+    }
 }
+
+export default LandingPage;
+
