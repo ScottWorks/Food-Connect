@@ -1,18 +1,57 @@
-DROP TABLE IF EXISTS businesses
+DROP TABLE IF EXISTS baskets;
+DROP TABLE IF EXISTS wishList;
+DROP TABLE IF EXISTS businesses;
+DROP TABLE IF EXISTS nonProfits;
+
 
 CREATE TABLE businesses
 (
     business_id SERIAL PRIMARY KEY,
-    business_name VARCHAR(45),
+    company_name VARCHAR(45),
     street_address VARCHAR(45),
     city VARCHAR(45),
-    state VARCHAR(),
+    state VARCHAR(2),
     zip_code VARCHAR(45),
     phone_number VARCHAR(15),
     business_type VARCHAR(45),
     admin_first_name VARCHAR(45),
     admin_last_name VARCHAR(45),
     fein VARCHAR(20),
-    latitude VARCHAR(45),
-    longitude VARCHAR(45)
-)
+    latitude DECIMAL,
+    longitude DECIMAL
+);
+
+CREATE TABLE nonProfits
+(
+    non_profit_id SERIAL PRIMARY KEY,
+    company_name VARCHAR(45),
+    street_address VARCHAR(45),
+    city VARCHAR(45),
+    state VARCHAR(2),
+    zip_code VARCHAR(45),
+    phone_number VARCHAR(15),
+    business_type VARCHAR(45),
+    admin_first_name VARCHAR(45),
+    admin_last_name VARCHAR(45),
+    fein VARCHAR(20),
+    latitude DECIMAL,
+    longitude DECIMAL
+);
+
+CREATE TABLE baskets
+(
+    basket_id SERIAL PRIMARY KEY,
+    business_id INTEGER REFERENCES businesses(business_id),
+    pick_up_time INTEGER,
+    scheduled_time INTEGER,
+    -- STATUS: INTEGER IS USED AS A FLAG TO RECORD STATUS
+    status INTEGER,
+    items JSONB
+);
+
+CREATE TABLE wishList
+(
+    wishlist_id SERIAL PRIMARY KEY,
+    non_profit_id INTEGER REFERENCES nonProfits(non_profit_id),
+    items text[]
+);
