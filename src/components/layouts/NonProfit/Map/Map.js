@@ -1,6 +1,6 @@
 import React from 'react';
 
-class NonProfitBasket extends React.Component {
+class Map extends React.Component {
   constructor() {
     super();
     this.state = {};
@@ -8,10 +8,10 @@ class NonProfitBasket extends React.Component {
   render() {
     return (
       <section>
-        <p>Basket</p>
+        <p>Google Map</p>
       </section>
     );
   }
 }
 
-export default NonProfitBasket;
+export default Map;
