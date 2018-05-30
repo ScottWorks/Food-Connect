@@ -1,43 +1,43 @@
 import React, { Component } from "react";
-import glamorous from "glamorous";
-import { Div } from "glamorous";
 import Scone from "./../../../assets/images/scone.png";
-import Hamburger from "./../../../assets/icons/hamburger.png"
+import './Header.css'
 // import {Link} from "react-router-dom";
 
-const HeaderMain = glamorous.div({
-    position: 'fixed',
-    top: 0,
-    background: 'linear-gradient(#56ab2f,#a8e063)',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: 70,
-    borderRadius: "0px 0px 3px 3px"
-})
+class Header extends Component {
 
-const HeaderContents = glamorous.div({
-    display:'flex',
-    width: "90%",
-    alignItems:'center',
-    justifyContent: 'space-between'
-})
+    // toggleCSS() {
+    //     document.getElementById('bar1').classList.toggle("change_bar1");
+    //     document.getElementById('bar2').classList.toggle("change_bar2");
+    //     document.getElementById('bar3').classList.toggle("change_bar3");
+    // }
 
-const HeaderIMG = glamorous.img({
-    height: 50,
-    width:50
-})
+    render() {
+        return (
+            <div id="header_main">
+                <div id="header_contents">
 
-class Header extends Component{
-    render(){
-        return(
-            <HeaderMain>
-                <HeaderContents>
-                    <HeaderIMG alt="scone" src={Scone}/>
-                    <HeaderIMG alt="hamburger_menu" src={Hamburger}/>
-                </HeaderContents>    
-            </HeaderMain> 
+                <div id="menuToggle">
+                        <input type="checkbox" />
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <ul id="menu">
+                            <a href="#"><li>Sign Up</li></a>
+                            <a href="#"><li>Login</li></a>
+                            <a href="#"><li>Dashboard</li></a>
+                            <a href="#"><li>FAQ</li></a>
+                        </ul>
+                    </div>
+
+                    <img alt="scone" src={Scone} id="header_img" />
+
+                    {/* <div id="container" onClick={() => this.toggleCSS()}>
+                        <div id="bar1"></div>
+                        <div id="bar2"></div>
+                        <div id="bar3"></div>
+                    </div> */}
+                </div>
+            </div>
         )
     }
 }
