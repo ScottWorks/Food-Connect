@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ScheduleBasket extends React.Component {
+class Map extends React.Component {
   constructor() {
     super();
     this.state = {};
@@ -8,10 +8,10 @@ class ScheduleBasket extends React.Component {
   render() {
     return (
       <section>
-        <p>Schedule Basket</p>
+        <p>Google Map</p>
       </section>
     );
   }
 }
 
-export default ScheduleBasket;
+export default Map;
