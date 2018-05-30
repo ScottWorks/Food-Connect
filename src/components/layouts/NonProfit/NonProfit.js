@@ -11,7 +11,6 @@ class NonProfit extends React.Component {
     this.state = {
       baskets: []
     };
-
     this.getBaskets = this.getBaskets.bind(this);
   }
 
@@ -27,6 +26,12 @@ class NonProfit extends React.Component {
     });
   }
 
+  reserveBasket() {}
+
+  showContactInfo(currentBasket) {
+    alert(currentBasket.company_name);
+  }
+
   render() {
     const { baskets } = this.state;
 
@@ -34,7 +39,11 @@ class NonProfit extends React.Component {
       <main className="mobile">
         <div className="NonProfit">Non Profit Page</div>
         <ScheduleList />
-        <NonProfitBasketList baskets={baskets} />
+        <NonProfitBasketList
+          baskets={baskets}
+          _inspectBasket={this.inspectBasket}
+          _showContactInfo={this.showContactInfo}
+        />
       </main>
     );
   }
