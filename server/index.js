@@ -5,14 +5,23 @@ const cors = require('cors')
 const app = express();
 const massive = require('massive');
 const dotenv = require('dotenv');
+const session = require('express-session')
 const twilioController = require('./controllers/TwilioController')
 dotenv.config();
+const { SERVER_PORT, CONNECTION_STRING, SECRET_SESSION } = process.env; //.env Deconstructor
 
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(`${__dirname}/../build`));
 
-const { SERVER_PORT, CONNECTION_STRING } = process.env;
+// Sessions
+app.use(
+  session({
+    secet: SECRET_SESSION,
+    resave: false,
+    saveUninitialized: true
+  })
+)
 
 massive(CONNECTION_STRING)
   .then((dbInstance) => {
@@ -26,10 +35,10 @@ massive(CONNECTION_STRING)
 app.get('/api/auth/me');
 app.get('/api/auth/login');
 app.get('/api/auth/logout');
-app.get('/api/auth/register')
+app.get('/api/auth/register');
 
 // LANDING ENDPOINTS
-app.get('/api/statistics')
+app.get('/api/statistics');
 
 // BUSINESS ENDPOINTS
 // Business Basket-Endpoints
