@@ -5,14 +5,19 @@ const cors = require('cors');
 const app = express();
 const massive = require('massive');
 const dotenv = require('dotenv');
-const session = require('express-session');
-const twilioController = require('./controllers/TwilioController');
-const s3Controller = require('./controllers/S3Controller');
-const mailController = require('./controllers/MailController')
 dotenv.config();
-const { SERVER_PORT, CONNECTION_STRING, SECRET_SESSION } = process.env; //.env Deconstructor
+const session = require('express-session');
 
-const nonProfitController = require('./controllers/NonProfitController');
+// Controllers
+const twilioController = require('./controllers/TwilioController'),
+      s3Controller = require('./controllers/S3Controller'),
+      mailController = require('./controllers/MailController'),
+      BusinessController = require('./controllers/BusinessController'),
+      nonProfitController = require('./controllers/NonProfitController'),
+      authController = require('./controllers/authController')
+      generalController = require('./controllers/GeneralController');
+
+const { SERVER_PORT, CONNECTION_STRING, SECRET_SESSION } = process.env; //.env Deconstructor
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -21,7 +26,7 @@ app.use(express.static(`${__dirname}/../build`));
 // Sessions
 app.use(
   session({
-    secet: SECRET_SESSION,
+    secret: SECRET_SESSION,
     resave: false,
     saveUninitialized: true
   })
@@ -39,15 +44,15 @@ massive(CONNECTION_STRING)
 app.get('/api/auth/me');
 app.get('/api/auth/login');
 app.get('/api/auth/logout');
-app.get('/api/auth/register');
+app.post('/api/auth/register');
 
 // LANDING ENDPOINTS
 app.get('/api/statistics');
 
 // BUSINESS ENDPOINTS
 // Business Basket-Endpoints
-app.get('/api/basket/:businessID', BusinessController.getBusinessBaskets);
-app.get('/api/basket');
+app.get('/api/basket/:businessID/:epochTime', BusinessController.getBusinessBaskets);
+app.get('/api/basket');  // USE TO PULL ALL BASKETS TO RUN STATS
 app.put('/api/basket/:basketID', BusinessController.updateBusinessBasket);
 app.post('/api/basket', BusinessController.createBaskets);
 app.delete('/api/basket/:basketID', BusinessController.deleteBusinessBasket);
