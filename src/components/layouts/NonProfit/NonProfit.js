@@ -9,26 +9,7 @@ class NonProfit extends React.Component {
   constructor() {
     super();
     this.state = {
-      baskets: [
-        {
-          resturant: 'Houstons',
-          featuredFood: ['Bagels', 'Croissants'],
-          distanceFrom: 10.4,
-          availability: { mon: '8-4', tue: '8-4', wed: '8-4' }
-        },
-        {
-          resturant: 'McDonalds',
-          featuredFood: ['Muffins', 'Donuts'],
-          distanceFrom: 0.7,
-          availability: { mon: '8-4', tue: '8-4', wed: '8-4' }
-        },
-        {
-          resturant: 'Pancho Villas',
-          featuredFood: ['Tortilla', 'Nachos'],
-          distanceFrom: 32,
-          availability: { mon: '8-4', tue: '8-4', wed: '8-4' }
-        }
-      ]
+      baskets: []
     };
 
     this.getBaskets = this.getBaskets.bind(this);
