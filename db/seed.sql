@@ -65,5 +65,5 @@ CREATE TABLE users
     user_pw VARCHAR(45),
     business_id INTEGER REFERENCES businesses(business_id),
     non_profit_id INTEGER REFERENCES nonProfits(non_profit_id),
-    business_type BOOLEAN
+    acct_type BOOLEAN
 );
