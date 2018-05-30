@@ -6,9 +6,12 @@ class NonProfitBasket extends React.Component {
     this.state = {};
   }
   render() {
+    const { currentBasket } = this.props;
     return (
       <section>
-        <p>Basket</p>
+        <p>{currentBasket.resturant}</p>
+        <p>{currentBasket.featuredFood}</p>
+        <p>{currentBasket.distanceFrom}</p>
       </section>
     );
   }
