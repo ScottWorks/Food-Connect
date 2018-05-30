@@ -17,7 +17,7 @@ CREATE TABLE businesses
     admin_first_name VARCHAR(45),
     admin_last_name VARCHAR(45),
     fein VARCHAR(20),
-    operating_hrs VARCHAR(45),
+    operating_hrs TEXT,  
     latitude DECIMAL,
     longitude DECIMAL
 );
@@ -82,5 +82,8 @@ CREATE TABLE users
 (
     user_id SERIAL PRIMARY KEY,
     user_name VARCHAR(45),
-    user_pw VARCHAR(45)
-)
+    user_pw VARCHAR(45),
+    business_id INTEGER REFERENCES businesses(business_id),
+    non_profit_id INTEGER REFERENCES nonProfits(non_profit_id),
+    acct_type BOOLEAN
+);
