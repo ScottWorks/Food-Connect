@@ -1,7 +1,7 @@
 // Required
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors')
+const cors = require('cors');
 const app = express();
 const massive = require('massive');
 const dotenv = require('dotenv');
@@ -9,6 +9,8 @@ const session = require('express-session')
 const twilioController = require('./controllers/TwilioController')
 dotenv.config();
 const { SERVER_PORT, CONNECTION_STRING, SECRET_SESSION } = process.env; //.env Deconstructor
+
+const nonProfitController = require('./controllers/NonProfitController');
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -55,8 +57,8 @@ app.put('/api/business/:businessID');
 
 // NON-PROFIT ENDPOINTS
 // Non-Profit Basket Endpoints
-app.get('/api/basket');
-app.put('/api/basket/:basketID');
+app.get('/api/basket', nonProfitController.getBaskets);
+// app.put('/api/basket/:basketID', nonProfitController.updateBasket);
 
 // Non-Profit Wishlist Endpoints
 app.get('/api/wishlist/:nonProfitID');
