@@ -1,19 +1,18 @@
-import React from 'react'
+import React from 'react';
+import NonProfitBasket from './NonProfitBasket/NonProfitBasket';
 
 class NonProfitBasketList extends React.Component {
   constructor() {
-    super()
-    this.state = {
-      
-    }
+    super();
+    this.state = {};
   }
   render() {
     return (
-      <div className="NonProfitBasketList">
-
-      </div>
-    )
+      <section>
+        <NonProfitBasket />
+      </section>
+    );
   }
 }
 
-export default NonProfitBasketList
+export default NonProfitBasketList;
