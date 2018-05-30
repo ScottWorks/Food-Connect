@@ -1,9 +1,148 @@
 .landing_main{
     display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+    height: 100%;
+    width: 100vw;
+}
+
+.landing_wrapper{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 70px;
+    height: 100%;
+    width: 100%;
+}
+
+.landing_main_media{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 70px;
+    width: 100vw;
+    height: 200px;
+    background-image: url('https://cdn.history.com/sites/2/2014/01/IH012802-P.jpeg');
+    background-size: cover;
+    border-radius: 3px;
+}
+
+.landing_login_button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size:15px;
+    margin-top: 50px;
+    height: 20px;
+    width: 100px;
+    border-radius: 15px;
+    background: linear-gradient(#56ab2f, #a8e063);
+}
+
+.landing_signup_button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size:15px;
+    margin-top: 15px;
+    height: 20px;
+    width: 120px;
+    border-radius: 15px;
+    background: linear-gradient(#56ab2f, #a8e063);
+}
+
+.landing_hexmap{
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    width: 100vw;
+    height: 220px;
+}
+
+.landing_hexmap_title{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.landing_hexmap_container{
+    background-color: green;
+    width: 90%;
+    height: 150px;
+}
+
+.landing_about{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 220px;
+}
+
+.landing_about_title{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.landing_about_container{
+    background-color: green;
+    width: 90%;
+    height: 150px;
+}
+
+.landing_stats{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 220px;
+}
+
+.landing_stats_title{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.landing_stats_container{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    height: 150px;
+}
+
+.landing_graph1{
+    background-color: green;
+    width: 150px;
+    height: 150px;
+}
+
+.landing_graph2{
+    background-color: green;
+    width: 150px;
+    height: 150px;
+}
+
+.landing_getstarted{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 220px;
+    margin-bottom: 20px;
+}
+
+.landing_getstarted_title{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.landing_getstarted_container{
+    background-color: green;
+    width: 90%;
+    height: 150px;
 }
 
 .FAQ_contents{
@@ -11,4 +150,26 @@
     flex-direction: column;
     height: 200px;
     width: 80vw;
+}
+
+hr{
+    margin-top: 18px;
+    border: 0;
+    width: 80vw;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
+.vertical_line{
+    border: 0;
+    width: 120px;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+    transform:rotate(90deg);
+    margin-top: 70px;
+    margin-left:0px;
+    margin-right:0px;
+    
 }
