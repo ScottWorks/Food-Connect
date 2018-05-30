@@ -11,6 +11,6 @@ export default (
     <Route exact path='/' component={LandingPage} />
     <Route path='/business' component={Business} />
     <Route path='/nonprofit' component={NonProfit} />
-    {/* <Route path='/login' component={Login}/> */}
+    <Route path='/login' component={Login}/>
   </Switch>
 )

@@ -1,11 +1,20 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import './login.css'
 
-class Auth extends Component {
+export default class Auth extends Component {
+    constructor(){
+        super()
+
+        this.state = {}
+    }
     render(){
         return(
             <div>
-                Auth Login View.
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
             </div>
         )
     }
@@ -16,4 +25,4 @@ let mapStateToProps = (state) => {
     return state
 }
 
-export default connect(mapStateToProps, {} )(Auth)
+// export default connect(mapStateToProps, {} )(Auth)
