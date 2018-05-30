@@ -1,4 +1,5 @@
 const aws = require('aws-sdk');
+const axios = require('axios');
 require('dotenv').load();
 
 const {
@@ -31,7 +32,7 @@ module.exports = {
 
         s3.getSignedUrl('putObject', params, (err, data) => {
             if(err) {
-                console.log(`Error at s3Controller ${err}`);
+                console.log(`Server error during Sign URI: ${err}`);
                 res.sendStatus(500);
             } else {
                 res.status(200).send(data);
@@ -39,5 +40,8 @@ module.exports = {
         })
     },
 
-    
+    upload: (req, res) => {
+        // TODO:
+    }
+
 }

@@ -5,8 +5,10 @@ const cors = require('cors');
 const app = express();
 const massive = require('massive');
 const dotenv = require('dotenv');
-const session = require('express-session')
-const twilioController = require('./controllers/TwilioController')
+const session = require('express-session');
+const twilioController = require('./controllers/TwilioController');
+const s3Controller = require('./controllers/S3Controller');
+const mailController = require('./controllers/MailController')
 dotenv.config();
 const { SERVER_PORT, CONNECTION_STRING, SECRET_SESSION } = process.env; //.env Deconstructor
 
@@ -67,7 +69,18 @@ app.put('/api/wishlist/:nonProfitID');
 app.delete('/api/wishlist/:nonProfitID');
 
 // TWILIO
-app.post('/api/twilio/:phoneNumber', twilioController.sendTwilioMessage)
+app.post('/api/twilio/:phoneNumber', twilioController.sendTwilioMessage);
+
+
+// AMAZON S3
+// Requires a body with the filename & filetype
+app.post('/api/amazon/uri', s3Controller.sign);
+
+// Requires a body that contains the signed uri & file & file type
+app.put('/api/amazon/upload', s3Controller.upload) // TODO:
+
+// NODEMAILER
+app.post('/api/email', mailController.sendEmail) // TODO:
 
 app.listen(SERVER_PORT, () => {
   console.log(`Creeping on Port: ${SERVER_PORT}`);
