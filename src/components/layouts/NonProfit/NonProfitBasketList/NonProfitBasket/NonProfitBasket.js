@@ -68,13 +68,13 @@ const DisplaySomeItems = ({ items }) => {
         }
       })}
 
-      {() => {
+      {(() => {
         if (basketSize > 3) {
           return <p>{basketSize - 3} more item(s) in basket...</p>;
         } else if (basketSize <= 3) {
           return <p>No more item(s) in basket...</p>;
         }
-      }}
+      })()}
     </div>
   );
 };
