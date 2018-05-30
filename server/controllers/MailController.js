@@ -30,7 +30,7 @@ module.exports = {
             if(error) {
                 console.log(error);
             } else {
-                res.satus(200).send(response);
+                res.status(200).send(response);
             }
         })
     }
