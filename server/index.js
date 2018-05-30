@@ -5,6 +5,7 @@ const cors = require('cors')
 const app = express();
 const massive = require('massive');
 const dotenv = require('dotenv');
+const twilioController = require('./controllers/TwilioController')
 dotenv.config();
 
 app.use(bodyParser.json());
@@ -53,6 +54,9 @@ app.get('/api/wishlist/:nonProfitID');
 app.post('/api/wishlist/:nonProfitID');
 app.put('/api/wishlist/:nonProfitID');
 app.delete('/api/wishlist/:nonProfitID');
+
+// TWILIO
+app.post('/api/twilio/:phoneNumber', twilioController.sendTwilioMessage)
 
 app.listen(SERVER_PORT, () => {
   console.log(`Creeping on Port: ${SERVER_PORT}`);
