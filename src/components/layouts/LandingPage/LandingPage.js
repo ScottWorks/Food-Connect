@@ -63,4 +63,3 @@ const modalStyles = {
 };
 
 export default LandingPage;
-
