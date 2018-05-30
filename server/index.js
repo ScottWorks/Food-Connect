@@ -76,8 +76,11 @@ app.post('/api/twilio/:phoneNumber', twilioController.sendTwilioMessage);
 // Requires a body with the filename & filetype
 app.post('/api/amazon/uri', s3Controller.sign);
 
-// Requires a body that contains the signed uri & file & file type
-app.put('/api/amazon/upload', s3Controller.upload)
+/*
+ * Requires the Basket ID parameter
+ * Requires a body that contains the signed uri & file & file type
+ */
+app.put('/api/amazon/upload/:basketID', s3Controller.upload)
 
 // NODEMAILER
 // Requires a body with toEmail, fromEmail, subject, and message
