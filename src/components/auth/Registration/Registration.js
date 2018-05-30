@@ -7,7 +7,11 @@ class Register extends Component {
         super()
 
         this.state = {
-            organizationType: ''
+            organizationType: '',
+            streetAddress: '',
+            city: '',
+            state: '',
+            zip: '',
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -58,7 +62,30 @@ class Register extends Component {
                 <br/>
                 <div>
                     <span>Where are you located?</span>
-
+                    <div>
+                        <span>Street Address</span>
+                        <input type="text"
+                            value={this.state.streetAddress}
+                        />
+                    </div>
+                    <div>
+                        <span>City</span>
+                        <input type="text"
+                            value={this.state.city}
+                        />
+                    </div>
+                    <div>
+                        <span>streetAddress</span>
+                        <input type="text"
+                            value={this.state.state}
+                        />
+                    </div>
+                    <div>
+                        <span>Zip</span>
+                        <input type="text"
+                            value={this.state.zip}
+                        />
+                    </div>
                 </div>
             </div>
         )
