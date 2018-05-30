@@ -6,6 +6,7 @@ class ScheduleBasket extends React.Component {
     this.state = {};
   }
   render() {
+    {/*jdsflskjd*/}
     return (
       <section>
         <p>Schedule Basket</p>

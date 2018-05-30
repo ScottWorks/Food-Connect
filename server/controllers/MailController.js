@@ -11,7 +11,7 @@ module.exports = {
     sendEmail : (req, res) => {
         const {toEmail, fromEmail, subject, message}  = req.body
         const smtpTransport = nodemailer.createTransport({
-            // TODO:
+
             service: "Gmail",
             auth : {
                 user : EMAIL_USER,

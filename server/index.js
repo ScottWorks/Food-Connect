@@ -80,7 +80,8 @@ app.post('/api/amazon/uri', s3Controller.sign);
 app.put('/api/amazon/upload', s3Controller.upload) // TODO:
 
 // NODEMAILER
-app.post('/api/email', mailController.sendEmail) // TODO:
+// Requires a body with toEmail, fromEmail, subject, and message
+app.post('/api/email', mailController.sendEmail)
 
 app.listen(SERVER_PORT, () => {
   console.log(`Creeping on Port: ${SERVER_PORT}`);
