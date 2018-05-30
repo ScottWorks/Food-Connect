@@ -41,7 +41,16 @@ module.exports = {
     },
 
     upload: (req, res) => {
-        // TODO:
+        const {signedURL, file, fileType} = req.body;
+
+        const options = {
+            headers: {
+                "Content-type": type
+            }
+        };
+    //     axios.put(signedURL, file, options).then(result=> {
+
+    //     })
     }
 
 }

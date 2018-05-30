@@ -46,16 +46,16 @@ app.get('/api/statistics');
 
 // BUSINESS ENDPOINTS
 // Business Basket-Endpoints
-app.get('/api/basket/:businessID');
+app.get('/api/basket/:businessID', BusinessController.getBusinessBaskets);
 app.get('/api/basket');
-app.put('/api/basket/:basketID');
-app.post('/api/basket');
-app.delete('/api/basket/:basketID');
+app.put('/api/basket/:basketID', BusinessController.updateBusinessBasket);
+app.post('/api/basket', BusinessController.createBaskets);
+app.delete('/api/basket/:basketID', BusinessController.deleteBusinessBasket);
 
 // Busines Endpoints
-app.get('/api/business/');
+app.get('/api/business/', BusinessController.getBusinessInfo);
 app.post('/api/business');
-app.put('/api/business/:businessID');
+app.put('/api/business/:businessID', BusinessController.updateBusinessInfo);
 
 // NON-PROFIT ENDPOINTS
 // Non-Profit Basket Endpoints
@@ -77,7 +77,7 @@ app.post('/api/twilio/:phoneNumber', twilioController.sendTwilioMessage);
 app.post('/api/amazon/uri', s3Controller.sign);
 
 // Requires a body that contains the signed uri & file & file type
-app.put('/api/amazon/upload', s3Controller.upload) // TODO:
+app.put('/api/amazon/upload', s3Controller.upload)
 
 // NODEMAILER
 // Requires a body with toEmail, fromEmail, subject, and message
