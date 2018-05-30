@@ -41,7 +41,7 @@ class Register extends Component {
     }
 
     registerOrganization() {
-        
+        axios.post()
     }
 
     render() {
