@@ -12,7 +12,6 @@ class NonProfit extends React.Component {
       baskets: []
     };
     this.getBaskets = this.getBaskets.bind(this);
-    this.inspectBasket = this.inspectBasket.bind(this);
   }
 
   componentDidMount() {
@@ -25,10 +24,6 @@ class NonProfit extends React.Component {
         baskets: baskets.data
       });
     });
-  }
-
-  inspectBasket(currentBasket) {
-    alert(currentBasket.company_name);
   }
 
   reserveBasket() {}
