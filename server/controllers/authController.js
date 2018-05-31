@@ -21,7 +21,7 @@ module.exports = {
                   res.status(200).send('Username taken. Please choose another, and try again.')
                 
                 } else {
-                    const salt = bcrypt.genSaltSync(10)
+                    const salt = bcrypt.geSaltSync(10)
                     const hash = bcrypt.hashSync(pw, salt)
     
                     db.register_np_admin([userName, hash, group.non_profit_id]).then( user => {

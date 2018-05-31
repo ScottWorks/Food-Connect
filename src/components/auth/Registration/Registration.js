@@ -72,15 +72,6 @@ class Register extends Component {
         }, this.clearInputs())
     }
 
-    //Function for opening the modal
-    openModal() {
-        this.setState({ modalIsOpen: true });
-    }
-    //Function for closing the modal
-    closeModal() {
-        this.setState({ modalIsOpen: false });
-    }
-
     render() {
         console.log(this.state)
         return(
