@@ -15,10 +15,11 @@ class Business extends React.Component {
     this.makeBasket = this.makeBasket.bind(this)
   }
 
+  //When component mounts get unexpired baskets that belong to this business
   componentDidMount() {
     var temp = 1
-
-    axios.get(`/api/basket/${temp}`).then(res => {
+    var epochTime = (new Date).getTime()
+    axios.get(`/api/basket/${temp}/${epochTime}`).then(res => {
       this.setState({baskets: res.data})
     })
   }
@@ -44,7 +45,7 @@ class Business extends React.Component {
     var basketObj = {
       items: this.state.items,
       expiration: this.state.pick_up_time,
-      business_id: '111111111111111111111111 NEED TO CHANGE THIS 11111111111111111111111111111'
+      business_id: '1111 NEED TO CHANGE THIS 1111'
     }
     axios.post('/api/basket', basketObj).then(res => {
       var basketArr = [res.data, ...basketArr]
@@ -63,7 +64,9 @@ class Business extends React.Component {
     })
     return (
       <div className="Business">
-        Business
+        <div>
+
+        </div>
         <BusinessTable 
           addItemToBasket={this.addItemToBasket}
           makeBasket={this.makeBasket}
