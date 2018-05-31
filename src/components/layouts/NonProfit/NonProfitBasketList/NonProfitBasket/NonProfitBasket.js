@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 class NonProfitBasket extends React.Component {
   constructor() {
@@ -15,7 +16,6 @@ class NonProfitBasket extends React.Component {
     let resize;
 
     if (expanded) {
-      resize = false;
     } else {
       resize = true;
     }
@@ -29,6 +29,9 @@ class NonProfitBasket extends React.Component {
     const { expanded } = this.state;
     const { currentBasket } = this.props;
 
+    const pickupTime = moment.unix(currentBasket.pick_up_time);
+    const formattedPickupTime = moment(pickupTime._d).format('ddd, MMM Do');
+
     const expandCard = expanded ? (
       <ExpandedCard currentBasket={currentBasket} />
     ) : (
@@ -40,7 +43,7 @@ class NonProfitBasket extends React.Component {
         <button>Reserve</button>
         <p>{currentBasket.company_name}</p>
         <p>{currentBasket.operating_hrs}</p>
-        <p>Pick-Up By: {currentBasket.pick_up_time}</p>
+        <p>Pick-Up By: {formattedPickupTime}</p>
         {expandCard}
         <button onClick={this.resizeCard}>
           {expanded ? 'Collapse' : 'Details'}
