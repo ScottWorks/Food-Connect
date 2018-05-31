@@ -14,6 +14,9 @@ class BasketTable extends React.Component {
     }
   }
 
+  //This function converts the time and data objects stored on state and
+  //converts the to to milliseconds from epoch, it also constructs an items object,
+  //and passes it up to the parent
   prepToAddItem() {
     let momentTime = moment(this.state.expirationTime),
         momentDate = moment(this.state.expirationDate),
@@ -39,6 +42,7 @@ class BasketTable extends React.Component {
     this.setState({name: '', weight: ''})
   }
 
+  //helper function to prepToAddItem make sure everything is formatted properly
   addZeroToFrontHelper(num) {
     if(num < 10) {
       return `0${num}`
@@ -52,9 +56,7 @@ class BasketTable extends React.Component {
       <div className="BasketTable">
         <button
           onClick={() => this.props.makeBasket()}
-        >
-          Make Basket
-        </button>
+        >Make Basket</button>
         <div>
           <input 
             placeholder="Item name"
@@ -68,11 +70,11 @@ class BasketTable extends React.Component {
           />
           <DatePicker 
             onChange={(x, date) => this.setState({expirationDate: date})}
-            hintText="Portrait Dialog"
+            hintText="Date"
           />
           <TimePicker
             onChange={(x, time) => this.setState({expirationTime: time})}
-            hintText="12hr Format"
+            hintText="Time"
           />
         </div>
         <button

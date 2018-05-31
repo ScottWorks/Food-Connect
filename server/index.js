@@ -21,7 +21,7 @@ app.use(express.static(`${__dirname}/../build`));
 // Sessions
 app.use(
   session({
-    secet: SECRET_SESSION,
+    secret: SECRET_SESSION,
     resave: false,
     saveUninitialized: true
   })
