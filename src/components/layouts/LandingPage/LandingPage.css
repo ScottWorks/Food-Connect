@@ -41,6 +41,10 @@
     background: linear-gradient(#56ab2f, #a8e063);
 }
 
+.landing_login_button:hover{
+    background: green;
+}
+
 .landing_signup_button{
     display: flex;
     align-items: center;
@@ -55,12 +59,16 @@
     background: linear-gradient(#56ab2f, #a8e063);
 }
 
+.landing_signup_button:hover{
+    background: green;
+}
+
 .landing_hexmap{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 220px;
+    height: 280px;
 }
 
 .landing_hexmap_title{
@@ -69,9 +77,11 @@
 }
 
 .landing_hexmap_container{
-    background-color: green;
+    /* background-color: green; */
+    background-image: url('https://www.supplychain247.com/images/article/Council_on_Foreign_Relations_food_waste_map.jpg');
+    background-size: cover;
     width: 90%;
-    height: 150px;
+    height: 220px;
 }
 
 .landing_about{
@@ -140,9 +150,31 @@
 }
 
 .landing_getstarted_container{
-    background-color: green;
+    display: flex;
+    justify-content: center;
+    background-image: url('https://images.unsplash.com/photo-1508787798358-dd83f04a4526?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a858962fbe2acbaade889c65b8abaac1&auto=format&fit=crop&w=1191&q=80');
+    background-size: cover;
     width: 90%;
     height: 150px;
+    border-radius: 5px;
+}
+
+.landing_getstarted_button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size:15px;
+    margin-top: 45px;
+    height: 40px;
+    width: 180px;
+    border-radius: 15px;
+    background: linear-gradient(#56ab2f, #a8e063);
+}
+
+.landing_getstarted_button:hover{
+    background: green;
 }
 
 .FAQ_contents{
