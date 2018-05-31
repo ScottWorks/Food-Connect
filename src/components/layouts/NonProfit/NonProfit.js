@@ -6,7 +6,6 @@ import Header from '../../components/Header/Header.js';
 import './NonProfit.css';
 
 import axios from 'axios';
-import moment from 'moment';
 
 class NonProfit extends React.Component {
   constructor() {
@@ -28,13 +27,11 @@ class NonProfit extends React.Component {
 
     console.log(currentLocalTime);
 
-    axios
-      .get('/api/basket', { currentLocalTime, dummyDataBusinessIDs })
-      .then((baskets) => {
-        this.setState({
-          baskets: baskets.data
-        });
+    axios.get(`/api/basket/${currentLocalTime}`).then((baskets) => {
+      this.setState({
+        baskets: baskets.data
       });
+    });
   }
 
   // reserveBasket() {

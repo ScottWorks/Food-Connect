@@ -36,11 +36,8 @@ class NonProfitBasket extends React.Component {
     const { expanded } = this.state;
     const { currentBasket } = this.props;
 
-    // const pickupTime = moment(currentBasket.pick_up_time);
-    const pickupTime = moment(1528797446475);
-
+    const pickupTime = moment(Number(currentBasket.pick_up_time));
     const formattedPickupTime = moment(pickupTime._d).format('ddd, MMM Do');
-    console.log(pickupTime, formattedPickupTime);
 
     const expandCard = expanded ? (
       <ExpandedCard currentBasket={currentBasket} />

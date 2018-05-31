@@ -1,12 +1,12 @@
 module.exports = {
   getBaskets: (req, res) => {
     const db = req.app.get('db');
-    // const currentTime = new Date().getTime();
+    const { currentLocalTime } = req.params;
 
-    console.log(currentTime);
+    console.log(currentLocalTime);
 
     db
-      .getBaskets([currentTime])
+      .getBaskets([currentLocalTime])
       .then((baskets) => {
         res.status(200).send(baskets);
       })
