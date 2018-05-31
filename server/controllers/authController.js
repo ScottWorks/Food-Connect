@@ -57,6 +57,42 @@ module.exports = {
 
         }
 
+    },
+    login: (req, res, next) => {
+        let err = 'Default Err'
+        // console.log(req.body)
+        const { userName, pw } = req.body;
+        const db = req.app.get('db');
+
+        db.check_username([userName]).then( user => {
+            if(user.length !== 0) {
+                const validpassWord = bcrypt.compareSync(pw, user[0].user_pw)
+                if(validpassWord === true && user[0].acct_type === false) {
+                    req.session.user.user_id = user[0].user_id
+                    res.status(200).send('You are also the chosen one!')
+                }
+                  else if (validpassWord === true && user[0].acct_type === true) {
+                    req.session.user.user_id = user[0].user_id
+                    res.status(200).send("You are the chosen one!")
+                    console.log(req.session)
+                } else {
+                    res.status(401).send("Wrong Password")
+                }
+                // res.status(401).send('Please create an account before logging in.')
+              }
+            }
+
+        ).catch(err)
+    },
+    validate: (req, res, next) => {
+        if(req.session.user.user_id) {
+            res.status(200).send()
+        }
+        res.status(401).send('You are not Authorized')
+    },
+    logout: (req, res, next) => {
+        req.session.destroy()
+        res.status(200).send()
     }
 }
 
