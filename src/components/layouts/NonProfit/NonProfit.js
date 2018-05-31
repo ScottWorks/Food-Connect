@@ -14,6 +14,7 @@ class NonProfit extends React.Component {
     this.state = {
       baskets: []
     };
+
     this.getBaskets = this.getBaskets.bind(this);
   }
 
@@ -25,18 +26,20 @@ class NonProfit extends React.Component {
     const currentLocalTime = new Date().getTime();
     const dummyDataBusinessIDs = [1, 3, 4];
 
-    const testTime = moment.unix(currentLocalTime);
+    console.log(currentLocalTime);
 
-    console.log(currentLocalTime, testTime);
-
-    axios.get('/api/basket', { dummyDataBusinessIDs }).then((baskets) => {
-      this.setState({
-        baskets: baskets.data
+    axios
+      .get('/api/basket', { currentLocalTime, dummyDataBusinessIDs })
+      .then((baskets) => {
+        this.setState({
+          baskets: baskets.data
+        });
       });
-    });
   }
 
-  reserveBasket() {}
+  // reserveBasket() {
+  //   alert('Working!');
+  // }
 
   render() {
     const { baskets } = this.state;

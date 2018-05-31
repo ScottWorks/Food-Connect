@@ -6,10 +6,12 @@ class NonProfitBasket extends React.Component {
   constructor() {
     super();
     this.state = {
-      expanded: false
+      expanded: false,
+      reserve: false
     };
 
     this.resizeCard = this.resizeCard.bind(this);
+    this.reserveBasket = this.reserveBasket.bind(this);
   }
 
   resizeCard() {
@@ -26,12 +28,19 @@ class NonProfitBasket extends React.Component {
     });
   }
 
+  reserveBasket() {
+    alert('Hey!');
+  }
+
   render() {
     const { expanded } = this.state;
     const { currentBasket } = this.props;
 
-    const pickupTime = moment.unix(currentBasket.pick_up_time);
+    // const pickupTime = moment(currentBasket.pick_up_time);
+    const pickupTime = moment(1528797446475);
+
     const formattedPickupTime = moment(pickupTime._d).format('ddd, MMM Do');
+    console.log(pickupTime, formattedPickupTime);
 
     const expandCard = expanded ? (
       <ExpandedCard currentBasket={currentBasket} />
@@ -41,7 +50,7 @@ class NonProfitBasket extends React.Component {
 
     return (
       <section>
-        <button>Reserve</button>
+        <button onClick={this.reserveBasket}>Reserve</button>
         <p>{currentBasket.company_name}</p>
         <p>{currentBasket.operating_hrs}</p>
         <p>Pick-Up By: {formattedPickupTime}</p>
