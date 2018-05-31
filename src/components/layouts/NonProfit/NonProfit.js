@@ -21,7 +21,9 @@ class NonProfit extends React.Component {
   }
 
   getBaskets() {
-    axios.get('/api/basket').then((baskets) => {
+    const dummyDataBusinessIDs = [1, 3, 4];
+
+    axios.get('/api/basket', { dummyDataBusinessIDs }).then((baskets) => {
       this.setState({
         baskets: baskets.data
       });
@@ -29,10 +31,6 @@ class NonProfit extends React.Component {
   }
 
   reserveBasket() {}
-
-  showContactInfo(currentBasket) {
-    alert(currentBasket.company_name);
-  }
 
   render() {
     const { baskets } = this.state;
@@ -42,11 +40,7 @@ class NonProfit extends React.Component {
         <Header/>
         <div className="nonprofit_main"><h2>Non Profit Page</h2></div>
         <ScheduleList />
-        <NonProfitBasketList
-          baskets={baskets}
-          _inspectBasket={this.inspectBasket}
-          _showContactInfo={this.showContactInfo}
-        />
+        <NonProfitBasketList baskets={baskets} />
       </main>
     );
   }
