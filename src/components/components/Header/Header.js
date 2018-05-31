@@ -16,17 +16,16 @@ class Header extends Component {
         return (
             <div id="header_main">
                 <div id="header_contents">
-                
                 <div id="menuToggle">
                         <input type="checkbox" />
                         <span></span>
                         <span></span>
                         <span></span>
                         <ul id="menu">
-                            <Link to=""><li>Sign Up</li></Link>
-                            <Link to=""><li>Login</li></Link>
+                            <Link to="/"><li>Home</li></Link>
+                            <Link to="/register"><li>Sign Up</li></Link>
+                            <Link to="/login"><li>Login</li></Link>
                             <Link to="/nonprofit"><li>Dashboard</li></Link>
-                            <a href=""><li onClick={()=> this.props.handler()}>FAQ</li></a>
                         </ul>
                     </div>
 
