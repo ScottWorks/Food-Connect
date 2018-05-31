@@ -1,6 +1,7 @@
 import React from 'react'
 
 import {Doughnut} from 'react-chartjs-2';
+import * as utilFunc  from '../../../config/analyticsUtil';
 
 export default class Donut extends React.Component{
     constructor(props) {
@@ -10,7 +11,8 @@ export default class Donut extends React.Component{
             data: {
                 datasets:[
                     {
-                        data:[10,20,30]
+                        data:[10,20,30],
+                        backgroundColor: utilFunc.generateRandomColors(data.length)
                     }
                 ], 
                 labels:['red', 'yellow', 'blue']
