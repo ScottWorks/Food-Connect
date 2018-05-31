@@ -19,6 +19,27 @@ module.exports = {
             sum += basketTotal;
         }
         return sum;
+    },
+
+    sumTotalBasketFMV(basket) {
+        let sum = 0; 
+        
+        for(var i=0; i < basket.length; i++) {
+            if(basket[i].hasOwnProperty('fmv')){
+                sum += basket[i]['fmv']
+            }
+        }
+        return sum;
+    },
+
+    sumTotalFMV(arrayOfBaskets) {
+        let sum =0;
+
+        for(var i=0; i < arrayOfBaskets.length; i++) {
+            let basketTotal = this.sumTotalBasketFMV(arrayOfBaskets[i]);
+            sum+= basketTotal;
+        }
+        return sum;
     }
 }
 
