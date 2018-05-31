@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Modal from 'react-modal';
-// import {Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import "./LandingPage.css"
 import Footer from "./../../components/Footer/Footer";
 import Header from "./../../components/Header/Header";
@@ -47,12 +47,12 @@ class LandingPage extends Component {
                         </div>
                     </Modal>
                     <div className="landing_main_media">
-                        <div className="landing_login_button">Login</div>
-                        <div className="landing_signup_button">Sign Up Now</div>
+                        <Link to="/login"><div className="landing_login_button">Login</div></Link>
+                        <Link to="/register"><div className="landing_signup_button">Sign Up Now</div></Link>
                     </div>
                     <div className="landing_hexmap">
                         <div className="landing_hexmap_title">HexMap Title</div>
-                        <div className="landing_hexmap_container"><h3>Hexmap</h3></div>
+                        <div className="landing_hexmap_container"><h3></h3></div>
                     </div>
                     <hr/>
                     <div className="landing_about">
@@ -70,8 +70,10 @@ class LandingPage extends Component {
                     </div>
                     <hr/>
                     <div className="landing_getstarted">
-                        <div className="landing_getstarted_title">Get Started With Us</div>
-                        <div className="landing_getstarted_container"><h3>Clickable Image</h3></div>
+                        {/* <div className="landing_getstarted_title">Get Started With Us</div> */}
+                        <div className="landing_getstarted_container">
+                        <Link to="/register"><div className="landing_getstarted_button">Get Started With Us</div></Link>
+                        </div>
                     </div>
                 </div>
                 <Footer handler={this.openModal} />

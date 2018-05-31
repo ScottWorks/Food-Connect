@@ -7,10 +7,7 @@ function NonProfitBasketList(props) {
   const displayBaskets = baskets.map((elem, idx) => {
     return (
       <div key={idx}>
-        <NonProfitBasket
-          currentBasket={elem}
-          _showContactInfo={_showContactInfo}
-        />
+        <NonProfitBasket currentBasket={elem} />
       </div>
     );
   });
