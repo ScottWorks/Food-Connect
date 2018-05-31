@@ -108,23 +108,3 @@ test('Should return an array of 10 colors', ()=> {
 
     expect(result.length).toBe(10);
 });
-
-/*
- * Test generateRandomColors
- * Should correclty return an array of RGB Colors
- */
-
- test('All values should be in range of 0 and 255', ()=> {
-   let testValue= 5;
-   let array = analyticFunctions.generateRandomColors(testValue);
-
-   let result = false;
-
-   for(var i=0; i < array.length; i++) {
-    if(array[i] <= 255 && array[i] >= 0){
-        result = true;
-    }
-   }
-
-   expect(result).toBeTruthy();
- })
