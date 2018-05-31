@@ -24,8 +24,8 @@ module.exports = {
         let sum = 0;
 
         for (var i = 0; i < basket.length; i++) {
-            if (basket[i].hasOwnProperty('fmv')) {
-                sum += basket[i]['fmv']
+            if (basket[i].hasOwnProperty('FMV')) {
+                sum += basket[i]['FMV']
             }
         }
         return sum;

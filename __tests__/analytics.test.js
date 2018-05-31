@@ -49,3 +49,82 @@ test('Should Return correct value of 400', ()=> {
 
     expect(result).toBe(400);
 });
+
+
+/*
+ * Test sumTotalBasketFMV
+ * Should correctly calculate the total FMV of a Basket
+ */
+test('Should return correct value of 500', ()=> {
+    let testValue = [{"FMV": 100, "item": "Bagel", "weight": 15}, {"FMV": 100, "item": "Donuts", "weight": 515}, {"FMV": 100, "item": "Donuts", "weight": 515}, {"FMV": 100, "item": "Donuts", "weight": 515}, {"FMV": 100, "item": "Donuts", "weight": 515}]
+    let result = analyticFunctions.sumTotalBasketFMV(testValue);
+
+    expect(result).toBe(500);
+});
+
+/*
+ * Test sumTotalBasketFMV
+ * Should correctly calculate the total FMV of a Basket
+ */
+test('Should return correct value of 0', ()=> {
+    let testValue = [{"item": "Bagel", "weight": 15}, {"item": "Donuts", "weight": 515}, {"item": "Donuts", "weight": 515}, {"item": "Donuts", "weight": 515}, {"item": "Donuts", "weight": 515}]
+    let result = analyticFunctions.sumTotalBasketFMV(testValue);
+
+    expect(result).toBe(0);
+})
+
+/*
+ * Test sumTotalFMV
+ * Should correclty calucalte the total FMV of an array of baskets
+ */
+
+ test('Should return correct value of 600',()=> {
+     let testValue = [[{"FMV": 100, "item": "Croissants", "weight": 65}, {"FMV": 100, "item": "Bread", "weight": 45}],[{"FMV": 100, "item": "Croissants", "weight": 65}, {"FMV": 100, "item": "Bread", "weight": 45}],[{"FMV": 100, "item": "Croissants", "weight": 65}, {"FMV": 100, "item": "Bread", "weight": 45}]]
+     let result = analyticFunctions.sumTotalFMV(testValue)
+
+     expect(result).toBe(600)
+ });
+
+/*
+ * Test sumTotalFMV
+ * Should correclty calucalte the total FMV of an array of baskets
+ */
+
+test('Should return correct value of 0',()=> {
+    let testValue = [[{"item": "Croissants", "weight": 65}, {"item": "Bread", "weight": 45}],[{"item": "Croissants", "weight": 65}, {"item": "Bread", "weight": 45}],[{"item": "Croissants", "weight": 65}, {"item": "Bread", "weight": 45}]]
+    let result = analyticFunctions.sumTotalFMV(testValue)
+
+    expect(result).toBe(0)
+});
+
+/*
+ * Test generateRandomColors
+ * Should correctly return an array of RGB colors
+ */
+
+test('Should return an array of 10 colors', ()=> {
+    let testValue = 10;
+    let result = analyticFunctions.generateRandomColors(testValue);
+
+    expect(result.length).toBe(10);
+});
+
+/*
+ * Test generateRandomColors
+ * Should correclty return an array of RGB Colors
+ */
+
+ test('All values should be in range of 0 and 255', ()=> {
+   let testValue= 5;
+   let array = analyticFunctions.generateRandomColors(testValue);
+
+   let result = false;
+
+   for(var i=0; i < array.length; i++) {
+    if(array[i] <= 255 && array[i] >= 0){
+        result = true;
+    }
+   }
+
+   expect(result).toBeTruthy();
+ })
