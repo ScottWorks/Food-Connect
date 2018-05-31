@@ -12,19 +12,27 @@ export default class Donut extends React.Component{
                 datasets:[
                     {
                         data:[10,20,30],
-                        backgroundColor: utilFunc.generateRandomColors(data.length)
+                        backgroundColor: utilFunc.generateRandomColors(3)
                     }
                 ], 
                 labels:['red', 'yellow', 'blue']
             }, 
-            options:{}
+            options:{
+                responsive: true,
+                title: {
+                    display: true,
+                    position: "top",
+                    text: "Total lbs of food weighs", // TODO:
+                    fontSize: 20,
+                    fontColor: "#000000"
+                }
+            }
         }
     }
 
     render(){
         return (
-            <Doughnut data={this.state.data}>
-
+            <Doughnut data={this.state.data} options={this.state.options}>
             </Doughnut>
         )
     }
