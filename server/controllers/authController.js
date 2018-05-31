@@ -14,6 +14,22 @@ module.exports = {
             //     console.log("We created a non-profit!")
             // })
             console.log('New np added to DB!', group)
+
+            db.check_username([userName]).then( user => {
+                if(user.length !== 0) {
+                  console.log('Please choose a different username.')
+                  res.status(200).send('Username taken. Please choose another, and try again.')
+                
+                } else {
+                    const salt = bcrypt.genSaltSync(10)
+                    const hash = bcrypt.hashSync(pw, salt)
+    
+                    db.register_np_admin([userName, hash, group.non_profit_id]).then( user => {
+                        console.log('Np user created!')
+                    })
+                }
+            })
+    
         }
 
         if(organizationType === 'business') {
@@ -23,13 +39,24 @@ module.exports = {
             //     res.status(200).send(group.data)
             // })
             console.log('New business added to DB!')
+            
+            db.check_username([userName]).then( user => {
+                if(user.length !== 0) {
+                  console.log('Please choose a different username.')
+                  res.status(200).send('Username taken. Please choose another, and try again.')
+                
+                } else {
+                    const salt = bcrypt.genSaltSync(10)
+                    const hash = bcrypt.hashSync(pw, salt)
+    
+                    db.register_business_admin([userName, hash, group.business_id]).then( user => {
+                        console.log('Business user created!')
+                    })
+                }
+            })
+    
         }
-        // db.check_users([username]).then( user => {
-        //     if(user.length !== 0)
-        //     console.log('Please choose a different username.')
-        //     res.status(200).send('Username taken. Please choose another, and try again.')
-        // })
-
+        
     }
 }
 

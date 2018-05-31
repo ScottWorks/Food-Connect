@@ -7,6 +7,7 @@ const massive = require('massive');
 const dotenv = require('dotenv');
 const session = require('express-session');
 dotenv.config();
+const checkForSession = require('./middlewares/checkForSessions')
 
 // Controllers
 const twilioController = require('./controllers/TwilioController'),
@@ -32,6 +33,8 @@ app.use(
     saveUninitialized: true
   })
 );
+
+app.use(checkForSession);
 
 massive(CONNECTION_STRING)
   .then((dbInstance) => {
