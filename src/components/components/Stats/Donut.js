@@ -7,14 +7,21 @@ export default class Donut extends React.Component{
         super(props);
 
         this.state = {
-            data: [], 
+            data: {
+                datasets:[
+                    {
+                        data:[10,20,30]
+                    }
+                ], 
+                labels:['red', 'yellow', 'blue']
+            }, 
             options:{}
         }
     }
 
     render(){
         return (
-            <Doughnut>
+            <Doughnut data={this.state.data}>
 
             </Doughnut>
         )
