@@ -90,7 +90,8 @@ a:hover
   margin-bottom: 5px;
   position: relative;
   
-  background: #cdcdcd;
+  /* background: #cdcdcd; */
+  background: white;
   border-radius: 3px;
   
   z-index: 1;

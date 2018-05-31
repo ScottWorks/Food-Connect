@@ -1,0 +1,9 @@
+.registry-containers {
+    margin: 0 auto;
+    width: 400px;
+    border: 1px solid black;
+}
+
+.registry-containers input {
+    padding-left: 4px;
+}

@@ -7,6 +7,7 @@ const massive = require('massive');
 const dotenv = require('dotenv');
 const session = require('express-session');
 dotenv.config();
+const checkForSession = require('./middlewares/checkForSessions')
 
 // Controllers
 const twilioController = require('./controllers/TwilioController'),
@@ -33,6 +34,8 @@ app.use(
   })
 );
 
+app.use(checkForSession);
+
 massive(CONNECTION_STRING)
   .then((dbInstance) => {
     app.set('db', dbInstance);
@@ -45,7 +48,7 @@ massive(CONNECTION_STRING)
 app.get('/api/auth/me');
 app.get('/api/auth/login');
 app.get('/api/auth/logout');
-app.post('/api/auth/register');
+app.post('/api/auth/register', authController.register);
 
 // LANDING ENDPOINTS
 app.get('/api/statistics/baskets', analyticsController.getAllCompletedBaskets);
