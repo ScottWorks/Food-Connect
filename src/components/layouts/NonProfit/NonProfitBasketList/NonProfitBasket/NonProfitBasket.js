@@ -27,7 +27,7 @@ class NonProfitBasket extends React.Component {
 
   render() {
     const { expanded } = this.state;
-    const { currentBasket, _showContactInfo } = this.props;
+    const { currentBasket } = this.props;
 
     const expandCard = expanded ? (
       <ExpandedCard currentBasket={currentBasket} />
@@ -40,9 +40,10 @@ class NonProfitBasket extends React.Component {
         <button>Reserve</button>
         <p>{currentBasket.company_name}</p>
         <p>{currentBasket.operating_hrs}</p>
+        <p>Pick-Up By: {currentBasket.pick_up_time}</p>
         {expandCard}
         <button onClick={this.resizeCard}>
-          {expanded ? 'Collapse' : 'Expand'}
+          {expanded ? 'Collapse' : 'Details'}
         </button>
       </section>
     );
