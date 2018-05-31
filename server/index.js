@@ -15,7 +15,7 @@ const twilioController = require('./controllers/TwilioController'),
       BusinessController = require('./controllers/BusinessController'),
       nonProfitController = require('./controllers/NonProfitController'),
       authController = require('./controllers/authController'),
-      analyticsController = require('./controllers/analyticsController')
+      analyticsController = require('./controllers/analyticsController'),
       generalController = require('./controllers/GeneralController');
 
 const { SERVER_PORT, CONNECTION_STRING, SECRET_SESSION } = process.env; //.env Deconstructor
