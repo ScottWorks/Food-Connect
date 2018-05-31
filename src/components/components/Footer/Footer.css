@@ -1,5 +1,5 @@
 .footer_main{
-    position: absolute;
+    position: fixed;
     bottom: 0;
     background: linear-gradient(#a8e063,#56ab2f);
     display: flex;
@@ -26,7 +26,7 @@
 .info_boxes{
     text-align:left;
     width: 112px;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 400px;
     align-items:flex-start;
 }

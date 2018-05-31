@@ -50,7 +50,8 @@ CREATE TABLE baskets
     -- STATUS: INTEGER IS USED AS A FLAG TO RECORD STATUS
     -- 0: Pending, 1: Completed, 2: Scheduled, 3: Expired, 4: No Pickup 
     status INTEGER,
-    items JSONB
+    items JSONB,
+    aws_path TEXT
 );
 
 INSERT INTO baskets (business_id, pick_up_time, scheduled_time, status, items)
