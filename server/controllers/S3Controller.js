@@ -5,7 +5,8 @@ require('dotenv').load();
 const {
     ACCESSKEYID,
     SECRETACCESSKEY,
-    S3BUCKET
+    S3BUCKET,
+    S3REGION
 } = process.env
 
 
@@ -41,7 +42,26 @@ module.exports = {
     },
 
     upload: (req, res) => {
-        // TODO:
+        const {signedURL, file, fileType} = req.body;
+        const dbInstance = req.app.get('db');
+        const {baksetID} = req.params
+        const aws_path = `https://${S3REGION}.amazonaws.com/${S3BUCKET}/${file}`
+
+        const options = {
+            headers: {
+                "Content-type": fileType
+            }
+        };
+
+        // This will upload file to Amazon AWS S3 and simulatenously update DB for AWS Path
+        axios.put(signedURL, file, options).then(result=> {
+            dbInstance.updateAWS([basketID, aws_path]).then((result) => {
+                res.status(200).send(result);
+            }).catch((err) => {
+                console.log(`Error while updating DB for AWS Path: ${err}`);
+                res.sendStatus(500);
+            })
+        })
     }
 
 }

@@ -10,9 +10,19 @@ const twilioController = require('./controllers/TwilioController');
 const s3Controller = require('./controllers/S3Controller');
 const mailController = require('./controllers/MailController');
 dotenv.config();
-const { SERVER_PORT, CONNECTION_STRING, SECRET_SESSION } = process.env; //.env Deconstructor
+const session = require('express-session');
 
-const nonProfitController = require('./controllers/NonProfitController');
+// Controllers
+const twilioController = require('./controllers/TwilioController'),
+  s3Controller = require('./controllers/S3Controller'),
+  mailController = require('./controllers/MailController'),
+  BusinessController = require('./controllers/BusinessController'),
+  nonProfitController = require('./controllers/NonProfitController'),
+  authController = require('./controllers/authController'),
+  analyticsController = require('./controllers/analyticsController'),
+  generalController = require('./controllers/GeneralController');
+
+const { SERVER_PORT, CONNECTION_STRING, SECRET_SESSION } = process.env; //.env Deconstructor
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -39,23 +49,26 @@ massive(CONNECTION_STRING)
 app.get('/api/auth/me');
 app.get('/api/auth/login');
 app.get('/api/auth/logout');
-app.get('/api/auth/register');
+app.post('/api/auth/register');
 
 // LANDING ENDPOINTS
-app.get('/api/statistics');
+app.get('/api/statistics/baskets', analyticsController.getAllCompletedBaskets);
 
 // BUSINESS ENDPOINTS
 // Business Basket-Endpoints
-app.get('/api/basket/:businessID');
-app.get('/api/basket');
-app.put('/api/basket/:basketID');
-app.post('/api/basket');
-app.delete('/api/basket/:basketID');
+app.get(
+  '/api/basket/:businessID/:epochTime',
+  BusinessController.getBusinessBaskets
+);
+app.get('/api/basket'); // USE TO PULL ALL BASKETS TO RUN STATS
+app.put('/api/basket/:basketID', BusinessController.updateBusinessBasket);
+app.post('/api/basket', BusinessController.createBaskets);
+app.delete('/api/basket/:basketID', BusinessController.deleteBusinessBasket);
 
 // Busines Endpoints
-app.get('/api/business/');
+app.get('/api/business/', BusinessController.getBusinessInfo);
 app.post('/api/business');
-app.put('/api/business/:businessID');
+app.put('/api/business/:businessID', BusinessController.updateBusinessInfo);
 
 // NON-PROFIT ENDPOINTS
 // Non-Profit Basket Endpoints
@@ -77,6 +90,11 @@ app.post('/api/amazon/uri', s3Controller.sign);
 
 // Requires a body that contains the signed uri & file & file type
 app.put('/api/amazon/upload', s3Controller.upload); // TODO:
+/*
+ * Requires the Basket ID parameter
+ * Requires a body that contains the signed uri & file & file type
+ */
+app.put('/api/amazon/upload/:basketID', s3Controller.upload);
 
 // NODEMAILER
 // Requires a body with toEmail, fromEmail, subject, and message
