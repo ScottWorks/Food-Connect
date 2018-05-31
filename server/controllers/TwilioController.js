@@ -17,7 +17,7 @@ module.exports = {
         const {phoneNumber} = req.params;
         const {message} = req.body;
         
-        client.message.create(
+        client.messages.create(
             {
                 body: message,
                 from: TWILIO_NUMBER,
