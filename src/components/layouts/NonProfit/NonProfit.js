@@ -23,20 +23,16 @@ class NonProfit extends React.Component {
 
   getBaskets() {
     const currentLocalTime = new Date().getTime();
-    const dummyDataBusinessIDs = [1, 3, 4];
+    const businessIDs = [1, 4];
 
-    console.log(currentLocalTime);
-
-    axios.get(`/api/basket/${currentLocalTime}`).then((baskets) => {
-      this.setState({
-        baskets: baskets.data
+    axios
+      .post(`/api/basket/${currentLocalTime}`, { businessIDs: businessIDs })
+      .then((baskets) => {
+        this.setState({
+          baskets: baskets.data
+        });
       });
-    });
   }
-
-  // reserveBasket() {
-  //   alert('Working!');
-  // }
 
   render() {
     const { baskets } = this.state;
