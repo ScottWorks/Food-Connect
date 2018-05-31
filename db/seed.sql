@@ -44,8 +44,8 @@ CREATE TABLE baskets
 (
     basket_id SERIAL PRIMARY KEY,
     business_id INTEGER REFERENCES businesses(business_id),
-    pick_up_time INTEGER,
-    scheduled_time INTEGER,
+    pick_up_time BIGINT,
+    scheduled_time BIGINT,
     -- STATUS: INTEGER IS USED AS A FLAG TO RECORD STATUS
     -- 0: Pending, 1: Completed, 2: Scheduled, 3: Expired, 4: No Pickup 
     status INTEGER,
