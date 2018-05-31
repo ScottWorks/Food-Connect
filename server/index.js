@@ -6,9 +6,6 @@ const app = express();
 const massive = require('massive');
 const dotenv = require('dotenv');
 const session = require('express-session');
-const twilioController = require('./controllers/TwilioController');
-const s3Controller = require('./controllers/S3Controller');
-const mailController = require('./controllers/MailController');
 dotenv.config();
 
 // Controllers
