@@ -40,18 +40,14 @@ class NonProfitBasket extends React.Component {
         <button>Reserve</button>
         <p>{currentBasket.company_name}</p>
         <p>{currentBasket.operating_hrs}</p>
-        {/* <ExpandedCard currentBasket={currentBasket} /> */}
         {expandCard}
-        <button onClick={this.resizeCard}>Show All</button>
-        <button onClick={() => _showContactInfo(currentBasket)}>Contact</button>
+        <button onClick={this.resizeCard}>
+          {expanded ? 'Collapse' : 'Expand'}
+        </button>
       </section>
     );
   }
 }
-
-const ExpandedCard = ({ currentBasket, expanded }) => (
-  <DisplayAllItems items={currentBasket.items} />
-);
 
 const DisplaySomeItems = ({ items }) => {
   const basketSize = items.length;
@@ -71,10 +67,27 @@ const DisplaySomeItems = ({ items }) => {
       {(() => {
         if (basketSize > 3) {
           return <p>{basketSize - 3} more item(s) in basket...</p>;
-        } else if (basketSize <= 3) {
-          return <p>No more item(s) in basket...</p>;
         }
       })()}
+    </div>
+  );
+};
+
+const ExpandedCard = ({ currentBasket, expanded }) => {
+  const contactInfo = {
+    address: currentBasket.street_address,
+    city: currentBasket.city,
+    state: currentBasket.state,
+    zipCode: currentBasket.zip_code,
+    phoneNumber: currentBasket.phone_number,
+    adminFirstName: currentBasket.admin_first_name,
+    adminLastName: currentBasket.admin_last_name
+  };
+
+  return (
+    <div>
+      <DisplayAllItems items={currentBasket.items} />
+      <DisplayContactInfo _contactInfo={contactInfo} />
     </div>
   );
 };
@@ -88,24 +101,19 @@ const DisplayAllItems = ({ items }) =>
     );
   });
 
-// const DisplayItems = ({ items, expanded }) =>
-//   items.map((elem, idx) => {
-//     if (!expanded) {
-//       if (idx < 3) {
-//         return (
-//           <p>
-//             {elem.item} - {elem.weight} lbs
-//           </p>
-//         );
-//       }
-//     } else {
-//       return (
-//         <p>
-//           {elem.item} - {elem.weight} lbs
-//         </p>
-//       );
-//     }
-//   }
-//   );
+const DisplayContactInfo = ({ _contactInfo }) => {
+  return (
+    <div>
+      <p>{_contactInfo.address}</p>
+      <p>
+        {_contactInfo.city}, {_contactInfo.state} {_contactInfo.zipCode}
+      </p>
+      <p>{_contactInfo.phoneNumber}</p>
+      <p>
+        {_contactInfo.adminFirstName} {_contactInfo.adminLastName}
+      </p>
+    </div>
+  );
+};
 
 export default NonProfitBasket;

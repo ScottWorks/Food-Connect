@@ -8,7 +8,7 @@ const dotenv = require('dotenv');
 const session = require('express-session');
 const twilioController = require('./controllers/TwilioController');
 const s3Controller = require('./controllers/S3Controller');
-const mailController = require('./controllers/MailController')
+const mailController = require('./controllers/MailController');
 dotenv.config();
 const { SERVER_PORT, CONNECTION_STRING, SECRET_SESSION } = process.env; //.env Deconstructor
 
@@ -21,11 +21,11 @@ app.use(express.static(`${__dirname}/../build`));
 // Sessions
 app.use(
   session({
-    secet: SECRET_SESSION,
+    secret: SECRET_SESSION,
     resave: false,
     saveUninitialized: true
   })
-)
+);
 
 massive(CONNECTION_STRING)
   .then((dbInstance) => {
@@ -71,17 +71,16 @@ app.delete('/api/wishlist/:nonProfitID');
 // TWILIO
 app.post('/api/twilio/:phoneNumber', twilioController.sendTwilioMessage);
 
-
 // AMAZON S3
 // Requires a body with the filename & filetype
 app.post('/api/amazon/uri', s3Controller.sign);
 
 // Requires a body that contains the signed uri & file & file type
-app.put('/api/amazon/upload', s3Controller.upload) // TODO:
+app.put('/api/amazon/upload', s3Controller.upload); // TODO:
 
 // NODEMAILER
 // Requires a body with toEmail, fromEmail, subject, and message
-app.post('/api/email', mailController.sendEmail)
+app.post('/api/email', mailController.sendEmail);
 
 app.listen(SERVER_PORT, () => {
   console.log(`Creeping on Port: ${SERVER_PORT}`);
