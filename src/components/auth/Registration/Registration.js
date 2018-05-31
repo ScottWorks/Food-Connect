@@ -9,12 +9,15 @@ class Register extends Component {
 
         this.state = {
             organizationType: '',
+            oganizationName: '',
+            specificType: '',
             streetAddress: '',
             city: '',
             state: '',
             zip: '',
             firstName: '',
             lastName: '',
+            phoneNumber: '',
             userName: '',
             pw: '',
             pwView: false
@@ -24,24 +27,29 @@ class Register extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
+    
     handleChange(event) {
         this.setState({
-           organizationType: event.target.value
+            organizationType: event.target.value
         })
     }
-
+    
     handleClick() {
         alert(`You are a ${this.state.organizationType}`)
     }
-
+    
     seePassword() {
         this.setState({
             pwView: !this.state.pwView
         })
     }
-
+    
     registerOrganization() {
-        axios.post()
+        const { organizationType, organizationName, specificType, streetAddress, city, state, zip, firstName, lastName, phoneNumber, userName, pw} = this.state
+        axios.post('/api/auth/register', { organizationType, organizationName, specificType, streetAddress, city, state, zip, firstName, lastName, phoneNumber, userName, pw} ).then( account => {
+            console.log(account.data)
+            // this.props.history.push('/login')
+        })
     }
 
     render() {
@@ -74,6 +82,22 @@ class Register extends Component {
                         </li>
                     </ul>
                     <button onClick={this.handleClick}>Continue</button>
+                </section>
+                <br />
+                <section className='registry-containers'>
+                    <div>
+                        <span>What is your organization's name?</span>
+                        <input 
+                            type="text"
+                            onChange={ (e) => this.setState({ organizationName: e.target.value})}
+                            /> 
+                        <span>{`Can you tell us what type of ${this.state.organizationType} you are representing?`}</span>
+                        <input 
+                            type="text"
+                            placeholder='eg. Church'
+                            onChange={ (e) => this.setState({ specificType: e.target.value })}
+                        />               
+                     </div>
                 </section>
                 
                 <br/>
@@ -126,6 +150,15 @@ class Register extends Component {
                             type="text"
                             value={this.state.lastName}
                             onChange={ (e) => this.setState({ lastName: e.target.value })}
+                            />
+                    </div>
+                    <div>
+                        <span>Phone Number</span>
+                        <input 
+                            type="text"
+                            maxLength="10"
+                            value={this.state.phoneNumber}
+                            onChange={ (e) => this.setState({ phoneNumber: e.target.value })}
                             />
                     </div>
                     <div>

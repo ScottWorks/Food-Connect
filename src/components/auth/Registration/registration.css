@@ -3,3 +3,7 @@
     width: 400px;
     margin: 0 auto;
 }
+
+.registry-containers input {
+    padding-left: 6px;
+}
