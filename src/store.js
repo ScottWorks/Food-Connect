@@ -4,12 +4,13 @@ import promiseMiddleware from 'redux-promise-middleware';
 import authReducer from './ducks/authReducer';
 import businessReucer from './ducks/businessReducer';
 import nonProfitReducer from './ducks/non-profitReducer'
-
+import analyticsReducer from './ducks/analyticsReducer'
 
 const reducers = {
     authReducer: authReducer,
     businessReducer: businessReucer,
-    nonProfitReducer: nonProfitReducer
+    nonProfitReducer: nonProfitReducer,
+    analyticsReducer: analyticsReducer
 }
 
 let middleware = promiseMiddleware();
