@@ -1,7 +1,7 @@
 module.exports = {
   getBaskets: (req, res) => {
     const db = req.app.get('db');
-    const currentTime = new Date().getTime();
+    // const currentTime = new Date().getTime();
 
     console.log(currentTime);
 

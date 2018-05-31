@@ -2,10 +2,11 @@ import React from 'react';
 // import Map from './Map/Map';
 import NonProfitBasketList from './NonProfitBasketList/NonProfitBasketList';
 import ScheduleList from './ScheduleList/ScheduleList';
-import Header from "../../components/Header/Header.js"
-import './NonProfit.css'
+import Header from '../../components/Header/Header.js';
+import './NonProfit.css';
 
 import axios from 'axios';
+import moment from 'moment';
 
 class NonProfit extends React.Component {
   constructor() {
@@ -21,7 +22,12 @@ class NonProfit extends React.Component {
   }
 
   getBaskets() {
+    const currentLocalTime = new Date().getTime();
     const dummyDataBusinessIDs = [1, 3, 4];
+
+    const testTime = moment.unix(currentLocalTime);
+
+    console.log(currentLocalTime, testTime);
 
     axios.get('/api/basket', { dummyDataBusinessIDs }).then((baskets) => {
       this.setState({
@@ -37,8 +43,10 @@ class NonProfit extends React.Component {
 
     return (
       <main className="mobile">
-        <Header/>
-        <div className="nonprofit_main"><h2>Non Profit Page</h2></div>
+        <Header />
+        <div className="nonprofit_main">
+          <h2>Non Profit Page</h2>
+        </div>
         <ScheduleList />
         <NonProfitBasketList baskets={baskets} />
       </main>
