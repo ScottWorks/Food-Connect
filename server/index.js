@@ -14,7 +14,8 @@ const twilioController = require('./controllers/TwilioController'),
       mailController = require('./controllers/MailController'),
       BusinessController = require('./controllers/BusinessController'),
       nonProfitController = require('./controllers/NonProfitController'),
-      authController = require('./controllers/authController')
+      authController = require('./controllers/authController'),
+      analyticsController = require('./controllers/analyticsController'),
       generalController = require('./controllers/GeneralController');
 
 const { SERVER_PORT, CONNECTION_STRING, SECRET_SESSION } = process.env; //.env Deconstructor
@@ -47,7 +48,7 @@ app.get('/api/auth/logout');
 app.post('/api/auth/register');
 
 // LANDING ENDPOINTS
-app.get('/api/statistics');
+app.get('/api/statistics/baskets', analyticsController.getAllCompletedBaskets);
 
 // BUSINESS ENDPOINTS
 // Business Basket-Endpoints

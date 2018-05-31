@@ -7,9 +7,9 @@ import nonProfitReducer from './ducks/non-profitReducer'
 
 
 const reducers = {
-    authReducer,
-    businessReducer,
-    nonProfitReducer
+    authReducer: authReducer,
+    businessReducer: businessReucer,
+    nonProfitReducer: nonProfitReducer
 }
 
 let middleware = promiseMiddleware();
