@@ -10,7 +10,6 @@ const twilioController = require('./controllers/TwilioController');
 const s3Controller = require('./controllers/S3Controller');
 const mailController = require('./controllers/MailController');
 dotenv.config();
-const session = require('express-session');
 
 // Controllers
 const twilioController = require('./controllers/TwilioController'),
