@@ -22,7 +22,7 @@ export default class Donut extends React.Component{
                 title: {
                     display: true,
                     position: "top",
-                    text: "Total lbs of food weighs", // TODO:
+                    text: "Total lbs of food saved", // TODO:
                     fontSize: 20,
                     fontColor: "#000000"
                 }
