@@ -5,4 +5,25 @@ function fromEpoch(epochTime, timeFormat) {
   return moment(time).format(timeFormat);
 }
 
-export { fromEpoch };
+function toEpoch(_date, _time) {
+  let momentTime = moment(_time),
+    momentDate = moment(_date),
+    hours = addZeroToFrontHelper(momentTime.hours()),
+    minutes = addZeroToFrontHelper(momentTime.minutes()),
+    months = addZeroToFrontHelper(momentDate.month() + 1),
+    days = addZeroToFrontHelper(momentDate.date()),
+    years = addZeroToFrontHelper(momentDate.year()),
+    timeString = `${years}-${months}-${days} ${hours}:${minutes}`;
+
+  return moment(timeString).format('x');
+}
+
+function addZeroToFrontHelper(num) {
+  if (num < 10) {
+    return `0${num}`;
+  } else {
+    return `${num}`;
+  }
+}
+
+export { fromEpoch, toEpoch, addZeroToFrontHelper };
