@@ -19,8 +19,18 @@ export default class Auth extends Component {
     }
 
     handleClick() {
-        axios.post('/api/auth/login', { userName: this.state.userName, pw: this.state.pw }).then(() => {
-            console.log('We did the thing!')
+        axios.post('/api/auth/login',{ userName: this.state.userName, pw: this.state.pw }).then( res => {
+            if(res.data === 'You are the chosen one!') {
+                window.location.assign('/#/business')
+            }
+            if(res.data === 'You are also the chosen one!') {
+                window.location.assign('/#/nonprofit')
+            }
+            if(res.data === 'Wrong Password') {
+                alert('Wrong Password. Please try again.')
+            }
+            if(res.data === 'Please create an account before logging in.')
+                alert('Please create an account before logging in.')
         })
     }
 
@@ -34,7 +44,7 @@ export default class Auth extends Component {
     }
 
     render() {
-        console.log(this.state)
+        console.log(window.location)
         const { userName, pw } = this.state
         return (
             <div>
