@@ -1,6 +1,6 @@
 import React from 'react';
-
 import moment from 'moment';
+import ContactInfoCard from '../../../../components/NonProfit/ContactInfoCard';
 
 class NonProfitBasket extends React.Component {
   constructor() {
@@ -98,7 +98,7 @@ const ExpandedCard = ({ currentBasket, expanded }) => {
   return (
     <div>
       <DisplayAllItems items={currentBasket.items} />
-      <DisplayContactInfo _contactInfo={contactInfo} />
+      <ContactInfoCard _contactInfo={contactInfo} />
     </div>
   );
 };
@@ -111,20 +111,5 @@ const DisplayAllItems = ({ items }) =>
       </p>
     );
   });
-
-const DisplayContactInfo = ({ _contactInfo }) => {
-  return (
-    <div>
-      <p>{_contactInfo.address}</p>
-      <p>
-        {_contactInfo.city}, {_contactInfo.state} {_contactInfo.zipCode}
-      </p>
-      <p>{_contactInfo.phoneNumber}</p>
-      <p>
-        {_contactInfo.adminFirstName} {_contactInfo.adminLastName}
-      </p>
-    </div>
-  );
-};
 
 export default NonProfitBasket;

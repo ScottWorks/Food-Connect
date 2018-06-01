@@ -1,11 +1,11 @@
 import React from 'react';
+import axios from 'axios';
 // import Map from './Map/Map';
 import NonProfitBasketList from './NonProfitBasketList/NonProfitBasketList';
 import ScheduleList from './ScheduleList/ScheduleList';
 import Header from '../../components/Header/Header.js';
 import './NonProfit.css';
 
-import axios from 'axios';
 
 class NonProfit extends React.Component {
   constructor() {
@@ -56,7 +56,7 @@ class NonProfit extends React.Component {
         <div className="nonprofit_main">
           <h2>Non Profit Page</h2>
         </div>
-        <ScheduleList />
+        <ScheduleList scheduledBaskets={scheduledBaskets}/>
         <NonProfitBasketList baskets={baskets} />
       </main>
     );
