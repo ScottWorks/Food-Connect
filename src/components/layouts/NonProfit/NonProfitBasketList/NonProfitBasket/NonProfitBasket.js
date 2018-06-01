@@ -1,39 +1,55 @@
 import React from 'react';
 import ContactInfoCard from '../../../../components/NonProfit/ContactInfoCard';
 import * as utilFunc from '../../../../../config/timeConversion';
+import DatePicker from 'material-ui/DatePicker';
+import TimePicker from 'material-ui/TimePicker';
 
 class NonProfitBasket extends React.Component {
   constructor() {
     super();
     this.state = {
       expanded: false,
-      reserve: false
+      reserve: false,
+      scheduledDate: '',
+      scheduledTime: ''
     };
 
-    this.resizeCard = this.resizeCard.bind(this);
-    this.reserveBasket = this.reserveBasket.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  resizeCard() {
-    const { expanded } = this.state;
-    let resize;
+  handleChange(key, value) {
+    this.setState({
+      [key]: value
+    });
+  }
 
-    if (expanded) {
+  buttonState(key) {
+    const { expanded, reserve } = this.state;
+    let resize, state;
+
+    if (key === 'expanded') {
+      state = expanded;
+    } else if (key === 'reserve') {
+      state = reserve;
+    }
+
+    if (state) {
+      resize = false;
     } else {
       resize = true;
     }
 
     this.setState({
-      expanded: resize
+      [key]: resize
     });
   }
 
   reserveBasket() {
-    alert('Works!');
+    alert('Reserved!');
   }
 
   render() {
-    const { expanded } = this.state;
+    const { expanded, reserve } = this.state;
     const { currentBasket } = this.props;
 
     let formattedTime = utilFunc.fromEpoch(
@@ -47,14 +63,22 @@ class NonProfitBasket extends React.Component {
       <DisplaySomeItems items={currentBasket.items} />
     );
 
+    const reserveCard = reserve ? (
+      <DateTimePicker
+        _reserveBasket={this.reserveBasket}
+        _handleChange={this.handleChange}
+      />
+    ) : null;
+
     return (
       <section>
-        <button onClick={this.reserveBasket}>Reserve</button>
+        {reserveCard}
+        <button onClick={() => this.buttonState('reserve')}>Reserve</button>
         <p>{currentBasket.company_name}</p>
         <p>{currentBasket.operating_hrs}</p>
         <p>Pick-Up By: {formattedTime}</p>
         {expandCard}
-        <button onClick={this.resizeCard}>
+        <button onClick={() => this.buttonState('expanded')}>
           {expanded ? 'Collapse' : 'Details'}
         </button>
       </section>
@@ -113,5 +137,21 @@ const DisplayAllItems = ({ items }) =>
       </p>
     );
   });
+
+const DateTimePicker = ({ _reserveBasket, _handleChange }) => {
+  return (
+    <div>
+      <button onClick={() => _reserveBasket()}>Submit</button>
+      <DatePicker
+        onChange={(x, date) => _handleChange('scheduledDate', date)}
+        hintText="Date"
+      />
+      <TimePicker
+        onChange={(x, time) => _handleChange('scheduledTime', time)}
+        hintText="Time"
+      />
+    </div>
+  );
+};
 
 export default NonProfitBasket;
