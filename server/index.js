@@ -7,7 +7,7 @@ const massive = require('massive');
 const dotenv = require('dotenv');
 const session = require('express-session');
 dotenv.config();
-const checkForSession = require('./middlewares/checkForSessions')
+const checkForSession = require('./middlewares/checkForSessions');
 
 // Controllers
 const twilioController = require('./controllers/TwilioController'),
@@ -71,7 +71,11 @@ app.put('/api/business/:businessID', BusinessController.updateBusinessInfo);
 
 // NON-PROFIT ENDPOINTS
 // Non-Profit Basket Endpoints
-app.get('/api/basket', nonProfitController.getBaskets);
+app.get(
+  '/api/scheduled/baskets/:nonProfitID',
+  nonProfitController.getScheduledBaskets
+);
+app.post('/api/basket/:currentLocalTime', nonProfitController.getBaskets);
 // app.put('/api/basket/:basketID', nonProfitController.updateBasket);
 
 // Non-Profit Wishlist Endpoints

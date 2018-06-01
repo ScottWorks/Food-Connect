@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS wishList;
-DROP TABLE IF EXISTS nonProfits;
 DROP TABLE IF EXISTS baskets;
+DROP TABLE IF EXISTS nonProfits;
 DROP TABLE IF EXISTS businesses;
 
 
@@ -44,6 +44,7 @@ CREATE TABLE baskets
 (
     basket_id SERIAL PRIMARY KEY,
     business_id INTEGER REFERENCES businesses(business_id),
+    non_profit_id INTEGER REFERENCES nonProfits(non_profit_id),
     pick_up_time BIGINT,
     scheduled_time BIGINT,
     -- STATUS: INTEGER IS USED AS A FLAG TO RECORD STATUS
