@@ -2,7 +2,7 @@ import React from 'react';
 import NonProfitBasket from './NonProfitBasket/NonProfitBasket';
 
 function NonProfitBasketList(props) {
-  const { baskets, _showContactInfo } = props;
+  const { baskets } = props;
 
   const displayBaskets = baskets.map((elem, idx) => {
     return (

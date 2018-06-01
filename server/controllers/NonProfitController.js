@@ -1,14 +1,33 @@
 module.exports = {
+  getScheduledBaskets: (req, res) => {
+    const db = req.app.get('db');
+    const { nonProfitID } = req.params;
+
+    db
+      .np_getScheduledBaskets([nonProfitID])
+      .then((scheduledBaskets) => {
+        console.log(scheduledBaskets);
+
+        res.status(200).send(scheduledBaskets);
+      })
+      .catch(() => {
+        res.sendStatus(500);
+      });
+  },
   getBaskets: (req, res) => {
     const db = req.app.get('db');
-    // const currentTime = Date.now();
-    const currentTime = 1500000000000;
+    const { currentLocalTime } = req.params;
+    const { businessIDs } = req.body;
 
-    console.log(currentTime);
+    db
+      .np_getBaskets([currentLocalTime, businessIDs])
+      .then((baskets) => {
+        // console.log(baskets);
 
-    db.getBaskets([currentTime]).then((baskets) => {
-      console.log(baskets);
-      res.status(200).send(baskets);
-    });
+        res.status(200).send(baskets);
+      })
+      .catch(() => {
+        res.sendStatus(500);
+      });
   }
 };

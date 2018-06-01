@@ -1,13 +1,17 @@
 import React from 'react';
+import ContactInfoCard from '../../../../components/NonProfit/ContactInfoCard';
+import * as utilFunc from '../../../../../config/timeConversion';
 
 class NonProfitBasket extends React.Component {
   constructor() {
     super();
     this.state = {
-      expanded: false
+      expanded: false,
+      reserve: false
     };
 
     this.resizeCard = this.resizeCard.bind(this);
+    this.reserveBasket = this.reserveBasket.bind(this);
   }
 
   resizeCard() {
@@ -15,7 +19,6 @@ class NonProfitBasket extends React.Component {
     let resize;
 
     if (expanded) {
-      resize = false;
     } else {
       resize = true;
     }
@@ -25,9 +28,18 @@ class NonProfitBasket extends React.Component {
     });
   }
 
+  reserveBasket() {
+    alert('Works!');
+  }
+
   render() {
     const { expanded } = this.state;
     const { currentBasket } = this.props;
+
+    let formattedTime = utilFunc.fromEpoch(
+      currentBasket.pick_up_time,
+      'ddd, MMM Do'
+    );
 
     const expandCard = expanded ? (
       <ExpandedCard currentBasket={currentBasket} />
@@ -37,10 +49,10 @@ class NonProfitBasket extends React.Component {
 
     return (
       <section>
-        <button>Reserve</button>
+        <button onClick={this.reserveBasket}>Reserve</button>
         <p>{currentBasket.company_name}</p>
         <p>{currentBasket.operating_hrs}</p>
-        <p>Pick-Up By: {currentBasket.pick_up_time}</p>
+        <p>Pick-Up By: {formattedTime}</p>
         {expandCard}
         <button onClick={this.resizeCard}>
           {expanded ? 'Collapse' : 'Details'}
@@ -88,7 +100,7 @@ const ExpandedCard = ({ currentBasket, expanded }) => {
   return (
     <div>
       <DisplayAllItems items={currentBasket.items} />
-      <DisplayContactInfo _contactInfo={contactInfo} />
+      <ContactInfoCard _contactInfo={contactInfo} />
     </div>
   );
 };
@@ -101,20 +113,5 @@ const DisplayAllItems = ({ items }) =>
       </p>
     );
   });
-
-const DisplayContactInfo = ({ _contactInfo }) => {
-  return (
-    <div>
-      <p>{_contactInfo.address}</p>
-      <p>
-        {_contactInfo.city}, {_contactInfo.state} {_contactInfo.zipCode}
-      </p>
-      <p>{_contactInfo.phoneNumber}</p>
-      <p>
-        {_contactInfo.adminFirstName} {_contactInfo.adminLastName}
-      </p>
-    </div>
-  );
-};
 
 export default NonProfitBasket;
