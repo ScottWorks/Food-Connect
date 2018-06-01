@@ -19,8 +19,6 @@ class NonProfitBasket extends React.Component {
   }
 
   handleChange(key, value) {
-    console.log(value);
-
     this.setState({
       [key]: value
     });
@@ -49,17 +47,18 @@ class NonProfitBasket extends React.Component {
 
   reserveBasket() {
     const { scheduledDate, scheduledTime } = this.state;
+    const { currentBasket } = this.props;
+    const basketID = currentBasket.basket_id;
 
     let time = timeConversion.toEpoch(scheduledDate, scheduledTime);
 
-    console.log(time);
+    this.props._updateBasket(basketID, time);
 
     this.setState({
+      reserve: false,
       scheduledDate: {},
       scheduledTime: {}
     });
-
-    alert('Reserved!');
   }
 
   render() {

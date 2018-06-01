@@ -6,8 +6,6 @@ function fromEpoch(epochTime, timeFormat) {
 }
 
 function toEpoch(_date, _time) {
-  console.log(_date, _time);
-
   let momentTime = moment(_time),
     momentDate = moment(_date),
     hours = addZeroToFrontHelper(momentTime.hours()),
@@ -16,8 +14,6 @@ function toEpoch(_date, _time) {
     days = addZeroToFrontHelper(momentDate.date()),
     years = addZeroToFrontHelper(momentDate.year()),
     timeString = `${years}-${months}-${days} ${hours}:${minutes}`;
-
-  console.log(timeString);
 
   return moment(timeString).format('x');
 }

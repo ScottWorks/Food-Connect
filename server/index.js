@@ -76,7 +76,7 @@ app.get(
   nonProfitController.getScheduledBaskets
 );
 app.post('/api/basket/:currentLocalTime', nonProfitController.getBaskets);
-// app.put('/api/basket/:basketID', nonProfitController.updateBasket);
+app.put('/api/basket/:nonProfitID', nonProfitController.updateBasket);
 
 // Non-Profit Wishlist Endpoints
 app.get('/api/wishlist/:nonProfitID');
