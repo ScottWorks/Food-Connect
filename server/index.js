@@ -45,9 +45,9 @@ massive(CONNECTION_STRING)
 // ##### ENDPOINTS ######
 
 // AUTH ENDPOINTS
-app.get('/api/auth/me');
-app.get('/api/auth/login');
-app.get('/api/auth/logout');
+app.get('/api/auth/me', authController.validate);
+app.post('/api/auth/login', authController.login);
+app.get('/api/auth/logout', authController.logout);
 app.post('/api/auth/register', authController.register);
 
 // LANDING ENDPOINTS
