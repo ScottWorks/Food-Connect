@@ -54,5 +54,13 @@ module.exports = {
         }
 
         return colors;
+    },
+
+    // TODO:
+    /* 
+     *  Need to create a function that creates an object of totals
+     */
+    createBusinessTotalObjectWeight(basketHistory){
+        // TODO:
     }
 }
