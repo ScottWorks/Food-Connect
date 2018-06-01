@@ -6,8 +6,6 @@ module.exports = {
     db
       .np_getScheduledBaskets([nonProfitID])
       .then((scheduledBaskets) => {
-        console.log(scheduledBaskets);
-
         res.status(200).send(scheduledBaskets);
       })
       .catch(() => {
@@ -22,9 +20,23 @@ module.exports = {
     db
       .np_getBaskets([currentLocalTime, businessIDs])
       .then((baskets) => {
-        // console.log(baskets);
-
         res.status(200).send(baskets);
+      })
+      .catch(() => {
+        res.sendStatus(500);
+      });
+  },
+  updateBasket: (req, res) => {
+    const db = req.app.get('db');
+    const { nonProfitID } = req.params;
+    const { scheduledTime, basketID } = req.body;
+
+    console.log(scheduledTime, basketID);
+
+    db
+      .np_updateBasket([nonProfitID, scheduledTime, basketID])
+      .then(() => {
+        res.sendStatus(200);
       })
       .catch(() => {
         res.sendStatus(500);
