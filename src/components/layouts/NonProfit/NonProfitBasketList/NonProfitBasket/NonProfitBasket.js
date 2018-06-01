@@ -1,6 +1,6 @@
 import React from 'react';
 import ContactInfoCard from '../../../../components/NonProfit/ContactInfoCard';
-import * as utilFunc from '../../../../../config/timeConversion';
+import * as timeConversion from '../../../../../config/timeConversion';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 
@@ -52,7 +52,7 @@ class NonProfitBasket extends React.Component {
     const { expanded, reserve } = this.state;
     const { currentBasket } = this.props;
 
-    let formattedTime = utilFunc.fromEpoch(
+    let formattedTime = timeConversion.fromEpoch(
       currentBasket.pick_up_time,
       'ddd, MMM Do'
     );
