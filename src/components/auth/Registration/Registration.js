@@ -67,9 +67,9 @@ class Register extends Component {
         const { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, userName, pw} = this.state
         axios.post('/api/auth/register', { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, userName, pw} ).then( account => {
             console.log(account.data)
-            // this.props.history.push('/login')
             
-        }, this.clearInputs())
+            
+        }, this.clearInputs(), window.location.assign('/#/login'))
     }
 
     render() {
