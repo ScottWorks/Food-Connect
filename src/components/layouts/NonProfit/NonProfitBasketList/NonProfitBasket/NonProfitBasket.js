@@ -1,6 +1,6 @@
 import React from 'react';
-import moment from 'moment';
 import ContactInfoCard from '../../../../components/NonProfit/ContactInfoCard';
+import * as utilFunc from '../../../../../config/timeConversion';
 
 class NonProfitBasket extends React.Component {
   constructor() {
@@ -36,8 +36,10 @@ class NonProfitBasket extends React.Component {
     const { expanded } = this.state;
     const { currentBasket } = this.props;
 
-    const pickupTime = moment(Number(currentBasket.pick_up_time));
-    const formattedPickupTime = moment(pickupTime._d).format('ddd, MMM Do');
+    let formattedTime = utilFunc.fromEpoch(
+      currentBasket.pick_up_time,
+      'ddd, MMM Do'
+    );
 
     const expandCard = expanded ? (
       <ExpandedCard currentBasket={currentBasket} />
@@ -50,7 +52,7 @@ class NonProfitBasket extends React.Component {
         <button onClick={this.reserveBasket}>Reserve</button>
         <p>{currentBasket.company_name}</p>
         <p>{currentBasket.operating_hrs}</p>
-        <p>Pick-Up By: {formattedPickupTime}</p>
+        <p>Pick-Up By: {formattedTime}</p>
         {expandCard}
         <button onClick={this.resizeCard}>
           {expanded ? 'Collapse' : 'Details'}
