@@ -10,13 +10,14 @@ class NonProfit extends React.Component {
   constructor() {
     super();
     this.state = {
-      nonProfitID: 4,
+      nonProfitID: 7,
       baskets: [],
       scheduledBaskets: []
     };
 
     this.getBaskets = this.getBaskets.bind(this);
     this.getScheduledBaskets = this.getScheduledBaskets.bind(this);
+    this.updateBasket = this.updateBasket.bind(this);
   }
 
   componentDidMount() {
@@ -26,10 +27,10 @@ class NonProfit extends React.Component {
 
   getBaskets() {
     const currentLocalTime = new Date().getTime();
-    const businessIDs = [1, 4];
+    const businessIDs = [4];
 
     axios
-      .post(`/api/basket/${currentLocalTime}`, { businessIDs: businessIDs })
+      .post(`/api/basket/${currentLocalTime}`, { businessIDs })
       .then((baskets) => {
         this.setState({
           baskets: baskets.data
@@ -49,15 +50,21 @@ class NonProfit extends React.Component {
       });
   }
 
-  updateBasket(basketID, scheduledTime) {
+  updateBasket(scheduledTime, status, basketID) {
     const { nonProfitID } = this.state;
 
-    axios.put(`/api/basket/${nonProfitID}`, { basketID, scheduledTime });
+    let promise = axios.put(`/api/basket/update/${nonProfitID}`, {
+      scheduledTime,
+      status,
+      basketID
+    });
 
-    this.getBaskets();
-    this.getScheduledBaskets();
+    Promise.all([promise]).then(() => {
+      this.getScheduledBaskets();
+      this.getBaskets();
+    });
 
-    alert('Reserved!');
+    alert('Reservation Successful!');
   }
 
   render() {
@@ -69,7 +76,9 @@ class NonProfit extends React.Component {
         <div className="nonprofit_main">
           <h2>Non Profit Page</h2>
         </div>
+        <h3>Scheduled Baskets</h3>
         <ScheduleList scheduledBaskets={scheduledBaskets} />
+        <h3>Available Baskets</h3>
         <NonProfitBasketList
           baskets={baskets}
           _updateBasket={this.updateBasket}
