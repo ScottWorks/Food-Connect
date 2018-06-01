@@ -7,10 +7,11 @@ class BasketTable extends React.Component {
   constructor() {
     super()
     this.state = {
-      name: '',
+      item: '',
       weight: '',
       expirationDate: '',
-      expirationTime: ''
+      expirationTime: '',
+      fairMarketValue: ''
     }
   }
 
@@ -22,24 +23,37 @@ class BasketTable extends React.Component {
         momentDate = moment(this.state.expirationDate),
         hours = this.addZeroToFrontHelper(momentTime.hours()),
         minutes = this.addZeroToFrontHelper(momentTime.minutes()),
-        months = this.addZeroToFrontHelper(momentTime.months()),
-        days = this.addZeroToFrontHelper(momentTime.days()),
-        years = this.addZeroToFrontHelper(momentTime.years()),
+        months = this.addZeroToFrontHelper(momentDate.month() + 1),
+        days = this.addZeroToFrontHelper(momentDate.daysInMonth()),
+        years = this.addZeroToFrontHelper(momentDate.year()),
         timeString = '',
-        parts = '',
-        utcTime = 0,
         itemObj = {}
 
-    timeString = `${months}/${days}/${years} ${hours}:${minutes}`
-    parts = timeString.match(/(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2})/);
-    utcTime = Date.UTC(+parts[3], parts[2]-1, +parts[1], +parts[4], +parts[5]);
+    timeString = `${years}-${months}-${days} ${hours}:${minutes}`
     itemObj = {
-      name: this.state.name,
+      item: this.state.item,
       weight: this.state.weight,
-      utcTime: utcTime
+      fairMarketValue: this.state.fairMarketValue,
+      utcTime: moment(timeString).format('x')
     }
     this.props.addItemToBasket(itemObj)
-    this.setState({name: '', weight: ''})
+    this.setState({item: '', weight: '', fairMarketValue: ''})
+  }
+
+  //This function formats currency on the onChange 
+  formatCurrencyHelper(input) {
+    let value = new String(input);
+    // remove all characters that aren't digit or dot
+    value = value.replace(/[^0-9.]/g,'');
+    // replace multiple dots with a single dot
+    value = value.replace(/\.+/g,'.');
+    // only allow 2 digits after a dot
+    value = value.replace(/(.*\.[0-9][0-9]?).*/g,'$1');
+    // replace multiple zeros with a single one
+    value = value.replace(/^0+(.*)$/,'0$1');
+    // remove leading zero
+    value = value.replace(/^0([^.].*)$/,'$1');
+    this.setState({fairMarketValue: value})
   }
 
   //helper function to prepToAddItem make sure everything is formatted properly
@@ -58,16 +72,6 @@ class BasketTable extends React.Component {
           onClick={() => this.props.makeBasket()}
         >Make Basket</button>
         <div>
-          <input 
-            placeholder="Item name"
-            onChange={e => this.setState({name: e.target.value})}
-            value={this.state.name}
-          />
-          <input 
-            placeholder="Weight in pounds"
-            onChange={e => this.setState({weight: e.target.value})}
-            value={this.state.weight}
-          />
           <DatePicker 
             onChange={(x, date) => this.setState({expirationDate: date})}
             hintText="Date"
@@ -75,6 +79,27 @@ class BasketTable extends React.Component {
           <TimePicker
             onChange={(x, time) => this.setState({expirationTime: time})}
             hintText="Time"
+          />
+        </div>
+        <div>
+          <input 
+            placeholder="Item name"
+            onChange={e => this.setState({item: e.target.value})}
+            value={this.state.item}
+            type="text"
+          />
+          <input 
+            placeholder="Weight in pounds"
+            onChange={e => this.setState({weight: e.target.value})}
+            value={this.state.weight}
+            type="number"
+          />
+          <input 
+            placeholder="Fair market value"
+            onChange={e => this.formatCurrencyHelper(e.target.value)}
+            value={this.state.fairMarketValue}
+            type="number" 
+            step="0.01"
           />
         </div>
         <button
