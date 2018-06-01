@@ -1,45 +1,62 @@
 import React from 'react';
+import axios from 'axios';
 // import Map from './Map/Map';
 import NonProfitBasketList from './NonProfitBasketList/NonProfitBasketList';
 import ScheduleList from './ScheduleList/ScheduleList';
-import Header from "../../components/Header/Header.js"
-import './NonProfit.css'
+import Header from '../../components/Header/Header.js';
+import './NonProfit.css';
 
-import axios from 'axios';
 
 class NonProfit extends React.Component {
   constructor() {
     super();
     this.state = {
-      baskets: []
+      baskets: [],
+      scheduledBaskets: []
     };
+
     this.getBaskets = this.getBaskets.bind(this);
+    this.getScheduledBaskets = this.getScheduledBaskets.bind(this)
   }
 
   componentDidMount() {
     this.getBaskets();
+    this.getScheduledBaskets()
   }
 
   getBaskets() {
-    const dummyDataBusinessIDs = [1, 3, 4];
+    const currentLocalTime = new Date().getTime();
+    const businessIDs = [1, 4];
 
-    axios.get('/api/basket', { dummyDataBusinessIDs }).then((baskets) => {
-      this.setState({
-        baskets: baskets.data
+    axios
+      .post(`/api/basket/${currentLocalTime}`, { businessIDs: businessIDs })
+      .then((baskets) => {
+        this.setState({
+          baskets: baskets.data
+        });
       });
-    });
   }
 
-  reserveBasket() {}
+  getScheduledBaskets() {
+    const nonProfitID = 4;
+ 
+    axios.get(`/api/scheduled/baskets/${nonProfitID}`).then((scheduledBaskets) => {
+      this.setState({
+        scheduledBaskets: scheduledBaskets.data
+      })
+    })
+  }
 
   render() {
-    const { baskets } = this.state;
+    const { baskets, scheduledBaskets } = this.state;
 
     return (
       <main className="mobile">
-        <Header/>
-        <div className="nonprofit_main"><h2>Non Profit Page</h2></div>
-        <ScheduleList />
+        <Header />
+        <div className="nonprofit_main">
+          <h2>Non Profit Page</h2>
+        </div>
+        <ScheduleList scheduledBaskets={scheduledBaskets}/>
         <NonProfitBasketList baskets={baskets} />
       </main>
     );

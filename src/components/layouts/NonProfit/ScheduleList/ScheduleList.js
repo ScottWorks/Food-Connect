@@ -1,18 +1,17 @@
 import React from 'react';
 import ScheduleBasket from './ScheduleBasket/ScheduleBasket';
 
-class ScheduleList extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-  render() {
+function ScheduleList(props) {
+  const { scheduledBaskets } = props;
+
+  const displaySchedule = scheduledBaskets.map((elem, idx) => {
     return (
-      <section>
-        <ScheduleBasket />
-      </section>
+      <div key={idx}>
+        <ScheduleBasket scheduledBasket={elem} />
+      </div>
     );
-  }
+  });
+  return <section>{displaySchedule}</section>;
 }
 
 export default ScheduleList;
