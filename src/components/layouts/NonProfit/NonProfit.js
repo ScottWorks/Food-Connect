@@ -11,14 +11,17 @@ class NonProfit extends React.Component {
   constructor() {
     super();
     this.state = {
-      baskets: []
+      baskets: [],
+      scheduledBaskets: []
     };
 
     this.getBaskets = this.getBaskets.bind(this);
+    this.getScheduledBaskets = this.getScheduledBaskets.bind(this)
   }
 
   componentDidMount() {
     this.getBaskets();
+    this.getScheduledBaskets()
   }
 
   getBaskets() {
@@ -34,8 +37,18 @@ class NonProfit extends React.Component {
       });
   }
 
+  getScheduledBaskets() {
+    const nonProfitID = 4;
+ 
+    axios.get(`/api/scheduled/baskets/${nonProfitID}`).then((scheduledBaskets) => {
+      this.setState({
+        scheduledBaskets: scheduledBaskets.data
+      })
+    })
+  }
+
   render() {
-    const { baskets } = this.state;
+    const { baskets, scheduledBaskets } = this.state;
 
     return (
       <main className="mobile">

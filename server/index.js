@@ -71,6 +71,10 @@ app.put('/api/business/:businessID', BusinessController.updateBusinessInfo);
 
 // NON-PROFIT ENDPOINTS
 // Non-Profit Basket Endpoints
+app.get(
+  '/api/scheduled/baskets/:nonProfitID',
+  nonProfitController.getScheduledBaskets
+);
 app.post('/api/basket/:currentLocalTime', nonProfitController.getBaskets);
 // app.put('/api/basket/:basketID', nonProfitController.updateBasket);
 
