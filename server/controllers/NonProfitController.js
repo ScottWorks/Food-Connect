@@ -29,10 +29,12 @@ module.exports = {
   updateBasket: (req, res) => {
     const db = req.app.get('db');
     const { nonProfitID } = req.params;
-    const { basketID, scheduledTime } = req.body;
+    const { scheduledTime, basketID } = req.body;
+
+    console.log(scheduledTime, basketID);
 
     db
-      .updateBasket([nonProfitID, basketID, scheduledTime])
+      .np_updateBasket([nonProfitID, scheduledTime, basketID])
       .then(() => {
         res.sendStatus(200);
       })

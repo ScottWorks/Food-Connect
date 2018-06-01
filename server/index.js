@@ -36,11 +36,11 @@ app.use(
 
 app.use(checkForSession);
 
-massive(CONNECTION_STRING)
-  .then((dbInstance) => {
-    app.set('db', dbInstance);
-  })
-  .catch((e) => console.log(`Error: ${e}`));
+// massive(CONNECTION_STRING)
+//   .then((dbInstance) => {
+//     app.set('db', dbInstance);
+//   })
+//   .catch((e) => console.log(`Error: ${e}`));
 
 // ##### ENDPOINTS ######
 
@@ -103,6 +103,13 @@ app.put('/api/amazon/upload/:basketID', s3Controller.upload);
 // Requires a body with toEmail, fromEmail, subject, and message
 app.post('/api/email', mailController.sendEmail);
 
-app.listen(SERVER_PORT, () => {
-  console.log(`Creeping on Port: ${SERVER_PORT}`);
+// app.listen(SERVER_PORT, () => {
+//   console.log(`Creeping on Port: ${SERVER_PORT}`);
+// });
+
+massive(CONNECTION_STRING).then((dbInstance) => {
+  app.set('db', dbInstance);
+  app.listen(SERVER_PORT, () =>
+    console.log(`Creeping on Port: ${SERVER_PORT}`)
+  );
 });
