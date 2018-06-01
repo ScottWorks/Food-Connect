@@ -10,7 +10,7 @@ export default class StatChart extends React.Component{
             data: {
                 datasets: [
                     {
-                        data: [1,2,3],
+                        data: [1000,2038,32048],
                         backgroundColor: utilFunc.generateRandomColors(3)
                     }
                 ],
@@ -21,16 +21,16 @@ export default class StatChart extends React.Component{
                 title: {
                     display: true,
                     position: "top",
-                    text: "MONTHLY CHARITABLE CONTRIBUTIONS",
+                    text: "Charitable Contributions",
                     fontSize: 25,
                     fontColor: "#000000"
                 },
                 legend: {display: false},
-                sacles : {
+                scales : {
                     yAxes: [{
                         ticks: {
                             callback: function (value, index, values) {
-                                return //TODO:
+                                return "$" + utilFunc.formatNumber(value, 2, 3, ',', '.');
                             }
                         }
                     }]
@@ -42,7 +42,7 @@ export default class StatChart extends React.Component{
 
     render() {
         return (
-            <Bar/>
+            <Bar data={this.state.data} options = {this.state.options}/>
         )
     }
 }

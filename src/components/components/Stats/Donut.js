@@ -11,18 +11,18 @@ export default class Donut extends React.Component{
             data: {
                 datasets:[
                     {
-                        data:[10,20,30],
-                        backgroundColor: utilFunc.generateRandomColors(3)
+                        data:[1088,208,308, 4000, 4930],
+                        backgroundColor: utilFunc.generateRandomColors(5) // TODO: need to generate number based on number of data points
                     }
                 ], 
-                labels:['red', 'yellow', 'blue']
+                labels:['red', 'yellow', 'blue'] // TODO: Need to auto generate labels based on food
             }, 
             options:{
                 responsive: true,
                 title: {
                     display: true,
                     position: "top",
-                    text: "Total lbs of food saved", // TODO:
+                    text: "Pounds of Food Saved", // TODO:
                     fontSize: 20,
                     fontColor: "#000000"
                 }
