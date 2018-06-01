@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import * as utilFunc from '../../../../../config/timeConversion';
 import ContactInfoCard from '../../../../components/NonProfit/ContactInfoCard';
 
 class ScheduleBasket extends React.Component {
@@ -10,9 +11,13 @@ class ScheduleBasket extends React.Component {
   render() {
     const { scheduledBasket } = this.props;
 
-    const scheduledTime = moment(Number(scheduledBasket.scheduled_time));
+    // const scheduledTime = moment(Number(scheduledBasket.scheduled_time));
 
-    const formattedPickupTime = moment(scheduledTime._d).format(
+    // const formattedPickupTime = moment(scheduledTime._d).format(
+    //   'ddd, MMM Do, h:mm a');
+
+    let formattedTime = utilFunc.fromEpoch(
+      scheduledBasket.scheduled_time,
       'ddd, MMM Do, h:mm a'
     );
 
@@ -29,7 +34,7 @@ class ScheduleBasket extends React.Component {
     return (
       <section>
         <p>Scheduled Baskets</p>
-        <p>{formattedPickupTime}</p>
+        <p>{formattedTime}</p>
         <p>{scheduledBasket.company_name}</p>
         <ContactInfoCard _contactInfo={contactInfo} />
       </section>
