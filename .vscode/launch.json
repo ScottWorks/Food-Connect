@@ -6,15 +6,9 @@
   "configurations": [
     {
       "type": "node",
-<<<<<<< HEAD
-      "request": "attach",
-      "name": "Attach",
-      "port": 9229
-=======
       "request": "launch",
       "name": "Launch Program",
       "program": "${workspaceFolder}/server/index.js"
->>>>>>> master
     },
     {
       "type": "chrome",
