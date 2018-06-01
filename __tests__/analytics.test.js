@@ -108,3 +108,15 @@ test('Should return an array of 10 colors', ()=> {
 
     expect(result.length).toBe(10);
 });
+
+/*
+ * Test formatNumber
+ * Should correnctly return a formated string
+ */
+
+ test('Should return 3,999.99 as string', ()=> {
+     let testValue = 3999.990
+     let result = analyticFunctions.formatNumber(testValue, 2, 3, ",", ".");
+
+     expect(result).toBe("3,999.99")
+ });

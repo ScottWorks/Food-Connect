@@ -41,6 +41,11 @@ module.exports = {
         return sum;
     },
 
+    /* 
+     * Function to generate a random array of colors (earch color in RGB format)
+     * @param Integer numOfColors = Number of colors that you want to generate
+     */
+
     generateRandomColors(numOfColors) {
         let colors = [];
         let counter = 0;
@@ -62,5 +67,22 @@ module.exports = {
      */
     createBusinessTotalObjectWeight(basketHistory){
         // TODO:
-    }
+    },
+
+
+    /*
+     * Function to format a number to a particular pattern
+     * @param integer num = number to format
+     * @param integer decLen = length of decimal
+     * @param integer len = length of whole part
+     * @param string sectionDelim = Sections Delimiter
+     * @param string decimalDelim = Decimal Delimter
+     */
+
+     formatNumber(num, decLen, len, sectionDelim, decimalDelim) {
+        let regex = '\\d(?=(\\d{' + (len || 3) + '})+' + (decLen > 0 ? '\\D' : '$') + ')';
+        let number = num.toFixed(Math.max(0, ~~decLen));
+
+    return (decimalDelim ? number.replace('.', decimalDelim) : number).replace(new RegExp(regex, 'g'), '$&' + (sectionDelim || ','));
+     }
 }
