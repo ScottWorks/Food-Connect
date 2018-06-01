@@ -17,7 +17,7 @@ class Business extends React.Component {
 
   //When component mounts get unexpired baskets that belong to this business
   componentDidMount() {
-    var temp = 1
+    var temp = 10
     var epochTime = (new Date).getTime()
     axios.get(`/api/basket/${temp}/${epochTime}`).then(res => {
       this.setState({baskets: res.data})
@@ -26,14 +26,15 @@ class Business extends React.Component {
 
   //This Fn is passed down to BusinessTable using it's props, 
   //it take the item passed in an adds it to state
-  addItemToBasket(item) {
+  addItemToBasket(newItem) {
     var itemsArr = []
+    console.log(newItem.fairMarketValue)
     if(this.state.items[0]) {
-      itemsArr = [{name: item.name, weight: item.weight}, ...this.state.items]
-      this.setState({items: itemsArr, pick_up_time: item.utcTime})
+      itemsArr = [{item: newItem.item, weight: newItem.weight, FMV: newItem.fairMarketValue}, ...this.state.items]
+      this.setState({items: itemsArr, pick_up_time: newItem.utcTime})
     } else {
-      itemsArr = [{name: item.name, weight: item.weight}]
-      this.setState({items: itemsArr, pick_up_time: item.utcTime})
+      itemsArr = [{item: newItem.item, weight: newItem.weight, FMV: newItem.fairMarketValue}]
+      this.setState({items: itemsArr, pick_up_time: newItem.utcTime})
     }
   }
 
@@ -43,10 +44,12 @@ class Business extends React.Component {
   //with all the given items
   makeBasket() {
     var basketObj = {
-      items: this.state.items,
-      expiration: this.state.pick_up_time,
-      business_id: '1111 NEED TO CHANGE THIS 1111'
+      business_id: 10,
+      pick_up_time: this.state.pick_up_time,
+      status: 0,
+      items: JSON.stringify(this.state.items)
     }
+    this.setState({items: []})
     axios.post('/api/basket', basketObj).then(res => {
       var basketArr = [res.data, ...basketArr]
       this.setState({baskets: basketArr})
@@ -54,14 +57,6 @@ class Business extends React.Component {
   }
 
   render() {
-    let itemCards = this.state.items.map((e, i) => {
-      return (
-        <div>
-          <p>{e.name}</p>
-          <p>{e.weight}</p>
-        </div>
-      )
-    })
     return (
       <div className="Business">
         <div>
@@ -71,9 +66,10 @@ class Business extends React.Component {
           addItemToBasket={this.addItemToBasket}
           makeBasket={this.makeBasket}
         />
-        {itemCards}
-        <BusinessBasketList />
-        <h1>{this.state.baskets}</h1>
+        <BusinessBasketList 
+          items={this.state.items}
+          baskets={this.state.baskets}
+        />
       </div>
     );
   }
