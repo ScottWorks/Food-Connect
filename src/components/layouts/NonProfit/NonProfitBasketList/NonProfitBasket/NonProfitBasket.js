@@ -28,10 +28,6 @@ class NonProfitBasket extends React.Component {
     });
   }
 
-  reserveBasket() {
-    alert('Hey!');
-  }
-
   render() {
     const { expanded } = this.state;
     const { currentBasket } = this.props;
