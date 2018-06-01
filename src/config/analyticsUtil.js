@@ -61,12 +61,13 @@ module.exports = {
         return colors;
     },
 
-    // TODO:
+
     /* 
-     *  Need to create a function that creates an object of totals
+     *  Create Data set based on completed baskets
+     * @param Array basketHistory = Array of basket objects
      */
-    createBusinessTotalObjectWeight(basketHistory){
-        // TODO:
+    createDataSet(basketHistory){
+        
     },
 
 

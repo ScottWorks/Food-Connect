@@ -23,7 +23,7 @@ export function getTotalWeightSaved(){
 };
 
 export function getBusinessBasketsCompleted(businessID) {
-    let baskets = axios.get(`/api/basket/all/${businessID}`).then((baskets) => {
+    let baskets = axios.get(`/api/all/basket/${businessID}`).then((baskets) => {
         return baskets.data
     }).catch((err) => {
         console.log(`Error: ${err}`)

@@ -1,8 +1,10 @@
 import React from 'react';
 import {Bar} from 'react-chartjs-2';
 import * as utilFunc  from '../../../config/analyticsUtil';
+import {connect} from 'react-redux';
+import {getBusinessBasketsCompleted} from '../../../ducks/analyticsReducer'
 
-export default class StatChart extends React.Component{
+export class StatChart extends React.Component{
     constructor(props) {
         super(props);
 
@@ -39,10 +41,23 @@ export default class StatChart extends React.Component{
         }
     }
 
+    componentDidMount(){
+        this.props.getBusinessBasketsCompleted(4);
+    }
+
 
     render() {
+        console.log(this.props.businessBaskets)
         return (
             <Bar data={this.state.data} options = {this.state.options}/>
         )
     }
 }
+
+function mapStateToProps(state){
+    return {
+        businessBaskets: state.analyticsReducer.businessBaskets
+    }
+}
+
+export default connect(mapStateToProps, {getBusinessBasketsCompleted})(StatChart);
