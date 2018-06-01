@@ -5,15 +5,19 @@ function fromEpoch(epochTime, timeFormat) {
   return moment(time).format(timeFormat);
 }
 
-function toEpoch(_time, _date) {
+function toEpoch(_date, _time) {
+  console.log(_date, _time);
+
   let momentTime = moment(_time),
     momentDate = moment(_date),
     hours = addZeroToFrontHelper(momentTime.hours()),
     minutes = addZeroToFrontHelper(momentTime.minutes()),
     months = addZeroToFrontHelper(momentDate.month() + 1),
-    days = addZeroToFrontHelper(momentDate.daysInMonth()),
+    days = addZeroToFrontHelper(momentDate.date()),
     years = addZeroToFrontHelper(momentDate.year()),
     timeString = `${years}-${months}-${days} ${hours}:${minutes}`;
+
+  console.log(timeString);
 
   return moment(timeString).format('x');
 }

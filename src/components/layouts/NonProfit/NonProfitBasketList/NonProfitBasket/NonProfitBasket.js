@@ -10,14 +10,17 @@ class NonProfitBasket extends React.Component {
     this.state = {
       expanded: false,
       reserve: false,
-      scheduledDate: '',
-      scheduledTime: ''
+      scheduledDate: {},
+      scheduledTime: {}
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.reserveBasket = this.reserveBasket.bind(this);
   }
 
   handleChange(key, value) {
+    console.log(value);
+
     this.setState({
       [key]: value
     });
@@ -45,11 +48,22 @@ class NonProfitBasket extends React.Component {
   }
 
   reserveBasket() {
+    const { scheduledDate, scheduledTime } = this.state;
+
+    let time = timeConversion.toEpoch(scheduledDate, scheduledTime);
+
+    console.log(time);
+
+    this.setState({
+      scheduledDate: {},
+      scheduledTime: {}
+    });
+
     alert('Reserved!');
   }
 
   render() {
-    const { expanded, reserve } = this.state;
+    const { expanded, reserve, scheduledDate, scheduledTime } = this.state;
     const { currentBasket } = this.props;
 
     let formattedTime = timeConversion.fromEpoch(
@@ -65,6 +79,8 @@ class NonProfitBasket extends React.Component {
 
     const reserveCard = reserve ? (
       <DateTimePicker
+        _scheduledDate={scheduledDate}
+        _scheduledTime={scheduledTime}
         _reserveBasket={this.reserveBasket}
         _handleChange={this.handleChange}
       />
@@ -138,15 +154,22 @@ const DisplayAllItems = ({ items }) =>
     );
   });
 
-const DateTimePicker = ({ _reserveBasket, _handleChange }) => {
+const DateTimePicker = ({
+  _scheduledDate,
+  _scheduledTime,
+  _reserveBasket,
+  _handleChange
+}) => {
   return (
     <div>
       <button onClick={() => _reserveBasket()}>Submit</button>
       <DatePicker
+        value={_scheduledDate}
         onChange={(x, date) => _handleChange('scheduledDate', date)}
         hintText="Date"
       />
       <TimePicker
+        value={_scheduledTime}
         onChange={(x, time) => _handleChange('scheduledTime', time)}
         hintText="Time"
       />
