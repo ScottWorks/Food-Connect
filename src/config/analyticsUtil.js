@@ -14,7 +14,7 @@ module.exports = {
         let sum = 0;
 
         for (var i = 0; i < arrayOfBaskets.length; i++) {
-            let basketTotal = this.sumTotalBasketWeight(arrayOfBaskets[i])
+            let basketTotal = this.sumTotalBasketWeight(arrayOfBaskets[i].items)
             sum += basketTotal;
         }
         return sum;
@@ -85,5 +85,22 @@ module.exports = {
         let number = num.toFixed(Math.max(0, ~~decLen));
 
     return (decimalDelim ? number.replace('.', decimalDelim) : number).replace(new RegExp(regex, 'g'), '$&' + (sectionDelim || ','));
-     }
+     },
+
+     /*
+      * Function to get meals saved
+      * PROTOTYPE AND DEMO PURPOSES - NOT ACCURATE CALCULATION / DATA
+      * @param Integer poundsOfFoodSaved = pounds of food saved
+      */
+
+      getMealsSaved(poundsOfFoodSaved) {
+            const AVG_LBS_EATEN_YEARLY = 1996
+            const DAYS_PER_YEAR = 365.25
+
+            let lbsPerDay = AVG_LBS_EATEN_YEARLY/DAYS_PER_YEAR;
+            let lbsPerMeal = lbsPerDay /3;
+            let mealsSaved = poundsOfFoodSaved / lbsPerMeal;
+
+            return this.formatNumber(mealsSaved, 2, 3, ',', '.');
+      }
 }
