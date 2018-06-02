@@ -17,7 +17,8 @@ class NonProfit extends React.Component {
 
     this.getBaskets = this.getBaskets.bind(this);
     this.getScheduledBaskets = this.getScheduledBaskets.bind(this);
-    this.updateBasket = this.updateBasket.bind(this);
+    this.scheduleBasket = this.scheduleBasket.bind(this);
+    this.cancelBasket = this.cancelBasket.bind(this);
   }
 
   componentDidMount() {
@@ -50,12 +51,11 @@ class NonProfit extends React.Component {
       });
   }
 
-  updateBasket(scheduledTime, status, basketID) {
+  scheduleBasket(scheduledTime, basketID) {
     const { nonProfitID } = this.state;
 
     let promise = axios.put(`/api/basket/update/${nonProfitID}`, {
       scheduledTime,
-      status,
       basketID
     });
 
@@ -65,6 +65,17 @@ class NonProfit extends React.Component {
     });
 
     alert('Reservation Successful!');
+  }
+
+  cancelBasket(basketID) {
+    let promise = axios.put(`/api/basket/cancel/${basketID}`);
+
+    Promise.all([promise]).then(() => {
+      this.getScheduledBaskets();
+      this.getBaskets();
+    });
+
+    alert('Reservation Canceled!');
   }
 
   render() {
@@ -77,11 +88,14 @@ class NonProfit extends React.Component {
           <h2>Non Profit Page</h2>
         </div>
         <h3>Scheduled Baskets</h3>
-        <ScheduleList scheduledBaskets={scheduledBaskets} />
+        <ScheduleList
+          scheduledBaskets={scheduledBaskets}
+          _cancelBasket={this.cancelBasket}
+        />
         <h3>Available Baskets</h3>
         <NonProfitBasketList
           baskets={baskets}
-          _updateBasket={this.updateBasket}
+          _scheduleBasket={this.scheduleBasket}
         />
       </main>
     );

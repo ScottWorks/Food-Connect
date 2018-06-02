@@ -52,7 +52,7 @@ class NonProfitBasket extends React.Component {
 
     let time = timeConversion.toEpoch(scheduledDate, scheduledTime);
 
-    this.props._updateBasket(time, 2, basketID);
+    this.props._scheduleBasket(time, basketID);
 
     this.setState({
       reserve: false,

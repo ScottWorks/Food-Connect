@@ -8,7 +8,7 @@ class ScheduleBasket extends React.Component {
     this.state = {};
   }
   render() {
-    const { scheduledBasket } = this.props;
+    const { scheduledBasket, _cancelBasket } = this.props;
 
     let formattedTime = timeConversion.fromEpoch(
       scheduledBasket.scheduled_time,
@@ -27,7 +27,10 @@ class ScheduleBasket extends React.Component {
 
     return (
       <section>
-        <p>Scheduled Baskets</p>
+        <button>Update</button>
+        <button onClick={() => _cancelBasket(scheduledBasket.basket_id)}>
+          Remove
+        </button>
         <p>{formattedTime}</p>
         <p>{scheduledBasket.company_name}</p>
         <ContactInfoCard _contactInfo={contactInfo} />

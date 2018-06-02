@@ -2,12 +2,15 @@ import React from 'react';
 import NonProfitBasket from './NonProfitBasket/NonProfitBasket';
 
 function NonProfitBasketList(props) {
-  const { baskets, _updateBasket } = props;
+  const { baskets, _scheduleBasket } = props;
 
   const displayBaskets = baskets.map((elem, idx) => {
     return (
       <div key={idx}>
-        <NonProfitBasket currentBasket={elem} _updateBasket={_updateBasket} />
+        <NonProfitBasket
+          currentBasket={elem}
+          _scheduleBasket={_scheduleBasket}
+        />
       </div>
     );
   });

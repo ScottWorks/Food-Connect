@@ -26,13 +26,28 @@ module.exports = {
         res.sendStatus(500);
       });
   },
-  updateBasket: (req, res) => {
+  scheduleBasket: (req, res) => {
     const db = req.app.get('db');
     const { nonProfitID } = req.params;
-    const { scheduledTime, status, basketID } = req.body;
+    const { scheduledTime, basketID } = req.body;
+    const status = 2;
 
     db
-      .np_updateBasket([nonProfitID, scheduledTime, status, basketID])
+      .np_scheduleBasket([nonProfitID, scheduledTime, status, basketID])
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch(() => {
+        res.sendStatus(500);
+      });
+  },
+  cancelBasket: (req, res) => {
+    const db = req.app.get('db');
+    const { basketID } = req.params;
+    const status = 0;
+
+    db
+      .np_cancelBasket([status, basketID])
       .then(() => {
         res.sendStatus(200);
       })
