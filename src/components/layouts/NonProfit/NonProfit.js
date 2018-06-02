@@ -90,6 +90,7 @@ class NonProfit extends React.Component {
         <h3>Scheduled Baskets</h3>
         <ScheduleList
           scheduledBaskets={scheduledBaskets}
+          _scheduleBasket={this.scheduleBasket}
           _cancelBasket={this.cancelBasket}
         />
         <h3>Available Baskets</h3>

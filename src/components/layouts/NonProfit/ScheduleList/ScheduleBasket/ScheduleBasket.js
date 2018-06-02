@@ -1,14 +1,36 @@
 import React from 'react';
 import ContactInfoCard from '../../../../components/NonProfit/ContactInfoCard';
+import DateTimePicker from '../../../../components/NonProfit/DateTimePicker';
 import * as timeConversion from '../../../../../config/timeConversion';
 
 class ScheduleBasket extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      update: false
+    };
+
+    this.toggleReservationCard = this.toggleReservationCard.bind(this);
   }
+
+  toggleReservationCard() {
+    const { update } = this.state;
+    let state;
+
+    if (update) {
+      state = false;
+    } else {
+      state = true;
+    }
+
+    this.setState({
+      update: state
+    });
+  }
+
   render() {
-    const { scheduledBasket, _cancelBasket } = this.props;
+    const { update, scheduledDate, scheduledTime } = this.state;
+    const { scheduledBasket, _scheduleBasket, _cancelBasket } = this.props;
 
     let formattedTime = timeConversion.fromEpoch(
       scheduledBasket.scheduled_time,
@@ -25,9 +47,20 @@ class ScheduleBasket extends React.Component {
       adminLastName: scheduledBasket.admin_last_name
     };
 
+    const basketID = scheduledBasket.basket_id;
+
+    const reserveCard = update ? (
+      <DateTimePicker
+        _basketID={basketID}
+        _scheduleBasket={_scheduleBasket}
+        _toggleReservationCard={this.toggleReservationCard}
+      />
+    ) : null;
+
     return (
       <section>
-        <button>Update</button>
+        {reserveCard}
+        <button onClick={() => this.toggleReservationCard()}>Update</button>
         <button onClick={() => _cancelBasket(scheduledBasket.basket_id)}>
           Remove
         </button>

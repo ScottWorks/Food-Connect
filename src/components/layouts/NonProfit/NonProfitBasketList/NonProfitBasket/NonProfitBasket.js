@@ -1,69 +1,52 @@
 import React from 'react';
 import ContactInfoCard from '../../../../components/NonProfit/ContactInfoCard';
+import DateTimePicker from '../../../../components/NonProfit/DateTimePicker';
 import * as timeConversion from '../../../../../config/timeConversion';
-import DatePicker from 'material-ui/DatePicker';
-import TimePicker from 'material-ui/TimePicker';
 
 class NonProfitBasket extends React.Component {
   constructor() {
     super();
     this.state = {
       expanded: false,
-      reserve: false,
-      scheduledDate: {},
-      scheduledTime: {}
+      reserve: false
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.reserveBasket = this.reserveBasket.bind(this);
+    this.toggleReservationCard = this.toggleReservationCard.bind(this);
   }
 
-  handleChange(key, value) {
-    this.setState({
-      [key]: value
-    });
-  }
+  toggleDetailedCard() {
+    const { expanded } = this.state;
+    let state;
 
-  buttonState(key) {
-    const { expanded, reserve } = this.state;
-    let resize, state;
-
-    if (key === 'expanded') {
-      state = expanded;
-    } else if (key === 'reserve') {
-      state = reserve;
-    }
-
-    if (state) {
-      resize = false;
+    if (expanded) {
+      state = false;
     } else {
-      resize = true;
+      state = true;
     }
 
     this.setState({
-      [key]: resize
+      expanded: state
     });
   }
 
-  reserveBasket() {
-    const { scheduledDate, scheduledTime } = this.state;
-    const { currentBasket } = this.props;
-    const basketID = currentBasket.basket_id;
+  toggleReservationCard() {
+    const { reserve } = this.state;
+    let state;
 
-    let time = timeConversion.toEpoch(scheduledDate, scheduledTime);
-
-    this.props._scheduleBasket(time, basketID);
+    if (reserve) {
+      state = false;
+    } else {
+      state = true;
+    }
 
     this.setState({
-      reserve: false,
-      scheduledDate: {},
-      scheduledTime: {}
+      reserve: state
     });
   }
 
   render() {
-    const { expanded, reserve, scheduledDate, scheduledTime } = this.state;
-    const { currentBasket } = this.props;
+    const { expanded, reserve } = this.state;
+    const { currentBasket, _scheduleBasket } = this.props;
 
     let formattedTime = timeConversion.fromEpoch(
       currentBasket.pick_up_time,
@@ -76,24 +59,25 @@ class NonProfitBasket extends React.Component {
       <DisplaySomeItems items={currentBasket.items} />
     );
 
+    const basketID = currentBasket.basket_id;
+
     const reserveCard = reserve ? (
       <DateTimePicker
-        _scheduledDate={scheduledDate}
-        _scheduledTime={scheduledTime}
-        _reserveBasket={this.reserveBasket}
-        _handleChange={this.handleChange}
+        _basketID={basketID}
+        _scheduleBasket={_scheduleBasket}
+        _toggleReservationCard={this.toggleReservationCard}
       />
     ) : null;
 
     return (
       <section>
         {reserveCard}
-        <button onClick={() => this.buttonState('reserve')}>Reserve</button>
+        <button onClick={() => this.toggleReservationCard()}>Reserve</button>
         <p>{currentBasket.company_name}</p>
         <p>{currentBasket.operating_hrs}</p>
         <p>Pick-Up By: {formattedTime}</p>
         {expandCard}
-        <button onClick={() => this.buttonState('expanded')}>
+        <button onClick={() => this.toggleDetailedCard()}>
           {expanded ? 'Collapse' : 'Details'}
         </button>
       </section>
@@ -152,28 +136,5 @@ const DisplayAllItems = ({ items }) =>
       </p>
     );
   });
-
-const DateTimePicker = ({
-  _scheduledDate,
-  _scheduledTime,
-  _reserveBasket,
-  _handleChange
-}) => {
-  return (
-    <div>
-      <button onClick={() => _reserveBasket()}>Submit</button>
-      <DatePicker
-        value={_scheduledDate}
-        onChange={(x, date) => _handleChange('scheduledDate', date)}
-        hintText="Date"
-      />
-      <TimePicker
-        value={_scheduledTime}
-        onChange={(x, time) => _handleChange('scheduledTime', time)}
-        hintText="Time"
-      />
-    </div>
-  );
-};
 
 export default NonProfitBasket;
