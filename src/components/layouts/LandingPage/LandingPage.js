@@ -55,8 +55,10 @@ class LandingPage extends Component {
                         </div>
                     </Modal>
                     <div className="landing_main_media">
+                    <div className='overlay'>
                         <Link to="/login"><div className="landing_login_button">Login</div></Link>
                         <Link to="/register"><div className="landing_signup_button">Sign Up Now</div></Link>
+                        </div>
                     </div>
                     <div className="landing_hexmap">
                         <div className="landing_hexmap_title">HexMap Title</div>
@@ -64,8 +66,11 @@ class LandingPage extends Component {
                     </div>
                     <hr/>
                     <div className="landing_about">
-                        <div className="landing_about_title">About Us</div>
-                        <div className="landing_about_container"><h3>About Us Text</h3></div>
+                        <h2 className="landing_about_title">About Us</h2>
+                        <div className="landing_about_container">
+                            <p>Lorem ipsum dolor amet ethical bushwick etsy street art hammock fixie cloud bread la croix prism flexitarian man braid meh cliche.</p>
+                            <p>Actually skateboard chillwave edison bulb literally, live-edge chambray wayfarers craft beer poke pitchfork lo-fi vice flexitarian put a bird on it. Distillery godard PBR palo santo everyday carry live-edge lyft you probably haven't heard of them, kinfolk tumblr freegan raw denim pickled.</p>
+                            <p>Fashion axe skateboard prism jean shorts iceland woke 8-bit tumblr hoodie franzen pork belly austin.</p><p>Oh. You need a little dummy text for your mockup?</p><p> How quaint.</p></div>
                     </div>
                     <hr/>
                     <div className="landing_stats">

@@ -1,7 +1,8 @@
 .footer_main{
     position: fixed;
     bottom: 0;
-    background: linear-gradient(#a8e063,#56ab2f);
+    /* background: linear-gradient(#a8e063,#56ab2f); */
+    background: #427AA1;
     display: flex;
     justify-content: center;
     align-items: center;

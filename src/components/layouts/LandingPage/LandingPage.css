@@ -41,6 +41,16 @@
     background: linear-gradient(#56ab2f, #a8e063);
 }
 
+.overlay{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(00,00,00, .5);
+    width: 100%;
+    height: 100%;
+}
+
 .landing_login_button:hover{
     background: green;
 }
@@ -50,13 +60,15 @@
     align-items: center;
     justify-content: center;
     color: white;
-    font-weight: bold;
+    /* font-weight: bold; */
+    text-transform: uppercase;
     font-size:15px;
     margin-top: 15px;
     height: 20px;
     width: 120px;
     border-radius: 15px;
-    background: linear-gradient(#56ab2f, #a8e063);
+    /* background: linear-gradient(#56ab2f, #a8e063); */
+    background: #679436;
 }
 
 .landing_signup_button:hover{
@@ -89,18 +101,28 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 220px;
+    height: fit-content;
 }
 
 .landing_about_title{
     margin-top: 20px;
     margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #679436;
+    font-weight: bold;
+    font-size: 20px
 }
 
 .landing_about_container{
-    background-color: green;
     width: 90%;
-    height: 150px;
+    height: fit-content;
+}
+
+.landing_about_container p{
+    line-height: 20px;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .landing_stats{
