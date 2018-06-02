@@ -22,7 +22,7 @@
     margin-top: 70px;
     width: 100vw;
     height: 200px;
-    background-image: url('https://cdn.history.com/sites/2/2014/01/IH012802-P.jpeg');
+    background: url('../../../assets//images/baked-2313462_640.jpg') center;
     background-size: cover;
     border-radius: 3px;
 }

@@ -12,8 +12,10 @@ const GET_BUSINESS_BASKET_COMPLETED = 'GET_BUSINESS_BASKET_COMPLETED';
 
 export function getTotalWeightSaved(){
     let total = axios.get('/api/statistics/baskets').then((baskets) => {
+        console.log(baskets);
         return utilFunctions.sumTotalWeight(baskets.data)
     })
+    console.log(total);
 
 
     return {

@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import Modal from 'react-modal';
 import {Link} from "react-router-dom";
+import {connect} from 'react-redux';
 import "./LandingPage.css"
 import Footer from "./../../components/Footer/Footer";
 import Header from "./../../components/Header/Header";
+
+import * as utilFunc from '../../../config/analyticsUtil';
+import {getTotalWeightSaved} from '../../../ducks/analyticsReducer'
 
 class LandingPage extends Component {
     constructor(props) {
@@ -21,6 +25,10 @@ class LandingPage extends Component {
     //Function for closing the modal
     closeModal() {
         this.setState({ modalIsOpen: false });
+    }
+
+    componentDidMount(){
+        this.props.getTotalWeightSaved();
     }
 
     render() {
@@ -63,9 +71,9 @@ class LandingPage extends Component {
                     <div className="landing_stats">
                         <div className="landing_stats_title">Our Stats</div>
                         <div className="landing_stats_container">
-                            <div className="landing_graph1"><h3>Chart 1</h3></div>
+                            <div className="landing_graph1"><h3>Pounds of Food Saved</h3>{utilFunc.formatNumber(this.props.landingTotalSavedByWeight,0,3,',','.')}</div>
                             {/* <hr className="vertical_line"/> */}
-                            <div className="landing_graph2"><h3>Chart 2</h3></div>
+                            <div className="landing_graph2"><h3>Number of Meals Saved</h3>{utilFunc.getMealsSaved(this.props.landingTotalSavedByWeight)}</div>
                         </div>
                     </div>
                     <hr/>
@@ -93,4 +101,10 @@ const modalStyles = {
     }
 };
 
-export default LandingPage;
+function mapStateToProps(state) {
+    return {
+        landingTotalSavedByWeight: state.analyticsReducer.landingTotalSavedByWeight
+    }
+}
+
+export default connect(mapStateToProps, {getTotalWeightSaved})(LandingPage);

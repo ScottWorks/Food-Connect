@@ -30,7 +30,201 @@ test('Should return correct value of 2075', ()=> {
  * Should calculate the weight of an Array of Baskets
  */
 test('Should Return correct value of 0', ()=> {
-    let testValue = [[{"FMV": 5, "item": "Bagel"}, {"FMV": 5, "item": "Bagel"}],[{"FMV": 5, "item": "Bagel"}, {"FMV": 5, "item": "Bagel"}], [{"FMV": 5, "item": "Bagel"}, {"FMV": 5, "item": "Bagel"}], [{"FMV": 5, "item": "Bagel"}, {"FMV": 5, "item": "Bagel"}]];
+    let testValue = [
+        {
+            "basket_id": 4,
+            "business_id": 1,
+            "non_profit_id": null,
+            "pick_up_time": "1528674446475",
+            "scheduled_time": null,
+            "status": 1,
+            "items": [
+                {
+                    "FMV": 50,
+                    "item": "Croissants",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Bread",
+                    "weight": 0
+                }
+            ],
+            "aws_path": null
+        },
+        {
+            "basket_id": 9,
+            "business_id": 4,
+            "non_profit_id": null,
+            "pick_up_time": "1528674446475",
+            "scheduled_time": null,
+            "status": 1,
+            "items": [
+                {
+                    "FMV": 50,
+                    "item": "Bagel",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Croissants",
+                    "weight": 0
+                }
+            ],
+            "aws_path": null
+        },
+        {
+            "basket_id": 12,
+            "business_id": 4,
+            "non_profit_id": null,
+            "pick_up_time": "1528674446475",
+            "scheduled_time": null,
+            "status": 1,
+            "items": [
+                {
+                    "FMV": 50,
+                    "item": "Bagel",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Bread",
+                    "weight": 0
+                }
+            ],
+            "aws_path": null
+        }
+    ];
 
     let result = analyticFunctions.sumTotalWeight(testValue);
 
@@ -43,7 +237,201 @@ test('Should Return correct value of 0', ()=> {
  * Should calculate the weight of an Array of Baskets
  */
 test('Should Return correct value of 400', ()=> {
-    let testValue = [[{"FMV": 50, "item": "Croissants", "weight": 100}, {"FMV": 50, "item": "Bread", "weight": 100}], [{"FMV": 50, "item": "Croissants", "weight": 100}, {"FMV": 50, "item": "Bread", "weight": 100}]]
+    let testValue = [
+        {
+            "basket_id": 4,
+            "business_id": 1,
+            "non_profit_id": null,
+            "pick_up_time": "1528674446475",
+            "scheduled_time": null,
+            "status": 1,
+            "items": [
+                {
+                    "FMV": 50,
+                    "item": "Croissants",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Bread",
+                    "weight": 0
+                }
+            ],
+            "aws_path": null
+        },
+        {
+            "basket_id": 9,
+            "business_id": 4,
+            "non_profit_id": null,
+            "pick_up_time": "1528674446475",
+            "scheduled_time": null,
+            "status": 1,
+            "items": [
+                {
+                    "FMV": 50,
+                    "item": "Bagel",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Croissants",
+                    "weight": 0
+                }
+            ],
+            "aws_path": null
+        },
+        {
+            "basket_id": 12,
+            "business_id": 4,
+            "non_profit_id": null,
+            "pick_up_time": "1528674446475",
+            "scheduled_time": null,
+            "status": 1,
+            "items": [
+                {
+                    "FMV": 50,
+                    "item": "Bagel",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 0
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 100
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 100
+                },
+                {
+                    "FMV": 50,
+                    "item": "Donuts",
+                    "weight": 100
+                },
+                {
+                    "FMV": 50,
+                    "item": "Bread",
+                    "weight": 100
+                }
+            ],
+            "aws_path": null
+        }
+    ];
 
     let result = analyticFunctions.sumTotalWeight(testValue);
 
@@ -120,3 +508,15 @@ test('Should return an array of 10 colors', ()=> {
 
      expect(result).toBe("3,999.99")
  });
+
+ /*
+  * Test getMealsSaved
+  * Should correctly return a string representing total amount of meals saved
+  */
+ 
+  test('Should return 5,4829.73', ()=> {
+      let testValue = 10000;
+      let result = analyticFunctions.getMealsSaved(testValue);
+
+      expect(result).toBe("5,489.73")
+  });
