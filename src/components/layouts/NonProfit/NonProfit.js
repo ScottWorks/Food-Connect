@@ -3,6 +3,7 @@ import axios from 'axios';
 // import Map from './Map/Map';
 import NonProfitBasketList from './NonProfitBasketList/NonProfitBasketList';
 import ScheduleList from './ScheduleList/ScheduleList';
+import WishList from './WishList/WishList';
 import Header from '../../components/Header/Header.js';
 import './NonProfit.css';
 
@@ -12,7 +13,8 @@ class NonProfit extends React.Component {
     this.state = {
       nonProfitID: 7,
       baskets: [],
-      scheduledBaskets: []
+      scheduledBaskets: [],
+      wishlist: []
     };
 
     this.getBaskets = this.getBaskets.bind(this);
@@ -28,7 +30,7 @@ class NonProfit extends React.Component {
 
   getBaskets() {
     const currentLocalTime = new Date().getTime();
-    const businessIDs = [4];
+    const businessIDs = [1, 2, 4, 6];
 
     axios
       .post(`/api/basket/${currentLocalTime}`, { businessIDs })
@@ -49,6 +51,16 @@ class NonProfit extends React.Component {
           scheduledBaskets: scheduledBaskets.data
         });
       });
+  }
+
+  getWishList() {
+    const { nonProfitID } = this.state;
+
+    axios.get(`/api/wishlist/${nonProfitID}`).then((wishlist) => {
+      this.setState({
+        wishlist: wishlist
+      });
+    });
   }
 
   scheduleBasket(scheduledTime, basketID) {
@@ -87,6 +99,8 @@ class NonProfit extends React.Component {
         <div className="nonprofit_main">
           <h2>Non Profit Page</h2>
         </div>
+        <h3>Wish List</h3>
+        <WishList />
         <h3>Scheduled Baskets</h3>
         <ScheduleList
           scheduledBaskets={scheduledBaskets}

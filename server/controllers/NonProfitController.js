@@ -12,6 +12,19 @@ module.exports = {
         res.sendStatus(500);
       });
   },
+  getWishlist: (req, res) => {
+    const db = req.app.get('db');
+    const { nonProfitID } = req.params;
+
+    db
+      .np_getWishList([nonProfitID])
+      .then((wishlist) => {
+        res.status(200).send(wishlist);
+      })
+      .catch(() => {
+        res.sendStatus(500);
+      });
+  },
   getBaskets: (req, res) => {
     const db = req.app.get('db');
     const { currentLocalTime } = req.params;
