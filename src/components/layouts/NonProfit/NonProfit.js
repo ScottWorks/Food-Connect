@@ -23,6 +23,7 @@ class NonProfit extends React.Component {
     this.cancelBasket = this.cancelBasket.bind(this);
     this.getWishList = this.getWishList.bind(this);
     this.addWishListItem = this.addWishListItem.bind(this);
+    this.removeWishListItem = this.removeWishListItem.bind(this);
   }
 
   componentDidMount() {
@@ -97,8 +98,24 @@ class NonProfit extends React.Component {
     const { nonProfitID } = this.state;
     const updatedWishList = [...this.state.wishlist.items, { item: item }];
 
-    axios.put(`/api/wishlist/${nonProfitID}`, { updatedWishList });
-    this.getWishList();
+    axios
+      .put(`/api/wishlist/add/${nonProfitID}`, { updatedWishList })
+      .then(() => {
+        this.getWishList();
+      });
+  }
+
+  removeWishListItem(idx) {
+    const { nonProfitID } = this.state;
+    const updatedWishList = [...this.state.wishlist.items];
+
+    updatedWishList.splice(idx, 1);
+
+    axios
+      .put(`/api/wishlist/remove/${nonProfitID}`, { updatedWishList })
+      .then(() => {
+        this.getWishList();
+      });
   }
 
   render() {
@@ -114,6 +131,7 @@ class NonProfit extends React.Component {
         <WishList
           _wishlist={wishlist}
           _addWishListItem={this.addWishListItem}
+          _removeWishListItem={this.removeWishListItem}
         />
         <h3>Scheduled Baskets</h3>
         <ScheduleList
