@@ -24,6 +24,7 @@ class NonProfit extends React.Component {
     this.getWishList = this.getWishList.bind(this);
     this.addWishListItem = this.addWishListItem.bind(this);
     this.removeWishListItem = this.removeWishListItem.bind(this);
+    this.modifyWishListItem = this.modifyWishListItem.bind(this);
   }
 
   componentDidMount() {
@@ -95,24 +96,24 @@ class NonProfit extends React.Component {
   }
 
   addWishListItem(item) {
-    const { nonProfitID } = this.state;
     const updatedWishList = [...this.state.wishlist.items, { item: item }];
 
-    axios
-      .put(`/api/wishlist/add/${nonProfitID}`, { updatedWishList })
-      .then(() => {
-        this.getWishList();
-      });
+    this.modifyWishListItem(updatedWishList);
   }
 
   removeWishListItem(idx) {
-    const { nonProfitID } = this.state;
     const updatedWishList = [...this.state.wishlist.items];
 
     updatedWishList.splice(idx, 1);
 
+    this.modifyWishListItem(updatedWishList);
+  }
+
+  modifyWishListItem(updatedWishList) {
+    const { nonProfitID } = this.state;
+
     axios
-      .put(`/api/wishlist/remove/${nonProfitID}`, { updatedWishList })
+      .put(`/api/wishlist/modify/${nonProfitID}`, { updatedWishList })
       .then(() => {
         this.getWishList();
       });

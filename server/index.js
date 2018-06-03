@@ -75,11 +75,9 @@ app.put('/api/basket/cancel/:basketID', nonProfitController.cancelBasket);
 
 // Non-Profit Wishlist Endpoints
 app.get('/api/wishlist/:nonProfitID', nonProfitController.getWishList);
-app.put('/api/wishlist/add/:nonProfitID', nonProfitController.addWishListItem);
-app.put('/api/wishlist/:nonProfitID');
 app.put(
-  '/api/wishlist/remove/:nonProfitID',
-  nonProfitController.removeWishListItem
+  '/api/wishlist/modify/:nonProfitID',
+  nonProfitController.modifyWishList
 );
 
 // TWILIO

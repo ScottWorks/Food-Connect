@@ -68,29 +68,13 @@ module.exports = {
         res.sendStatus(500);
       });
   },
-  addWishListItem: (req, res) => {
+  modifyWishList: (req, res) => {
     const db = req.app.get('db');
     const { updatedWishList } = req.body;
     const { nonProfitID } = req.params;
 
     db
-      .np_addWishListItem([JSON.stringify(updatedWishList), nonProfitID])
-      .then(() => {
-        res.sendStatus(200);
-      })
-      .catch(() => {
-        res.sendStatus(500);
-      });
-  },
-  removeWishListItem: (req, res) => {
-    const db = req.app.get('db');
-    const { updatedWishList } = req.body;
-    const { nonProfitID } = req.params;
-
-    console.log(JSON.stringify(updatedWishList));
-
-    db
-      .np_removeWishListItem([JSON.stringify(updatedWishList), nonProfitID])
+      .np_modifyWishList([JSON.stringify(updatedWishList), nonProfitID])
       .then(() => {
         res.sendStatus(200);
       })
