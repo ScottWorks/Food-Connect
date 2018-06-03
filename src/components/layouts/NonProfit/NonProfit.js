@@ -19,6 +19,7 @@ class NonProfit extends React.Component {
 
     this.getBaskets = this.getBaskets.bind(this);
     this.getScheduledBaskets = this.getScheduledBaskets.bind(this);
+    this.getWishList = this.getWishList.bind(this);
     this.scheduleBasket = this.scheduleBasket.bind(this);
     this.cancelBasket = this.cancelBasket.bind(this);
   }
@@ -26,6 +27,7 @@ class NonProfit extends React.Component {
   componentDidMount() {
     this.getBaskets();
     this.getScheduledBaskets();
+    this.getWishList();
   }
 
   getBaskets() {
@@ -54,11 +56,12 @@ class NonProfit extends React.Component {
   }
 
   getWishList() {
-    const { nonProfitID } = this.state;
+    // const { nonProfitID } = this.state;
+    const nonProfitID = 4;
 
     axios.get(`/api/wishlist/${nonProfitID}`).then((wishlist) => {
       this.setState({
-        wishlist: wishlist
+        wishlist: wishlist.data[0]
       });
     });
   }
@@ -91,7 +94,7 @@ class NonProfit extends React.Component {
   }
 
   render() {
-    const { baskets, scheduledBaskets } = this.state;
+    const { baskets, scheduledBaskets, wishlist } = this.state;
 
     return (
       <main className="mobile">
@@ -100,16 +103,16 @@ class NonProfit extends React.Component {
           <h2>Non Profit Page</h2>
         </div>
         <h3>Wish List</h3>
-        <WishList />
+        <WishList _wishlist={wishlist} />
         <h3>Scheduled Baskets</h3>
         <ScheduleList
-          scheduledBaskets={scheduledBaskets}
+          _scheduledBaskets={scheduledBaskets}
           _scheduleBasket={this.scheduleBasket}
           _cancelBasket={this.cancelBasket}
         />
         <h3>Available Baskets</h3>
         <NonProfitBasketList
-          baskets={baskets}
+          _baskets={baskets}
           _scheduleBasket={this.scheduleBasket}
         />
       </main>

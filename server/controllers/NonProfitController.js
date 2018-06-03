@@ -12,13 +12,16 @@ module.exports = {
         res.sendStatus(500);
       });
   },
-  getWishlist: (req, res) => {
+  getWishList: (req, res) => {
     const db = req.app.get('db');
     const { nonProfitID } = req.params;
+
+    console.log('Im Hit!');
 
     db
       .np_getWishList([nonProfitID])
       .then((wishlist) => {
+        console.log(wishlist);
         res.status(200).send(wishlist);
       })
       .catch(() => {

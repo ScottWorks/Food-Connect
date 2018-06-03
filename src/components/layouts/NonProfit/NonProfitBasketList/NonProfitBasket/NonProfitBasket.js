@@ -122,14 +122,14 @@ const ExpandedCard = ({ currentBasket, expanded }) => {
 
   return (
     <div>
-      <DisplayAllItems items={currentBasket.items} />
+      <DisplayAllItems _items={currentBasket.items} />
       <ContactInfoCard _contactInfo={contactInfo} />
     </div>
   );
 };
 
-const DisplayAllItems = ({ items }) =>
-  items.map((elem, idx) => {
+const DisplayAllItems = ({ _items }) =>
+  _items.map((elem, idx) => {
     return (
       <p key={idx}>
         {elem.item} - {elem.weight} lbs

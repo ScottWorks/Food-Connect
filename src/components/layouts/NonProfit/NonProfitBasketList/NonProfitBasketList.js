@@ -2,9 +2,17 @@ import React from 'react';
 import NonProfitBasket from './NonProfitBasket/NonProfitBasket';
 
 function NonProfitBasketList(props) {
-  const { baskets, _scheduleBasket } = props;
+  const { _baskets, _scheduleBasket } = props;
 
-  const displayBaskets = baskets.map((elem, idx) => {
+  return (
+    <section>
+      <DisplayBaskets _baskets={_baskets} _scheduleBasket={_scheduleBasket} />
+    </section>
+  );
+}
+
+const DisplayBaskets = ({ _baskets, _scheduleBasket }) => {
+  return _baskets.map((elem, idx) => {
     return (
       <div key={idx}>
         <NonProfitBasket
@@ -14,7 +22,6 @@ function NonProfitBasketList(props) {
       </div>
     );
   });
-  return <section>{displayBaskets}</section>;
-}
+};
 
 export default NonProfitBasketList;
