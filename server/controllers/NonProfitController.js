@@ -12,22 +12,6 @@ module.exports = {
         res.sendStatus(500);
       });
   },
-  getWishList: (req, res) => {
-    const db = req.app.get('db');
-    const { nonProfitID } = req.params;
-
-    console.log('Im Hit!');
-
-    db
-      .np_getWishList([nonProfitID])
-      .then((wishlist) => {
-        console.log(wishlist);
-        res.status(200).send(wishlist);
-      })
-      .catch(() => {
-        res.sendStatus(500);
-      });
-  },
   getBaskets: (req, res) => {
     const db = req.app.get('db');
     const { currentLocalTime } = req.params;
@@ -64,6 +48,35 @@ module.exports = {
 
     db
       .np_cancelBasket([status, basketID])
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch(() => {
+        res.sendStatus(500);
+      });
+  },
+  getWishList: (req, res) => {
+    const db = req.app.get('db');
+    const { nonProfitID } = req.params;
+
+    db
+      .np_getWishList([nonProfitID])
+      .then((wishlist) => {
+        res.status(200).send(wishlist);
+      })
+      .catch(() => {
+        res.sendStatus(500);
+      });
+  },
+  addWishListItem: (req, res) => {
+    const db = req.app.get('db');
+    const { updatedWishList } = req.body;
+    const { nonProfitID } = req.params;
+
+    console.log(JSON.stringify(updatedWishList));
+
+    db
+      .np_addWishListItem([JSON.stringify(updatedWishList), nonProfitID])
       .then(() => {
         res.sendStatus(200);
       })

@@ -11,7 +11,7 @@ class NonProfit extends React.Component {
   constructor() {
     super();
     this.state = {
-      nonProfitID: 7,
+      nonProfitID: 4,
       baskets: [],
       scheduledBaskets: [],
       wishlist: []
@@ -19,9 +19,10 @@ class NonProfit extends React.Component {
 
     this.getBaskets = this.getBaskets.bind(this);
     this.getScheduledBaskets = this.getScheduledBaskets.bind(this);
-    this.getWishList = this.getWishList.bind(this);
     this.scheduleBasket = this.scheduleBasket.bind(this);
     this.cancelBasket = this.cancelBasket.bind(this);
+    this.getWishList = this.getWishList.bind(this);
+    this.addWishListItem = this.addWishListItem.bind(this);
   }
 
   componentDidMount() {
@@ -55,17 +56,6 @@ class NonProfit extends React.Component {
       });
   }
 
-  getWishList() {
-    // const { nonProfitID } = this.state;
-    const nonProfitID = 4;
-
-    axios.get(`/api/wishlist/${nonProfitID}`).then((wishlist) => {
-      this.setState({
-        wishlist: wishlist.data[0]
-      });
-    });
-  }
-
   scheduleBasket(scheduledTime, basketID) {
     const { nonProfitID } = this.state;
 
@@ -93,6 +83,24 @@ class NonProfit extends React.Component {
     alert('Reservation Canceled!');
   }
 
+  getWishList() {
+    const { nonProfitID } = this.state;
+
+    axios.get(`/api/wishlist/${nonProfitID}`).then((wishlist) => {
+      this.setState({
+        wishlist: wishlist.data[0]
+      });
+    });
+  }
+
+  addWishListItem(item) {
+    const { nonProfitID } = this.state;
+    const updatedWishList = [...this.state.wishlist.items, { item: item }];
+
+    axios.put(`/api/wishlist/${nonProfitID}`, { updatedWishList });
+    this.getWishList();
+  }
+
   render() {
     const { baskets, scheduledBaskets, wishlist } = this.state;
 
@@ -103,7 +111,10 @@ class NonProfit extends React.Component {
           <h2>Non Profit Page</h2>
         </div>
         <h3>Wish List</h3>
-        <WishList _wishlist={wishlist} />
+        <WishList
+          _wishlist={wishlist}
+          _addWishListItem={this.addWishListItem}
+        />
         <h3>Scheduled Baskets</h3>
         <ScheduleList
           _scheduledBaskets={scheduledBaskets}

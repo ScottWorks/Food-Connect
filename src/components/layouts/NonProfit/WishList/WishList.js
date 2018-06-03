@@ -1,13 +1,37 @@
 import React from 'react';
 
-function WishList(props) {
-  const { _wishlist } = props;
+class WishList extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      newItem: ''
+    };
 
-  return (
-    <div>
-      <DisplayWishList _items={_wishlist.items} />
-    </div>
-  );
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(key, value) {
+    this.setState({
+      [key]: value
+    });
+  }
+
+  render() {
+    const { newItem } = this.state;
+    const { _wishlist, _addWishListItem } = this.props;
+
+    return (
+      <div>
+        <button onClick={() => _addWishListItem(newItem)}>Add Item</button>
+        <input
+          name="addtowishlist"
+          type="text"
+          onChange={(e) => this.handleChange('newItem', e.target.value)}
+        />
+        <DisplayWishList _items={_wishlist.items} />
+      </div>
+    );
+  }
 }
 
 const DisplayWishList = ({ _items }) => {
