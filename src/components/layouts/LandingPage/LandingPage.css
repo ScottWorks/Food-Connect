@@ -51,6 +51,7 @@
     /* font-weight: bold; */
     text-transform: uppercase;
     font-size:15px;
+    font-weight: bold;
     margin-top: 15px;
     height: 28px;
     width: 113px;
@@ -70,13 +71,15 @@
 }
 
 .landing_login_button:hover{
-    background: green;
+    background:#A5BE00;
+    color: #ebf2fA
 }
 
 
 
 .landing_signup_button:hover{
-    background: green;
+    background:#A5BE00;
+    color: #ebf2fA
 }
 
 .landing_hexmap{
@@ -115,7 +118,7 @@
     letter-spacing: 4px;
     color: #679436;
     font-weight: bold;
-    font-size: 20px
+    font-size: 30px;
 }
 
 .landing_about_container{
@@ -138,25 +141,46 @@
 }
 
 .landing_stats_title{
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #679436;
+    font-weight: bold;
+    font-size: 30px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
 .landing_stats_container{
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     width: 90%;
     height: 150px;
 }
 
+.landing_stats_column{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.landing_stats_p {
+    font-size: 30px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #05668D;
+}
+
 .landing_graph1{
-    background-color: green;
     width: 150px;
     height: 150px;
 }
 
 .landing_graph2{
-    background-color: green;
     width: 150px;
     height: 150px;
 }
@@ -173,6 +197,7 @@
 .landing_getstarted_title{
     margin-top: 20px;
     margin-bottom: 20px;
+    
 }
 
 .landing_getstarted_container{
@@ -221,7 +246,7 @@ hr{
 
 .vertical_line{
     border: 0;
-    width: 120px;
+    /* width: 90%; */
     height: 1px;
     background: #333;
     background-image: linear-gradient(to right, #ccc, #333, #ccc);
@@ -231,3 +256,4 @@ hr{
     margin-right:0px;
     
 }
+

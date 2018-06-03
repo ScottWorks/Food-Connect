@@ -75,11 +75,17 @@ class LandingPage extends Component {
                     </section>
                     <hr/>
                     <section className="landing_stats">
-                        <h2 className="landing_stats_title">Our Stats</h2>
+                        <h2 className="landing_stats_title">OUR STATS</h2>
                         <div className="landing_stats_container">
-                            <div className="landing_graph1"><h3>Pounds of Food Saved</h3>{utilFunc.formatNumber(this.props.landingTotalSavedByWeight,0,3,',','.')}</div>
-                            {/* <hr className="vertical_line"/> */}
-                            <div className="landing_graph2"><h3>Number of Meals Saved</h3>{utilFunc.getMealsSaved(this.props.landingTotalSavedByWeight)}</div>
+                            <div className='landing_stats_column'>
+                                <p className='landing_stats_p'>{utilFunc.formatNumber(this.props.landingTotalSavedByWeight,0,3,',','.')}</p>
+                                <h3>Pounds of<br/> Food Saved</h3>
+                            </div>
+                            {/* <hr className="vertical_line"/> TODO: */}
+                            <div className='landing_stats_column'>
+                                <p className='landing_stats_p'>{utilFunc.getMealsSaved(this.props.landingTotalSavedByWeight)}</p>
+                                <h3>Number of<br/> Meals Saved</h3>
+                            </div>
                         </div>
                     </section>
                     <hr/>
