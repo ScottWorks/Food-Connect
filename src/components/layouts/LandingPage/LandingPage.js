@@ -90,9 +90,9 @@ class LandingPage extends Component {
                     </section>
                     <hr/>
                     <section className="landing_getstarted">
-                        {/* <div className="landing_getstarted_title">Get Started With Us</div> */}
                         <div className="landing_getstarted_container">
-                        <Link to="/register"><div className="landing_getstarted_button">Get Started With Us</div></Link>
+                        <div className='landing-overlay'>
+                            <Link to="/register"><div className="landing_getstarted_button">Get Started With Us</div></Link></div>
                         </div>
                     </section>
                 </div>

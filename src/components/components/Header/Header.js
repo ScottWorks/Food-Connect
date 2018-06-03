@@ -16,6 +16,7 @@ class Header extends Component {
         return (
             <div id="header_main">
                 <div id="header_contents">
+                <Link to="/"><img alt="scone" src={Scone} id="header_img" /></Link>
                 <div id="menuToggle">
                         <input type="checkbox" />
                         <span></span>
@@ -27,9 +28,9 @@ class Header extends Component {
                             <Link to="/login"><li>Login</li></Link>
                             <Link to="/nonprofit"><li>Dashboard</li></Link>
                         </ul>
-                    </div>
+                </div>
 
-                    <Link to="/"><img alt="scone" src={Scone} id="header_img" /></Link>
+                    
                     {/*I am not using this hamburger right now.*/}
                     {/* <div id="container" onClick={() => this.toggleCSS()}>
                         <div id="bar1"></div>
