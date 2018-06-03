@@ -55,39 +55,40 @@ class LandingPage extends Component {
                         </div>
                     </Modal>
                     <div className="landing_main_media">
-                    <div className='overlay'>
+                    <div className='landing-overlay'>
                         <Link to="/login"><div className="landing_login_button">Login</div></Link>
-                        <Link to="/register"><div className="landing_signup_button">Sign Up Now</div></Link>
+                        <Link to="/register"><div className="landing_signup_button">Sign Up</div></Link>
                         </div>
                     </div>
-                    <div className="landing_hexmap">
+                    <section className="landing_hexmap">
                         <div className="landing_hexmap_title">HexMap Title</div>
                         <div className="landing_hexmap_container"><h3></h3></div>
-                    </div>
+                    </section>
                     <hr/>
-                    <div className="landing_about">
+                    <section className="landing_about">
                         <h2 className="landing_about_title">About Us</h2>
                         <div className="landing_about_container">
                             <p>Lorem ipsum dolor amet ethical bushwick etsy street art hammock fixie cloud bread la croix prism flexitarian man braid meh cliche.</p>
                             <p>Actually skateboard chillwave edison bulb literally, live-edge chambray wayfarers craft beer poke pitchfork lo-fi vice flexitarian put a bird on it. Distillery godard PBR palo santo everyday carry live-edge lyft you probably haven't heard of them, kinfolk tumblr freegan raw denim pickled.</p>
-                            <p>Fashion axe skateboard prism jean shorts iceland woke 8-bit tumblr hoodie franzen pork belly austin.</p><p>Oh. You need a little dummy text for your mockup?</p><p> How quaint.</p></div>
-                    </div>
+                            <p>Fashion axe skateboard prism jean shorts iceland woke 8-bit tumblr hoodie franzen pork belly austin.</p><p>Oh. You need a little dummy text for your mockup?</p><p> How quaint.</p>
+                        </div>
+                    </section>
                     <hr/>
-                    <div className="landing_stats">
-                        <div className="landing_stats_title">Our Stats</div>
+                    <section className="landing_stats">
+                        <h2 className="landing_stats_title">Our Stats</h2>
                         <div className="landing_stats_container">
                             <div className="landing_graph1"><h3>Pounds of Food Saved</h3>{utilFunc.formatNumber(this.props.landingTotalSavedByWeight,0,3,',','.')}</div>
                             {/* <hr className="vertical_line"/> */}
                             <div className="landing_graph2"><h3>Number of Meals Saved</h3>{utilFunc.getMealsSaved(this.props.landingTotalSavedByWeight)}</div>
                         </div>
-                    </div>
+                    </section>
                     <hr/>
-                    <div className="landing_getstarted">
+                    <section className="landing_getstarted">
                         {/* <div className="landing_getstarted_title">Get Started With Us</div> */}
                         <div className="landing_getstarted_container">
                         <Link to="/register"><div className="landing_getstarted_button">Get Started With Us</div></Link>
                         </div>
-                    </div>
+                    </section>
                 </div>
                 <Footer handler={this.openModal} />
             </div>
