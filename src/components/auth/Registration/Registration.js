@@ -291,7 +291,6 @@ class Register extends Component {
                     </section>
 
                 </div>
-                <Footer className='registration-footer' handler={this.openModal} />
             </div>
         )
     }

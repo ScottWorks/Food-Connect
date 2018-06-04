@@ -51,7 +51,7 @@ export default class Auth extends Component {
                 <Header />
                 <div className='login_wrapper'>
                     {/*Bringing in the Modal component.*/}
-                    <Modal
+                    {/* <Modal
                         isOpen={this.state.modalIsOpen}
                         onAfterOpen={this.afterOpenModal}
                         onRequestClose={this.closeModal}
@@ -67,7 +67,7 @@ export default class Auth extends Component {
                             <h4>What if I don't want to save people with my food?</h4>
                             <p>Then you are a bad person...</p>
                         </div>
-                    </Modal>
+                    </Modal> */}
                     <form className='login-form'>
                     <h2>Username</h2>
                     <input required='true' 
@@ -85,7 +85,7 @@ export default class Auth extends Component {
                     
                     </form>
                 </div>
-                <Footer handler={this.openModal} />
+                {/* <Footer handler={this.openModal} /> TODO: REMOVE*/}
             </div>
         )
     }

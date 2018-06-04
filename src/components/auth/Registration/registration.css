@@ -99,6 +99,7 @@
         align-items: center;
         height: 1050px;
         width: 100vw;
+        
     }
     .account_type_box {
         display: flex;
@@ -156,7 +157,9 @@
         min-height: 30px;
     }
     .registration-footer {
-        margin-bottom: -100px;
+        position: fixed;
+        bottom: 0;
+        border: 1px solid red;
     }
     @keyframes scale-display {
         0% {
