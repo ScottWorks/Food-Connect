@@ -8,6 +8,7 @@ const dotenv = require('dotenv');
 const session = require('express-session');
 dotenv.config();
 const checkForSession = require('./middlewares/checkForSessions');
+const inLine = require('./middlewares/middlewares')
 
 // Controllers
 const twilioController = require('./controllers/TwilioController'),
