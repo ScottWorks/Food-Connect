@@ -1,10 +1,13 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { deleteBasket, editBasket } from '../../../../../ducks/businessReducer'
+import './BusinessBasket.css'
 
 function BusinessBasket(props) {
-  if(props.basket) {
+  if(props.basket && props.basket.items) {
     var items = props.basket.items.map((e, i) => {
       return (
-        <div>
+        <div className="bus-basket-item">
           <p>{e.item}</p>
           <p>{e.weight}</p>
           <p>{e.FMV}</p>
@@ -14,6 +17,12 @@ function BusinessBasket(props) {
   }
   return (
     <div className="BusinessBasket">
+      <button
+        onClick={() => props.editBasket(props.index)}
+      >Edit</button>
+      <button
+        onClick={() => props.deleteBasket({index: props.index, id: props.basket.basket_id})}
+      >Delete</button>
       <div>
         {items}
       </div>
@@ -21,4 +30,4 @@ function BusinessBasket(props) {
   );
 }
 
-export default BusinessBasket;
+export default connect(null, {deleteBasket, editBasket})(BusinessBasket);
