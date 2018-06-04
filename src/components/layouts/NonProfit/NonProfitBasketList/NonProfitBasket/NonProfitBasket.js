@@ -65,6 +65,8 @@ class NonProfitBasket extends React.Component {
     const reserveCard = reserve ? (
       <DateTimePicker
         _basketID={basketID}
+        _message={`Basket ${basketID} is scheduled for pickup on `}
+        _phoneNumber={currentBasket.phone_number}
         _scheduleBasket={_scheduleBasket}
         _toggleReservationCard={this.toggleReservationCard}
       />

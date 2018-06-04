@@ -53,7 +53,10 @@ app.get(
   '/api/basket/:businessID/:epochTime',
   BusinessController.getBusinessBaskets
 );
-app.get('/api/all/basket/:businessID', analyticsController.getBussinessCompletedBaskets); // USE TO PULL ALL BASKETS TO RUN STATS
+app.get(
+  '/api/all/basket/:businessID',
+  analyticsController.getBussinessCompletedBaskets
+); // USE TO PULL ALL BASKETS TO RUN STATS
 app.put('/api/basket/:basketID', BusinessController.updateBusinessBasket);
 app.post('/api/basket', BusinessController.createBaskets);
 app.delete('/api/basket/:basketID', BusinessController.deleteBusinessBasket);
@@ -70,8 +73,16 @@ app.get(
   nonProfitController.getScheduledBaskets
 );
 app.post('/api/basket/:currentLocalTime', nonProfitController.getBaskets);
-app.put('/api/basket/update/:nonProfitID', nonProfitController.scheduleBasket);
-app.put('/api/basket/cancel/:basketID', nonProfitController.cancelBasket);
+app.put(
+  '/api/basket/update/:nonProfitID',
+  twilioController.sendTwilioMessage,
+  nonProfitController.scheduleBasket
+);
+app.put(
+  '/api/basket/cancel/:basketID',
+  twilioController.sendTwilioMessage,
+  nonProfitController.cancelBasket
+);
 
 // Non-Profit Wishlist Endpoints
 app.get('/api/wishlist/:nonProfitID', nonProfitController.getWishList);
@@ -82,7 +93,7 @@ app.put(
 );
 
 // TWILIO
-app.post('/api/twilio/:phoneNumber', twilioController.sendTwilioMessage);
+app.post('/api/twilio', twilioController.sendTwilioMessage);
 
 // AMAZON S3
 // Requires a body with the filename & filetype

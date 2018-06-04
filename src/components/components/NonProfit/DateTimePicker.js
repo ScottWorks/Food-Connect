@@ -23,11 +23,24 @@ class DateTimePicker extends React.Component {
 
   reserveBasket() {
     const { scheduledDate, scheduledTime } = this.state;
-    const { _basketID, _parentToggle } = this.props;
+    const { _basketID, _phoneNumber, _message, _parentToggle } = this.props;
+    const fakePhoneNumber = '13033496264';
 
     let time = timeConversion.toEpoch(scheduledDate, scheduledTime);
 
-    this.props._scheduleBasket(time, _basketID);
+    let twilio_formattedTime = timeConversion.fromEpoch(
+      time,
+      'ddd, MMM Do, h:mm a'
+    );
+
+    let twilio_message = _message.concat(twilio_formattedTime);
+
+    this.props._scheduleBasket(
+      time,
+      fakePhoneNumber,
+      twilio_message,
+      _basketID
+    );
 
     this.setState({
       scheduledDate: {},

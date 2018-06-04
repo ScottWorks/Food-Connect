@@ -12,6 +12,7 @@ class NonProfit extends React.Component {
     super();
     this.state = {
       nonProfitID: 8,
+      nonProfitInfo: '',
       baskets: [],
       scheduledBaskets: [],
       wishlist: []
@@ -60,11 +61,13 @@ class NonProfit extends React.Component {
       });
   }
 
-  scheduleBasket(scheduledTime, basketID) {
+  scheduleBasket(scheduledTime, phoneNumber, message, basketID) {
     const { nonProfitID } = this.state;
 
     let promise = axios.put(`/api/basket/update/${nonProfitID}`, {
       scheduledTime,
+      phoneNumber,
+      message,
       basketID
     });
 
@@ -76,8 +79,13 @@ class NonProfit extends React.Component {
     alert('Reservation Successful!');
   }
 
-  cancelBasket(basketID) {
-    let promise = axios.put(`/api/basket/cancel/${basketID}`);
+  cancelBasket(phoneNumber, basketID) {
+    const message = `Basket ${basketID} pickup has been canceled.`;
+
+    let promise = axios.put(`/api/basket/cancel/${basketID}`, {
+      phoneNumber,
+      message
+    });
 
     Promise.all([promise]).then(() => {
       this.getScheduledBaskets();

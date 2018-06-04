@@ -33,10 +33,17 @@ class ScheduleBasket extends React.Component {
     const { update, scheduledDate, scheduledTime } = this.state;
     const { scheduledBasket, _scheduleBasket, _cancelBasket } = this.props;
 
+    const fakePhoneNumber = '13033496264';
+
     let formattedTime = timeConversion.fromEpoch(
       scheduledBasket.scheduled_time,
       'ddd, MMM Do, h:mm a'
     );
+
+    // let twilio_formattedTime = timeConversion.fromEpoch(
+    //   scheduledBasket.scheduled_time,
+    //   'ddd, MMM Do'
+    // );
 
     const contactInfo = {
       address: scheduledBasket.street_address,
@@ -53,6 +60,8 @@ class ScheduleBasket extends React.Component {
     const reserveCard = update ? (
       <DateTimePicker
         _basketID={basketID}
+        _message={`Basket ${basketID} has been re-scheduled for pickup to `}
+        _phoneNumber={scheduledBasket.phone_number}
         _scheduleBasket={_scheduleBasket}
         _toggleReservationCard={this.toggleReservationCard}
       />
@@ -62,7 +71,11 @@ class ScheduleBasket extends React.Component {
       <section className="basket">
         {reserveCard}
         <button onClick={() => this.toggleReservationCard()}>Update</button>
-        <button onClick={() => _cancelBasket(scheduledBasket.basket_id)}>
+        <button
+          onClick={() =>
+            _cancelBasket(fakePhoneNumber, scheduledBasket.basket_id)
+          }
+        >
           Remove
         </button>
         <p>{formattedTime}</p>
