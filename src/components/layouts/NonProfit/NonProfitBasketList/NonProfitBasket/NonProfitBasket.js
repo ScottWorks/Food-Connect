@@ -3,6 +3,7 @@ import ContactInfoCard from '../../../../components/NonProfit/ContactInfoCard';
 import * as timeConversion from '../../../../../config/timeConversion';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
+import '../../../../../assets/styles/NonProfitBasket.css'
 
 class NonProfitBasket extends React.Component {
   constructor() {
@@ -86,15 +87,15 @@ class NonProfitBasket extends React.Component {
     ) : null;
 
     return (
-      <section>
+      <section className='np-basket'>
         {reserveCard}
-        <button onClick={() => this.buttonState('reserve')}>Reserve</button>
-        <p>{currentBasket.company_name}</p>
+        <button className='reserve-btn'onClick={() => this.buttonState('reserve')}>RESERVE</button>
+        <h2>{currentBasket.company_name}</h2>
         <p>{currentBasket.operating_hrs}</p>
         <p>Pick-Up By: {formattedTime}</p>
         {expandCard}
-        <button onClick={() => this.buttonState('expanded')}>
-          {expanded ? 'Collapse' : 'Details'}
+        <button className='details-collapse-btn'onClick={() => this.buttonState('expanded')}>
+          {expanded ? 'COLLAPSE' : 'DETAILS'}
         </button>
       </section>
     );

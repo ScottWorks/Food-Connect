@@ -66,9 +66,6 @@ class NonProfit extends React.Component {
     return (
       <main className="mobile">
         <Header />
-        <div className="nonprofit_main">
-          <h2>Non Profit Page</h2>
-        </div>
         <ScheduleList scheduledBaskets={scheduledBaskets} />
         <NonProfitBasketList
           baskets={baskets}
