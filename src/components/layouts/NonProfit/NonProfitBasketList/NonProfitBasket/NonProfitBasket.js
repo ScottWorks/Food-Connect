@@ -162,7 +162,7 @@ const DateTimePicker = ({
 }) => {
   return (
     <div>
-      <button onClick={() => _reserveBasket()}>Submit</button>
+      <button className='np-basket-btn-submit' onClick={() => _reserveBasket()}>Submit</button>
       <DatePicker
         value={_scheduledDate}
         onChange={(x, date) => _handleChange('scheduledDate', date)}

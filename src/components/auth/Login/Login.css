@@ -1,8 +1,76 @@
-.login_wrapper{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
+/* FOR MOBILE DEVICES */
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    
+    .login-form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+        
+        
+    }
+
+    .login-form input {
+        width: 30%;
+    }
+
+    .login-form h2{
+        font-size: 1.625em;
+        line-height: 1.15384615em;
+    }
+
+    .login-form button {
+        color: #EBF2FA;
+        font-size: 16px;
+        margin-top: 8px;
+        width: 6em;
+        background: #427AA1;
+        border: 1px #427AA1 solid;
+        border-radius: 3px;
+        padding: 2px;
+    }
+
+    .login-form button:hover{
+        background: #679436;
+    }
+}
+
+/* For Desktop */
+@media screen and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1) {
+    
+    .login-form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+        
+    }
+
+    .login-form input {
+        width: 10%;
+    }
+
+    .login-form h2{
+        font-size: 2.25em ;
+        line-height: 1.25;
+    }
+
+    .login-form button {
+        color: #EBF2FA;
+        font-size: 1em;
+        margin-top: 8px;
+        width: 6em;
+        background: #427AA1;
+        border: 1px #427AA1 solid;
+        border-radius: 3px;
+        padding: 2px;
+    }
+
+    .login-form button:hover{
+        background: #679436;
+    }
 }

@@ -68,19 +68,22 @@ export default class Auth extends Component {
                             <p>Then you are a bad person...</p>
                         </div>
                     </Modal>
-                    <span>Username</span>
-                    <input
+                    <form className='login-form'>
+                    <h2>Username</h2>
+                    <input required='true' 
                         onChange={(e) => this.setState({ userName: e.target.value })}
                         type='text'
                     />
-                    <span>Password</span>
+                    <h2>Password</h2>
                     <input
+                    required='true' 
                         onChange={(e) => this.setState({ pw: e.target.value })}
                         type='password'
                     />
-                    <div>
-                        <button onClick={() => this.handleClick(userName, pw)}>Login</button>
-                    </div>
+                    
+                        <button type='submit' onClick={() => this.handleClick(userName, pw)}>LOGIN</button>
+                    
+                    </form>
                 </div>
                 <Footer handler={this.openModal} />
             </div>

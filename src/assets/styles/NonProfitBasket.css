@@ -24,7 +24,7 @@
         text-transform: uppercase;
     }
 
-    .reserve-btn {
+    .reserve-btn, .np-basket-btn-submit {
         color: #EBF2FA;
         font-size: 16px;
         margin-top: 5px;
@@ -57,7 +57,7 @@
         margin-top: 6px;
         margin-bottom: 6px;
         text-align: center;
-        width: 30%;
+        width: 40%;
         line-height: 1.375em;
         margin-left: auto;
         margin-right: auto;
