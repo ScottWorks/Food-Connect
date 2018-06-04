@@ -89,13 +89,13 @@ class NonProfitBasket extends React.Component {
     return (
       <section className='np-basket'>
         {reserveCard}
-        <button className='reserve-btn'onClick={() => this.buttonState('reserve')}>Reserve</button>
+        <button className='reserve-btn'onClick={() => this.buttonState('reserve')}>RESERVE</button>
         <h2>{currentBasket.company_name}</h2>
         <p>{currentBasket.operating_hrs}</p>
         <p>Pick-Up By: {formattedTime}</p>
         {expandCard}
-        <button onClick={() => this.buttonState('expanded')}>
-          {expanded ? 'Collapse' : 'Details'}
+        <button className='details-collapse-btn'onClick={() => this.buttonState('expanded')}>
+          {expanded ? 'COLLAPSE' : 'DETAILS'}
         </button>
       </section>
     );
