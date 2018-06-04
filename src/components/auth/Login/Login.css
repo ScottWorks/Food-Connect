@@ -50,14 +50,20 @@
 /* For Desktop */
 @media screen and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1) {
     
+    .login-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .login_wrapper{
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 100vw;
+        width: 50vw;
         height: 100vh;
-        
+        border-right: 2px solid black;
     }
 
 
@@ -67,14 +73,26 @@
         justify-content: center;
         align-items: center;
         border: #679436 solid 1px;;
-        
-        width: 50%;
-        height: 50%;
+        width: 70%;
+        height: 70%;
         box-shadow: 0 4px 8px 0 rgba(66, 122, 161, 0.2), 0 6px 20px 0 rgba(66, 122, 161, 0.19);
+    
+    }
+
+    .login-in-header {
+        padding-bottom: 30px;
+    }
+
+    .login-in-header h2 {
+        font-size: 2.25em ;
+        line-height: 1.25;
     }
 
     .login-form input {
-        width: 25%;
+        width: 35%;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        height: 20px;
     }
 
     .login-form h2{
@@ -86,14 +104,35 @@
         color: #EBF2FA;
         font-size: 1em;
         margin-top: 8px;
-        width: 7em;
+        width: 35%;
         background: #427AA1;
         border: 1px #427AA1 solid;
         border-radius: 3px;
-        padding: 2px;
+        padding: 5px;
     }
 
     .login-form button:hover{
         background: #679436;
     }
+
+    .particles-side-container {
+        height: 100%;
+        width:50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .particles-side-container h1 {
+        font-size: 3em;
+        line-height: 1.05em;
+        transition: 1s;
+        
+    }
+
+    .particles-side-container h1:hover{
+        font-size: 4em;
+        
+    }
+
 }
