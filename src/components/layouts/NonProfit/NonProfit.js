@@ -23,6 +23,7 @@ class NonProfit extends React.Component {
     this.cancelBasket = this.cancelBasket.bind(this);
     this.getWishList = this.getWishList.bind(this);
     this.addWishListItem = this.addWishListItem.bind(this);
+    this.parent_editWishListItem = this.parent_editWishListItem.bind(this);
     this.removeWishListItem = this.removeWishListItem.bind(this);
     this.modifyWishListItem = this.modifyWishListItem.bind(this);
   }
@@ -101,11 +102,17 @@ class NonProfit extends React.Component {
     this.modifyWishListItem(updatedWishList);
   }
 
+  parent_editWishListItem(idx, item) {
+    const updatedWishList = [...this.state.wishlist.items];
+
+    updatedWishList.splice(idx, 1, { item: item });
+    this.modifyWishListItem(updatedWishList);
+  }
+
   removeWishListItem(idx) {
     const updatedWishList = [...this.state.wishlist.items];
 
     updatedWishList.splice(idx, 1);
-
     this.modifyWishListItem(updatedWishList);
   }
 
@@ -132,6 +139,7 @@ class NonProfit extends React.Component {
         <WishList
           _wishlist={wishlist}
           _addWishListItem={this.addWishListItem}
+          parent_editWishListItem={this.parent_editWishListItem}
           _removeWishListItem={this.removeWishListItem}
         />
         <h3>Scheduled Baskets</h3>

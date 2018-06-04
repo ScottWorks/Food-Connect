@@ -4,16 +4,37 @@ class WishList extends React.Component {
   constructor() {
     super();
     this.state = {
-      newItem: ''
+      newItem: '',
+      edit: false,
+      editItemIdx: '',
+      editItem: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.toggleEdit = this.toggleEdit.bind(this);
     this.addWishListItem = this.addWishListItem.bind(this);
+    this.editWishListItem = this.editWishListItem.bind(this);
   }
 
   handleChange(key, value) {
     this.setState({
       [key]: value
+    });
+  }
+
+  toggleEdit(editItemIdx) {
+    const { edit } = this.state;
+    let state;
+
+    if (edit) {
+      state = false;
+    } else {
+      state = true;
+    }
+
+    this.setState({
+      edit: state,
+      editItemIdx: editItemIdx
     });
   }
 
@@ -26,8 +47,18 @@ class WishList extends React.Component {
     });
   }
 
+  editWishListItem(idx) {
+    const { editItem } = this.state;
+
+    this.props.parent_editWishListItem(idx, editItem);
+    this.setState({
+      editItem: '',
+      edit: false
+    });
+  }
+
   render() {
-    const { newItem } = this.state;
+    const { newItem, edit, editItemIdx, editItem } = this.state;
     const { _wishlist, _addWishListItem, _removeWishListItem } = this.props;
 
     return (
@@ -35,12 +66,17 @@ class WishList extends React.Component {
         <button onClick={() => this.addWishListItem()}>Add Item</button>
         <input
           value={newItem}
-          name="addtowishlist"
           type="text"
           onChange={(e) => this.handleChange('newItem', e.target.value)}
         />
         <DisplayWishList
+          _edit={edit}
+          _editItemIdx={editItemIdx}
+          _editItem={editItem}
           _items={_wishlist.items}
+          _handleChange={this.handleChange}
+          _toggleEdit={this.toggleEdit}
+          child_editWishListItem={this.editWishListItem}
           _removeWishListItem={_removeWishListItem}
         />
       </div>
@@ -48,16 +84,40 @@ class WishList extends React.Component {
   }
 }
 
-const DisplayWishList = ({ _items, _removeWishListItem }) => {
+const DisplayWishList = ({
+  _edit,
+  _editItemIdx,
+  _editItem,
+  _items,
+  _handleChange,
+  _toggleEdit,
+  child_editWishListItem,
+  _removeWishListItem
+}) => {
   if (_items) {
     return _items.map((elem, idx) => {
-      return (
-        <div key={idx}>
-          <p>{elem.item}</p>
-          <button>Edit</button>
-          <button onClick={() => _removeWishListItem(idx)}>Delete</button>
-        </div>
-      );
+      if (_edit && idx === _editItemIdx) {
+        return (
+          <div key={idx}>
+            <p>{elem.item}</p>
+            <button onClick={() => child_editWishListItem(idx)}>Submit</button>
+            <input
+              value={_editItem}
+              type="text"
+              onChange={(e) => _handleChange('editItem', e.target.value)}
+            />
+            <button onClick={() => _toggleEdit(idx)}>Cancel</button>
+          </div>
+        );
+      } else {
+        return (
+          <div key={idx}>
+            <p>{elem.item}</p>
+            <button onClick={() => _toggleEdit(idx)}>Edit</button>
+            <button onClick={() => _removeWishListItem(idx)}>Delete</button>
+          </div>
+        );
+      }
     });
   } else {
     return null;
