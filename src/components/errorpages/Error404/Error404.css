@@ -1,0 +1,93 @@
+/* @import url('https://fonts.googleapis.com/css?family=Chango'); */
+
+a{
+    text-decoration: none;
+}
+
+.error404_body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    font-weight: bold;
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+
+.error404_image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 120px;
+    margin-bottom: 20px;
+    /* color: #427AA1; */
+}
+
+.error404_image img{
+    height: 100px;
+    width: 100px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.error404_subtext{
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.home_button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #EBF2FA;
+    font-weight: bold;
+    font-size: 15px;
+    height: 30px;
+    width: 130px;
+    border-radius: 15px;
+    text-transform: uppercase;
+    background: #427AA1;
+    }
+}
+
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    .error404_image{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 400px;
+        margin-bottom: 30px;
+        /* color: #427AA1; */
+    }
+    
+    .error404_image img{
+        height: 300px;
+        width: 300px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    
+    .error404_subtext{
+        font-size: 40px;
+        margin-bottom: 30px;
+    }
+
+    .home_button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #EBF2FA;
+        font-weight: bold;
+        font-size: 15px;
+        height: 30px;
+        width: 130px;
+        border-radius: 15px;
+        text-transform: uppercase;
+        background: #427AA1;
+        }
+  }
