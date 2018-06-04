@@ -1,0 +1,10 @@
+/* FOR MOBILE DEVICES */
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+
+   }
+   
+   /* For Desktop */
+   @media screen and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1) {
+   
+   }
