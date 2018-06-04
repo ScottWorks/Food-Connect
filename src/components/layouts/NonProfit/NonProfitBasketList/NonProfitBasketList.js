@@ -1,5 +1,6 @@
 import React from 'react';
 import NonProfitBasket from './NonProfitBasket/NonProfitBasket';
+import '../../../../assets/styles/NonProfitBasketList.css'
 
 function NonProfitBasketList(props) {
   const { baskets, _updateBasket } = props;
@@ -11,7 +12,7 @@ function NonProfitBasketList(props) {
       </div>
     );
   });
-  return <section>{displayBaskets}</section>;
+  return <section className='np-bucket-list'>{displayBaskets}</section>;
 }
 
 export default NonProfitBasketList;
