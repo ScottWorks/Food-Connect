@@ -1,6 +1,21 @@
 .BasketTable {
+  max-width: 1000px;
   width: 100%;
   height: fit-content;
+  background: white;
+  border: 1px dashed lightgray;
+  border-radius: 10px;
   padding: 25px;
-  background: salmon;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.BasketTable-date-time-picker {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }

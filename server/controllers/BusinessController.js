@@ -15,14 +15,14 @@ module.exports =  {
     const basket_id = basketID
     const { business_id, pick_up_time, status, items } = req.body
     db.updateBusinessBasket([basket_id, business_id, pick_up_time, status, items])
-    .then(basket => res.status(200).send(basket))
+    .then(basket => res.status(200).send(basket[0]))
     .catch(() => res.status(500).send())
   },
   createBaskets: (req, res) => {
     const db = req.app.get('db')
     const { business_id, pick_up_time, status, items } = req.body
     db.createBasket([business_id, pick_up_time, status, items])
-      .then(newBasket => console.log('newBasket' + newBasket))
+      .then(newBasket => res.status(200).send(newBasket[0]))
       .catch(() => res.status(500).send())
   },
   deleteBusinessBasket: (req, res) => {
