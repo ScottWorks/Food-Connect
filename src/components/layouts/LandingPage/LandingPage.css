@@ -162,7 +162,6 @@
         justify-content: center;
         align-items: center;
         height: 220px;
-        
     }
     .landing_getstarted_container {
         display: flex;
@@ -197,9 +196,9 @@
         width: 80vw;
     }
     hr {
-        margin-top: 18px;
+        margin-top: 10px;
         border: 0;
-        width: 80vw;
+        width: 90vw;
         height: 1px;
         background: #333;
         background-image: linear-gradient(to right, #ccc, #333, #ccc);
@@ -215,6 +214,8 @@
         margin-left: 0px;
         margin-right: 0px;
     }
+
+    
 }
 
 /* FOR NON-RETINA / NON-HIGH RES DESKTOPS */
@@ -441,6 +442,5 @@
         margin-left: 0px;
         margin-right: 0px;
     }
-
 
 }

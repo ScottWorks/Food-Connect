@@ -48,10 +48,12 @@
 }
 
 /* FOR NON-RETINA / NON-HIGH RES DESKTOPS */
-@media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) {
+@media screen and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1) {
     .footer_main {
+        
         background: #05668D;
         color: #EBF2FA;
+        
     }
     .contact h2 {
         text-align: center;
