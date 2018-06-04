@@ -53,7 +53,7 @@ app.get(
   '/api/basket/:businessID/:epochTime',
   BusinessController.getBusinessBaskets
 );
-app.get('/api/basket'); // USE TO PULL ALL BASKETS TO RUN STATS
+app.get('/api/all/basket/:businessID', analyticsController.getBussinessCompletedBaskets); // USE TO PULL ALL BASKETS TO RUN STATS
 app.put('/api/basket/:basketID', BusinessController.updateBusinessBasket);
 app.post('/api/basket', BusinessController.createBaskets);
 app.delete('/api/basket/:basketID', BusinessController.deleteBusinessBasket);

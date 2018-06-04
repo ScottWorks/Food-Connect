@@ -2,6 +2,7 @@ import React from 'react';
 import ContactInfoCard from '../../../../components/NonProfit/ContactInfoCard';
 import DateTimePicker from '../../../../components/NonProfit/DateTimePicker';
 import * as timeConversion from '../../../../../config/timeConversion';
+import '../../../../../assets/styles/ScheduleBasket.css';
 
 class ScheduleBasket extends React.Component {
   constructor() {
@@ -58,7 +59,7 @@ class ScheduleBasket extends React.Component {
     ) : null;
 
     return (
-      <section>
+      <section className="basket">
         {reserveCard}
         <button onClick={() => this.toggleReservationCard()}>Update</button>
         <button onClick={() => _cancelBasket(scheduledBasket.basket_id)}>

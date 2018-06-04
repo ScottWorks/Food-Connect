@@ -14,7 +14,7 @@ module.exports = {
         let sum = 0;
 
         for (var i = 0; i < arrayOfBaskets.length; i++) {
-            let basketTotal = this.sumTotalBasketWeight(arrayOfBaskets[i])
+            let basketTotal = this.sumTotalBasketWeight(arrayOfBaskets[i].items)
             sum += basketTotal;
         }
         return sum;
@@ -24,8 +24,8 @@ module.exports = {
         let sum = 0;
 
         for (var i = 0; i < basket.length; i++) {
-            if (basket[i].hasOwnProperty('fmv')) {
-                sum += basket[i]['fmv']
+            if (basket[i].hasOwnProperty('FMV')) {
+                sum += basket[i]['FMV']
             }
         }
         return sum;
@@ -41,6 +41,11 @@ module.exports = {
         return sum;
     },
 
+    /* 
+     * Function to generate a random array of colors (earch color in RGB format)
+     * @param Integer numOfColors = Number of colors that you want to generate
+     */
+
     generateRandomColors(numOfColors) {
         let colors = [];
         let counter = 0;
@@ -54,5 +59,48 @@ module.exports = {
         }
 
         return colors;
-    }
+    },
+
+
+    /* 
+     *  Create Data set based on completed baskets
+     * @param Array basketHistory = Array of basket objects
+     */
+    createDataSet(basketHistory){
+        
+    },
+
+
+    /*
+     * Function to format a number to a particular pattern
+     * @param integer num = number to format
+     * @param integer decLen = length of decimal
+     * @param integer len = length of whole part
+     * @param string sectionDelim = Sections Delimiter
+     * @param string decimalDelim = Decimal Delimter
+     */
+
+     formatNumber(num, decLen, len, sectionDelim, decimalDelim) {
+        let regex = '\\d(?=(\\d{' + (len || 3) + '})+' + (decLen > 0 ? '\\D' : '$') + ')';
+        let number = num.toFixed(Math.max(0, ~~decLen));
+
+    return (decimalDelim ? number.replace('.', decimalDelim) : number).replace(new RegExp(regex, 'g'), '$&' + (sectionDelim || ','));
+     },
+
+     /*
+      * Function to get meals saved
+      * PROTOTYPE AND DEMO PURPOSES - NOT ACCURATE CALCULATION / DATA
+      * @param Integer poundsOfFoodSaved = pounds of food saved
+      */
+
+      getMealsSaved(poundsOfFoodSaved) {
+            const AVG_LBS_EATEN_YEARLY = 1996
+            const DAYS_PER_YEAR = 365.25
+
+            let lbsPerDay = AVG_LBS_EATEN_YEARLY/DAYS_PER_YEAR;
+            let lbsPerMeal = lbsPerDay /3;
+            let mealsSaved = poundsOfFoodSaved / lbsPerMeal;
+
+            return this.formatNumber(mealsSaved, 2, 3, ',', '.');
+      }
 }

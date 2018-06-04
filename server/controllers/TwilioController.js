@@ -25,7 +25,7 @@ module.exports = {
             }
         ).then(message => {
             console.log(`Success: ${message}`);
-            res.status(200).send(message);
+            res.status(200).send(message.body);
         }).catch(err => {
             console.log(`Server Error while sending SMS: ${err}`);
             res.sendStatus(500);

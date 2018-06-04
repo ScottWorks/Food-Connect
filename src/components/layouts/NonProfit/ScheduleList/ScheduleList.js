@@ -1,5 +1,6 @@
 import React from 'react';
 import ScheduleBasket from './ScheduleBasket/ScheduleBasket';
+import './../../../../assets/styles/ScheduleList.css';
 
 function ScheduleList(props) {
   const { _scheduledBaskets, _scheduleBasket, _cancelBasket } = props;
@@ -22,7 +23,7 @@ const DisplaySchedule = ({
 }) => {
   return _scheduledBaskets.map((elem, idx) => {
     return (
-      <div key={idx}>
+      <div className="scheduled-list-container" key={idx}>
         <ScheduleBasket
           scheduledBasket={elem}
           _scheduleBasket={_scheduleBasket}

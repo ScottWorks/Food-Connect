@@ -2,6 +2,7 @@ import React from 'react';
 import ContactInfoCard from '../../../../components/NonProfit/ContactInfoCard';
 import DateTimePicker from '../../../../components/NonProfit/DateTimePicker';
 import * as timeConversion from '../../../../../config/timeConversion';
+import '../../../../../assets/styles/NonProfitBasket.css';
 
 class NonProfitBasket extends React.Component {
   constructor() {
@@ -70,15 +71,23 @@ class NonProfitBasket extends React.Component {
     ) : null;
 
     return (
-      <section>
+      <section className="np-basket">
         {reserveCard}
-        <button onClick={() => this.toggleReservationCard()}>Reserve</button>
+        <button
+          className="reserve-btn"
+          onClick={() => this.toggleReservationCard()}
+        >
+          RESERVE
+        </button>
         <p>{currentBasket.company_name}</p>
         <p>{currentBasket.operating_hrs}</p>
         <p>Pick-Up By: {formattedTime}</p>
         {expandCard}
-        <button onClick={() => this.toggleDetailedCard()}>
-          {expanded ? 'Collapse' : 'Details'}
+        <button
+          className="details-collapse-btn"
+          onClick={() => this.toggleDetailedCard()}
+        >
+          {expanded ? 'COLLAPSE' : 'DETAILS'}
         </button>
       </section>
     );
