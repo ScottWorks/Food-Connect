@@ -5,6 +5,7 @@ import Header from "../../components/Header/Header.js";
 import Footer from "../../components/Footer/Footer.js";
 import "./Login.css"
 import {Link} from 'react-router-dom';
+import Particles from 'react-particles-js';
 
 export default class Auth extends Component {
     constructor() {
@@ -13,12 +14,23 @@ export default class Auth extends Component {
         this.state = {
             userName: '',
             pw: '',
-            modalIsOpen: false
+            isMobile: true
         }
-        this.openModal = this.openModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
+        this.updateDevice = this.updateDevice.bind(this);
     }
 
+    componentDidMount(){
+        this.updateDevice();
+        window.addEventListener("resize", this.updateDevice)
+    }
+
+    componentWillMount(){
+        window.removeEventListener("resize", this.updateDevice)
+    }
+
+    updateDevice(){
+        this.setState({isMobile: window.innerWidth <= 667})
+    }
     handleClick() {
         axios.post('/api/auth/login',{ userName: this.state.userName, pw: this.state.pw }).then( res => {
             if(res.data === 'You are the chosen one!') {
@@ -35,17 +47,30 @@ export default class Auth extends Component {
         })
     }
 
-    //Function for opening the modal
-    openModal() {
-        this.setState({ modalIsOpen: true });
-    }
-    //Function for closing the modal
-    closeModal() {
-        this.setState({ modalIsOpen: false });
-    }
-
     render() {
-        console.log(window.location)
+        
+        // Particles JS Options;
+        const particlesParams = {
+            particles: {
+                number: {
+                    value: 20
+                },
+                size: {
+                    value: 9.7
+                },
+                line_linked:{
+                    enable_auto: false,
+                    width: 0,
+                    distance: 0,
+                    opacity: 0
+                },
+                color: {
+                    value: "#A5BE00"
+                }
+
+            }
+        }
+
         const { userName, pw } = this.state
         return (
             <div className='login-container'>
@@ -58,6 +83,7 @@ export default class Auth extends Component {
                     </div>
                     <h2>Username</h2>
                     <input required='true' 
+                    name='username'
                         onChange={(e) => this.setState({ userName: e.target.value })}
                         type='text'
                     />
@@ -72,34 +98,21 @@ export default class Auth extends Component {
                     
                     </form>
 
-                    <div>
+                    <section className='register-text'>
                         <p>New to Crumb?  Please Register</p>
-                    </div>
-                </div>
-                <div className='particles-side-container'>
-                    <h1>crumb</h1>
+                    </section>
                 </div>
 
+                {/* Conditionally Render the Particle Div JS based on Device Size */}
+                {
+                    this.state.isMobile ? null : (
+                        <div className='particles-side-container'>
+                            <Particles params={particlesParams} className='particles-js'/>
+                            <h1>crumb</h1>
+                        </div>
+                    )
+                }
             </div>
         )
     }
-
 }
-
-// //Style for the modal
-// const modalStyles = {
-//     content: {
-//         top: '50%',
-//         left: '50%',
-//         right: 'auto',
-//         bottom: 'auto',
-//         marginRight: '-50%',
-//         transform: 'translate(-50%, -50%)'
-//     }
-// };
-
-// let mapStateToProps = (state) => {
-//     return state
-// }
-
-// export default connect(mapStateToProps, {} )(Auth)
