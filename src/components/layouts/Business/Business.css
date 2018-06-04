@@ -1,0 +1,8 @@
+.bus-top-bar {
+  width: 100%;
+  height: 250px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
