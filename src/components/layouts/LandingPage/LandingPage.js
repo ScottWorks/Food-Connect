@@ -95,8 +95,11 @@ class LandingPage extends Component {
                             <Link to="/register"><div className="landing_getstarted_button">Get Started With Us</div></Link></div>
                         </div>
                     </section>
+                    
+                        <Footer handler={this.openModal} />
+                    
+                    
                 </div>
-                <Footer handler={this.openModal} />
             </div>
         )
     }

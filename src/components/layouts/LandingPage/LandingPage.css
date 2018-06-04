@@ -2,15 +2,12 @@
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
     .landing_main {
         display: flex;
-        /* justify-content: center; */
-        /* align-items: center; */
         height: 100%;
         width: 100vw;
     }
     .landing_wrapper {
         display: flex;
         flex-direction: column;
-        margin-bottom: 70px;
         height: 100%;
         width: 100%;
     }
@@ -165,7 +162,7 @@
         justify-content: center;
         align-items: center;
         height: 220px;
-        margin-bottom: 20px;
+        
     }
     .landing_getstarted_container {
         display: flex;
