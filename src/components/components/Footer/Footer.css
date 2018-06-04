@@ -3,6 +3,7 @@
     .footer_main {
         background: #05668D;
         color: #EBF2FA;
+        width: 100vw;
     }
     .contact h2 {
         text-align: center;

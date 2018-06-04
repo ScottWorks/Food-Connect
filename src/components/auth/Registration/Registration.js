@@ -151,7 +151,7 @@ class Register extends Component {
                         </div>
                     </Modal>
                     <div className="title_box">
-                        <span className="section_title">What type of organization are you representing?</span>
+                        <h2 className="section_title">What type of organization are you representing?</h2>
                     </div>
                     <section id='registry-container1'>
                         <div className="account_type_box">
@@ -291,7 +291,7 @@ class Register extends Component {
                     </section>
 
                 </div>
-                <Footer handler={this.openModal} />
+                <Footer className='registration-footer' handler={this.openModal} />
             </div>
         )
     }
