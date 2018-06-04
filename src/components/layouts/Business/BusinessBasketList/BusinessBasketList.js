@@ -3,12 +3,6 @@ import BusinessBasket from './BusinessBasket/BusinessBasket'
 import BusinessItems from './BusinessItems/BusinessItems'
 
 class BusinessBasketList extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      baskets: props.baskets
-    }
-  }
   render() {
     var itemCards = this.props.items.map((e, i) => {
       return (
@@ -16,6 +10,7 @@ class BusinessBasketList extends React.Component {
           item={e}
           index={i}
           key={e.item + i}
+          deleteItem={this.props.deleteItem}
         />
       )
     })
@@ -26,12 +21,14 @@ class BusinessBasketList extends React.Component {
           <BusinessBasket
             basket={e}
             index={i}
+            editBasket={this.props.editBasket}
+            deleteBasket={this.props.deleteBasket}
           />
         )
       })
     }
     return (
-      <div classitem="BusinessBasketList">
+      <div className="BusinessBasketList">
         <div>
           {itemCards}
         </div>

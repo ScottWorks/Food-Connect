@@ -2,6 +2,9 @@ import React from 'react'
 import moment from 'moment'
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
+import { connect } from 'react-redux'
+import { addItemToBasket } from '../../../../ducks/businessReducer'
+import './BasketTable.css'
 
 class BasketTable extends React.Component {
   constructor() {
@@ -9,9 +12,9 @@ class BasketTable extends React.Component {
     this.state = {
       item: '',
       weight: '',
+      fairMarketValue: '',
       expirationDate: '',
-      expirationTime: '',
-      fairMarketValue: ''
+      expirationTime: ''
     }
   }
 
@@ -24,7 +27,7 @@ class BasketTable extends React.Component {
         hours = this.addZeroToFrontHelper(momentTime.hours()),
         minutes = this.addZeroToFrontHelper(momentTime.minutes()),
         months = this.addZeroToFrontHelper(momentDate.month() + 1),
-        days = this.addZeroToFrontHelper(momentDate.daysInMonth()),
+        days = this.addZeroToFrontHelper(momentDate.date()),
         years = this.addZeroToFrontHelper(momentDate.year()),
         timeString = '',
         itemObj = {}
@@ -69,8 +72,14 @@ class BasketTable extends React.Component {
     return (
       <div className="BasketTable">
         <button
-          onClick={() => this.props.makeBasket()}
-        >Make Basket</button>
+          onClick={() => {
+            if(this.props.fromBasket) {
+              this.props.saveBasket()
+            } else {
+              this.props.makeBasket()
+            }
+          }}
+        >{this.props.fromBasket ? 'Save basket' : 'Make a basket'}</button>
         <div>
           <DatePicker 
             onChange={(x, date) => this.setState({expirationDate: date})}
@@ -110,4 +119,4 @@ class BasketTable extends React.Component {
   }
 }
 
-export default BasketTable;
+export default connect(null, {addItemToBasket})(BasketTable);
