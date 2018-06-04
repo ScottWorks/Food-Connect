@@ -1,9 +1,202 @@
-.registry-containers {
-    margin: 0 auto;
-    width: 400px;
-    border: 1px solid black;
+#registry-container1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width:98%;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+    border-radius: 0px 0px 2px 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: Roboto;
+    color:#545E69;
+    text-align: start;
+    background-color: #f1f1f1;
+    min-height: 100px;
 }
 
-.registry-containers input {
+#registry-container2 {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width:98%;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+    border-radius: 0px 0px 2px 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: Roboto;
+    color:#545E69;
+    text-align: start;
+    background-color: #f1f1f1;
+    min-height: 100px;
+    /* animation: scale-display .3s; */
+}
+
+#registry-container3 {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width:98%;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+    border-radius: 0px 0px 2px 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: Roboto;
+    color:#545E69;
+    text-align: start;
+    background-color: #f1f1f1;
+    min-height: 140px;
+    animation: scale-display .3s;
+}
+
+#registry-container4 {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width:98%;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+    border-radius: 0px 0px 2px 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: Roboto;
+    color:#545E69;
+    text-align: start;
+    background-color: #f1f1f1;
+    min-height: 190px;
+    animation: scale-display .3s;
+}
+
+#registry-container2 input, #registry-container3 input, #registry-container4 input {
     padding-left: 4px;
+    margin-left: 8px;
+    border-radius: 4px;
+    border: 1px solid #B1B9C3;
+    width: 100px;
+}
+
+.collapsible{
+    color: white;
+    border: 1px solid #51AF33;
+    background-color: #51AF33;
+    text-align: center;
+    padding: 0.5em 1.38em 0.5em;
+    border-radius: 4px;
+    height: 30px;
+    width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+
+.registration_wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.registration_main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1050px;
+    width: 100vw;
+}
+
+.account_type_box{
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.organization_box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.register_button{
+    margin-top: 10px;
+    color: white;
+    border: 1px solid #51AF33;
+    background-color: #51AF33;
+    text-align: center;
+    padding: 0.5em 1.38em 0.5em;
+    border-radius: 4px;
+    height: 30px;
+    width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section_title{
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.password_icon{
+    height: 20px;
+    width: 25px;
+}
+
+.password_div{
+    display: flex;
+    justify-content: center;
+}
+
+.title_box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width:98%;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+    border-radius: 2px 2px 0px 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: Roboto;
+    color:#545E69;
+    text-align: start;
+    background-color: #f1f1f1;
+    min-height: 30px;
+}
+
+@keyframes scale-display {
+	0% {
+		opacity: 0;
+		transform: scale(0);
+    -webkit-transform: scale(0);
+	}
+
+	100% {
+        display: flex;
+		opacity: 1;
+		transform: scale(1);
+    -webkit-transform: scale(1);
+	}
+}
+
+@keyframes scale-display--reversed {
+	0% {
+		opacity: 1;
+		transform: scale(1);
+		-webkit-transform: scale(1);
+	}
+	99% {
+		opacity: 0;
+		transform: scale(0);
+		-webkit-transform: scale(0);
+	}
+	100% {
+		display: none;
+		opacity: 0;
+		transform: scale(0);
+		-webkit-transform: scale(0);
+	}
 }

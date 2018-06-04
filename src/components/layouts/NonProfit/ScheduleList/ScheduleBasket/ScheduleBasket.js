@@ -1,6 +1,7 @@
 import React from 'react';
 import ContactInfoCard from '../../../../components/NonProfit/ContactInfoCard';
-import * as utilFunc from '../../../../../config/timeConversion';
+import * as timeConversion from '../../../../../config/timeConversion';
+import '../../../../../assets/styles/ScheduleBasket.css'
 
 class ScheduleBasket extends React.Component {
   constructor() {
@@ -10,7 +11,7 @@ class ScheduleBasket extends React.Component {
   render() {
     const { scheduledBasket } = this.props;
 
-    let formattedTime = utilFunc.fromEpoch(
+    let formattedTime = timeConversion.fromEpoch(
       scheduledBasket.scheduled_time,
       'ddd, MMM Do, h:mm a'
     );
@@ -26,7 +27,7 @@ class ScheduleBasket extends React.Component {
     };
 
     return (
-      <section>
+      <section className='basket'>
         <p>Scheduled Baskets</p>
         <p>{formattedTime}</p>
         <p>{scheduledBasket.company_name}</p>

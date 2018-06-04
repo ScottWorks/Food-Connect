@@ -36,11 +36,11 @@ app.use(
 
 app.use(checkForSession);
 
-massive(CONNECTION_STRING)
-  .then((dbInstance) => {
-    app.set('db', dbInstance);
-  })
-  .catch((e) => console.log(`Error: ${e}`));
+// massive(CONNECTION_STRING)
+//   .then((dbInstance) => {
+//     app.set('db', dbInstance);
+//   })
+//   .catch((e) => console.log(`Error: ${e}`));
 
 // ##### ENDPOINTS ######
 
@@ -59,7 +59,7 @@ app.get(
   '/api/basket/:businessID/:epochTime',
   BusinessController.getBusinessBaskets
 );
-app.get('/api/basket'); // USE TO PULL ALL BASKETS TO RUN STATS
+app.get('/api/all/basket/:businessID', analyticsController.getBussinessCompletedBaskets); // USE TO PULL ALL BASKETS TO RUN STATS
 app.put('/api/basket/:basketID', BusinessController.updateBusinessBasket);
 app.post('/api/basket', BusinessController.createBaskets);
 app.delete('/api/basket/:basketID', BusinessController.deleteBusinessBasket);
@@ -76,7 +76,7 @@ app.get(
   nonProfitController.getScheduledBaskets
 );
 app.post('/api/basket/:currentLocalTime', nonProfitController.getBaskets);
-// app.put('/api/basket/:basketID', nonProfitController.updateBasket);
+app.put('/api/basket/:nonProfitID', nonProfitController.updateBasket);
 
 // Non-Profit Wishlist Endpoints
 app.get('/api/wishlist/:nonProfitID');
@@ -103,6 +103,13 @@ app.put('/api/amazon/upload/:basketID', s3Controller.upload);
 // Requires a body with toEmail, fromEmail, subject, and message
 app.post('/api/email', mailController.sendEmail);
 
-app.listen(SERVER_PORT, () => {
-  console.log(`Creeping on Port: ${SERVER_PORT}`);
+// app.listen(SERVER_PORT, () => {
+//   console.log(`Creeping on Port: ${SERVER_PORT}`);
+// });
+
+massive(CONNECTION_STRING).then((dbInstance) => {
+  app.set('db', dbInstance);
+  app.listen(SERVER_PORT, () =>
+    console.log(`Creeping on Port: ${SERVER_PORT}`)
+  );
 });

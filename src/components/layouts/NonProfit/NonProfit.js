@@ -6,22 +6,22 @@ import ScheduleList from './ScheduleList/ScheduleList';
 import Header from '../../components/Header/Header.js';
 import './NonProfit.css';
 
-
 class NonProfit extends React.Component {
   constructor() {
     super();
     this.state = {
+      nonProfitID: 4,
       baskets: [],
       scheduledBaskets: []
     };
 
     this.getBaskets = this.getBaskets.bind(this);
-    this.getScheduledBaskets = this.getScheduledBaskets.bind(this)
+    this.getScheduledBaskets = this.getScheduledBaskets.bind(this);
   }
 
   componentDidMount() {
     this.getBaskets();
-    this.getScheduledBaskets()
+    this.getScheduledBaskets();
   }
 
   getBaskets() {
@@ -38,13 +38,26 @@ class NonProfit extends React.Component {
   }
 
   getScheduledBaskets() {
-    const nonProfitID = 4;
- 
-    axios.get(`/api/scheduled/baskets/${nonProfitID}`).then((scheduledBaskets) => {
-      this.setState({
-        scheduledBaskets: scheduledBaskets.data
-      })
-    })
+    const { nonProfitID } = this.state;
+
+    axios
+      .get(`/api/scheduled/baskets/${nonProfitID}`)
+      .then((scheduledBaskets) => {
+        this.setState({
+          scheduledBaskets: scheduledBaskets.data
+        });
+      });
+  }
+
+  updateBasket(basketID, scheduledTime) {
+    const { nonProfitID } = this.state;
+
+    axios.put(`/api/basket/${nonProfitID}`, { basketID, scheduledTime });
+
+    this.getBaskets();
+    this.getScheduledBaskets();
+
+    alert('Reserved!');
   }
 
   render() {
@@ -53,11 +66,11 @@ class NonProfit extends React.Component {
     return (
       <main className="mobile">
         <Header />
-        <div className="nonprofit_main">
-          <h2>Non Profit Page</h2>
-        </div>
-        <ScheduleList scheduledBaskets={scheduledBaskets}/>
-        <NonProfitBasketList baskets={baskets} />
+        <ScheduleList scheduledBaskets={scheduledBaskets} />
+        <NonProfitBasketList
+          baskets={baskets}
+          _updateBasket={this.updateBasket}
+        />
       </main>
     );
   }
