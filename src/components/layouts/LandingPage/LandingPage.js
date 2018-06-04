@@ -92,7 +92,7 @@ class LandingPage extends Component {
                     <section className="landing_getstarted">
                         <div className="landing_getstarted_container">
                         <div className='landing-overlay'>
-                            <Link to="/register"><div className="landing_getstarted_button">Get Started With Us</div></Link></div>
+                            <Link to="/register"><div className="landing_getstarted_button">GET STARTED</div></Link></div>
                         </div>
                     </section>
                     
