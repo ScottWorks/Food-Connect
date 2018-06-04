@@ -1,7 +1,7 @@
 /* FOR MOBILE DEVICES */
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
     
-    .login-form{
+    .login_wrapper{
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -9,11 +9,21 @@
         width: 100vw;
         height: 100vh;
         
-        
+    }
+
+    .login-form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: #679436 solid 1px;;
+        width: 70%;
+        height: 40%;
+        box-shadow: 0 4px 8px 0 rgba(66, 122, 161, 0.2), 0 6px 20px 0 rgba(66, 122, 161, 0.19);
     }
 
     .login-form input {
-        width: 30%;
+        width: 40%;
     }
 
     .login-form h2{
@@ -40,7 +50,7 @@
 /* For Desktop */
 @media screen and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1) {
     
-    .login-form{
+    .login_wrapper{
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -50,8 +60,21 @@
         
     }
 
+
+    .login-form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: #679436 solid 1px;;
+        
+        width: 50%;
+        height: 50%;
+        box-shadow: 0 4px 8px 0 rgba(66, 122, 161, 0.2), 0 6px 20px 0 rgba(66, 122, 161, 0.19);
+    }
+
     .login-form input {
-        width: 10%;
+        width: 25%;
     }
 
     .login-form h2{
@@ -63,7 +86,7 @@
         color: #EBF2FA;
         font-size: 1em;
         margin-top: 8px;
-        width: 6em;
+        width: 7em;
         background: #427AA1;
         border: 1px #427AA1 solid;
         border-radius: 3px;
