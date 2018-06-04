@@ -2,6 +2,9 @@ import React from 'react'
 import moment from 'moment'
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
+import { connect } from 'react-redux'
+import { addItemToBasket, makeBasket, saveBasket } from '../../../../ducks/businessReducer'
+import './BasketTable.css'
 
 class BasketTable extends React.Component {
   constructor() {
@@ -9,9 +12,9 @@ class BasketTable extends React.Component {
     this.state = {
       item: '',
       weight: '',
+      fairMarketValue: '',
       expirationDate: '',
-      expirationTime: '',
-      fairMarketValue: ''
+      expirationTime: ''
     }
   }
 
@@ -24,7 +27,7 @@ class BasketTable extends React.Component {
         hours = this.addZeroToFrontHelper(momentTime.hours()),
         minutes = this.addZeroToFrontHelper(momentTime.minutes()),
         months = this.addZeroToFrontHelper(momentDate.month() + 1),
-        days = this.addZeroToFrontHelper(momentDate.daysInMonth()),
+        days = this.addZeroToFrontHelper(momentDate.date()),
         years = this.addZeroToFrontHelper(momentDate.year()),
         timeString = '',
         itemObj = {}
@@ -33,8 +36,8 @@ class BasketTable extends React.Component {
     itemObj = {
       item: this.state.item,
       weight: this.state.weight,
-      fairMarketValue: this.state.fairMarketValue,
-      utcTime: moment(timeString).format('x')
+      FMV: this.state.fairMarketValue,
+      pick_up_time: moment(timeString).format('x')
     }
     this.props.addItemToBasket(itemObj)
     this.setState({item: '', weight: '', fairMarketValue: ''})
@@ -64,14 +67,34 @@ class BasketTable extends React.Component {
       return `${num}`
     }
   }
+  prepBasket() {
+    let basketObj = {
+      business_id: 1, //Change this!!!
+      pick_up_time: this.props.pick_up_time,
+      status: 0,
+      items: JSON.stringify(this.props.items)
+    }
+    if(this.props.editingBasket) {
+      console.log(basketObj)
+      this.props.saveBasket(this.props.currentBasketID, basketObj)
+    } else {
+      console.log(basketObj)
+      this.props.makeBasket(basketObj)
+    }
+  }
+  
   
   render() {
     return (
       <div className="BasketTable">
-        <button
-          onClick={() => this.props.makeBasket()}
-        >Make Basket</button>
         <div>
+          <button
+            onClick={() => this.prepBasket()}
+          >{this.props.editingBasket ? 'Save basket' : 'Make a basket'}</button>
+        </div>
+        <div
+          className="BasketTable-date-time-picker"
+        >
           <DatePicker 
             onChange={(x, date) => this.setState({expirationDate: date})}
             hintText="Date"
@@ -109,5 +132,15 @@ class BasketTable extends React.Component {
     );
   }
 }
+function mapStateToProps(state) {
+  return {
+    editingBasket: state.businessReducer.editingBasket,
+    pick_up_time: state.businessReducer.pick_up_time,
+    items: state.businessReducer.items,
+    currentBasketID: state.businessReducer.currentBasketID
 
-export default BasketTable;
+    //business_id: state.businessReducer.business_id, Change this!!!
+  }
+}
+
+export default connect(mapStateToProps, {addItemToBasket, makeBasket, saveBasket})(BasketTable);
