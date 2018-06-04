@@ -11,7 +11,7 @@ class NonProfit extends React.Component {
   constructor() {
     super();
     this.state = {
-      nonProfitID: 4,
+      nonProfitID: 8,
       baskets: [],
       scheduledBaskets: [],
       wishlist: []
@@ -22,6 +22,7 @@ class NonProfit extends React.Component {
     this.scheduleBasket = this.scheduleBasket.bind(this);
     this.cancelBasket = this.cancelBasket.bind(this);
     this.getWishList = this.getWishList.bind(this);
+    this.createWishList = this.createWishList.bind(this);
     this.addWishListItem = this.addWishListItem.bind(this);
     this.parent_editWishListItem = this.parent_editWishListItem.bind(this);
     this.removeWishListItem = this.removeWishListItem.bind(this);
@@ -96,6 +97,14 @@ class NonProfit extends React.Component {
     });
   }
 
+  createWishList() {
+    const { nonProfitID } = this.state;
+
+    axios.post(`/api/wishlist/${nonProfitID}`).then(() => {
+      this.getWishList();
+    });
+  }
+
   addWishListItem(item) {
     const updatedWishList = [...this.state.wishlist.items, { item: item }];
 
@@ -138,6 +147,7 @@ class NonProfit extends React.Component {
         <h3>Wish List</h3>
         <WishList
           _wishlist={wishlist}
+          _createWishList={this.createWishList}
           _addWishListItem={this.addWishListItem}
           parent_editWishListItem={this.parent_editWishListItem}
           _removeWishListItem={this.removeWishListItem}

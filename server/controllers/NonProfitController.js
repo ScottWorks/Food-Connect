@@ -68,6 +68,19 @@ module.exports = {
         res.sendStatus(500);
       });
   },
+  createWishList: (req, res) => {
+    const db = req.app.get('db');
+    const { nonProfitID } = req.params;
+
+    db
+      .np_createWishList([nonProfitID])
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch(() => {
+        res.sendStatus(500);
+      });
+  },
   modifyWishList: (req, res) => {
     const db = req.app.get('db');
     const { updatedWishList } = req.body;
