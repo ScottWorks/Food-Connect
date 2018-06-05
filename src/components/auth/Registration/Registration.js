@@ -293,7 +293,7 @@ class Register extends Component {
                                 className={this.state.panel1State.panel1HeaderState}>
                                 Organization Type</div>
                         <div className={this.state.panel1State.panel1BodyState}>
-                            <h2>What type of organizationare you representing?</h2>
+                            <h2>What type of organization are you representing?</h2>
                             <form className='registration-form'>
                             <div>
                                 <input required='true' type='radio' checked={this.state.organizationType==='non-profit'} 
