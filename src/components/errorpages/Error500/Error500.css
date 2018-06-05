@@ -33,6 +33,10 @@ a{
 }
 
 .error500_subtext{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     font-size: 20px;
     margin-bottom: 20px;
 }

@@ -8,7 +8,8 @@ import Register from '../components/auth/Registration/Registration'
 import Error403 from "../components/errorpages/Error403/Error403.js";
 import Error404 from "../components/errorpages/Error404/Error404.js";
 import Error500 from "../components/errorpages/Error500/Error500.js";
-import LoadingPulse from '../components/components/LoadingPulse/LoadingPulse.js';
+import LoadingPulse from '../components/components/LoadingPages/LoadingPulse/LoadingPulse.js';
+import LoadingDots from '../components/components/LoadingPages/LoadingDots/LoadingDots.js';
 
 
 export default (
@@ -22,5 +23,6 @@ export default (
     <Route path='/404' component={Error404} />
     <Route path='/500' component={Error500} />
     <Route path='/LoadingPulse' component={LoadingPulse} />
+    <Route path='/LoadingDots' component={LoadingDots} />
   </Switch>
 )

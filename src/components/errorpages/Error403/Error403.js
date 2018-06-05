@@ -1,12 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Error403.css"
+import "./Error403.css";
+import noSymbol from "./no.png";
 
 function Error403() {
     return (
         <div className="error403_body">
             <div className="error403_image">
-                403
+            <div>4</div>
+            <img src={noSymbol}/>
+            <div>3</div>
             </div>
             <div className="error403_subtext">
                 Forbidden or No Permission to Access

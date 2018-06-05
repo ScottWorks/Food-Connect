@@ -26,8 +26,8 @@ a{
 }
 
 .error403_image img{
-    height: 100px;
-    width: 100px;
+    height: 85px;
+    width: 60px;
     margin-left: 5px;
     margin-right: 5px;
 }
@@ -50,6 +50,7 @@ a{
     text-transform: uppercase;
     background: #427AA1;
     }
+
 }
 
 @media screen 
@@ -66,8 +67,8 @@ a{
     }
     
     .error403_image img{
-        height: 300px;
-        width: 300px;
+        height: 290px;
+        width: 200px;
         margin-left: 5px;
         margin-right: 5px;
     }

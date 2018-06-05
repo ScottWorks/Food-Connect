@@ -1,10 +1,10 @@
 import React from "react";
 import "./LoadingPulse.css"
 
-function LoadingPulse() {
+function LoadingPulse(props) {
     return (
         <div className="pulse_container">
-            <div className="pulse_animation">Please Wait</div>
+            {props.text ? <div className="pulse_animation">{props.text}</div> : <div className="pulse_animation">Please Wait</div>}
         </div>
     )
 }

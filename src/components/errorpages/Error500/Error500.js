@@ -9,7 +9,8 @@ function Error500() {
                 500
             </div>
             <div className="error500_subtext">
-                Internal Server Error
+                <div>Internal Server Error</div>
+                {/* <p>Try refreshing the page, or contact us if the problem persists</p> */}
             </div>
             <Link to="/"><div className="home_button">Return Home</div></Link>
         </div>
