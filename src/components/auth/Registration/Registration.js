@@ -181,7 +181,6 @@ class Register extends Component {
             tempPanel2State.panel2ButtonState = 'false';
             tempPanel3State.panel3BodyState = 'panel-body-extended';
             this.setState({panel2State: tempPanel2State, panel3State: tempPanel3State });
-            
         }
     }
 
@@ -199,7 +198,6 @@ class Register extends Component {
             tempPanel3State.panel3ButtonState = 'false';
             tempPanel4State.panel4BodyState = 'panel-body-extended';
             this.setState({panel3State: tempPanel3State, panel4State: tempPanel4State });
-            
         }
     }
 
@@ -221,7 +219,6 @@ class Register extends Component {
             tempPanel4State.panel4BodyState = 'panel-body-collapsed';
             this.setState({panel2State: tempPanel2State, panel3State: tempPanel3State, panel4State: tempPanel4State})
 
-        
         }
     }
 
@@ -243,7 +240,7 @@ class Register extends Component {
             let tempPanel4State = Object.assign({}, this.state.panel4State);
             tempPanel4State.panel4BodyState = 'panel-body-collapsed';
             this.setState({panel1State: tempPanel1State, panel3State: tempPanel3State, panel4State: tempPanel4State})
-            
+
         }
     }
 
