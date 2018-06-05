@@ -1,18 +1,28 @@
 import React from 'react';
 import NonProfitBasket from './NonProfitBasket/NonProfitBasket';
-import '../../../../assets/styles/NonProfitBasketList.css'
+import '../../../../assets/styles/NonProfitBasketList.css';
 
 function NonProfitBasketList(props) {
-  const { baskets, _updateBasket } = props;
+  const { _baskets, _scheduleBasket } = props;
 
-  const displayBaskets = baskets.map((elem, idx) => {
+  return (
+    <section className="np-bucket-list">
+      <DisplayBaskets _baskets={_baskets} _scheduleBasket={_scheduleBasket} />
+    </section>
+  );
+}
+
+const DisplayBaskets = ({ _baskets, _scheduleBasket }) => {
+  return _baskets.map((elem, idx) => {
     return (
       <div key={idx}>
-        <NonProfitBasket currentBasket={elem} _updateBasket={_updateBasket} />
+        <NonProfitBasket
+          currentBasket={elem}
+          _scheduleBasket={_scheduleBasket}
+        />
       </div>
     );
   });
-  return <section className='np-bucket-list'>{displayBaskets}</section>;
-}
+};
 
 export default NonProfitBasketList;
