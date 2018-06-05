@@ -26,15 +26,68 @@ module.exports = {
         res.sendStatus(500);
       });
   },
-  updateBasket: (req, res) => {
+  scheduleBasket: (req, res) => {
     const db = req.app.get('db');
     const { nonProfitID } = req.params;
     const { scheduledTime, basketID } = req.body;
-
-    console.log(scheduledTime, basketID);
+    const status = 2;
 
     db
-      .np_updateBasket([nonProfitID, scheduledTime, basketID])
+      .np_scheduleBasket([nonProfitID, scheduledTime, status, basketID])
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch(() => {
+        res.sendStatus(500);
+      });
+  },
+  cancelBasket: (req, res) => {
+    const db = req.app.get('db');
+    const { basketID } = req.params;
+    const status = 0;
+
+    db
+      .np_cancelBasket([status, basketID])
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch(() => {
+        res.sendStatus(500);
+      });
+  },
+  getWishList: (req, res) => {
+    const db = req.app.get('db');
+    const { nonProfitID } = req.params;
+
+    db
+      .np_getWishList([nonProfitID])
+      .then((wishlist) => {
+        res.status(200).send(wishlist);
+      })
+      .catch(() => {
+        res.sendStatus(500);
+      });
+  },
+  createWishList: (req, res) => {
+    const db = req.app.get('db');
+    const { nonProfitID } = req.params;
+
+    db
+      .np_createWishList([nonProfitID])
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch(() => {
+        res.sendStatus(500);
+      });
+  },
+  modifyWishList: (req, res) => {
+    const db = req.app.get('db');
+    const { updatedWishList } = req.body;
+    const { nonProfitID } = req.params;
+
+    db
+      .np_modifyWishList([JSON.stringify(updatedWishList), nonProfitID])
       .then(() => {
         res.sendStatus(200);
       })

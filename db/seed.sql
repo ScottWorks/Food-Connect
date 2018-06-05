@@ -23,7 +23,7 @@ CREATE TABLE businesses
     longitude DECIMAL
 );
 
-CREATE TABLE nonProfits
+CREATE TABLE nonprofits
 (
     non_profit_id SERIAL PRIMARY KEY,
     company_name VARCHAR(45),
@@ -54,11 +54,11 @@ CREATE TABLE baskets
     aws_path TEXT
 );
 
-CREATE TABLE wishList
+CREATE TABLE wishlist
 (
     wishlist_id SERIAL PRIMARY KEY,
     non_profit_id INTEGER REFERENCES nonProfits(non_profit_id),
-    items text[]
+    items JSONB
 );
 
 CREATE TABLE users

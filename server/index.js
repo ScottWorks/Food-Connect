@@ -37,12 +37,6 @@ app.use(
 
 app.use(checkForSession);
 
-// massive(CONNECTION_STRING)
-//   .then((dbInstance) => {
-//     app.set('db', dbInstance);
-//   })
-//   .catch((e) => console.log(`Error: ${e}`));
-
 // ##### ENDPOINTS ######
 
 // AUTH ENDPOINTS
@@ -60,7 +54,10 @@ app.get(
   '/api/basket/:businessID/:epochTime',
   BusinessController.getBusinessBaskets
 );
-app.get('/api/all/basket/:businessID', analyticsController.getBussinessCompletedBaskets); // USE TO PULL ALL BASKETS TO RUN STATS
+app.get(
+  '/api/all/basket/:businessID',
+  analyticsController.getBussinessCompletedBaskets
+); // USE TO PULL ALL BASKETS TO RUN STATS
 app.put('/api/basket/:basketID', BusinessController.updateBusinessBasket);
 app.post('/api/basket', BusinessController.createBaskets);
 app.delete('/api/basket/:basketID', BusinessController.deleteBusinessBasket);
@@ -77,16 +74,29 @@ app.get(
   nonProfitController.getScheduledBaskets
 );
 app.post('/api/basket/:currentLocalTime', nonProfitController.getBaskets);
-app.put('/api/basket/:nonProfitID', nonProfitController.updateBasket);
+app.put('/api/basket/update/:nonProfitID', nonProfitController.scheduleBasket); // TESTING ONLY!
+// app.put(
+//   '/api/basket/update/:nonProfitID',
+//   twilioController.sendTwilioMessage,
+//   nonProfitController.scheduleBasket
+// );
+app.put('/api/basket/cancel/:basketID', nonProfitController.cancelBasket); // TESTING ONLY!
+// app.put(
+//   '/api/basket/cancel/:basketID',
+//   twilioController.sendTwilioMessage,
+//   nonProfitController.cancelBasket
+// );
 
 // Non-Profit Wishlist Endpoints
-app.get('/api/wishlist/:nonProfitID');
-app.post('/api/wishlist/:nonProfitID');
-app.put('/api/wishlist/:nonProfitID');
-app.delete('/api/wishlist/:nonProfitID');
+app.get('/api/wishlist/:nonProfitID', nonProfitController.getWishList);
+app.post('/api/wishlist/:nonProfitID', nonProfitController.createWishList);
+app.put(
+  '/api/wishlist/modify/:nonProfitID',
+  nonProfitController.modifyWishList
+);
 
 // TWILIO
-app.post('/api/twilio/:phoneNumber', twilioController.sendTwilioMessage);
+app.post('/api/twilio', twilioController.sendTwilioMessage);
 
 // AMAZON S3
 // Requires a body with the filename & filetype
@@ -103,10 +113,6 @@ app.put('/api/amazon/upload/:basketID', s3Controller.upload);
 // NODEMAILER
 // Requires a body with toEmail, fromEmail, subject, and message
 app.post('/api/email', mailController.sendEmail);
-
-// app.listen(SERVER_PORT, () => {
-//   console.log(`Creeping on Port: ${SERVER_PORT}`);
-// });
 
 massive(CONNECTION_STRING).then((dbInstance) => {
   app.set('db', dbInstance);
