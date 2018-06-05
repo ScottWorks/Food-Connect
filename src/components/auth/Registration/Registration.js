@@ -68,6 +68,7 @@ class Register extends Component {
         this.setState({
             organizationType: event.target.value
         })
+        
     }
 
     seePassword(e) {
@@ -98,6 +99,7 @@ class Register extends Component {
                 })
             }
         }
+        
     }
 
     clearInputs() {
@@ -116,9 +118,11 @@ class Register extends Component {
             pw: '',
             pwView: false
         })
+        
     }
 
-    registerOrganization() {
+    registerOrganization(e) {
+        e.preventDefault();
         if(this.state.firstName === '' || this.state.lastName === '' || this.state.phoneNumber===''
             || this.state.userName === '' || this.state.pw === ''){
                 alert('Please Fill Out Required Info')
@@ -133,10 +137,12 @@ class Register extends Component {
                 console.log(account.data)
     
             }, this.clearInputs(), window.location.assign('/#/login'))
+            
         }
     }
 
-    handleContinueClickPanel1(){
+    handleContinueClickPanel1(e){
+        e.preventDefault();
         let tempPanel1State = Object.assign({}, this.state.panel1State); 
         let tempPanel2State = Object.assign({}, this.state.panel2State); 
         
@@ -147,12 +153,18 @@ class Register extends Component {
             tempPanel1State.panel1BodyState = 'panel-body-collapsed';
             tempPanel1State.panel1HeaderState = 'panel-header-completed';
             tempPanel1State.panel1ButtonState = 'false';
+
             tempPanel2State.panel2BodyState = 'panel-body-extended';
-            this.setState({panel1State: tempPanel1State, panel2State: tempPanel2State });
+            
+            this.setState({panel1State: tempPanel1State, panel2State: tempPanel2State }, ()=> {
+                console.log('hit');
+            });
+            
         }
     }
 
-    handleContinueClickPanel2(){
+    handleContinueClickPanel2(e){
+        e.preventDefault();
         let tempPanel2State = Object.assign({}, this.state.panel2State); 
         let tempPanel3State = Object.assign({}, this.state.panel3State); 
         
@@ -169,10 +181,12 @@ class Register extends Component {
             tempPanel2State.panel2ButtonState = 'false';
             tempPanel3State.panel3BodyState = 'panel-body-extended';
             this.setState({panel2State: tempPanel2State, panel3State: tempPanel3State });
+            
         }
     }
 
-    handleContinueClickPanel3(){
+    handleContinueClickPanel3(e){
+        e.preventDefault();
         let tempPanel3State = Object.assign({}, this.state.panel3State); 
         let tempPanel4State = Object.assign({}, this.state.panel4State); 
 
@@ -185,6 +199,7 @@ class Register extends Component {
             tempPanel3State.panel3ButtonState = 'false';
             tempPanel4State.panel4BodyState = 'panel-body-extended';
             this.setState({panel3State: tempPanel3State, panel4State: tempPanel4State });
+            
         }
     }
 
@@ -205,6 +220,8 @@ class Register extends Component {
             let tempPanel4State = Object.assign({}, this.state.panel4State);
             tempPanel4State.panel4BodyState = 'panel-body-collapsed';
             this.setState({panel2State: tempPanel2State, panel3State: tempPanel3State, panel4State: tempPanel4State})
+
+        
         }
     }
 
@@ -226,6 +243,7 @@ class Register extends Component {
             let tempPanel4State = Object.assign({}, this.state.panel4State);
             tempPanel4State.panel4BodyState = 'panel-body-collapsed';
             this.setState({panel1State: tempPanel1State, panel3State: tempPanel3State, panel4State: tempPanel4State})
+            
         }
     }
 
@@ -248,6 +266,7 @@ class Register extends Component {
             let tempPanel4State = Object.assign({}, this.state.panel4State);
             tempPanel4State.panel4BodyState = 'panel-body-collapsed';
             this.setState({panel1State: tempPanel1State, panel2State: tempPanel2State, panel4State: tempPanel4State})
+            
         }
     }
 
@@ -272,6 +291,7 @@ class Register extends Component {
             let tempPanel3State = Object.assign({}, this.state.panel3State);
             tempPanel3State.panel3BodyState = 'panel-body-collapsed';
             this.setState({panel1State: tempPanel1State, panel2State: tempPanel2State, panel3State: tempPanel3State})
+            
         }
     }
 
@@ -297,7 +317,8 @@ class Register extends Component {
                                 <input type='radio' checked={this.state.organizationType==='business'} 
                                     onChange={this.handleChange}  value='business' id='business'/>
                                 <label  htmlFor='business'>Business</label></div>
-                                <input className='form-continue-button' type='submit' onClick={()=> this.handleContinueClickPanel1()}
+
+                                <input className='form-continue-button' type='submit' onClick={(e)=> this.handleContinueClickPanel1(e)}
                                     value='Continue'/>
                             </form>     
                         </div>
@@ -319,7 +340,7 @@ class Register extends Component {
                                     onChange={(e)=> this.setState({specificType: e.target.value})}
                                     required='true' placeholder={`Enter Type of ${this.state.organizationType}`}
                                     type='text'/>
-                                <input className='form-continue-button' type='submit' value='Continue' onClick={()=>this.handleContinueClickPanel2()}/>
+                                <input className='form-continue-button' type='submit' value='Continue' onClick={(e)=>this.handleContinueClickPanel2(e)}/>
                             </form>
                         </div>
                     </section>
@@ -334,7 +355,7 @@ class Register extends Component {
                                     onChange={(e)=>this.setState({addresss: e.target.value})}
                                     required='true' placeholder='Enter Address'
                                     type='text'/>
-                                <input className='form-continue-button' onClick={()=>this.handleContinueClickPanel3()} type='submit' value='Continue'/>
+                                <input className='form-continue-button' onClick={(e)=>this.handleContinueClickPanel3(e)} type='submit' value='Continue'/>
                             </form>
                         </div>
                     </section>
@@ -377,7 +398,7 @@ class Register extends Component {
                                         className="password_icon" />}
                                 </div>
 
-                                <input  onClick={() => this.registerOrganization()} 
+                                <input  onClick={(e) => this.registerOrganization(e)} 
                                     className='form-continue-button' type='submit' value='Register'/>
                             </form>
                         </div>
@@ -388,4 +409,4 @@ class Register extends Component {
     }
 }
 
-export default (Register)
+export default Register
