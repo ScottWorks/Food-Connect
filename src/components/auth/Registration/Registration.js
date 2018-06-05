@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import SearchInput from '../../components/PredictiveInput/placesAutocomplete'
 // import {connect} from 'react-redux'
 import './registration.css'
 import Modal from 'react-modal';
@@ -7,6 +8,7 @@ import Header from "../../components/Header/Header.js";
 import Footer from "../../components/Footer/Footer.js";
 import showPassword from "../../../assets/icons/showpassword.png";
 import hidePassword from "../../../assets/icons/hidepassword.png";
+
 
 class Register extends Component {
     constructor() {
@@ -205,34 +207,7 @@ class Register extends Component {
                         <span className="section_title">Where are you located?</span>
                     </div>
                     <section id='registry-container3'>
-                        <div>
-                            <span>Street Address:</span>
-                            <input type="text"
-                                value={this.state.streetAddress}
-                                onChange={(e) => this.setState({ streetAddress: e.target.value })}
-                            />
-                        </div>
-                        <div>
-                            <span>City:</span>
-                            <input type="text"
-                                value={this.state.city}
-                                onChange={(e) => this.setState({ city: e.target.value })}
-                            />
-                        </div>
-                        <div>
-                            <span>State:</span>
-                            <input type="text"
-                                value={this.state.statee}
-                                onChange={(e) => this.setState({ statee: e.target.value })}
-                            />
-                        </div>
-                        <div>
-                            <span>Zip:</span>
-                            <input type="text"
-                                value={this.state.zip}
-                                onChange={(e) => this.setState({ zip: e.target.value })}
-                            />
-                        </div>
+                        <SearchInput />
                         <button onClick={() => this.openBoxes('registry-container4')} className="collapsible">Continue</button>
                     </section>
                     <br />

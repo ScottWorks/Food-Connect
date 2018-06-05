@@ -5,6 +5,7 @@ import NonProfitBasketList from './NonProfitBasketList/NonProfitBasketList';
 import ScheduleList from './ScheduleList/ScheduleList';
 import Header from '../../components/Header/Header.js';
 import './NonProfit.css';
+import MapContainer from '../../components/Map/googleMap'
 
 class NonProfit extends React.Component {
   constructor() {
@@ -67,6 +68,7 @@ class NonProfit extends React.Component {
       <main className="mobile">
         <Header />
         <ScheduleList scheduledBaskets={scheduledBaskets} />
+        <MapContainer />
         <NonProfitBasketList
           baskets={baskets}
           _updateBasket={this.updateBasket}

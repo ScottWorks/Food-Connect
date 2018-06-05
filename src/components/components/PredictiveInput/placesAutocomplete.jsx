@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import PlacesAutoComplete from 'react-places-autocomplete'
 import {geocodeByAddress, getLatLng } from 'react-places-autocomplete'
+import axios from 'axios'
 
 class SearchInput extends Component {
     constructor(props) {
@@ -20,7 +21,7 @@ class SearchInput extends Component {
     handleSelect = (address) => {
         geocodeByAddress(address)
         .then( results => getLatLng(results[0]))
-        .then( latLng => this.props.newLocation(latLng))
+        .then( latLng => console.log('Success', latLng))
         .catch( error =>  console.log('Error', error))
     }
 

@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 // import Map from './map'
 import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react'
-import PropTypes from 'prop-types'
-import Inputs from './locationInput'
-import SearchInput from './placesAutoComplete'
+// import SearchInput from './placesAutoComplete'
 
   export class Container extends Component {
       constructor(props) {
@@ -13,6 +11,7 @@ import SearchInput from './placesAutoComplete'
               showingInfoWindow: false,
               activeMarker: {},
               selectedPlace: {},
+              initialPosition: { lat: 40.2262, lng: -111.6609 },
               markers:[]
           }
 
@@ -56,8 +55,11 @@ import SearchInput from './placesAutoComplete'
           const {markers} = this.state
 
           const style = {
-              width: '30vw',
-              height: '30vh'
+              width: '300px',
+              height: '300px',
+              boxShadow: '0px 0px 3px rgba(0, 0, 0, 0.7)',
+              marginLeft: '0px',
+              marginTop: '70px'
           }
 
           let displayMarkers = markers.map( (marker, i) => {
@@ -75,29 +77,32 @@ import SearchInput from './placesAutoComplete'
           }
 
           return (
-              <div style={style}>
+              <div style={{style}}>
                 <Map
+                    style={style}
                     google={this.props.google}
-                    initialCenter={{
-                        lat: 40.2338,
-                        lng: -111.6585
-                    }}            
+                    initialCenter={this.state.initialPosition}           
                     zoom={14}
                     onClick={this.onMapClicked}
                 >
-                <div style={{
+
+                {/* <div style={{
                     zIndex:'5',
                     position: 'absolute',
                     left: '45%'
                 }}>
-                    <SearchInput 
+                    {/* <SearchInput 
                         newLocation={this.newLocation}
-                    />
-                </div>
+                    /> 
+                    </div> */}
                 
                 {/* Default marker... displays at the center of our map when rendered */}
                 <Marker 
-                    name={'Your Location'}
+                    name={'DevMountain'}
+                    desc={'THE place to learn and grow as a Developer!'}
+                    url={'https://devmountain.com/'}
+                    position= {{ lat: 40.2262, lng: -111.6609 }}
+                    onClick={this.onMarkerClick}
                 />
 
                 {/* Displays 'Marker components' from an array of coordinates. Will render from an unknown array length. */}
@@ -121,5 +126,5 @@ import SearchInput from './placesAutoComplete'
   }
 
   export default GoogleApiWrapper({
-      apiKey: ('AIzaSyAL5r0-LhNUW9LEyd_5ceKbuBDnDYPhg2g')
+      apiKey: process.env.REACT_APP_GMAP_API_KEY
   })(Container)
