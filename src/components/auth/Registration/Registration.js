@@ -53,7 +53,6 @@ class Register extends Component {
         }
 
         this.handleChange = this.handleChange.bind(this);
-        this.handleClick = this.handleClick.bind(this);
         this.clearInputs = this.clearInputs.bind(this);
         this.handleContinueClickPanel1 = this.handleContinueClickPanel1.bind(this);
         this.handleContinueClickPanel2 = this.handleContinueClickPanel2.bind(this);
@@ -69,10 +68,6 @@ class Register extends Component {
         this.setState({
             organizationType: event.target.value
         })
-    }
-
-    handleClick() {
-        alert(`You are a ${this.state.organizationType}`)
     }
 
     seePassword(e) {
@@ -180,8 +175,7 @@ class Register extends Component {
     handleContinueClickPanel3(){
         let tempPanel3State = Object.assign({}, this.state.panel3State); 
         let tempPanel4State = Object.assign({}, this.state.panel4State); 
-        
-        // TODO:
+
         if(this.state.addresss===''){
             alert('Address Required')
         } else {
@@ -283,7 +277,6 @@ class Register extends Component {
 
 
     render() {
-        console.log(this.state.panel1State)
         return (
             <div className="registration_main">
                 <Header />
@@ -297,14 +290,15 @@ class Register extends Component {
                             <form className='registration-form'>
                             <div>
                                 <input required='true' type='radio' checked={this.state.organizationType==='non-profit'} 
-                                        value='non-profit' onChange={this.handleChange} id='non-profit'/>
-                                <label for='non-profit'>Non-Profit</label>
+                                    value='non-profit' onChange={this.handleChange} id='non-profit'/>
+                                <label htmlFor='non-profit'>Non-Profit</label>
                                 </div>
                                 <div>
                                 <input type='radio' checked={this.state.organizationType==='business'} 
-                                        onChange={this.handleChange}  value='business' id='business'/>
-                                <label for='business'>Business</label></div>
-                                <input className='form-continue-button' type='submit' onClick={()=> this.handleContinueClickPanel1()} value='Continue'/>
+                                    onChange={this.handleChange}  value='business' id='business'/>
+                                <label  htmlFor='business'>Business</label></div>
+                                <input className='form-continue-button' type='submit' onClick={()=> this.handleContinueClickPanel1()}
+                                    value='Continue'/>
                             </form>     
                         </div>
                     </section>
