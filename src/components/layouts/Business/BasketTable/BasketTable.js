@@ -2,7 +2,7 @@ import React from 'react'
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 import { connect } from 'react-redux'
-import { toEpoch, fromEpoch } from '../../../../config/timeConversion'
+import { toEpoch, fromEpoch } from '../../../../config/timeUtil'
 import { addItemToBasket, makeBasket, saveBasket } from '../../../../ducks/businessReducer'
 import './BasketTable.css'
 
