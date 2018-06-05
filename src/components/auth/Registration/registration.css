@@ -248,7 +248,7 @@
         .panel-header{
             width: 100%;
             background: #679436;
-            padding: 10px;
+            padding: 20px;
             text-align: left;
             border: none;
             font-size: 1.625em;
@@ -266,7 +266,7 @@
             cursor: pointer;
             width: 100%;
             background: #679436;
-            padding: 10px;
+            padding: 20px;
             text-align: left;
             border: none;
             font-size: 1.625em;
@@ -290,7 +290,7 @@
             overflow: hidden;
             font-size: 1em;
             line-height: 1.25em;
-            padding: 10px;
+            
         }
 
         .panel-body-extended{
@@ -300,9 +300,62 @@
             overflow:hidden;
             padding: 10px;
             height: fit-content;
-            padding: 40px;
-
+            padding-top: 30px;
+            padding-bottom: 30px;
+            padding-left: 20px;
         }
+
+        .panel-body-extended h2{
+            margin-bottom: 20px;
+        }
+
+        .registration-form{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-continue-button{
+            width: 120px;
+            padding: 10px;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1em;
+            font-weight: bold;
+            border-radius: 10px;
+            background: #679436;
+            color: #EBF2FA;
+        }
+
+        .form-continue-button:hover{
+            background: #427AA1;
+        }
+
+        .form-input-box{
+            width: 50%;
+            margin-bottom: 10px;
+            padding:5px;
+            font-size: 1em;
+        }
+
+        .form-input-box:focus{
+            border: #A5BE00 solid;
+            outline: 0;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
     
         .collapsible-test-btn{
             width: 100%;
