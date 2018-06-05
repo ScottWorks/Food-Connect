@@ -1,7 +1,7 @@
 import React from 'react';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
-import * as timeConversion from '../../../config/timeConversion';
+import * as timeUtil from '../../../config/timeUtil';
 
 class DateTimePicker extends React.Component {
   constructor() {
@@ -26,12 +26,9 @@ class DateTimePicker extends React.Component {
     const { _basketID, _phoneNumber, _message, _parentToggle } = this.props;
     const fakePhoneNumber = '13033496264';
 
-    let time = timeConversion.toEpoch(scheduledDate, scheduledTime);
+    let time = timeUtil.toEpoch(scheduledDate, scheduledTime);
 
-    let twilio_formattedTime = timeConversion.fromEpoch(
-      time,
-      'ddd, MMM Do, h:mm a'
-    );
+    let twilio_formattedTime = timeUtil.fromEpoch(time, 'ddd, MMM Do, h:mm a');
 
     let twilio_message = _message.concat(twilio_formattedTime);
 

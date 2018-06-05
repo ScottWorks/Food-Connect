@@ -1,17 +1,21 @@
 import React from 'react';
 import axios from 'axios';
+
 // import Map from './Map/Map';
 import NonProfitBasketList from './NonProfitBasketList/NonProfitBasketList';
 import ScheduleList from './ScheduleList/ScheduleList';
 import WishList from './WishList/WishList';
 import Header from '../../components/Header/Header.js';
+
+import * as sortUtil from '../../../config/sortUtil';
+
 import './NonProfit.css';
 
 class NonProfit extends React.Component {
   constructor() {
     super();
     this.state = {
-      nonProfitID: 8,
+      nonProfitID: 9,
       nonProfitInfo: '',
       baskets: [],
       scheduledBaskets: [],
@@ -43,6 +47,8 @@ class NonProfit extends React.Component {
     axios
       .post(`/api/basket/${currentLocalTime}`, { businessIDs })
       .then((baskets) => {
+        console.log(baskets.data);
+
         this.setState({
           baskets: baskets.data
         });
@@ -99,6 +105,8 @@ class NonProfit extends React.Component {
     const { nonProfitID } = this.state;
 
     axios.get(`/api/wishlist/${nonProfitID}`).then((wishlist) => {
+      console.log(wishlist.data[0]);
+
       this.setState({
         wishlist: wishlist.data[0]
       });
@@ -141,6 +149,10 @@ class NonProfit extends React.Component {
       .then(() => {
         this.getWishList();
       });
+  }
+
+  sortBasket() {
+    //
   }
 
   render() {

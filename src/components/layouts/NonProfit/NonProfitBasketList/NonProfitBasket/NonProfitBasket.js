@@ -1,7 +1,7 @@
 import React from 'react';
 import ContactInfoCard from '../../../../components/NonProfit/ContactInfoCard';
 import DateTimePicker from '../../../../components/NonProfit/DateTimePicker';
-import * as timeConversion from '../../../../../config/timeConversion';
+import * as timeUtil from '../../../../../config/timeUtil';
 import '../../../../../assets/styles/NonProfitBasket.css';
 
 class NonProfitBasket extends React.Component {
@@ -49,7 +49,7 @@ class NonProfitBasket extends React.Component {
     const { expanded, reserve } = this.state;
     const { currentBasket, _scheduleBasket } = this.props;
 
-    let formattedTime = timeConversion.fromEpoch(
+    let formattedTime = timeUtil.fromEpoch(
       currentBasket.pick_up_time,
       'ddd, MMM Do'
     );

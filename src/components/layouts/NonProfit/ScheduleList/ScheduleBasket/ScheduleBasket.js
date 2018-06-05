@@ -1,7 +1,7 @@
 import React from 'react';
 import ContactInfoCard from '../../../../components/NonProfit/ContactInfoCard';
 import DateTimePicker from '../../../../components/NonProfit/DateTimePicker';
-import * as timeConversion from '../../../../../config/timeConversion';
+import * as timeUtil from '../../../../../config/timeUtil';
 import '../../../../../assets/styles/ScheduleBasket.css';
 
 class ScheduleBasket extends React.Component {
@@ -35,12 +35,12 @@ class ScheduleBasket extends React.Component {
 
     const fakePhoneNumber = '13033496264';
 
-    let formattedTime = timeConversion.fromEpoch(
+    let formattedTime = timeUtil.fromEpoch(
       scheduledBasket.scheduled_time,
       'ddd, MMM Do, h:mm a'
     );
 
-    // let twilio_formattedTime = timeConversion.fromEpoch(
+    // let twilio_formattedTime = timeUtil.fromEpoch(
     //   scheduledBasket.scheduled_time,
     //   'ddd, MMM Do'
     // );

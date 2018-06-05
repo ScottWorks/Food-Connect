@@ -73,16 +73,18 @@ app.get(
   nonProfitController.getScheduledBaskets
 );
 app.post('/api/basket/:currentLocalTime', nonProfitController.getBaskets);
-app.put(
-  '/api/basket/update/:nonProfitID',
-  twilioController.sendTwilioMessage,
-  nonProfitController.scheduleBasket
-);
-app.put(
-  '/api/basket/cancel/:basketID',
-  twilioController.sendTwilioMessage,
-  nonProfitController.cancelBasket
-);
+app.put('/api/basket/update/:nonProfitID', nonProfitController.scheduleBasket); // TESTING ONLY!
+// app.put(
+//   '/api/basket/update/:nonProfitID',
+//   twilioController.sendTwilioMessage,
+//   nonProfitController.scheduleBasket
+// );
+app.put('/api/basket/cancel/:basketID', nonProfitController.cancelBasket); // TESTING ONLY!
+// app.put(
+//   '/api/basket/cancel/:basketID',
+//   twilioController.sendTwilioMessage,
+//   nonProfitController.cancelBasket
+// );
 
 // Non-Profit Wishlist Endpoints
 app.get('/api/wishlist/:nonProfitID', nonProfitController.getWishList);
