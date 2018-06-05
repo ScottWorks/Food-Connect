@@ -69,6 +69,14 @@
         margin-top: 30px;
     }
 
+    .register-text a:link{
+        color: #427AA1;
+    }
+
+    .register-text a:visited{
+        color: #427AA1;
+    }
+
     .particles-side-container h1{
         display: none;
     }

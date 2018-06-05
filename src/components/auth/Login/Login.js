@@ -99,7 +99,7 @@ export default class Auth extends Component {
                     </form>
 
                     <section className='register-text'>
-                        <p>New to Crumb?  Please Register</p>
+                        <p>New to Crumb? <Link to='/register'>Please Register</Link></p>
                     </section>
                 </div>
 
