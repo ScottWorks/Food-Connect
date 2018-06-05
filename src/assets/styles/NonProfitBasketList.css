@@ -1,12 +1,15 @@
 /* FOR MOBILE DEVICES */
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
-    .np-bucket-list{
+    .np-bucket-list {
         margin-top: 100px;
     }
-   }
-   
-   /* For Desktop */
-   @media screen and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1) {
-   
-   }
+}
+
+/* For Desktop */
+
+@media screen and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1) {
+    .np-bucket-list {
+        margin-top: 100px;
+    }
+}
