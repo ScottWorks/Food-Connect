@@ -101,7 +101,7 @@
     color: #EBF2FA;
   }
 
-  .open-menu a:hover {
+  .open-menu li:hover {
     color: #A5BE00
   }
 
@@ -115,7 +115,6 @@
 /* FOR NON-RETINA / NON-HIGH RES DESKTOPS */
 @media screen 
   and (min-device-width: 1200px) 
-  and (max-device-width: 1600px) 
   and (-webkit-min-device-pixel-ratio: 1) { 
     #header_main {
       position: fixed;
@@ -218,7 +217,7 @@
       color: #EBF2FA;
     }
   
-    .open-menu a:hover {
+    .open-menu li:hover {
       color: #A5BE00
     }
   
