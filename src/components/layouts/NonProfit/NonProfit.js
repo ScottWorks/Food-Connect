@@ -47,8 +47,6 @@ class NonProfit extends React.Component {
     axios
       .post(`/api/basket/${currentLocalTime}`, { businessIDs })
       .then((baskets) => {
-        console.log(baskets.data);
-
         this.setState({
           baskets: baskets.data
         });
@@ -105,8 +103,6 @@ class NonProfit extends React.Component {
     const { nonProfitID } = this.state;
 
     axios.get(`/api/wishlist/${nonProfitID}`).then((wishlist) => {
-      console.log(wishlist.data[0]);
-
       this.setState({
         wishlist: wishlist.data[0]
       });
@@ -151,12 +147,13 @@ class NonProfit extends React.Component {
       });
   }
 
-  sortBasket() {
-    //
-  }
-
   render() {
     const { baskets, scheduledBaskets, wishlist } = this.state;
+
+    let sortedBasketsByWishListItems = sortUtil.sortByWishList(
+      baskets,
+      wishlist
+    );
 
     return (
       <main className="mobile">
@@ -180,7 +177,7 @@ class NonProfit extends React.Component {
         />
         <h3>Available Baskets</h3>
         <NonProfitBasketList
-          _baskets={baskets}
+          _baskets={sortedBasketsByWishListItems}
           _scheduleBasket={this.scheduleBasket}
         />
       </main>

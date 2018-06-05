@@ -1,23 +1,46 @@
-function matchWishListItems(baskets, wishList) {
-  let matchedItemsList = baskets.filter((basket) => {
-    let flag,
-      basketItems = basket.items;
+function sortByWishList(baskets, wishList) {
+  let idx = 0,
+    matchedItems = [],
+    sortedBaskets = [...baskets];
 
-    basketItems.forEach((basketItem) => {
-      wishListItems.forEach((wishListItem) => {
-        flag = false;
+  if (wishList.items) {
+    baskets.forEach((basket) => {
+      let flag = false,
+        basketItems = basket.items;
 
-        if (basketItem === wishListItem.item) {
-          flag = true;
-        }
-        return flag;
+      basketItems.forEach((basketItem) => {
+        let wishListItems = wishList.items;
+
+        wishListItems.forEach((wishListItem) => {
+          if (basketItem.item === wishListItem.item) {
+            flag = true;
+          }
+          return flag;
+        });
       });
-    });
 
-    if (flag) {
-      return true;
-    }
-  });
+      if (flag) {
+        matchedItems.push(basket);
+        sortedBaskets.splice(idx, 1);
+        idx--;
+      }
+      idx++;
+    });
+  }
+
+  let sortedList = mergeLists(matchedItems, sortedBaskets);
+  console.log(sortedList);
+  return sortedList;
 }
 
-export { matchWishListItems };
+function mergeLists(matchedItems, sortedBaskets) {
+  let mergedList = [...sortedBaskets];
+
+  for (let i = matchedItems.length - 1; i >= 0; i--) {
+    mergedList.unshift(matchedItems[i]);
+  }
+
+  return mergedList;
+}
+
+export { sortByWishList, mergeLists };
