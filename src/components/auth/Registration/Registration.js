@@ -26,11 +26,10 @@ class Register extends Component {
             phoneNumber: '',
             userName: '',
             pw: '',
+            pwConfirm: '',
             pwView: false,
             pwShowHide1: false,
             pwShowHide2: false,
-            questionClass1: 'test',
-            question1ButtonDisable: 'false',
             panel1State:{
                 panel1HeaderState:'panel-header',
                 panel1BodyState:'panel-body-extended',
@@ -56,8 +55,6 @@ class Register extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.clearInputs = this.clearInputs.bind(this);
-        this.openBoxes = this.openBoxes.bind(this);
-        
         this.handleContinueClickPanel1 = this.handleContinueClickPanel1.bind(this);
         this.handleContinueClickPanel2 = this.handleContinueClickPanel2.bind(this);
         this.handleContinueClickPanel3 = this.handleContinueClickPanel3.bind(this);
@@ -108,19 +105,6 @@ class Register extends Component {
         }
     }
 
-    openBoxes(element) {
-        var x = document.getElementById(element)
-        if (x.style.display === "flex") {
-            x.style.display = "none";
-            x.style.animation = 'scale-display--reversed .3s'
-            x.style.animationFillMode = 'forwards'
-        }
-        else {
-            x.style.display = "flex";
-            x.style.animation = 'scale-display .3s'
-        }
-    }
-
     clearInputs() {
         this.setState({
             organizationType: '',
@@ -140,11 +124,21 @@ class Register extends Component {
     }
 
     registerOrganization() {
-        const { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, userName, pw } = this.state
-        axios.post('/api/auth/register', { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, userName, pw }).then(account => {
-            console.log(account.data)
+        if(this.state.firstName === '' || this.state.lastName === '' || this.state.phoneNumber===''
+            || this.state.userName === '' || this.state.pw === ''){
+                alert('Please Fill Out Required Info')
+            }
 
-        }, this.clearInputs(), window.location.assign('/#/login'))
+        if(this.state.pw !== this.state.pwConfirm){
+            alert('Passwords Do Not Match')
+        } else {
+
+            const { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, userName, pw } = this.state
+            axios.post('/api/auth/register', { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, userName, pw }).then(account => {
+                console.log(account.data)
+    
+            }, this.clearInputs(), window.location.assign('/#/login'))
+        }
     }
 
     handleContinueClickPanel1(){
@@ -167,9 +161,12 @@ class Register extends Component {
         let tempPanel2State = Object.assign({}, this.state.panel2State); 
         let tempPanel3State = Object.assign({}, this.state.panel3State); 
         
-        // TODO:
-        if(this.state.organizationType===''){
-            alert('Organization Type Required')
+        if(this.state.organizationName ==='' || this.state.specificType === ''){
+            if(this.state.organizationName === ''){
+                alert('Organization Name Required')
+            } else {
+                alert('Organization Type Required')
+            }
         } else {
             // If Already Collapsed - Extend the panel
             tempPanel2State.panel2BodyState = 'panel-body-collapsed';
@@ -185,8 +182,8 @@ class Register extends Component {
         let tempPanel4State = Object.assign({}, this.state.panel4State); 
         
         // TODO:
-        if(this.state.organizationType===''){
-            alert('Organization Type Required')
+        if(this.state.addresss===''){
+            alert('Address Required')
         } else {
             // If Already Collapsed - Extend the panel
             tempPanel3State.panel3BodyState = 'panel-body-collapsed';
@@ -291,35 +288,6 @@ class Register extends Component {
             <div className="registration_main">
                 <Header />
                 <div className="registration_wrapper">
-                    {/* <div className="title_box">
-                        <h2 className="section_title">What type of organization are you representing?</h2>
-                    </div>
-
-                    <section id='registry-container1'>
-                        <div className="account_type_box">
-                            <label>
-                                <input
-                                    type="radio"
-                                    value='non-profit'
-                                    checked={this.state.organizationType === 'non-profit'}
-                                    onChange={this.handleChange}
-                                />
-                                Non-Profit
-                            </label>
-                            <label>
-                                <input
-                                    type="radio"
-                                    value='business'
-                                    checked={this.state.organizationType === 'business'}
-                                    onChange={this.handleChange}
-                                />
-                                Business
-                            </label>
-                        </div>
-                        <button onClick={() => this.openBoxes('registry-container2')} className="collapsible">Continue</button>
-                    </section> */}
-
-                    {/* TESTING */}
                     <section className='question-panel'>
                         <div onClick={()=>this.handlePanelHeader1Click()}
                                 className={this.state.panel1State.panel1HeaderState}>
@@ -386,139 +354,40 @@ class Register extends Component {
                             <form className='registration-form'>
                                 <input onChange={(e)=>this.setState({firstName:e.target.value})} 
                                     value={this.state.firstName} className='form-input-box' required='true'
-                                    placeholder='First Name'/>
+                                    type='text' placeholder='First Name'/>
                                 <input onChange={(e)=>this.setState({lastName: e.target.value})} 
                                     value={this.state.lastName} className='form-input-box' required='true'
-                                    placeholder='Last Name'/>
+                                    type='text' placeholder='Last Name'/>
                                 <input onChange={(e)=>this.setState({phoneNumber: e.target.value})} 
                                     value={this.state.phoneNumber} className='form-input-box' required='true' 
-                                    placeholder='Phone Number'/>
+                                    type='text' placeholder='Phone Number'/>
                                 <input onChange={(e)=>this.setState({userName: e.target.value})} 
                                     value={this.state.userName} className='form-input-box' required='true' 
-                                    placeholder='Username'/>
-                                <input className='form-input-box' required='true' placeholder='Password'/>
-                                <input className='form-input-box' required='true' placeholder='Confirm Password'/>
-                                <input className='form-continue-button' type='submit' value='Register'/>
+                                    type='text' placeholder='Username'/>
+
+                                <div className='password_div'>
+                                    <input type={(this.state.pwShowHide1) ? "text" : "password"}
+                                        onChange={(e)=>this.setState({pw: e.target.value})}
+                                        className='form-input-box' required='true' placeholder='Password'/>
+                                    {!this.state.pwShowHide1 ? <img src={hidePassword} onClick={() => this.seePassword(1)} 
+                                        className="password_icon" /> : <img src={showPassword} onClick={() => this.seePassword(1)} 
+                                        className="password_icon" />}
+                                </div>
+                                    
+                                <div className='password_div'>
+                                    <input type={(this.state.pwShowHide2) ? "text" : "password"}
+                                        className='form-input-box' required='true'
+                                        onChange={(e)=>this.setState({pwConfirm: e.target.value})}placeholder='Confirm Password'/>
+                                    {!this.state.pwShowHide2 ? <img src={hidePassword} onClick={() => this.seePassword(2)} 
+                                        className="password_icon" /> : <img src={showPassword} onClick={() => this.seePassword(2)} 
+                                        className="password_icon" />}
+                                </div>
+
+                                <input  onClick={() => this.registerOrganization()} 
+                                    className='form-continue-button' type='submit' value='Register'/>
                             </form>
                         </div>
                     </section>
-                    
-
-                     {/* TESTING */}
-
-                    {/* <div className="title_box">
-                        <h2 className="section_title">Tell us a little more about your organization.</h2>
-                    </div>
-                    <section id='registry-container2'>
-                        <div className="organization_box">
-                            <div>
-                                <span>Organization Name:</span>
-                                <input
-                                    type="text"
-                                    onChange={(e) => this.setState({ organizationName: e.target.value })}
-                                />
-                            </div>
-                            <div>
-                                <span>{`Type of ${this.state.organizationType} you are representing:`}</span>
-                                <input
-                                    type="text"
-                                    placeholder='eg. Church'
-                                    onChange={(e) => this.setState({ specificType: e.target.value })}
-                                />
-                            </div>
-                            <button onClick={() => this.openBoxes('registry-container3')} className="collapsible">Continue</button>
-                        </div>
-                    </section> */}
-
-                    {/* <div className="title_box">
-                        <h2 className="section_title">Where are you located?</h2>
-                    </div>
-                    <section id='registry-container3'>
-                        <div>
-                            <span>Street Address:</span>
-                            <input type="text"
-                                value={this.state.streetAddress}
-                                onChange={(e) => this.setState({ streetAddress: e.target.value })}
-                            />
-                        </div>
-                        <div>
-                            <span>City:</span>
-                            <input type="text"
-                                value={this.state.city}
-                                onChange={(e) => this.setState({ city: e.target.value })}
-                            />
-                        </div>
-                        <div>
-                            <span>State:</span>
-                            <input type="text"
-                                value={this.state.statee}
-                                onChange={(e) => this.setState({ statee: e.target.value })}
-                            />
-                        </div>
-                        <div>
-                            <span>Zip:</span>
-                            <input type="text"
-                                value={this.state.zip}
-                                onChange={(e) => this.setState({ zip: e.target.value })}
-                            />
-                        </div>
-                        <button onClick={() => this.openBoxes('registry-container4')} className="collapsible">Continue</button>
-                    </section> */}
-
-                    {/* <div className="title_box">
-                        <h2 className="section_title">Finally let's set up a username and login!</h2>
-                    </div>
-                    <section id='registry-container4'>
-                        <div>
-                            <span>First Name:</span>
-                            <input
-                                type="text"
-                                value={this.state.firstName}
-                                onChange={(e) => this.setState({ firstName: e.target.value })}
-                            />
-                        </div>
-                        <div>
-                            <span>Last Name:</span>
-                            <input
-                                type="text"
-                                value={this.state.lastName}
-                                onChange={(e) => this.setState({ lastName: e.target.value })}
-                            />
-                        </div>
-                        <div>
-                            <span>Phone Number:</span>
-                            <input
-                                type="text"
-                                maxLength="10"
-                                value={this.state.phoneNumber}
-                                onChange={(e) => this.setState({ phoneNumber: e.target.value })}
-                            />
-                        </div>
-                        <div>
-                            <span>Username:</span>
-                            <input
-                                type="text"
-                                value={this.state.userName}
-                                onChange={(e) => this.setState({ userName: e.target.value })}
-                            />
-                        </div>
-                        <div className="password_div">
-                            <span>Password:</span>
-                            <input
-                                type={(this.state.pwShowHide1) ? "text" : "password"}
-                                value={this.state.pw}
-                                onChange={(e) => this.setState({ pw: e.target.value })}
-                            /> {!this.state.pwShowHide1 ? <img src={hidePassword} onClick={() => this.seePassword(1)} className="password_icon" /> : <img src={showPassword} onClick={() => this.seePassword(1)} className="password_icon" />}
-                        </div>
-                        <div>
-                            <span>Confirm Password:</span>
-                            <input
-                                type={(this.state.pwShowHide2) ? "text" : "password"}
-                            /> {!this.state.pwShowHide2 ? <img src={hidePassword} onClick={() => this.seePassword(2)} className="password_icon" /> : <img src={showPassword} onClick={() => this.seePassword(2)} className="password_icon" />}
-                        </div>
-                        <button className="register_button" onClick={() => this.registerOrganization()}>Register</button>
-                    </section> */}
-
                 </div>
             </div>
         )
