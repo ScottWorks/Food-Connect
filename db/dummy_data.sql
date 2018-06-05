@@ -146,3 +146,20 @@ VALUES (6, null, 1527877446475, null, 0, '[{ "item": "Croissants", "weight": 8, 
 
 INSERT INTO baskets (business_id, non_profit_id, pick_up_time, scheduled_time, status, items)
 VALUES (6, null, 1527777446475, null, 0, '[{ "item": "Croissants", "weight": 8, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 }, { "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 }, { "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 }, { "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 }, { "item": "Donuts", "weight": 515, "FMV": 50 }, { "item": "Bread", "weight": 13, "FMV": 50 }]');
+
+INSERT INTO baskets (business_id, non_profit_id, pick_up_time, scheduled_time, status, items)
+VALUES (6, null, 1527777446475, null, 0, '[{ "item": "Croissants", "weight": 8, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 }, { "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 }, { "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 }, { "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 }, { "item": "Donuts", "weight": 515, "FMV": 50 }, { "item": "Bread", "weight": 13, "FMV": 50 }]');
+
+
+-- WISHLIST DUMMY DATA
+INSERT INTO wishlist (non_profit_id, items)
+VALUES (1, '[{"item":  "Cake"}, {"item":  "Flat Bread"}, {"item":  "Croissants"} ]');
+
+INSERT INTO wishlist (non_profit_id, items)
+VALUES (2, '[{"item":  "Bagels"}, {"item":  "Donuts"}, {"item":  "Kaiser Rolls"} ]');
+
+INSERT INTO wishlist (non_profit_id, items)
+VALUES (3, '[{"item":  "Whole Wheat Bread"}, {"item":  "Bagels"}, {"item":  "Croissants"} ]');
+
+INSERT INTO wishlist (non_profit_id, items)
+VALUES (4, '[{"item":  "Bagels"}, {"item":  "Donuts"}, {"item":  "Kaiser Rolls"}, {"item":  "Whole Wheat Bread"}, {"item":  "White Bread"}, {"item":  "Croissants"} ]');

@@ -101,7 +101,7 @@
     color: #EBF2FA;
   }
 
-  .open-menu a:hover {
+  .open-menu li:hover {
     color: #A5BE00
   }
 
@@ -217,7 +217,7 @@
       color: #EBF2FA;
     }
   
-    .open-menu a:hover {
+    .open-menu li:hover {
       color: #A5BE00
     }
   
