@@ -95,11 +95,11 @@
     .registration_main {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 1050px;
+        /* justify-content: center; */
+        /* align-items: center; */
+        height: 100%;
         width: 100vw;
-        
+        overflow: scroll;
     }
     .account_type_box {
         display: flex;
@@ -151,16 +151,52 @@
         border-radius: 2px 2px 0px 0px;
         padding-top: 10px;
         padding-bottom: 10px;
-        color: #545E69;
+        color: #427AA1;
         text-align: start;
         background-color: #f1f1f1;
         min-height: 30px;
     }
-    .registration-footer {
-        position: fixed;
-        bottom: 0;
-        border: 1px solid red;
+
+    /* TESTING */
+
+    .question-panel{
+        width: 95%;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+        border: 1px solid black;
+        margin-bottom: 10px;
     }
+
+    .collapsible-test-btn{
+        width: 100%;
+        background: #679436;
+        padding: 10px;
+        cursor: pointer;
+        text-align: left;
+        border: none;
+        font-size: 1.625em;
+        color: #EBF2FA;
+        
+    }
+
+    .test{
+        display: none;
+        overflow: hidden;
+        font-size: 1em;
+        line-height: 1.25em;
+        
+    }
+
+    .test-active{
+        display:block;
+        overflow: hidden;
+    }
+
+
+    /* TESTING */
+
+
+
+
     @keyframes scale-display {
         0% {
             opacity: 0;
@@ -192,4 +228,117 @@
             -webkit-transform: scale(0);
         }
     }
+}
+
+@media screen and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1){
+        /* TESTING */
+
+        .registration_wrapper{
+            margin-top: 80px;
+        }
+
+        .question-panel{
+            width: 70%;
+            box-shadow: 0 4px 8px 0 rgba(66, 122, 161, 0.2), 0 6px 20px 0 rgba(66, 122, 161, 0.19);
+            margin-bottom: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .panel-header{
+            width: 100%;
+            background: #679436;
+            padding: 10px;
+            text-align: left;
+            border: none;
+            font-size: 1.625em;
+            color: #EBF2FA;
+        }
+
+        .panel-header:after{
+            content: '\002B';
+            color: white;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .panel-header-completed{
+            cursor: pointer;
+            width: 100%;
+            background: #679436;
+            padding: 10px;
+            text-align: left;
+            border: none;
+            font-size: 1.625em;
+            color: #EBF2FA;
+        }
+
+        .panel-header-completed:after{
+            content: '\2713';
+            color: white;
+            float: right;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        .panel-header-completed:hover:after{
+            content:'\270E';
+        }
+
+        .panel-body-collapsed{
+            display: none;
+            overflow: hidden;
+            font-size: 1em;
+            line-height: 1.25em;
+            padding: 10px;
+        }
+
+        .panel-body-extended{
+            font-size: 1em;
+            line-height: 1.25em;
+            display:block;
+            overflow:hidden;
+            padding: 10px;
+            height: fit-content;
+            padding: 40px;
+
+        }
+    
+        .collapsible-test-btn{
+            width: 100%;
+            background: #679436;
+            padding: 10px;
+            cursor: pointer;
+            text-align: left;
+            border: none;
+            font-size: 1.625em;
+            color: #EBF2FA;
+        }
+
+        .collapsible-test-btn:after{
+            content: '\002B';
+            color: white;
+            float: right;
+            margin-left: 2px;
+        }
+
+        .complete-panel-1:after{
+            content: "\2713"
+        }
+    
+        .test{
+            display: none;
+            overflow: hidden;
+            font-size: 1em;
+            line-height: 1.25em;
+            
+        }
+    
+        .test-active{
+            display:block;
+            overflow: hidden;
+        }
+    
+    
+        /* TESTING */
 }
