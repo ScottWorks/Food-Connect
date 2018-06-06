@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import SearchInput from '../../components/PredictiveInput/placesAutocomplete'
 // import {connect} from 'react-redux'
 import './registration.css'
 import Modal from 'react-modal';
@@ -7,6 +8,7 @@ import Header from "../../components/Header/Header.js";
 import Footer from "../../components/Footer/Footer.js";
 import showPassword from "../../../assets/icons/showpassword.png";
 import hidePassword from "../../../assets/icons/hidepassword.png";
+
 
 class Register extends Component {
     constructor() {
@@ -16,11 +18,14 @@ class Register extends Component {
             organizationType: '',
             organizationName: '',
             specificType: '',
-            addresss: '',
-            // streetAddress: '',
-            // city: '',
-            // statee: '',
-            // zip: '',
+            address: '',
+            streetAddress: '',
+            city: '',
+            state: '',
+            zip: '',
+            country: '',
+            latitude: '',
+            longitude: '',
             firstName: '',
             lastName: '',
             phoneNumber: '',
@@ -62,6 +67,8 @@ class Register extends Component {
         this.handlePanelHeader2Click = this.handlePanelHeader2Click.bind(this);
         this.handlePanelHeader3Click = this.handlePanelHeader3Click.bind(this);
         this.handlePanelHeader4Click = this.handlePanelHeader4Click.bind(this);
+        this.getAddressFromAutoComplete = this.getAddressFromAutoComplete.bind(this);
+        this.getLatLngFromAutoComplete = this.getLatLngFromAutoComplete.bind(this);
     }
 
 
@@ -110,7 +117,7 @@ class Register extends Component {
             specificType: '',
             streetAddress: '',
             city: '',
-            statee: '',
+            state: '',
             zip: '',
             firstName: '',
             lastName: '',
@@ -120,6 +127,26 @@ class Register extends Component {
             pwView: false
         })
         
+    }
+
+    getAddressFromAutoComplete(formatted_address) {
+        const addressSplit = formatted_address.split(', ');
+        const stateSplit = addressSplit[2].split(' ');
+
+        this.setState({
+            streetAddress: addressSplit[0],
+            city: addressSplit[1],
+            statee: stateSplit[0],
+            zip: stateSplit[1],
+            country: addressSplit[3]
+        } )
+    }
+
+    getLatLngFromAutoComplete(latLng) {
+        this.setState({
+            latitude: latLng.lat,
+            longitude: latLng.lng
+        })
     }
 
     registerOrganization(e) {
@@ -133,8 +160,8 @@ class Register extends Component {
             alert('Passwords Do Not Match')
         } else {
 
-            const { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, userName, pw } = this.state
-            axios.post('/api/auth/register', { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, userName, pw }).then(account => {
+            const { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, latitude, longitude, userName, pw, fein } = this.state
+            axios.post('/api/auth/register', { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, latitude, longitude, userName, pw, fein }).then(account => {
                 console.log(account.data)
     
             }, this.clearInputs(), window.location.assign('/#/login'))
@@ -191,6 +218,7 @@ class Register extends Component {
             tempPanel4State.panel4BodyState = 'panel-body-extended';
             this.setState({panel3State: tempPanel3State, panel4State: tempPanel4State });
         }
+
     }
 
     handlePanelHeader1Click(){
@@ -238,15 +266,15 @@ class Register extends Component {
 
     handlePanelHeader3Click(){
         if(this.state.panel3State.panel3BodyState==='panel-body-collapsed'
-            && this.state.organizationName !== '' 
-            && this.state.organizationType !== ''
-            && this.state.specificType !==''){
+        && this.state.organizationName !== '' 
+        && this.state.organizationType !== ''
+        && this.state.specificType !==''){
             // Open Up Panel 3
             let tempPanel3State = Object.assign({}, this.state.panel3State);
             tempPanel3State.panel3BodyState = 'panel-body-extended';
             tempPanel3State.panel3HeaderState = 'panel-header';
             this.setState({panel3State:tempPanel3State})
-
+            
             // Collapse Panels 1,2, & 4
             let tempPanel1State = Object.assign({}, this.state.panel1State);
             tempPanel1State.panel1BodyState = 'panel-body-collapsed';
@@ -257,6 +285,7 @@ class Register extends Component {
             this.setState({panel1State: tempPanel1State, panel2State: tempPanel2State, panel4State: tempPanel4State})
             
         }
+        console.log(this.state.address)        
     }
 
     handlePanelHeader4Click(){
@@ -313,6 +342,7 @@ class Register extends Component {
                             </form>     
                         </div>
                     </section>
+                    <br />
 
                     <section className='question-panel'>
                         <div className={this.state.panel2State.panel2HeaderState}
@@ -350,12 +380,14 @@ class Register extends Component {
                         <div className={this.state.panel3State.panel3BodyState}>
                             <h2>Where are you located?</h2>
                             <form className='registration-form'>
-                                <input className='form-input-box'
-                                    onChange={(e)=>this.setState({addresss: e.target.value})}
-                                    required='true' placeholder='Enter Address'
-                                    type='text'/>
+                                <SearchInput 
+                                    // function from parent to get address data from child predictiveText component
+                                    getAddress={this.getAddressFromAutoComplete}
+                                    getlatLng={this.getLatLngFromAutoComplete}
+                                />
                                 <input className='form-continue-button' onClick={(e)=>this.handleContinueClickPanel3(e)} type='submit' value='Continue'/>
                             </form>
+                            <button onClick={() => console.log(this.state.address)}>Test</button>                            
                         </div>
                     </section>
 
@@ -401,11 +433,12 @@ class Register extends Component {
                                     className='form-continue-button' type='submit' value='Register'/>
                             </form>
                         </div>
-                    </section>
+                      </section>
                 </div>
             </div>
         )
     }
 }
+
 
 export default Register
