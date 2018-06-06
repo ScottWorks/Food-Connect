@@ -1,80 +1,91 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { deleteBasket, editBasket } from '../../../../../ducks/businessReducer'
-import { fromEpoch } from '../../../../../config/timeUtil'
+import React from 'react';
+import { connect } from 'react-redux';
+import { deleteBasket, editBasket } from '../../../../../ducks/businessReducer';
+import { fromEpoch } from '../../../../../config/timeUtil';
 import './BusinessBasket.css';
-import * as utilFunc from '../../../../../config/analyticsUtil'
+import * as utilFunc from '../../../../../config/analyticsUtil';
 
 function BusinessBasket(props) {
-
-  if(props.basket && props.basket.items) {
-    var items = props.basket.items.map((e, i)=> {
+  if (props.basket && props.basket.items) {
+    var items = props.basket.items.map((e, i) => {
       return (
-        <div 
-          className="bus-basket-item"
-          key={e.item + i}
-        >
-          <div className='item-weight'>
+        <div className="bus-basket-item" key={e.item + i}>
+          <div className="item-weight">
             <p>{e.item}</p>
-          
+
             <p>{e.weight} lbs</p>
-          
+
             <p>${utilFunc.formatNumber(Number(e.FMV), 2, 3, ',', '.')}</p>
           </div>
         </div>
-      )
-    })
+      );
+    });
   }
 
-  if(props.basket) {
-    var checkStatus = ''
-    switch(props.basket.status) {
+  if (props.basket) {
+    var checkStatus = '';
+    switch (props.basket.status) {
       case 0:
-        checkStatus = 'Pending' 
+        checkStatus = 'Pending';
         break;
 
       case 1:
-        checkStatus = 'Completed'
+        checkStatus = 'Completed';
         break;
 
       case 2:
-        checkStatus = 'Scheduled'
+        checkStatus = 'Scheduled';
         break;
 
       case 3:
-        checkStatus = 'Expired'
+        checkStatus = 'Expired';
         break;
 
       case 4:
-        checkStatus = 'No Pickup'
+        checkStatus = 'No Pickup';
         break;
-      
+
       default:
-        checkStatus = ''
+        checkStatus = '';
     }
   }
 
   return (
     <div className="BusinessBasket">
-      <div className='business-basket-btn-grp'>
+      <div className="business-basket-btn-grp">
         <button
-          className='business-basket-edit-btn'
+          className="business-basket-edit-btn"
           onClick={() => props.editBasket(props.index)}
-          >Edit</button>
-      <button
-          className='business-basket-edit-btn'
-          onClick={() => props.deleteBasket({index: props.index, id: props.basket.basket_id})}
-          >Delete</button>
+        >
+          Edit
+        </button>
+        <button
+          className="business-basket-edit-btn"
+          onClick={() =>
+            props.deleteBasket({
+              index: props.index,
+              id: props.basket.basket_id
+            })
+          }
+        >
+          Delete
+        </button>
       </div>
 
-      <div className='business-basket-info-contain'>
-          <p className='basket-status'>{props.basket ? checkStatus : ''}</p>
-          <p>{props.basket ? fromEpoch(props.basket.pick_up_time, 'ddd, MMM Do, h:mm a') : ''}</p>
-          {items}
+      <div className="business-basket-info-contain">
+        <p className="basket-status">{props.basket ? checkStatus : ''}</p>
+        <p>
+          {props.basket
+            ? fromEpoch(props.basket.pick_up_time, 'ddd, MMM Do, h:mm a')
+            : ''}
+        </p>
+        {items}
       </div>
-
     </div>
   );
 }
 
-export default connect(null, {deleteBasket, editBasket})(BusinessBasket);
+export default connect(
+  null,
+  { deleteBasket, editBasket }
+)(BusinessBasket);
