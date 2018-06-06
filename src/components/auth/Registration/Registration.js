@@ -25,6 +25,7 @@ class Register extends Component {
             lastName: '',
             phoneNumber: '',
             userName: '',
+            fein: '',
             pw: '',
             pwConfirm: '',
             pwView: false,
@@ -168,12 +169,8 @@ class Register extends Component {
         let tempPanel2State = Object.assign({}, this.state.panel2State); 
         let tempPanel3State = Object.assign({}, this.state.panel3State); 
         
-        if(this.state.organizationName ==='' || this.state.specificType === ''){
-            if(this.state.organizationName === ''){
-                alert('Organization Name Required')
-            } else {
-                alert('Organization Type Required')
-            }
+        if(this.state.organizationName ==='' || this.state.specificType === '' || this.state.fein===''){
+            alert('Please Fill Out Required Info')
         } else {
             // If Already Collapsed - Extend the panel
             tempPanel2State.panel2BodyState = 'panel-body-collapsed';
@@ -337,6 +334,15 @@ class Register extends Component {
                                     onChange={(e)=> this.setState({specificType: e.target.value})}
                                     required='true' placeholder={`Enter Type of ${this.state.organizationType}`}
                                     type='text'/>
+
+                                    <input className='form-input-box' 
+                                    onChange={(e)=> this.setState({fein: e.target.value})}
+                                    required='true' placeholder='Enter FEIN'
+                                    type='number'
+                                    maxLength='9'
+                                    />
+
+
                                 <input className='form-continue-button' type='submit' value='Continue' onClick={(e)=>this.handleContinueClickPanel2(e)}/>
                             </form>
                         </div>
