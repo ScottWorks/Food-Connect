@@ -194,9 +194,8 @@ class NonProfit extends React.Component {
             city={`${nonProfitInfo.city} ${nonProfitInfo.state}`}
           />
         </div>
-        <div className="nonprofit_main">
-          <h2>Non Profit Page</h2>
-        </div>
+
+        <div className='np-wishlist-basket-container'>
         <h3>Wish List</h3>
         <WishList
           _wishlist={wishlist}
@@ -205,17 +204,24 @@ class NonProfit extends React.Component {
           parent_editWishListItem={this.parent_editWishListItem}
           _removeWishListItem={this.removeWishListItem}
         />
+        </div>
+
+        <div className='np-sched-basket-container'>
         <h3>Scheduled Baskets</h3>
         <ScheduleList
           _scheduledBaskets={scheduledBaskets}
           _scheduleBasket={this.scheduleBasket}
           _cancelBasket={this.cancelBasket}
         />
+      </div>
+
+        <div className='np-avail-basket-container'>
         <h3>Available Baskets</h3>
         <NonProfitBasketList
           _baskets={baskets}
           _scheduleBasket={this.scheduleBasket}
         />
+        </div>
       </main>
     );
   }

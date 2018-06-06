@@ -1,12 +1,44 @@
 /* FOR MOBILE DEVICES */
-
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
-  .non-profit-basket-list {
-    margin-top: 500px;
-  }
 
   .google-maps {
     display: none;
+  }
+
+  .np-wishlist-basket-container{
+      margin-top: 70px;
+  }
+
+  .np-wishlist-basket-container h3{
+    font-size: 1.375em;
+    line-height: 	1.13636364em;
+    text-align: center;
+    border: 2px solid yellow;
+    padding: 5px;
+  }
+
+  .np-sched-basket-container{
+
+  }
+
+  .np-sched-basket-container h3{
+    font-size: 1.375em;
+    line-height: 	1.13636364em;
+    text-align: center;
+    border: 2px solid yellow;
+    padding: 5px;
+  }
+
+  .np-avail-basket-container{
+
+  }
+
+  .np-avail-basket-container h3{
+    font-size: 1.375em;
+    line-height: 	1.13636364em;
+    text-align: center;
+    border: 2px solid yellow;
+    padding: 5px;
   }
 }
 

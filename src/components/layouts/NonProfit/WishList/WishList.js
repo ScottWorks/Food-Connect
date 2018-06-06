@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../../../assets/styles/Wishlist.css'
 
 class WishList extends React.Component {
   constructor() {
