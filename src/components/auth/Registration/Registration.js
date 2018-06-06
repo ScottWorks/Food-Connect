@@ -25,6 +25,7 @@ class Register extends Component {
             lastName: '',
             phoneNumber: '',
             userName: '',
+            fein: '',
             pw: '',
             pwConfirm: '',
             pwView: false,
@@ -153,13 +154,8 @@ class Register extends Component {
             tempPanel1State.panel1BodyState = 'panel-body-collapsed';
             tempPanel1State.panel1HeaderState = 'panel-header-completed';
             tempPanel1State.panel1ButtonState = 'false';
-
             tempPanel2State.panel2BodyState = 'panel-body-extended';
-            
-            this.setState({panel1State: tempPanel1State, panel2State: tempPanel2State }, ()=> {
-                console.log('hit');
-            });
-            
+            this.setState({panel1State: tempPanel1State, panel2State: tempPanel2State });
         }
     }
 
@@ -168,12 +164,8 @@ class Register extends Component {
         let tempPanel2State = Object.assign({}, this.state.panel2State); 
         let tempPanel3State = Object.assign({}, this.state.panel3State); 
         
-        if(this.state.organizationName ==='' || this.state.specificType === ''){
-            if(this.state.organizationName === ''){
-                alert('Organization Name Required')
-            } else {
-                alert('Organization Type Required')
-            }
+        if(this.state.organizationName ==='' || this.state.specificType === '' || this.state.fein===''){
+            alert('Please Fill Out Required Info')
         } else {
             // If Already Collapsed - Extend the panel
             tempPanel2State.panel2BodyState = 'panel-body-collapsed';
@@ -271,6 +263,7 @@ class Register extends Component {
         if(this.state.panel4State.panel4BodyState==='panel-body-collapsed'
             && this.state.organizationName !==''
             && this.state.organizationType !==''
+            && this.state.fein !== ''
             && this.state.specificType !==''
             && this.state.addresss !==''){
 
@@ -337,6 +330,15 @@ class Register extends Component {
                                     onChange={(e)=> this.setState({specificType: e.target.value})}
                                     required='true' placeholder={`Enter Type of ${this.state.organizationType}`}
                                     type='text'/>
+
+                                    <input className='form-input-box' 
+                                    onChange={(e)=> this.setState({fein: e.target.value})}
+                                    required='true' placeholder='Enter FEIN'
+                                    type='number'
+                                    max='999999999'
+                                    />
+
+
                                 <input className='form-continue-button' type='submit' value='Continue' onClick={(e)=>this.handleContinueClickPanel2(e)}/>
                             </form>
                         </div>
