@@ -154,13 +154,8 @@ class Register extends Component {
             tempPanel1State.panel1BodyState = 'panel-body-collapsed';
             tempPanel1State.panel1HeaderState = 'panel-header-completed';
             tempPanel1State.panel1ButtonState = 'false';
-
             tempPanel2State.panel2BodyState = 'panel-body-extended';
-            
-            this.setState({panel1State: tempPanel1State, panel2State: tempPanel2State }, ()=> {
-                console.log('hit');
-            });
-            
+            this.setState({panel1State: tempPanel1State, panel2State: tempPanel2State });
         }
     }
 
@@ -268,6 +263,7 @@ class Register extends Component {
         if(this.state.panel4State.panel4BodyState==='panel-body-collapsed'
             && this.state.organizationName !==''
             && this.state.organizationType !==''
+            && this.state.fein !== ''
             && this.state.specificType !==''
             && this.state.addresss !==''){
 
