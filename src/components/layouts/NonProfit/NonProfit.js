@@ -28,9 +28,6 @@ class NonProfit extends React.Component {
 
     this.initializeComponent = this.initializeComponent.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    // this.getBaskets = this.getBaskets.bind(this);
-    // this.getScheduledBaskets = this.getScheduledBaskets.bind(this);
-    // this.getWishList = this.getWishList.bind(this);
     this.scheduleBasket = this.scheduleBasket.bind(this);
     this.cancelBasket = this.cancelBasket.bind(this);
     this.createWishList = this.createWishList.bind(this);
@@ -39,7 +36,7 @@ class NonProfit extends React.Component {
     this.removeWishListItem = this.removeWishListItem.bind(this);
     this.modifyWishListItem = this.modifyWishListItem.bind(this);
     this.sortBaskets = this.sortBaskets.bind(this);
-    this.searchBaskets = this.searchBaskets.bind(this)
+    this.searchBaskets = this.searchBaskets.bind(this);
   }
 
   componentDidMount() {
@@ -51,7 +48,6 @@ class NonProfit extends React.Component {
     const currentLocalTime = new Date().getTime();
     const businessIDs = [1, 2, 3, 4, 5, 6, 7, 8];
     // const businessIDs = [60, 70, 80];
-    
 
     let basketPromise = axios
       .post(`/api/basket/${currentLocalTime}`, { businessIDs })
@@ -85,52 +81,16 @@ class NonProfit extends React.Component {
 
         this.setState({
           baskets: modifiedBaskets
-        })
+        });
       }
     });
   }
 
   handleChange(key, value) {
-    console.log(value);
     this.setState({
       [key]: value
     });
   }
-
-  // getBaskets() {
-  //   const currentLocalTime = new Date().getTime();
-  //   const businessIDs = [1, 2, 3, 4, 5, 6, 7, 8];
-
-  //   axios
-  //     .post(`/api/basket/${currentLocalTime}`, { businessIDs })
-  //     .then((baskets) => {
-  //       this.setState({
-  //         baskets: baskets.data
-  //       });
-  //     });
-  // }
-
-  // getScheduledBaskets() {
-  //   const { nonProfitID } = this.state;
-
-  //   axios
-  //     .get(`/api/scheduled/baskets/${nonProfitID}`)
-  //     .then((scheduledBaskets) => {
-  //       this.setState({
-  //         scheduledBaskets: scheduledBaskets.data
-  //       });
-  //     });
-  // }
-
-  // getWishList() {
-  //   const { nonProfitID } = this.state;
-
-  //   axios.get(`/api/wishlist/${nonProfitID}`).then((wishlist) => {
-  //     this.setState({
-  //       wishlist: wishlist.data[0]
-  //     });
-  //   });
-  // }
 
   scheduleBasket(scheduledTime, phoneNumber, message, basketID) {
     const { nonProfitID } = this.state;
@@ -172,13 +132,15 @@ class NonProfit extends React.Component {
     });
   }
 
-  addWishListItem(item) {
+  addWishListItem(e, item) {
+    e.preventDefault();
     const updatedWishList = [...this.state.wishList.items, { item: item }];
 
     this.modifyWishListItem(updatedWishList);
   }
 
-  parent_editWishListItem(idx, item) {
+  parent_editWishListItem(e, idx, item) {
+    e.preventDefault();
     const updatedWishList = [...this.state.wishList.items];
 
     updatedWishList.splice(idx, 1, { item: item });
@@ -233,10 +195,11 @@ class NonProfit extends React.Component {
           });
           break;
       }
-    }  
+    }
   }
 
-  searchBaskets() {
+  searchBaskets(e) {
+    e.preventDefault();
     const { baskets, searchInput } = this.state;
     const currentLocalTime = new Date().getTime();
     const businessIDs = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -244,13 +207,15 @@ class NonProfit extends React.Component {
     axios
       .post(`/api/basket/${currentLocalTime}`, { businessIDs })
       .then((baskets) => {
-        let modifiedBaskets = searchUtil.searchBaskets(baskets.data, searchInput);
- 
+        let modifiedBaskets = searchUtil.searchBaskets(
+          baskets.data,
+          searchInput
+        );
+
         this.setState({
-          baskets: modifiedBaskets,
-          searchInput: ''
+          baskets: modifiedBaskets
         });
-      })
+      });
   }
 
   render() {
@@ -262,7 +227,6 @@ class NonProfit extends React.Component {
         <div className="nonprofit_main">
           <h2>Non Profit Page</h2>
         </div>
-        <h2>Wish List</h2>
         <WishList
           _wishList={wishList}
           _createWishList={this.createWishList}
@@ -277,7 +241,12 @@ class NonProfit extends React.Component {
           _cancelBasket={this.cancelBasket}
         />
         <h2>Available Baskets</h2>
-        <Search _searchInput={searchInput} _handleChange={this.handleChange} _initializeComponent={this.initializeComponent} _searchBaskets={this.searchBaskets} />
+        <Search
+          _searchInput={searchInput}
+          _initializeComponent={this.initializeComponent}
+          _handleChange={this.handleChange}
+          _searchBaskets={this.searchBaskets}
+        />
         <Sort _sortBaskets={this.sortBaskets} />
         <NonProfitBasketList
           _baskets={baskets}

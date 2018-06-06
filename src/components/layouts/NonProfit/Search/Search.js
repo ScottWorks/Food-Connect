@@ -1,18 +1,25 @@
 import React from 'react';
 
 function Search(props) {
-  const { _searchInput } = props;
+  const {
+    _searchInput,
+    _initializeComponent,
+    _handleChange,
+    _searchBaskets
+  } = props;
 
   return (
     <div>
-      <h3>Search:</h3>
-      <input
-        value={_searchInput}
-        type="text"
-        onChange={(e) => props._handleChange('searchInput', e.target.value)}
-      />
-      <button onClick={() => props._searchBaskets()}>Search</button>
-      <button onClick={() => props._initializeComponent()}>Reset</button>
+      <form onSubmit={(e) => _searchBaskets(e)}>
+        <input
+          value={_searchInput}
+          type="text"
+          placeholder="Search an Item..."
+          onChange={(e) => _handleChange('searchInput', e.target.value)}
+        />
+      </form>
+      {/* <button onClick={() => _searchBaskets()}>Search</button> */}
+      <button onClick={() => _initializeComponent()}>Reset</button>
     </div>
   );
 }
