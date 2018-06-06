@@ -10,7 +10,9 @@ INSERT INTO businesses
     longitude,
     business_type,
     admin_first_name,
-    admin_last_name
+    admin_last_name,
+    fein,
+    operating_hours
 )
 VALUES
 (
@@ -24,6 +26,8 @@ VALUES
     $8,
     $9,
     $10,
-    $11
+    $11,
+    $12,
+    $13
 )
 RETURNING *;
