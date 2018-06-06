@@ -10,16 +10,17 @@ import Header from '../../components/Header/Header.js';
 import * as sortUtil from '../../../config/sortUtil';
 
 import './NonProfit.css';
+import MapContainer from '../../components/Map/googleMap'
 
 class NonProfit extends React.Component {
   constructor() {
     super();
     this.state = {
       nonProfitID: 9,
-      nonProfitInfo: '',
       baskets: [],
       scheduledBaskets: [],
-      wishlist: []
+      wishlist: [],
+      nonProfitInfo: {}
     };
 
     this.getBaskets = this.getBaskets.bind(this);
@@ -32,12 +33,23 @@ class NonProfit extends React.Component {
     this.parent_editWishListItem = this.parent_editWishListItem.bind(this);
     this.removeWishListItem = this.removeWishListItem.bind(this);
     this.modifyWishListItem = this.modifyWishListItem.bind(this);
+    this.getUserInfo = this.getUserInfo.bind(this);
   }
 
   componentDidMount() {
     this.getBaskets();
     this.getScheduledBaskets();
     this.getWishList();
+    this.getUserInfo();
+  }
+
+  getUserInfo() {
+    // change axios request to send user_id based on session after longin when routing and auth are fully implemented.
+    axios.get(`/api/nonprofit/${+this.state.nonProfitID}`).then( userData => {
+      this.setState({
+        nonProfitInfo: userData.data[0]
+      })
+    })
   }
 
   getBaskets() {
@@ -148,16 +160,24 @@ class NonProfit extends React.Component {
   }
 
   render() {
-    const { baskets, scheduledBaskets, wishlist } = this.state;
+    const { baskets, scheduledBaskets, wishlist, nonProfitInfo } = this.state;
 
-    let sortedBasketsByWishListItems = sortUtil.sortByWishList(
-      baskets,
-      wishlist
-    );
-
+    // let sortedBasketsByWishListItems = sortUtil.sortByWishList(
+    //   baskets,
+    //   wishlist
+    // );
+    console.log(wishlist)
     return (
       <main className="mobile">
         <Header />
+        <div>
+          <MapContainer 
+            mapCenter={{lat: nonProfitInfo.latitude, lng: nonProfitInfo.longitude}}
+            npName={nonProfitInfo.company_name}
+            address={nonProfitInfo.street_address}
+            city={`${nonProfitInfo.city} ${nonProfitInfo.state}`}
+          />
+        </div>
         <div className="nonprofit_main">
           <h2>Non Profit Page</h2>
         </div>
@@ -177,7 +197,7 @@ class NonProfit extends React.Component {
         />
         <h3>Available Baskets</h3>
         <NonProfitBasketList
-          _baskets={sortedBasketsByWishListItems}
+          _baskets={baskets}
           _scheduleBasket={this.scheduleBasket}
         />
       </main>
