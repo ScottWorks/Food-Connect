@@ -5,6 +5,7 @@ import axios from 'axios';
 import Header from '../../components/Header/Header.js';
 import NonProfitBasketList from './NonProfitBasketList/NonProfitBasketList';
 import ScheduleList from './ScheduleList/ScheduleList';
+import Search from './Search/Search';
 import Sort from './Sort/Sort';
 import WishList from './WishList/WishList';
 
@@ -20,10 +21,12 @@ class NonProfit extends React.Component {
       nonProfitInfo: '',
       baskets: [],
       wishList: [],
-      scheduledBaskets: []
+      scheduledBaskets: [],
+      searchInput: ''
     };
 
     this.initializeComponent = this.initializeComponent.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     // this.getBaskets = this.getBaskets.bind(this);
     // this.getScheduledBaskets = this.getScheduledBaskets.bind(this);
     // this.getWishList = this.getWishList.bind(this);
@@ -78,6 +81,13 @@ class NonProfit extends React.Component {
       this.setState({
         baskets: modifiedBaskets
       });
+    });
+  }
+
+  handleChange(key, value) {
+    console.log(value);
+    this.setState({
+      [key]: value
     });
   }
 
@@ -219,7 +229,7 @@ class NonProfit extends React.Component {
   }
 
   render() {
-    const { baskets, scheduledBaskets, wishList } = this.state;
+    const { baskets, scheduledBaskets, wishList, searchInput } = this.state;
 
     return (
       <main className="mobile">
@@ -242,6 +252,7 @@ class NonProfit extends React.Component {
           _cancelBasket={this.cancelBasket}
         />
         <h2>Available Baskets</h2>
+        <Search _searchInput={searchInput} _handleChange={this.handleChange} />
         <Sort _sortBaskets={this.sortBaskets} />
         <NonProfitBasketList
           _baskets={baskets}
