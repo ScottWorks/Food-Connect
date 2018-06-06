@@ -3,7 +3,7 @@ function sortByWishList(baskets, wishList) {
     matchedItems = [],
     sortedBaskets = [...baskets];
 
-  if (wishList.items) {
+  if (wishList && wishList.items) {
     baskets.forEach((basket) => {
       let flag = false,
         basketItems = basket.items;
@@ -28,9 +28,7 @@ function sortByWishList(baskets, wishList) {
     });
   }
 
-  let sortedList = mergeLists(matchedItems, sortedBaskets);
-  console.log(sortedList);
-  return sortedList;
+  return mergeLists(matchedItems, sortedBaskets);
 }
 
 function mergeLists(matchedItems, sortedBaskets) {

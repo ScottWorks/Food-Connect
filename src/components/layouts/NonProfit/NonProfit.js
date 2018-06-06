@@ -2,10 +2,11 @@ import React from 'react';
 import axios from 'axios';
 
 // import Map from './Map/Map';
+import Header from '../../components/Header/Header.js';
 import NonProfitBasketList from './NonProfitBasketList/NonProfitBasketList';
 import ScheduleList from './ScheduleList/ScheduleList';
+import Sort from './Sort/Sort';
 import WishList from './WishList/WishList';
-import Header from '../../components/Header/Header.js';
 
 import * as sortUtil from '../../../config/sortUtil';
 
@@ -15,9 +16,10 @@ class NonProfit extends React.Component {
   constructor() {
     super();
     this.state = {
-      nonProfitID: 9,
+      nonProfitID: 7,
       nonProfitInfo: '',
       baskets: [],
+      modifiedBaskets: [],
       scheduledBaskets: [],
       wishlist: []
     };
@@ -32,6 +34,7 @@ class NonProfit extends React.Component {
     this.parent_editWishListItem = this.parent_editWishListItem.bind(this);
     this.removeWishListItem = this.removeWishListItem.bind(this);
     this.modifyWishListItem = this.modifyWishListItem.bind(this);
+    this.sortBaskets = this.sortBaskets.bind(this);
   }
 
   componentDidMount() {
@@ -42,7 +45,7 @@ class NonProfit extends React.Component {
 
   getBaskets() {
     const currentLocalTime = new Date().getTime();
-    const businessIDs = [1, 2, 4, 6];
+    const businessIDs = [1, 2, 3, 4, 5, 6, 7, 8];
 
     axios
       .post(`/api/basket/${currentLocalTime}`, { businessIDs })
@@ -147,13 +150,42 @@ class NonProfit extends React.Component {
       });
   }
 
+  sortBaskets(sortType) {
+    const { baskets, wishlist } = this.state;
+    let modifiedBaskets;
+
+    switch (sortType) {
+      case 'wishlist':
+        modifiedBaskets = sortUtil.sortByWishList(baskets, wishlist);
+        console.log(modifiedBaskets);
+        this.setState({
+          baskets: modifiedBaskets
+        });
+        break;
+
+      case 'newestFirst':
+        console.log('newestFirst');
+        this.getBaskets();
+        break;
+
+      case 'oldestFirst':
+        console.log('oldestFirst');
+        break;
+
+      default:
+        modifiedBaskets = sortUtil.sortByWishList(baskets, wishlist);
+        this.setState({
+          baskets: modifiedBaskets
+        });
+    }
+  }
+
   render() {
     const { baskets, scheduledBaskets, wishlist } = this.state;
 
-    let sortedBasketsByWishListItems = sortUtil.sortByWishList(
-      baskets,
-      wishlist
-    );
+    () => {
+      this.sortBaskets();
+    };
 
     return (
       <main className="mobile">
@@ -161,7 +193,7 @@ class NonProfit extends React.Component {
         <div className="nonprofit_main">
           <h2>Non Profit Page</h2>
         </div>
-        <h3>Wish List</h3>
+        <h2>Wish List</h2>
         <WishList
           _wishlist={wishlist}
           _createWishList={this.createWishList}
@@ -169,15 +201,16 @@ class NonProfit extends React.Component {
           parent_editWishListItem={this.parent_editWishListItem}
           _removeWishListItem={this.removeWishListItem}
         />
-        <h3>Scheduled Baskets</h3>
+        <h2>Scheduled Baskets</h2>
         <ScheduleList
           _scheduledBaskets={scheduledBaskets}
           _scheduleBasket={this.scheduleBasket}
           _cancelBasket={this.cancelBasket}
         />
-        <h3>Available Baskets</h3>
+        <h2>Available Baskets</h2>
+        <Sort _sortBaskets={this.sortBaskets} />
         <NonProfitBasketList
-          _baskets={sortedBasketsByWishListItems}
+          _baskets={baskets}
           _scheduleBasket={this.scheduleBasket}
         />
       </main>
