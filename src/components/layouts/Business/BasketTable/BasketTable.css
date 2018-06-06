@@ -93,6 +93,7 @@
     width: 150px;
     border-radius: 10px;
     font-size: 1em;
+    border:0;
   }
 
   .save-make-basket-btn:hover{
@@ -106,6 +107,7 @@
     width: 100px;
     border-radius: 10px;
     font-size: 1em;
+    border:0;
   }
   .add-item-btn:hover{
     background: #427AA1;
@@ -159,6 +161,7 @@
     width: 150px;
     border-radius: 10px;
     font-size: 1em;
+    border:0;
   }
 
   .save-make-basket-btn:hover{
@@ -172,6 +175,7 @@
     width: 100px;
     border-radius: 10px;
     font-size: 1em;
+    border:0;
   }
   .add-item-btn:hover{
     background: #427AA1;

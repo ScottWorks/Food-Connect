@@ -15,12 +15,11 @@ function BusinessBasket(props) {
           key={e.item + i}
         >
           <div className='item-weight'>
-            <p>Item: <span>{e.item}</span></p>
+            <p>{e.item}</p>
           
-            <p>Weight: <span>{e.weight}</span></p>
-          </div>
-          <div>
-            <p>FMV: <span>${utilFunc.formatNumber(Number(e.FMV), 2, 3, ',', '.')}</span></p>
+            <p>{e.weight} lbs</p>
+          
+            <p>${utilFunc.formatNumber(Number(e.FMV), 2, 3, ',', '.')}</p>
           </div>
         </div>
       )
