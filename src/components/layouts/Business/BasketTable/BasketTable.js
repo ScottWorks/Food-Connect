@@ -69,7 +69,7 @@ class BasketTable extends React.Component {
           <button
             className='save-make-basket-btn'
             onClick={() => this.prepBasket()}
-          >{this.props.editingBasket ? 'Save basket' : 'Make a basket'}</button>
+          >{this.props.editingBasket ? 'Save Basket' : 'Make a Basket'}</button>
         </div>
         <div
           className="BasketTable-date-time-picker"
@@ -89,21 +89,21 @@ class BasketTable extends React.Component {
         <div className='business-table-input-contain'>
           <input 
             className='business-table-input'
-            placeholder="Item name"
+            placeholder="Item Name"
             onChange={e => this.setState({item: e.target.value})}
             value={this.state.item}
             type="text"
           />
           <input 
           className='business-table-input'
-            placeholder="Weight in pounds"
+            placeholder="Weight in Pounds"
             onChange={e => this.setState({weight: e.target.value})}
             value={this.state.weight}
             type="number"
           />
           <input 
           className='business-table-input'
-            placeholder="Fair market value"
+            placeholder="Fair Market Value"
             onChange={e => this.formatCurrencyHelper(e.target.value)}
             value={this.state.fairMarketValue}
             type="number" 
