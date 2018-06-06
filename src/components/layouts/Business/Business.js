@@ -24,11 +24,11 @@ class Business extends React.Component {
       <div className="Business">
         <Header />
         <div className="bus-top-bar">
-        <div className='donut-container'>
-        {/* <Donut/> */}
-        </div>
+          <div className='donut-container'>
+            <Donut/>
+          </div>
           <div className='barchart-container'>
-          {/* <StatChart/> */}
+            <StatChart/>
           </div>
         </div>
         <div className='business-table-list-container'>

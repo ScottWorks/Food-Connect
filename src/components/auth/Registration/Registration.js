@@ -31,6 +31,7 @@ class Register extends Component {
             pwView: false,
             pwShowHide1: false,
             pwShowHide2: false,
+            operating_hours : '',
             panel1State:{
                 panel1HeaderState:'panel-header',
                 panel1BodyState:'panel-body-extended',
@@ -133,8 +134,8 @@ class Register extends Component {
             alert('Passwords Do Not Match')
         } else {
 
-            const { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, userName, pw } = this.state
-            axios.post('/api/auth/register', { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, userName, pw }).then(account => {
+            const { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, userName, fein, operating_hours, pw } = this.state
+            axios.post('/api/auth/register', { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, userName, pw, fein, operating_hours }).then(account => {
                 console.log(account.data)
     
             }, this.clearInputs(), window.location.assign('/#/login'))
@@ -375,6 +376,10 @@ class Register extends Component {
                                 <input onChange={(e)=>this.setState({phoneNumber: e.target.value})} 
                                     value={this.state.phoneNumber} className='form-input-box' required='true' 
                                     type='text' placeholder='Phone Number'/>
+                                <input onChange={(e)=>this.setState({operating_hours: e.target.value})} 
+                                    value={this.state.operating_hours} className='form-input-box' required='true' 
+                                    type='text' placeholder='Business Hours'/>
+
                                 <input onChange={(e)=>this.setState({userName: e.target.value})} 
                                     value={this.state.userName} className='form-input-box' required='true' 
                                     type='text' placeholder='Username'/>
