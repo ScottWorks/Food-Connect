@@ -88,19 +88,6 @@ import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react'
                         name={this.props.npName}
                         onClick={this.onMarkerClick}
                         />
-
-                {/* <div style={{
-                    zIndex:'5',
-                    position: 'absolute',
-                    left: '45%'
-                }}>
-                    {/* <SearchInput 
-                        newLocation={this.newLocation}
-                    /> 
-                    </div> */}
-                
-                {/* Default marker... displays at the center of our map when rendered */}
-
                 {/* Displays 'Marker components' from an array of coordinates. Will render from an unknown array length. */}
                 {/* {displayMarkers} */}
 

@@ -18,7 +18,7 @@ class Register extends Component {
             organizationType: '',
             organizationName: '',
             specificType: '',
-            addresss: '',
+            address: '',
             // streetAddress: '',
             // city: '',
             // statee: '',
@@ -63,6 +63,7 @@ class Register extends Component {
         this.handlePanelHeader2Click = this.handlePanelHeader2Click.bind(this);
         this.handlePanelHeader3Click = this.handlePanelHeader3Click.bind(this);
         this.handlePanelHeader4Click = this.handlePanelHeader4Click.bind(this);
+        this.getAddressFromAutoComplete = this.getAddressFromAutoComplete.bind(this);
     }
 
 
@@ -121,6 +122,12 @@ class Register extends Component {
             pwView: false
         })
         
+    }
+
+    getAddressFromAutoComplete(formatted_address) {
+        this.setState({
+            address: formatted_address
+        })
     }
 
     registerOrganization(e) {
@@ -248,15 +255,15 @@ class Register extends Component {
 
     handlePanelHeader3Click(){
         if(this.state.panel3State.panel3BodyState==='panel-body-collapsed'
-            && this.state.organizationName !== '' 
-            && this.state.organizationType !== ''
-            && this.state.specificType !==''){
+        && this.state.organizationName !== '' 
+        && this.state.organizationType !== ''
+        && this.state.specificType !==''){
             // Open Up Panel 3
             let tempPanel3State = Object.assign({}, this.state.panel3State);
             tempPanel3State.panel3BodyState = 'panel-body-extended';
             tempPanel3State.panel3HeaderState = 'panel-header';
             this.setState({panel3State:tempPanel3State})
-
+            
             // Collapse Panels 1,2, & 4
             let tempPanel1State = Object.assign({}, this.state.panel1State);
             tempPanel1State.panel1BodyState = 'panel-body-collapsed';
@@ -267,6 +274,7 @@ class Register extends Component {
             this.setState({panel1State: tempPanel1State, panel2State: tempPanel2State, panel4State: tempPanel4State})
             
         }
+        console.log(this.state.address)        
     }
 
     handlePanelHeader4Click(){
@@ -352,6 +360,7 @@ class Register extends Component {
                             <h2>Where are you located?</h2>
                             <form className='registration-form'>
                                 <SearchInput 
+                                    getAddress={this.getAddressFromAutoComplete}
                                 />
                                 {/* <input className='form-input-box'
                                     onChange={(e)=>this.setState({addresss: e.target.value})}
@@ -359,6 +368,7 @@ class Register extends Component {
                                     type='text'/> */}
                                 <input className='form-continue-button' onClick={(e)=>this.handleContinueClickPanel3(e)} type='submit' value='Continue'/>
                             </form>
+                            <button onClick={() => console.log(this.state.address)}>Test</button>                            
                         </div>
                     </section>
 

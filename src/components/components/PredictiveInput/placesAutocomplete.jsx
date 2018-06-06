@@ -9,7 +9,8 @@ class SearchInput extends Component {
 
         this.state = {
             address: '',
-            results: []
+            results: [],
+            formatted_address: ''
         }
     }
 
@@ -21,9 +22,11 @@ class SearchInput extends Component {
 
     handleSelect = (address) => {
         geocodeByAddress(address)
-        .then( results => this.setState({results: results[0]}))
+        .then( results => this.setState({results: results[0], formatted_address: results[0].formatted_address}))
         .then( latLng => console.log('Success', latLng))
         .catch( error =>  console.log('Error', error))
+
+        this.props.getAddress(this.state.formatted_address)
     }
 
     render() {
