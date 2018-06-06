@@ -12,7 +12,7 @@ INSERT INTO businesses
     admin_first_name,
     admin_last_name,
     fein,
-    operating_hours
+    operating_hrs
 )
 VALUES
 (
