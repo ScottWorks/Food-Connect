@@ -22,11 +22,14 @@ class SearchInput extends Component {
 
     handleSelect = (address) => {
         geocodeByAddress(address)
-        .then( results => this.setState({results: results[0], formatted_address: results[0].formatted_address}))
+        .then( results => {
+            // set google address data to local state, & send the address data up to the parent register function
+            this.setState({results: results[0]})
+            this.props.getAddress(results[0].formatted_address)
+        })
         .then( latLng => console.log('Success', latLng))
         .catch( error =>  console.log('Error', error))
 
-        this.props.getAddress(this.state.formatted_address)
     }
 
     render() {

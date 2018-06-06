@@ -19,10 +19,11 @@ class Register extends Component {
             organizationName: '',
             specificType: '',
             address: '',
-            // streetAddress: '',
-            // city: '',
-            // statee: '',
-            // zip: '',
+            streetAddress: '',
+            city: '',
+            state: '',
+            zip: '',
+            country: '',
             firstName: '',
             lastName: '',
             phoneNumber: '',
@@ -125,9 +126,16 @@ class Register extends Component {
     }
 
     getAddressFromAutoComplete(formatted_address) {
+        const addressSplit = formatted_address.split(', ');
+        const stateSplit = addressSplit[2].split(' ');
+
         this.setState({
-            address: formatted_address
-        })
+            streetAddress: addressSplit[0],
+            city: addressSplit[1],
+            state: stateSplit[0],
+            zip: stateSplit[1],
+            country: addressSplit[3]
+        } )
     }
 
     registerOrganization(e) {
@@ -208,6 +216,7 @@ class Register extends Component {
             tempPanel4State.panel4BodyState = 'panel-body-extended';
             this.setState({panel3State: tempPanel3State, panel4State: tempPanel4State });
         }
+
     }
 
     handlePanelHeader1Click(){
@@ -360,12 +369,9 @@ class Register extends Component {
                             <h2>Where are you located?</h2>
                             <form className='registration-form'>
                                 <SearchInput 
+                                    // function from parent to get address data from child predictiveText component
                                     getAddress={this.getAddressFromAutoComplete}
                                 />
-                                {/* <input className='form-input-box'
-                                    onChange={(e)=>this.setState({addresss: e.target.value})}
-                                    required='true' placeholder='Enter Address'
-                                    type='text'/> */}
                                 <input className='form-continue-button' onClick={(e)=>this.handleContinueClickPanel3(e)} type='submit' value='Continue'/>
                             </form>
                             <button onClick={() => console.log(this.state.address)}>Test</button>                            
