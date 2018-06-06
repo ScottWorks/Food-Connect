@@ -2,12 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { deleteBasket, editBasket } from '../../../../../ducks/businessReducer'
 import { fromEpoch } from '../../../../../config/timeUtil'
-<<<<<<< HEAD
-import './BusinessBasket.css'
-=======
 import './BusinessBasket.css';
 import * as utilFunc from '../../../../../config/analyticsUtil'
->>>>>>> master
 
 function BusinessBasket(props) {
 

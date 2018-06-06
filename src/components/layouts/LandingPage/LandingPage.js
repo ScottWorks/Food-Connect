@@ -78,7 +78,7 @@ class LandingPage extends Component {
                         <h2 className="landing_stats_title">OUR STATS</h2>
                         <div className="landing_stats_container">
                             <div className='landing_stats_column'>
-                                <p className='landing_stats_p'>{utilFunc.formatNumber(this.props.landingTotalSavedByWeight,0,3,',','.')}</p>
+                            <p className='landing_stats_p'>{utilFunc.formatNumber(Number(this.props.landingTotalSavedByWeight),0,3,',','.')}</p>
                                 <h3>Pounds of<br/> Food Saved</h3>
                             </div>
                             {/* <hr className="vertical_line"/> TODO: */}

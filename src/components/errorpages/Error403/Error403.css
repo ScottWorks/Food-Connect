@@ -16,25 +16,35 @@ a{
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
 
-.error403_image{
+.error403_main{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 120px;
+    font-size: 100px;
     margin-bottom: 20px;
-    /* color: #427AA1; */
+    font-weight: 400
 }
 
-.error403_image img{
-    height: 85px;
-    width: 60px;
+.error403_main img{
+    height: 70px;
+    width: 70px;
     margin-left: 5px;
     margin-right: 5px;
+    margin-top: 10px;
 }
 
 .error403_subtext{
     font-size: 20px;
     margin-bottom: 20px;
+}
+
+.error403_sub_subtext{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 20px;
+    width: 100vw;
 }
 
 .home_button{
@@ -50,6 +60,10 @@ a{
     text-transform: uppercase;
     background: #427AA1;
     }
+    .error403_hr{
+        width: 70%;
+        margin-bottom: 35px;
+    }
 
 }
 
@@ -57,25 +71,35 @@ a{
   and (min-device-width: 1200px) 
   and (max-device-width: 1600px) 
   and (-webkit-min-device-pixel-ratio: 1) {
-    .error403_image{
+    .error403_main{
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 400px;
+        font-size: 200px;
         margin-bottom: 30px;
-        /* color: #427AA1; */
+        font-weight: 400;
     }
     
-    .error403_image img{
-        height: 290px;
-        width: 200px;
+    .error403_main img{
+        height: 130px;
+        width: 130px;
         margin-left: 5px;
         margin-right: 5px;
+        margin-top: 25px;
     }
     
     .error403_subtext{
         font-size: 40px;
         margin-bottom: 30px;
+    }
+
+    .error403_sub_subtext{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        margin-bottom: 40px;
+        width: 100vw;
     }
 
     .home_button{
@@ -85,10 +109,14 @@ a{
         color: #EBF2FA;
         font-weight: bold;
         font-size: 15px;
-        height: 30px;
-        width: 130px;
+        height: 50px;
+        width: 150px;
         border-radius: 15px;
         text-transform: uppercase;
         background: #427AA1;
+        }
+        .error403_hr{
+            width: 40%;
+            margin-bottom: 45px;
         }
   }
