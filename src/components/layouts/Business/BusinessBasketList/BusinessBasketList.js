@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import BusinessBasket from './BusinessBasket/BusinessBasket'
 import BusinessItems from './BusinessItems/BusinessItems'
+import '../../../../assets/styles/BusinessBasketList.css'
 
 function BusinessBasketList(props) {
 
@@ -31,7 +32,7 @@ function BusinessBasketList(props) {
 
   return (
     <div className="BusinessBasketList">
-      <div>
+      <div className='item-card-container'>
         {itemCards}
       </div>
       <div>

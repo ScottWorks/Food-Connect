@@ -1,23 +1,117 @@
-.BusinessItem {
-  max-width: 1000px;
-  width: 80%;
-  height: 50px;
-  padding: 17px 25px;
-  margin: 10px auto;
-  border: 1px dashed lightgrey;
-  background: white;
-  border-radius: 10px;
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
+/* MOBILE VIEW */
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px){
+  .BusinessItem {
+    width: 90%;
+    height: 50px;
+    padding: 25px;
+    margin: 10px auto;
+    border: 1px dashed lightgrey;
+    background: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1em;
+    line-height: 1.25em;
+  }
+
+  .business-items-details{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+  }
+
+  .business-items-details :nth-child(1){
+    width: 33%;
+    text-align: left;
+  }
+
+  .business-items-details :nth-child(2){
+    width: 33%;
+    text-align: center;
+  }
+
+  .business-items-details :nth-child(3){
+    width: 33%;
+    text-align: right;
+  }
+  
+  .business-item-delete-x {
+    text-align: right;
+    width: 10%;
+    height: 14px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    background: none;
+    font-weight: bold;
+    font-size: 1em;
+  }
+
+  .business-item-delete-x:hover{
+    color: red;
+  }
+
 }
 
-.BusinessItem button {
-  width: 14px;
-  height: 14px;
-  padding: 0;
-  border: none;
-  cursor: pointer;
-  background: none;
+
+/* TABLET VIEW */
+@media only screen and (min-device-width: 668px) and (max-device-width: 1199px){
+  .BusinessItem {
+    width: 60%;
+    height: 50px;
+    padding: 25px;
+    margin: 10px auto;
+    border: 1px dashed lightgrey;
+    background: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1em;
+    line-height: 1.375em;
+  }
+
+  .business-items-details{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+  }
+
+  .business-items-details :nth-child(1){
+    width: 33%;
+    text-align: left;
+  }
+
+  .business-items-details :nth-child(2){
+    width: 33%;
+    text-align: center;
+  }
+
+  .business-items-details :nth-child(3){
+    width: 33%;
+    text-align: right;
+  }
+  
+  .business-item-delete-x {
+    text-align: right;
+    width: 10%;
+    height: 14px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    background: none;
+    font-weight: bold;
+    font-size: 1em;
+  }
+
+  .business-item-delete-x:hover{
+    color: red;
+  }
+}
+
+/* DESKTOP VIEW */
+@media screen  and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1){
 
 }
+
