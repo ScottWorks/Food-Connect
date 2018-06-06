@@ -87,6 +87,8 @@ import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react'
                     <Marker
                         name={this.props.npName}
                         onClick={this.onMarkerClick}
+                        icon={{
+                        }}
                         />
                 {/* Displays 'Marker components' from an array of coordinates. Will render from an unknown array length. */}
                 {/* {displayMarkers} */}
