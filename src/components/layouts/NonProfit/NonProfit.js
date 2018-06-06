@@ -186,7 +186,7 @@ class NonProfit extends React.Component {
     return (
       <main className="mobile">
         <Header />
-        <div>
+        <div className='google-maps'>
           <MapContainer 
             mapCenter={{lat: nonProfitInfo.latitude, lng: nonProfitInfo.longitude}}
             npName={nonProfitInfo.company_name}

@@ -4,7 +4,18 @@
   .non-profit-basket-list {
     margin-top: 500px;
   }
+
+  .google-maps {
+    display: none;
+  }
 }
 
+/* TABLET VIEW */
+@media only screen and (min-device-width: 668px) and (max-device-width: 1199px){
+  
+}
+
+/* DESKTOP VIEW */
 @media screen and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1) {
+
 }
