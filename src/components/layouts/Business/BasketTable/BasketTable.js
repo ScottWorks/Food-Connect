@@ -67,8 +67,9 @@ class BasketTable extends React.Component {
       <div className="BasketTable">
         <div>
           <button
+            className='save-make-basket-btn'
             onClick={() => this.prepBasket()}
-          >{this.props.editingBasket ? 'Save basket' : 'Make a basket'}</button>
+          >{this.props.editingBasket ? 'Save Basket' : 'Make a Basket'}</button>
         </div>
         <div
           className="BasketTable-date-time-picker"
@@ -85,21 +86,24 @@ class BasketTable extends React.Component {
         <div>
           <p>{this.props.editingBasket ? fromEpoch(this.props.pick_up_time, 'ddd, MMM Do, h:mm a') : ''}</p>
         </div>
-        <div>
+        <div className='business-table-input-contain'>
           <input 
-            placeholder="Item name"
+            className='business-table-input'
+            placeholder="Item Name"
             onChange={e => this.setState({item: e.target.value})}
             value={this.state.item}
             type="text"
           />
           <input 
-            placeholder="Weight in pounds"
+          className='business-table-input'
+            placeholder="Weight in Pounds"
             onChange={e => this.setState({weight: e.target.value})}
             value={this.state.weight}
             type="number"
           />
           <input 
-            placeholder="Fair market value"
+          className='business-table-input'
+            placeholder="Fair Market Value"
             onChange={e => this.formatCurrencyHelper(e.target.value)}
             value={this.state.fairMarketValue}
             type="number" 
@@ -107,6 +111,7 @@ class BasketTable extends React.Component {
           />
         </div>
         <button
+          className='add-item-btn'
           onClick={() => this.prepToAddItem()}
         >Add Item</button>
       </div>
