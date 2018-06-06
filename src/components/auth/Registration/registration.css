@@ -113,6 +113,18 @@
         outline: 0;
     }
 
+    #predictive-input {
+        width: 90%;
+        margin-bottom: 10px;
+        padding:5px;
+        font-size: 1em;
+    }
+
+    #predictive-input:focus {
+        border: #A5BE00 solid;
+        outline: 0;
+    }
+
     .password_icon {
         height: 20px;
         width: 25px;

@@ -323,12 +323,6 @@ class Register extends Component {
                         </div>
                     </section>
                     <br />
-                    <div className="title_box">
-                        <span className="section_title">Where are you located?</span>
-                    </div>
-                    <section id='registry-container3'>
-                        <SearchInput />
-                        <button onClick={() => this.openBoxes('registry-container4')} className="collapsible">Continue</button>
 
                     <section className='question-panel'>
                         <div className={this.state.panel2State.panel2HeaderState}
@@ -357,10 +351,12 @@ class Register extends Component {
                         <div className={this.state.panel3State.panel3BodyState}>
                             <h2>Where are you located?</h2>
                             <form className='registration-form'>
-                                <input className='form-input-box'
+                                <SearchInput 
+                                />
+                                {/* <input className='form-input-box'
                                     onChange={(e)=>this.setState({addresss: e.target.value})}
                                     required='true' placeholder='Enter Address'
-                                    type='text'/>
+                                    type='text'/> */}
                                 <input className='form-continue-button' onClick={(e)=>this.handleContinueClickPanel3(e)} type='submit' value='Continue'/>
                             </form>
                         </div>
@@ -409,7 +405,6 @@ class Register extends Component {
                             </form>
                         </div>
                       </section>
-                    </section>
                 </div>
             </div>
         )
