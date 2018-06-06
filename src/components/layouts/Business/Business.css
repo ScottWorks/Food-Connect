@@ -1,9 +1,36 @@
-.bus-top-bar {
-  width: 100%;
-  height: 250px;
-  margin-top: 75px;
-  background: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* FOR MOBILE DEVICES */
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px){
+  .bus-top-bar {
+    width: 100%;
+    height: 250px;
+    margin-top: 75px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
 }
+
+
+/* TABLET VIEW */
+@media only screen and (min-device-width: 668px) and (max-device-width: 1199px){
+
+}
+
+
+
+/* FOR NON-RETINA / NON-HIGH RES DESKTOPS */
+@media screen  and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1) {
+  .bus-top-bar {
+    width: 100%;
+    height: 250px;
+    margin-top: 75px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  }
