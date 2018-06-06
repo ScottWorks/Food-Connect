@@ -14,12 +14,6 @@ function BusinessBasket(props) {
           className="bus-basket-item"
           key={e.item + i}
         >
-          <p>Item:</p>
-          <p>{e.item}</p>
-          <p>Weight:</p>
-          <p>{e.weight}</p>
-          <p>Fair Market Value:</p>
-          <p>{e.FMV}</p>
           <div className='item-weight'>
             <p>{e.item}</p>
           
@@ -68,15 +62,6 @@ function BusinessBasket(props) {
           onClick={() => props.editBasket(props.index)}
           >Edit</button>
       <button
-        onClick={() => props.editBasket(props.index)}
-      >Edit</button>
-      <button
-        onClick={() => props.deleteBasket({index: props.index, id: props.basket.basket_id})}
-      >Delete</button>
-      <div>
-        <p>{props.basket ? checkStatus : ''}</p>
-        <p>{props.basket ? fromEpoch(props.basket.pick_up_time, 'ddd, MMM Do, h:mm a') : ''}</p>
-        {items}
           className='business-basket-edit-btn'
           onClick={() => props.deleteBasket({index: props.index, id: props.basket.basket_id})}
           >Delete</button>

@@ -160,8 +160,8 @@ class Register extends Component {
             alert('Passwords Do Not Match')
         } else {
 
-            const { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, latitude, longitude, userName, pw } = this.state
-            axios.post('/api/auth/register', { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, latitude, longitude, userName, pw }).then(account => {
+            const { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, latitude, longitude, userName, pw, fein } = this.state
+            axios.post('/api/auth/register', { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, latitude, longitude, userName, pw, fein }).then(account => {
                 console.log(account.data)
     
             }, this.clearInputs(), window.location.assign('/#/login'))

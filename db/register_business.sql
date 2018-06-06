@@ -14,6 +14,7 @@ INSERT INTO businesses
     fein,
     operating_hrs
 )
+
 VALUES
 (
     $1,
@@ -30,4 +31,5 @@ VALUES
     $12,
     $13
 )
+
 RETURNING *;
