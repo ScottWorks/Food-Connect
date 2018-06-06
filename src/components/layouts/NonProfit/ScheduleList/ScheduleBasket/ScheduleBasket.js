@@ -30,6 +30,7 @@ class ScheduleBasket extends React.Component {
   }
 
   render() {
+    console.log(this.state.update)
     const { update, scheduledDate, scheduledTime } = this.state;
     const { scheduledBasket, _scheduleBasket, _cancelBasket } = this.props;
 

@@ -94,6 +94,8 @@ app.put(
   '/api/wishlist/modify/:nonProfitID',
   nonProfitController.modifyWishList
 );
+// Non-Profit User Endpoints
+app.get('/api/nonprofit/:userID', nonProfitController.getUserInfo);
 
 // TWILIO
 app.post('/api/twilio', twilioController.sendTwilioMessage);
