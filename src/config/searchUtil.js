@@ -3,8 +3,8 @@ function searchBaskets(baskets, keyword) {
     matchedItems = [],
     sortedBaskets = [...baskets];
 
-  if (keyword && baskets.items.length > 0) {
-    matchedItems = baskets.map((basket) => {
+  if (keyword && baskets.length > 0) {
+    matchedItems = baskets.filter((basket) => {
       let flag = false,
         basketItems = basket.items;
 
@@ -16,15 +16,12 @@ function searchBaskets(baskets, keyword) {
       });
 
       if (flag) {
-        // matchedItems.push(basket);
-        // sortedBaskets.splice(idx, 1);
-        // idx--;
-        return basket;
+        console.log(basket);
+        return true;
       }
-      // idx++;
     });
   }
-
+  console.log(matchedItems);
   return matchedItems;
 }
 

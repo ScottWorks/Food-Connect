@@ -11,7 +11,7 @@ function Search(props) {
         type="text"
         onChange={(e) => props._handleChange('searchInput', e.target.value)}
       />
-      <button>Search</button>
+      <button onClick={() => props._searchBaskets()}>Search</button>
     </div>
   );
 }

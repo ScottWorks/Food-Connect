@@ -236,14 +236,21 @@ class NonProfit extends React.Component {
     }  
   }
 
-  searchBaskets(keyword) {
-    const { baskets } = this.state;
+  searchBaskets() {
+    const { baskets, searchInput } = this.state;
+    const currentLocalTime = new Date().getTime();
+    const businessIDs = [1, 2, 3, 4, 5, 6, 7, 8];
 
-    let modifiedBaskets = searchUtil.searchBaskets(baskets, keyword);
-
-    this.setState({
-      baskets: modifiedBaskets
-    });
+    axios
+      .post(`/api/basket/${currentLocalTime}`, { businessIDs })
+      .then((baskets) => {
+        let modifiedBaskets = searchUtil.searchBaskets(baskets.data, searchInput);
+ 
+        this.setState({
+          baskets: modifiedBaskets,
+          searchInput: ''
+        });
+      })
   }
 
   render() {
@@ -270,7 +277,7 @@ class NonProfit extends React.Component {
           _cancelBasket={this.cancelBasket}
         />
         <h2>Available Baskets</h2>
-        <Search _searchInput={searchInput} _handleChange={this.handleChange} searchBaskets={this.searchBaskets} />
+        <Search _searchInput={searchInput} _handleChange={this.handleChange} _searchBaskets={this.searchBaskets} />
         <Sort _sortBaskets={this.sortBaskets} />
         <NonProfitBasketList
           _baskets={baskets}
