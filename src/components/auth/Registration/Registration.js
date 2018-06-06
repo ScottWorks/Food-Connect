@@ -408,11 +408,13 @@ class Register extends Component {
                                     className='form-continue-button' type='submit' value='Register'/>
                             </form>
                         </div>
+                      </section>
                     </section>
                 </div>
             </div>
         )
     }
 }
+
 
 export default Register
