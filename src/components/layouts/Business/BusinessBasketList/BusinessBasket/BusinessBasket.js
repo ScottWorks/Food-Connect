@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { deleteBasket, editBasket } from '../../../../../ducks/businessReducer'
-import { fromEpoch } from '../../../../../config/timeConversion'
+import { fromEpoch } from '../../../../../config/timeUtil'
 import './BusinessBasket.css'
 
 function BusinessBasket(props) {
