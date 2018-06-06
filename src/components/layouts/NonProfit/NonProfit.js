@@ -19,8 +19,8 @@ class NonProfit extends React.Component {
       nonProfitID: 7,
       nonProfitInfo: '',
       baskets: [],
-      scheduledBaskets: [],
-      wishlist: []
+      wishList: [],
+      scheduledBaskets: []
     };
 
     this.initializeComponent = this.initializeComponent.bind(this);
@@ -56,9 +56,9 @@ class NonProfit extends React.Component {
 
     let wishListPromise = axios
       .get(`/api/wishlist/${nonProfitID}`)
-      .then((wishlist) => {
+      .then((wishList) => {
         this.setState({
-          wishlist: wishlist.data[0]
+          wishList: wishList.data[0]
         });
       });
 
@@ -71,9 +71,9 @@ class NonProfit extends React.Component {
       });
 
     Promise.all([basketPromise, wishListPromise, schedulePromise]).then(() => {
-      const { baskets, wishlist } = this.state;
+      const { baskets, wishList } = this.state;
 
-      let modifiedBaskets = sortUtil.sortByWishList(baskets, wishlist);
+      let modifiedBaskets = sortUtil.sortByWishList(baskets, wishList);
 
       this.setState({
         baskets: modifiedBaskets
@@ -157,20 +157,20 @@ class NonProfit extends React.Component {
   }
 
   addWishListItem(item) {
-    const updatedWishList = [...this.state.wishlist.items, { item: item }];
+    const updatedWishList = [...this.state.wishList.items, { item: item }];
 
     this.modifyWishListItem(updatedWishList);
   }
 
   parent_editWishListItem(idx, item) {
-    const updatedWishList = [...this.state.wishlist.items];
+    const updatedWishList = [...this.state.wishList.items];
 
     updatedWishList.splice(idx, 1, { item: item });
     this.modifyWishListItem(updatedWishList);
   }
 
   removeWishListItem(idx) {
-    const updatedWishList = [...this.state.wishlist.items];
+    const updatedWishList = [...this.state.wishList.items];
 
     updatedWishList.splice(idx, 1);
     this.modifyWishListItem(updatedWishList);
@@ -192,7 +192,7 @@ class NonProfit extends React.Component {
 
     switch (sortType) {
       case 'wishlist':
-        if (wishList && wishList.items > 0) {
+        if (wishList.items.length > 0) {
           modifiedBaskets = sortUtil.sortByWishList(baskets, wishList);
           this.setState({
             baskets: modifiedBaskets
@@ -203,7 +203,6 @@ class NonProfit extends React.Component {
         break;
 
       case 'latest':
-        console.log('latest');
         modifiedBaskets = sortUtil.sortRecent(baskets);
         this.setState({
           baskets: modifiedBaskets
@@ -211,7 +210,6 @@ class NonProfit extends React.Component {
         break;
 
       case 'oldest':
-        console.log('oldest');
         modifiedBaskets = sortUtil.sortOldest(baskets);
         this.setState({
           baskets: modifiedBaskets
@@ -221,7 +219,7 @@ class NonProfit extends React.Component {
   }
 
   render() {
-    const { baskets, scheduledBaskets, wishlist } = this.state;
+    const { baskets, scheduledBaskets, wishList } = this.state;
 
     return (
       <main className="mobile">
@@ -231,7 +229,7 @@ class NonProfit extends React.Component {
         </div>
         <h2>Wish List</h2>
         <WishList
-          _wishlist={wishlist}
+          _wishList={wishList}
           _createWishList={this.createWishList}
           _addWishListItem={this.addWishListItem}
           parent_editWishListItem={this.parent_editWishListItem}
