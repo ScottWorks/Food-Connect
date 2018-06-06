@@ -7,6 +7,8 @@ import BusinessBasketList from './BusinessBasketList/BusinessBasketList'
 import Header from'../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import './Business.css'
+import Donut from '../../components/Stats/Donut';
+import StatChart from '../../components/Stats/StatChart'
 
 class Business extends React.Component {
 
@@ -22,11 +24,18 @@ class Business extends React.Component {
       <div className="Business">
         <Header />
         <div className="bus-top-bar">
+        <div className='donut-container'>
+        {/* <Donut/> */}
+        </div>
+          <div className='barchart-container'>
+          {/* <StatChart/> */}
+          </div>
+        </div>
+        <div className='business-table-list-container'>
+        <BusinessTable className='business-table-container'/>
+        <BusinessBasketList className='business-basket-list-container'/>
 
         </div>
-        <BusinessTable />
-        <BusinessBasketList />
-        <Footer />
       </div>
     );
   }
