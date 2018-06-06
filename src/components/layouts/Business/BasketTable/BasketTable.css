@@ -3,7 +3,7 @@
 
   .BasketTable {
     max-width: 1000px;
-    width: 95%;
+    width: 90%;
     height: fit-content;
     background: white;
     border: 1px solid #A5BE00;
@@ -19,7 +19,7 @@
   
   .save-make-basket-btn{
     background: #679436;
-    color: white;
+    color: #EBF2FA;
     padding: 10px;
     width: 150px;
     border-radius: 10px;
@@ -32,7 +32,7 @@
 
   .add-item-btn{
     background: #679436;
-    color: white;
+    color: #EBF2FA;
     padding: 10px;
     width: 100px;
     border-radius: 10px;
@@ -88,7 +88,7 @@
   
   .save-make-basket-btn{
     background: #679436;
-    color: white;
+    color: #EBF2FA;
     padding: 10px;
     width: 150px;
     border-radius: 10px;
@@ -101,7 +101,7 @@
 
   .add-item-btn{
     background: #679436;
-    color: white;
+    color: #EBF2FA;
     padding: 10px;
     width: 100px;
     border-radius: 10px;
@@ -134,8 +134,7 @@
 }
 
 
-/* ###################################### */
-/* FOR NON-RETINA / NON-HIGH RES DESKTOPS */
+/* DESKTOP VIEW */
 @media screen  and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1) {
   .BasketTable {
     max-width: 1000px;
@@ -155,7 +154,7 @@
   
   .save-make-basket-btn{
     background: #679436;
-    color: white;
+    color: #EBF2FA;
     padding: 10px;
     width: 150px;
     border-radius: 10px;
@@ -168,7 +167,7 @@
 
   .add-item-btn{
     background: #679436;
-    color: white;
+    color: #EBF2FA;
     padding: 10px;
     width: 100px;
     border-radius: 10px;
