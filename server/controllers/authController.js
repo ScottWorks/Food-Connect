@@ -3,12 +3,12 @@ const axios = require('axios')
 
 module.exports = {
     register: async (req, res, next) => {
-        const { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, userName, pw } = req.body
+        const { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, latitude, longitude, userName, pw } = req.body
         const db = req.app.get('db')
 
         let group;
         if (organizationType === 'non-profit') {
-            group = await db.register_np([organizationName, streetAddress, city, statee, zip, phoneNumber, specificType, firstName, lastName])
+            group = await db.register_np([organizationName, streetAddress, city, statee, zip, phoneNumber, latitude, longitude, specificType, firstName, lastName])
             // .then( group => {
             //     res.status(200).send(group.data)
             //     console.log("We created a non-profit!")
@@ -33,7 +33,7 @@ module.exports = {
         }
 
         if (organizationType === 'business') {
-            group = await db.register_business([organizationName, streetAddress, city, statee, zip, phoneNumber, specificType, firstName, lastName])
+            group = await db.register_business([organizationName, streetAddress, city, statee, zip, phoneNumber, latitude, longitude, specificType, firstName, lastName])
             // .then( group => {
             //     console.log("We created a new business!")
             //     res.status(200).send(group.data)

@@ -24,6 +24,8 @@ class Register extends Component {
             state: '',
             zip: '',
             country: '',
+            latitude: '',
+            longitude: '',
             firstName: '',
             lastName: '',
             phoneNumber: '',
@@ -65,6 +67,7 @@ class Register extends Component {
         this.handlePanelHeader3Click = this.handlePanelHeader3Click.bind(this);
         this.handlePanelHeader4Click = this.handlePanelHeader4Click.bind(this);
         this.getAddressFromAutoComplete = this.getAddressFromAutoComplete.bind(this);
+        this.getLatLngFromAutoComplete = this.getLatLngFromAutoComplete.bind(this);
     }
 
 
@@ -113,7 +116,7 @@ class Register extends Component {
             specificType: '',
             streetAddress: '',
             city: '',
-            statee: '',
+            state: '',
             zip: '',
             firstName: '',
             lastName: '',
@@ -132,10 +135,17 @@ class Register extends Component {
         this.setState({
             streetAddress: addressSplit[0],
             city: addressSplit[1],
-            state: stateSplit[0],
+            statee: stateSplit[0],
             zip: stateSplit[1],
             country: addressSplit[3]
         } )
+    }
+
+    getLatLngFromAutoComplete(latLng) {
+        this.setState({
+            latitude: latLng.lat,
+            longitude: latLng.lng
+        })
     }
 
     registerOrganization(e) {
@@ -149,8 +159,8 @@ class Register extends Component {
             alert('Passwords Do Not Match')
         } else {
 
-            const { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, userName, pw } = this.state
-            axios.post('/api/auth/register', { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, userName, pw }).then(account => {
+            const { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, latitude, longitude, userName, pw } = this.state
+            axios.post('/api/auth/register', { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, latitude, longitude, userName, pw }).then(account => {
                 console.log(account.data)
     
             }, this.clearInputs(), window.location.assign('/#/login'))
@@ -371,6 +381,7 @@ class Register extends Component {
                                 <SearchInput 
                                     // function from parent to get address data from child predictiveText component
                                     getAddress={this.getAddressFromAutoComplete}
+                                    getlatLng={this.getLatLngFromAutoComplete}
                                 />
                                 <input className='form-continue-button' onClick={(e)=>this.handleContinueClickPanel3(e)} type='submit' value='Continue'/>
                             </form>

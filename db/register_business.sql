@@ -6,6 +6,8 @@ INSERT INTO businesses
     state,
     zip_code,
     phone_number,
+    latitude,
+    longitude,
     business_type,
     admin_first_name,
     admin_last_name
@@ -20,6 +22,8 @@ VALUES
     $6,
     $7,
     $8,
-    $9
+    $9,
+    $10,
+    $11
 )
 RETURNING *;
