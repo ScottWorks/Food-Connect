@@ -19,16 +19,16 @@ class NonProfit extends React.Component {
       nonProfitID: 7,
       nonProfitInfo: '',
       baskets: [],
-      modifiedBaskets: [],
       scheduledBaskets: [],
       wishlist: []
     };
 
-    this.getBaskets = this.getBaskets.bind(this);
-    this.getScheduledBaskets = this.getScheduledBaskets.bind(this);
+    this.initializeComponent = this.initializeComponent.bind(this);
+    // this.getBaskets = this.getBaskets.bind(this);
+    // this.getScheduledBaskets = this.getScheduledBaskets.bind(this);
+    // this.getWishList = this.getWishList.bind(this);
     this.scheduleBasket = this.scheduleBasket.bind(this);
     this.cancelBasket = this.cancelBasket.bind(this);
-    this.getWishList = this.getWishList.bind(this);
     this.createWishList = this.createWishList.bind(this);
     this.addWishListItem = this.addWishListItem.bind(this);
     this.parent_editWishListItem = this.parent_editWishListItem.bind(this);
@@ -38,35 +38,83 @@ class NonProfit extends React.Component {
   }
 
   componentDidMount() {
-    this.getBaskets();
-    this.getScheduledBaskets();
-    this.getWishList();
+    this.initializeComponent();
   }
 
-  getBaskets() {
+  initializeComponent() {
+    const { nonProfitID } = this.state;
     const currentLocalTime = new Date().getTime();
     const businessIDs = [1, 2, 3, 4, 5, 6, 7, 8];
 
-    axios
+    let basketPromise = axios
       .post(`/api/basket/${currentLocalTime}`, { businessIDs })
       .then((baskets) => {
         this.setState({
           baskets: baskets.data
         });
       });
-  }
 
-  getScheduledBaskets() {
-    const { nonProfitID } = this.state;
+    let wishListPromise = axios
+      .get(`/api/wishlist/${nonProfitID}`)
+      .then((wishlist) => {
+        this.setState({
+          wishlist: wishlist.data[0]
+        });
+      });
 
-    axios
+    let schedulePromise = axios
       .get(`/api/scheduled/baskets/${nonProfitID}`)
       .then((scheduledBaskets) => {
         this.setState({
           scheduledBaskets: scheduledBaskets.data
         });
       });
+
+    Promise.all([basketPromise, wishListPromise, schedulePromise]).then(() => {
+      const { baskets, wishlist } = this.state;
+
+      let modifiedBaskets = sortUtil.sortByWishList(baskets, wishlist);
+
+      this.setState({
+        baskets: modifiedBaskets
+      });
+    });
   }
+
+  // getBaskets() {
+  //   const currentLocalTime = new Date().getTime();
+  //   const businessIDs = [1, 2, 3, 4, 5, 6, 7, 8];
+
+  //   axios
+  //     .post(`/api/basket/${currentLocalTime}`, { businessIDs })
+  //     .then((baskets) => {
+  //       this.setState({
+  //         baskets: baskets.data
+  //       });
+  //     });
+  // }
+
+  // getScheduledBaskets() {
+  //   const { nonProfitID } = this.state;
+
+  //   axios
+  //     .get(`/api/scheduled/baskets/${nonProfitID}`)
+  //     .then((scheduledBaskets) => {
+  //       this.setState({
+  //         scheduledBaskets: scheduledBaskets.data
+  //       });
+  //     });
+  // }
+
+  // getWishList() {
+  //   const { nonProfitID } = this.state;
+
+  //   axios.get(`/api/wishlist/${nonProfitID}`).then((wishlist) => {
+  //     this.setState({
+  //       wishlist: wishlist.data[0]
+  //     });
+  //   });
+  // }
 
   scheduleBasket(scheduledTime, phoneNumber, message, basketID) {
     const { nonProfitID } = this.state;
@@ -79,8 +127,7 @@ class NonProfit extends React.Component {
     });
 
     Promise.all([promise]).then(() => {
-      this.getScheduledBaskets();
-      this.getBaskets();
+      this.initializeComponent();
     });
 
     alert('Reservation Successful!');
@@ -95,28 +142,17 @@ class NonProfit extends React.Component {
     });
 
     Promise.all([promise]).then(() => {
-      this.getScheduledBaskets();
-      this.getBaskets();
+      this.initializeComponent();
     });
 
     alert('Reservation Canceled!');
-  }
-
-  getWishList() {
-    const { nonProfitID } = this.state;
-
-    axios.get(`/api/wishlist/${nonProfitID}`).then((wishlist) => {
-      this.setState({
-        wishlist: wishlist.data[0]
-      });
-    });
   }
 
   createWishList() {
     const { nonProfitID } = this.state;
 
     axios.post(`/api/wishlist/${nonProfitID}`).then(() => {
-      this.getWishList();
+      this.initializeComponent();
     });
   }
 
@@ -146,46 +182,46 @@ class NonProfit extends React.Component {
     axios
       .put(`/api/wishlist/modify/${nonProfitID}`, { updatedWishList })
       .then(() => {
-        this.getWishList();
+        this.initializeComponent();
       });
   }
 
   sortBaskets(sortType) {
-    const { baskets, wishlist } = this.state;
+    const { baskets, wishList } = this.state;
     let modifiedBaskets;
 
     switch (sortType) {
       case 'wishlist':
-        modifiedBaskets = sortUtil.sortByWishList(baskets, wishlist);
-        console.log(modifiedBaskets);
+        if (wishList && wishList.items > 0) {
+          modifiedBaskets = sortUtil.sortByWishList(baskets, wishList);
+          this.setState({
+            baskets: modifiedBaskets
+          });
+        } else {
+          alert('Add items to Wish List!');
+        }
+        break;
+
+      case 'latest':
+        console.log('latest');
+        modifiedBaskets = sortUtil.sortRecent(baskets);
         this.setState({
           baskets: modifiedBaskets
         });
         break;
 
-      case 'newestFirst':
-        console.log('newestFirst');
-        this.getBaskets();
-        break;
-
-      case 'oldestFirst':
-        console.log('oldestFirst');
-        break;
-
-      default:
-        modifiedBaskets = sortUtil.sortByWishList(baskets, wishlist);
+      case 'oldest':
+        console.log('oldest');
+        modifiedBaskets = sortUtil.sortOldest(baskets);
         this.setState({
           baskets: modifiedBaskets
         });
+        break;
     }
   }
 
   render() {
     const { baskets, scheduledBaskets, wishlist } = this.state;
-
-    () => {
-      this.sortBaskets();
-    };
 
     return (
       <main className="mobile">

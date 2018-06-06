@@ -3,15 +3,8 @@ import React from 'react';
 class Sort extends React.Component {
   constructor() {
     super();
-    this.state = {
-      active: ''
-    };
 
     this.handleChange = this.handleChange.bind(this);
-  }
-
-  componentDidMount() {
-    this.props._sortBaskets('wishlist');
   }
 
   handleChange(sortBy) {
@@ -19,13 +12,17 @@ class Sort extends React.Component {
   }
 
   render() {
-    const { active } = this.state;
     return (
       <div>
         <h3>Sort By:</h3>
-        <button onClick={() => this.handleChange('wishlist')}>Wish List</button>
-        <button onClick={() => this.handleChange('newestFirst')}>
-          Newest First
+        <button onClick={() => this.props._sortBaskets('wishlist')}>
+          Wish List
+        </button>
+        <button onClick={() => this.props._sortBaskets('latest')}>
+          Latest
+        </button>
+        <button onClick={() => this.props._sortBaskets('oldest')}>
+          Oldest
         </button>
       </div>
     );

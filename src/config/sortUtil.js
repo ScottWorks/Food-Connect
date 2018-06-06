@@ -1,4 +1,6 @@
 function sortByWishList(baskets, wishList) {
+  baskets = sortRecent(baskets);
+
   let idx = 0,
     matchedItems = [],
     sortedBaskets = [...baskets];
@@ -31,6 +33,36 @@ function sortByWishList(baskets, wishList) {
   return mergeLists(matchedItems, sortedBaskets);
 }
 
+function sortRecent(baskets) {
+  let sortedBaskets = [...baskets];
+
+  for (let i = 0; i < sortedBaskets.length - 1; i++) {
+    for (let j = 0; j < sortedBaskets.length - 1; j++) {
+      if (sortedBaskets[j].pick_up_time < sortedBaskets[j + 1].pick_up_time) {
+        let temp = sortedBaskets[j];
+        sortedBaskets[j] = sortedBaskets[j + 1];
+        sortedBaskets[j + 1] = temp;
+      }
+    }
+  }
+  return sortedBaskets;
+}
+
+function sortOldest(baskets) {
+  let sortedBaskets = [...baskets];
+
+  for (let i = 0; i < sortedBaskets.length - 1; i++) {
+    for (let j = 0; j < sortedBaskets.length - 1; j++) {
+      if (sortedBaskets[j].pick_up_time > sortedBaskets[j + 1].pick_up_time) {
+        let temp = sortedBaskets[j];
+        sortedBaskets[j] = sortedBaskets[j + 1];
+        sortedBaskets[j + 1] = temp;
+      }
+    }
+  }
+  return sortedBaskets;
+}
+
 function mergeLists(matchedItems, sortedBaskets) {
   let mergedList = [...sortedBaskets];
 
@@ -41,4 +73,4 @@ function mergeLists(matchedItems, sortedBaskets) {
   return mergedList;
 }
 
-export { sortByWishList, mergeLists };
+export { sortByWishList, sortRecent, sortOldest };
