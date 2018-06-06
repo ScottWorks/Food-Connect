@@ -14,7 +14,9 @@ function sortByWishList(baskets, wishList) {
         let wishListItems = wishList.items;
 
         wishListItems.forEach((wishListItem) => {
-          if (basketItem.item === wishListItem.item) {
+          if (
+            basketItem.item.toLowerCase() === wishListItem.item.toLowerCase()
+          ) {
             flag = true;
           }
           return flag;
@@ -29,7 +31,6 @@ function sortByWishList(baskets, wishList) {
       idx++;
     });
   }
-
   return mergeLists(matchedItems, sortedBaskets);
 }
 

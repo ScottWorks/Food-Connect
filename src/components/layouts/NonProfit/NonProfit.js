@@ -9,6 +9,7 @@ import Search from './Search/Search';
 import Sort from './Sort/Sort';
 import WishList from './WishList/WishList';
 
+import * as searchUtil from '../../../config/searchUtil';
 import * as sortUtil from '../../../config/sortUtil';
 
 import './NonProfit.css';
@@ -38,6 +39,7 @@ class NonProfit extends React.Component {
     this.removeWishListItem = this.removeWishListItem.bind(this);
     this.modifyWishListItem = this.modifyWishListItem.bind(this);
     this.sortBaskets = this.sortBaskets.bind(this);
+    this.searchBaskets = this.searchBaskets.bind(this)
   }
 
   componentDidMount() {
@@ -48,6 +50,8 @@ class NonProfit extends React.Component {
     const { nonProfitID } = this.state;
     const currentLocalTime = new Date().getTime();
     const businessIDs = [1, 2, 3, 4, 5, 6, 7, 8];
+    // const businessIDs = [60, 70, 80];
+    
 
     let basketPromise = axios
       .post(`/api/basket/${currentLocalTime}`, { businessIDs })
@@ -76,11 +80,13 @@ class NonProfit extends React.Component {
     Promise.all([basketPromise, wishListPromise, schedulePromise]).then(() => {
       const { baskets, wishList } = this.state;
 
-      let modifiedBaskets = sortUtil.sortByWishList(baskets, wishList);
+      if (baskets.length > 0) {
+        let modifiedBaskets = sortUtil.sortByWishList(baskets, wishList);
 
-      this.setState({
-        baskets: modifiedBaskets
-      });
+        this.setState({
+          baskets: modifiedBaskets
+        })
+      }
     });
   }
 
@@ -200,32 +206,44 @@ class NonProfit extends React.Component {
     const { baskets, wishList } = this.state;
     let modifiedBaskets;
 
-    switch (sortType) {
-      case 'wishlist':
-        if (wishList.items.length > 0) {
-          modifiedBaskets = sortUtil.sortByWishList(baskets, wishList);
+    if (baskets.length > 0) {
+      switch (sortType) {
+        case 'wishlist':
+          if (wishList.items && wishList.items.length > 0) {
+            modifiedBaskets = sortUtil.sortByWishList(baskets, wishList);
+            this.setState({
+              baskets: modifiedBaskets
+            });
+          } else {
+            alert('Add items to Wish List!');
+          }
+          break;
+
+        case 'latest':
+          modifiedBaskets = sortUtil.sortRecent(baskets);
           this.setState({
             baskets: modifiedBaskets
           });
-        } else {
-          alert('Add items to Wish List!');
-        }
-        break;
+          break;
 
-      case 'latest':
-        modifiedBaskets = sortUtil.sortRecent(baskets);
-        this.setState({
-          baskets: modifiedBaskets
-        });
-        break;
+        case 'oldest':
+          modifiedBaskets = sortUtil.sortOldest(baskets);
+          this.setState({
+            baskets: modifiedBaskets
+          });
+          break;
+      }
+    }  
+  }
 
-      case 'oldest':
-        modifiedBaskets = sortUtil.sortOldest(baskets);
-        this.setState({
-          baskets: modifiedBaskets
-        });
-        break;
-    }
+  searchBaskets(keyword) {
+    const { baskets } = this.state;
+
+    let modifiedBaskets = searchUtil.searchBaskets(baskets, keyword);
+
+    this.setState({
+      baskets: modifiedBaskets
+    });
   }
 
   render() {
@@ -252,7 +270,7 @@ class NonProfit extends React.Component {
           _cancelBasket={this.cancelBasket}
         />
         <h2>Available Baskets</h2>
-        <Search _searchInput={searchInput} _handleChange={this.handleChange} />
+        <Search _searchInput={searchInput} _handleChange={this.handleChange} searchBaskets={this.searchBaskets} />
         <Sort _sortBaskets={this.sortBaskets} />
         <NonProfitBasketList
           _baskets={baskets}
