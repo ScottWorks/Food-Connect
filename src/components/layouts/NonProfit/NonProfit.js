@@ -34,13 +34,18 @@ class NonProfit extends React.Component {
     this.removeWishListItem = this.removeWishListItem.bind(this);
     this.modifyWishListItem = this.modifyWishListItem.bind(this);
     this.getUserInfo = this.getUserInfo.bind(this);
+    this.displayBusinessToMap = this.displayBusinessToMap.bind(this);
   }
 
   componentDidMount() {
     this.getBaskets();
     this.getScheduledBaskets();
     this.getWishList();
-    this.getUserInfo();
+    this.getUserInfo();    
+  }
+
+  componentWillUpdate() {
+    this.displayBusinessToMap()    
   }
 
   getUserInfo() {
@@ -59,6 +64,7 @@ class NonProfit extends React.Component {
     axios
       .post(`/api/basket/${currentLocalTime}`, { businessIDs })
       .then((baskets) => {
+        console.log(baskets)
         this.setState({
           baskets: baskets.data
         });
@@ -157,6 +163,16 @@ class NonProfit extends React.Component {
       .then(() => {
         this.getWishList();
       });
+  }
+
+  displayBusinessToMap() {
+    let arr = []
+    let { baskets } = this.state
+
+    for(let i = 0; i < baskets.length; i++) {
+      arr.push(baskets[i].business_id)
+    }
+    console.log(arr.sort( (a,b) => a - b))
   }
 
   render() {
