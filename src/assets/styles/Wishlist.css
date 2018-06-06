@@ -1,6 +1,68 @@
 /* FOR MOBILE DEVICES */
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    .wishlist-add-container{
+        margin: 10px 0;
+        padding: 5px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .wishlist-add-container button {
+        padding: 1px;
+        border: 0;     
+        background: #679436;
+        color: #EBF2FA;
+        border-radius: 5px;
+        font-size: 1em;
+        line-height: 1.25em;
+        margin-right: 10px;
+        width: 80px;
+    }
+
+    .wishlist-add-container input {
+        font-size: 1em;
+    }
+
+    .wishlist-add-container input:focus{
+        border: #A5BE00 solid;
+            outline: 0;
+    }
+
     
+    .wishlist-items-container{
+        
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px;
+        width: 95%;
+        margin-top: 10px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .wishlist-items-container p {
+        font-weight: bold;
+        font-size: 1em;
+        line-height: 1.25em;
+    }
+
+    .wishlist-items-container-btns {
+        
+        display: flex;
+    }
+
+    .wishlist-items-container-btns button{
+        padding: 1px;
+        border: 0;     
+        background: #679436;
+        color: #EBF2FA;
+        border-radius: 5px;
+        font-size: 1em;
+        line-height: 1.25em;
+        margin-left: 20px;
+        width: 80px;
+    }
 }
 
 /* TABLET VIEW */

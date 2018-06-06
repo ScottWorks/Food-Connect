@@ -69,12 +69,14 @@ class WishList extends React.Component {
 
     const wishlist = _wishlist ? (
       <div>
+        <div className='wishlist-add-container'>
         <button onClick={() => this.addWishListItem()}>Add Item</button>
         <input
           value={newItem}
           type="text"
           onChange={(e) => this.handleChange('newItem', e.target.value)}
         />
+        </div>
         <DisplayWishList
           _edit={edit}
           _editItemIdx={editItemIdx}
@@ -124,10 +126,12 @@ const DisplayWishList = ({
         );
       } else {
         return (
-          <div key={idx}>
+          <div className='wishlist-items-container' key={idx}>
             <p>{elem.item}</p>
-            <button onClick={() => _toggleEdit(idx)}>Edit</button>
-            <button onClick={() => _removeWishListItem(idx)}>Delete</button>
+            <div className='wishlist-items-container-btns'>
+              <button onClick={() => _toggleEdit(idx)}>Edit</button>
+              <button onClick={() => _removeWishListItem(idx)}>Delete</button>
+            </div>
           </div>
         );
       }
