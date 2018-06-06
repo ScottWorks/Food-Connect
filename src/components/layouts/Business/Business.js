@@ -29,7 +29,6 @@ class Business extends React.Component {
     })
     this.checkIfMobile;
     window.addEventListener('resize', this.checkIfMobile)
-
   }
 
   componentWillUnmount(){
@@ -37,7 +36,7 @@ class Business extends React.Component {
   }
 
   checkIfMobile(){
-    this.setState({hideChart: !(window.innerWidth > 667)})
+    this.setState({hideChart: (window.innerWidth < 667)})
   }
 
   render() {
@@ -60,9 +59,8 @@ class Business extends React.Component {
           }
         </div>
         <div className='business-table-list-container'>
-        <BusinessTable className='business-table-container'/>
-        <BusinessBasketList className='business-basket-list-container'/>
-
+          <BusinessTable className='business-table-container'/>
+          <BusinessBasketList className='business-basket-list-container'/>
         </div>
       </div>
     );
