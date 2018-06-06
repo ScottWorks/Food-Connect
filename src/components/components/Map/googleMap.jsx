@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 // import Map from './map'
 import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react'
 // import SearchInput from './placesAutoComplete'
+import blueIcon from '../../../assets/icons/map-blue.png'
 
   export class Container extends Component {
       constructor(props) {
@@ -63,7 +64,8 @@ import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react'
 
           let displayMarkers = markers.map( (marker, i) => {
               return (
-              <Marker key={i} 
+              <Marker 
+                key={i} 
                 position={{lat: marker.lat, lng: marker.lng } } 
                 name={marker.name}
                 onClick={this.onMarkerClick}
@@ -78,6 +80,7 @@ import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react'
           return (
               <div style={style}>
                 <Map
+                    className={'map'}
                     style={style}
                     google={this.props.google}
                     initialCenter={this.props.mapCenter}           
@@ -87,7 +90,7 @@ import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react'
                     <Marker
                         name={this.props.npName}
                         onClick={this.onMarkerClick}
-                        />
+                     />
                 {/* Displays 'Marker components' from an array of coordinates. Will render from an unknown array length. */}
                 {/* {displayMarkers} */}
 
