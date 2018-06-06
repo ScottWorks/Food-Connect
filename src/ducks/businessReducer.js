@@ -120,10 +120,9 @@ export default function reducer(state = initialState, action) {
 
     case EDIT_BASKET: 
       if(!state.editingBasket) {
-        var otherBaskets = state.baskets
-        var selectedBasket = state.baskets[action.payload]
-        otherBaskets.splice(action.payload, 1)
-        console.log(JSON.stringify(selectedBasket))
+        var otherBaskets = state.baskets.slice()
+        var selectedBasket = otherBaskets.splice(action.payload, 1)[0]
+        console.log(selectedBasket.pick_up_time)
         return Object.assign({}, state, {
           items: selectedBasket.items, 
           pick_up_time: selectedBasket.pick_up_time,
@@ -132,6 +131,7 @@ export default function reducer(state = initialState, action) {
           currentBasketID: selectedBasket.basket_id
         })
       }
+      return state
 
     case DELETE_ITEM:
       var deleteItemsArr = state.items.slice()

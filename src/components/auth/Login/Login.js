@@ -4,6 +4,8 @@ import Modal from 'react-modal';
 import Header from "../../components/Header/Header.js";
 import Footer from "../../components/Footer/Footer.js";
 import "./Login.css"
+import {Link} from 'react-router-dom';
+import Particles from 'react-particles-js';
 
 export default class Auth extends Component {
     constructor() {
@@ -12,12 +14,23 @@ export default class Auth extends Component {
         this.state = {
             userName: '',
             pw: '',
-            modalIsOpen: false
+            isMobile: true
         }
-        this.openModal = this.openModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
+        this.updateDevice = this.updateDevice.bind(this);
     }
 
+    componentDidMount(){
+        this.updateDevice();
+        window.addEventListener("resize", this.updateDevice)
+    }
+
+    componentWillMount(){
+        window.removeEventListener("resize", this.updateDevice)
+    }
+
+    updateDevice(){
+        this.setState({isMobile: window.innerWidth <= 667})
+    }
     handleClick() {
         axios.post('/api/auth/login',{ userName: this.state.userName, pw: this.state.pw }).then( res => {
             if(res.data === 'You are the chosen one!') {
@@ -34,75 +47,72 @@ export default class Auth extends Component {
         })
     }
 
-    //Function for opening the modal
-    openModal() {
-        this.setState({ modalIsOpen: true });
-    }
-    //Function for closing the modal
-    closeModal() {
-        this.setState({ modalIsOpen: false });
-    }
-
     render() {
-        console.log(window.location)
+        
+        // Particles JS Options;
+        const particlesParams = {
+            particles: {
+                number: {
+                    value: 20
+                },
+                size: {
+                    value: 9.7
+                },
+                line_linked:{
+                    enable_auto: false,
+                    width: 0,
+                    distance: 0,
+                    opacity: 0
+                },
+                color: {
+                    value: "#A5BE00"
+                }
+
+            }
+        }
+
         const { userName, pw } = this.state
         return (
-            <div>
+            <div className='login-container'>
                 <Header />
                 <div className='login_wrapper'>
-                    {/*Bringing in the Modal component.*/}
-                    <Modal
-                        isOpen={this.state.modalIsOpen}
-                        onAfterOpen={this.afterOpenModal}
-                        onRequestClose={this.closeModal}
-                        style={modalStyles}
-                        contentLabel="FAQ Modal"
-                    >
-                        <div className="FAQ_contents">
-                            <h3>Frequently Asked Questions</h3>
-                            <h4>What do we do?</h4>
-                            <p>We uhhh take your expiring food, and give it to someone in need!</p>
-                            <h4>What is in it for me?</h4>
-                            <p>You get to help those in need, and receive a nifty tax refund.</p>
-                            <h4>What if I don't want to save people with my food?</h4>
-                            <p>Then you are a bad person...</p>
-                        </div>
-                    </Modal>
-                    <span>Username</span>
-                    <input
+
+                    <form className='login-form'>
+                    <div className='login-in-header'>
+                        <h2>Please Sign In</h2>
+                    </div>
+                    <h2>Username</h2>
+                    <input required='true' 
+                    name='username'
                         onChange={(e) => this.setState({ userName: e.target.value })}
                         type='text'
                     />
-                    <span>Password</span>
+                    <h2>Password</h2>
                     <input
+                    required='true' 
                         onChange={(e) => this.setState({ pw: e.target.value })}
                         type='password'
                     />
-                    <div>
-                        <button onClick={() => this.handleClick(userName, pw)}>Login</button>
-                    </div>
+                    
+                        <button type='submit' onClick={() => this.handleClick(userName, pw)}>LOGIN</button>
+                    
+                    </form>
+
+                    <section className='register-text'>
+                        <p>New to Crumb? <Link to='/register'>Please Register</Link></p>
+                    </section>
                 </div>
-                <Footer handler={this.openModal} />
+
+                {/* Conditionally Render the Particle Div JS based on Device Size */}
+                {
+                    this.state.isMobile ? null : (
+                        <div className='particles-side-container'>
+                            <Particles params={particlesParams} className='particles-js'/>
+                            <h1>crumb</h1>
+                        </div>
+                    )
+                }
             </div>
         )
     }
-
 }
-
-//Style for the modal
-const modalStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)'
-    }
-};
-
-// let mapStateToProps = (state) => {
-//     return state
-// }
-
-// export default connect(mapStateToProps, {} )(Auth)
