@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { deleteBasket, editBasket } from '../../../../../ducks/businessReducer'
-import { fromEpoch } from '../../../../../config/timeConversion'
-import './BusinessBasket.css'
+import { fromEpoch } from '../../../../../config/timeUtil'
+import './BusinessBasket.css';
+import * as utilFunc from '../../../../../config/analyticsUtil'
 
 function BusinessBasket(props) {
 
@@ -13,12 +14,13 @@ function BusinessBasket(props) {
           className="bus-basket-item"
           key={e.item + i}
         >
-          <p>Item:</p>
-          <p>{e.item}</p>
-          <p>Weight:</p>
-          <p>{e.weight}</p>
-          <p>Fair Market Value:</p>
-          <p>{e.FMV}</p>
+          <div className='item-weight'>
+            <p>{e.item}</p>
+          
+            <p>{e.weight} lbs</p>
+          
+            <p>${utilFunc.formatNumber(Number(e.FMV), 2, 3, ',', '.')}</p>
+          </div>
         </div>
       )
     })
@@ -54,17 +56,23 @@ function BusinessBasket(props) {
 
   return (
     <div className="BusinessBasket">
+      <div className='business-basket-btn-grp'>
+        <button
+          className='business-basket-edit-btn'
+          onClick={() => props.editBasket(props.index)}
+          >Edit</button>
       <button
-        onClick={() => props.editBasket(props.index)}
-      >Edit</button>
-      <button
-        onClick={() => props.deleteBasket({index: props.index, id: props.basket.basket_id})}
-      >Delete</button>
-      <div>
-        <p>{props.basket ? checkStatus : ''}</p>
-        <p>{props.basket ? fromEpoch(props.basket.pick_up_time, 'ddd, MMM Do, h:mm a') : ''}</p>
-        {items}
+          className='business-basket-edit-btn'
+          onClick={() => props.deleteBasket({index: props.index, id: props.basket.basket_id})}
+          >Delete</button>
       </div>
+
+      <div className='business-basket-info-contain'>
+          <p className='basket-status'>{props.basket ? checkStatus : ''}</p>
+          <p>{props.basket ? fromEpoch(props.basket.pick_up_time, 'ddd, MMM Do, h:mm a') : ''}</p>
+          {items}
+      </div>
+
     </div>
   );
 }
