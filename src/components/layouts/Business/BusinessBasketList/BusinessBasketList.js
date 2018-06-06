@@ -4,6 +4,7 @@ import BusinessBasket from './BusinessBasket/BusinessBasket'
 import BusinessItems from './BusinessItems/BusinessItems'
 
 function BusinessBasketList(props) {
+
   if(props.items.length) {
     var itemCards = props.items.map((e, i) => {
       return (
@@ -15,16 +16,19 @@ function BusinessBasketList(props) {
       )
     })
   }
+
   if(props.baskets.length) {
     var basketCards = props.baskets.map((e, i) => {
       return (
         <BusinessBasket
           basket={e}
           index={i}
+          key={props.baskets.basket_id + `${i}`}
         />
       )
     })
   }
+
   return (
     <div className="BusinessBasketList">
       <div>

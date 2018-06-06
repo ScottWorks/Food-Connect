@@ -1,6 +1,7 @@
 .bus-top-bar {
   width: 100%;
   height: 250px;
+  margin-top: 75px;
   background: white;
   display: flex;
   justify-content: center;

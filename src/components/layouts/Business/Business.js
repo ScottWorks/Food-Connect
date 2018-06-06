@@ -9,22 +9,10 @@ import Footer from '../../components/Footer/Footer'
 import './Business.css'
 
 class Business extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      items: [],
-      baskets: [],
-      pick_up_time: 0,
-      fromBasket: false,
-      currentBasketID: -1
-    }
-  }
 
-  //When component mounts get unexpired baskets that belong to this business
   componentDidMount() {
     var temp = 1
-    var epochTime = (new Date).getTime()
-    axios.get(`/api/basket/${temp}/${epochTime}`).then(res => {
+    axios.get(`/api/basket/${temp}/${(new Date).getTime()}`).then(res => {
       this.props.setBasket(res.data)
     })
   }
@@ -34,7 +22,7 @@ class Business extends React.Component {
       <div className="Business">
         <Header />
         <div className="bus-top-bar">
-          <h1>Business Stats</h1>
+
         </div>
         <BusinessTable />
         <BusinessBasketList />

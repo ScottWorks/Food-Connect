@@ -1,8 +1,8 @@
 import React from 'react'
-import moment from 'moment'
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 import { connect } from 'react-redux'
+import { toEpoch, fromEpoch } from '../../../../config/timeUtil'
 import { addItemToBasket, makeBasket, saveBasket } from '../../../../ducks/businessReducer'
 import './BasketTable.css'
 
@@ -18,34 +18,23 @@ class BasketTable extends React.Component {
     }
   }
 
-  //This function converts the time and data objects stored on state and
-  //converts the to to milliseconds from epoch, it also constructs an items object,
-  //and passes it up to the parent
   prepToAddItem() {
-    let momentTime = moment(this.state.expirationTime),
-        momentDate = moment(this.state.expirationDate),
-        hours = this.addZeroToFrontHelper(momentTime.hours()),
-        minutes = this.addZeroToFrontHelper(momentTime.minutes()),
-        months = this.addZeroToFrontHelper(momentDate.month() + 1),
-        days = this.addZeroToFrontHelper(momentDate.date()),
-        years = this.addZeroToFrontHelper(momentDate.year()),
-        timeString = '',
-        itemObj = {}
-
-    timeString = `${years}-${months}-${days} ${hours}:${minutes}`
-    itemObj = {
-      item: this.state.item,
-      weight: this.state.weight,
-      FMV: this.state.fairMarketValue,
-      pick_up_time: moment(timeString).format('x')
+    if(this.state.expirationDate && this.state.expirationTime) {
+      var itemObj = {
+        item: this.state.item,
+        weight: this.state.weight,
+        FMV: this.state.fairMarketValue,
+        pick_up_time: toEpoch(this.state.expirationDate, this.state.expirationTime)
+      }
+      this.props.addItemToBasket(itemObj)
+      this.setState({item: '', weight: '', fairMarketValue: ''})
+    } else {
+      alert('Please and a date and time.')
     }
-    this.props.addItemToBasket(itemObj)
-    this.setState({item: '', weight: '', fairMarketValue: ''})
   }
 
-  //This function formats currency on the onChange 
   formatCurrencyHelper(input) {
-    let value = new String(input);
+    let value = String(input);
     // remove all characters that aren't digit or dot
     value = value.replace(/[^0-9.]/g,'');
     // replace multiple dots with a single dot
@@ -59,14 +48,6 @@ class BasketTable extends React.Component {
     this.setState({fairMarketValue: value})
   }
 
-  //helper function to prepToAddItem make sure everything is formatted properly
-  addZeroToFrontHelper(num) {
-    if(num < 10) {
-      return `0${num}`
-    } else {
-      return `${num}`
-    }
-  }
   prepBasket() {
     let basketObj = {
       business_id: 1, //Change this!!!
@@ -75,14 +56,11 @@ class BasketTable extends React.Component {
       items: JSON.stringify(this.props.items)
     }
     if(this.props.editingBasket) {
-      console.log(basketObj)
       this.props.saveBasket(this.props.currentBasketID, basketObj)
     } else {
-      console.log(basketObj)
       this.props.makeBasket(basketObj)
     }
   }
-  
   
   render() {
     return (
@@ -103,6 +81,9 @@ class BasketTable extends React.Component {
             onChange={(x, time) => this.setState({expirationTime: time})}
             hintText="Time"
           />
+        </div>
+        <div>
+          <p>{this.props.editingBasket ? fromEpoch(this.props.pick_up_time, 'ddd, MMM Do, h:mm a') : ''}</p>
         </div>
         <div>
           <input 
@@ -132,13 +113,14 @@ class BasketTable extends React.Component {
     );
   }
 }
+
 function mapStateToProps(state) {
   return {
     editingBasket: state.businessReducer.editingBasket,
     pick_up_time: state.businessReducer.pick_up_time,
     items: state.businessReducer.items,
+    baskets: state.businessReducer.baskets,
     currentBasketID: state.businessReducer.currentBasketID
-
     //business_id: state.businessReducer.business_id, Change this!!!
   }
 }

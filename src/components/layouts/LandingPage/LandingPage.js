@@ -96,7 +96,9 @@ class LandingPage extends Component {
                         </div>
                     </section>
                     <hr/>
+                    <div className='footer-landing' >
                         <Footer handler={this.openModal} />
+                    </div>
                 </div>
             </div>
         )
