@@ -18,7 +18,6 @@ function Search(props) {
           onChange={(e) => _handleChange('searchInput', e.target.value)}
         />
       </form>
-      {/* <button onClick={() => _searchBaskets()}>Search</button> */}
       <button onClick={() => _initializeComponent()}>Reset</button>
     </div>
   );

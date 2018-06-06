@@ -1,7 +1,22 @@
 module.exports = {
+  getUserInfo: (req, res, next) => {
+    const db = req.app.get('db')
+    const { userID } = req.params
+
+    db
+    .np_getUserInfo([userID])
+    .then( userInfo => {
+      res.status(200).send(userInfo)
+    }, (userInfo) => console.log(userInfo))
+    .catch( () => {
+      res.sendStatus(500)
+    })
+  },
+
   getScheduledBaskets: (req, res) => {
     const db = req.app.get('db');
     const { nonProfitID } = req.params;
+    
 
     db
       .np_getScheduledBaskets([nonProfitID])
@@ -12,6 +27,7 @@ module.exports = {
         res.sendStatus(500);
       });
   },
+
   getBaskets: (req, res) => {
     const db = req.app.get('db');
     const { currentLocalTime } = req.params;

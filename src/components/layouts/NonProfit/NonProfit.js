@@ -13,13 +13,14 @@ import * as searchUtil from '../../../config/searchUtil';
 import * as sortUtil from '../../../config/sortUtil';
 
 import './NonProfit.css';
+import MapContainer from '../../components/Map/googleMap';
 
 class NonProfit extends React.Component {
   constructor() {
     super();
     this.state = {
-      nonProfitID: 7,
-      nonProfitInfo: '',
+      nonProfitID: 9,
+      nonProfitInfo: {},
       baskets: [],
       wishList: [],
       scheduledBaskets: [],
@@ -27,6 +28,8 @@ class NonProfit extends React.Component {
     };
 
     this.initializeComponent = this.initializeComponent.bind(this);
+    this.getUserInfo = this.getUserInfo.bind(this);
+    this.displayBusinessToMap = this.displayBusinessToMap.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.scheduleBasket = this.scheduleBasket.bind(this);
     this.cancelBasket = this.cancelBasket.bind(this);
@@ -41,6 +44,11 @@ class NonProfit extends React.Component {
 
   componentDidMount() {
     this.initializeComponent();
+    this.getUserInfo();
+  }
+
+  componentWillUpdate() {
+    this.displayBusinessToMap();
   }
 
   initializeComponent() {
@@ -52,6 +60,7 @@ class NonProfit extends React.Component {
     let basketPromise = axios
       .post(`/api/basket/${currentLocalTime}`, { businessIDs })
       .then((baskets) => {
+        console.log(baskets);
         this.setState({
           baskets: baskets.data
         });
@@ -83,6 +92,15 @@ class NonProfit extends React.Component {
           baskets: modifiedBaskets
         });
       }
+    });
+  }
+
+  getUserInfo() {
+    // change axios request to send user_id based on session after longin when routing and auth are fully implemented.
+    axios.get(`/api/nonprofit/${+this.state.nonProfitID}`).then((userData) => {
+      this.setState({
+        nonProfitInfo: userData.data[0]
+      });
     });
   }
 
@@ -218,12 +236,39 @@ class NonProfit extends React.Component {
       });
   }
 
+  displayBusinessToMap() {
+    let arr = [];
+    let { baskets } = this.state;
+
+    for (let i = 0; i < baskets.length; i++) {
+      arr.push(baskets[i].business_id);
+    }
+    console.log(arr.sort((a, b) => a - b));
+  }
+
   render() {
-    const { baskets, scheduledBaskets, wishList, searchInput } = this.state;
+    const {
+      nonProfitInfo,
+      baskets,
+      wishList,
+      scheduledBaskets,
+      searchInput
+    } = this.state;
 
     return (
       <main className="mobile">
         <Header />
+        <div>
+          <MapContainer
+            mapCenter={{
+              lat: nonProfitInfo.latitude,
+              lng: nonProfitInfo.longitude
+            }}
+            npName={nonProfitInfo.company_name}
+            address={nonProfitInfo.street_address}
+            city={`${nonProfitInfo.city} ${nonProfitInfo.state}`}
+          />
+        </div>
         <div className="nonprofit_main">
           <h2>Non Profit Page</h2>
         </div>

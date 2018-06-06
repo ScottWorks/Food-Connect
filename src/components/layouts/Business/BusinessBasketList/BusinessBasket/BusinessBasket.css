@@ -1,19 +1,200 @@
-.BusinessBasket {
-  max-width: 1000px;
-  width: 80%;
-  height: fit-content;
-  padding: 25px;
-  background: lightgreen;
-  border-radius: 10px;
-  margin: 25px auto;
+/* FOR MOBILE DEVICES */
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px){
+  .BusinessBasket {
+    max-width: 1000px;
+    width: 90%;
+    height: fit-content;
+    padding: 25px;
+    background: white;
+    border-radius: 10px;
+    margin: 25px auto;
+    border: 1px solid #427AA1;
+    box-shadow: 0 4px 8px 0 rgba(66, 122, 161, 0.2), 0 6px 20px 0 rgba(66, 122, 161, 0.19);
+  }
+  
+  .bus-basket-item {
+    display: flex;
+    flex-direction: column;
+    font-size: 1em;
+    line-height: 1.235em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-top: 1px dashed #427AA1;
+  }
+
+  .item-weight{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1px;
+  }
+
+  .item-weight :nth-child(2){
+    text-align: center;
+    width: 33%;
+  }
+
+  .item-weight :nth-child(1){
+    text-align: left;
+    width: 33%;
+  }
+
+  .item-weight :nth-child(3){
+    text-align: right;
+    width: 33%;
+  }
+
+  .business-basket-btn-grp{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .business-basket-edit-btn{
+    background: #679436;
+    color: white;
+    padding: 4px;
+    width: 70px;
+    border-radius: 10px;
+    font-size: 1em;
+    border:0;
+  }
+
+  .business-basket-edit-btn:hover{
+    background: #427AA1;
+  }
+
+  .business-basket-info-contain{
+    font-size: 1em;
+    line-height: 1.25em;
+    margin-bottom: 5px;
+  }
+
+  .basket-status{
+    font-weight: bold;
+  }
 }
 
-.bus-basket-item {
-  height: 16px;
-  display: flex;
-  font-size: 16px;
-  line-height: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
+/* TABLET VIEW */
+@media only screen and (min-device-width: 668px) and (max-device-width: 1199px){
+  .BusinessBasket {
+    max-width: 1000px;
+    width: 90%;
+    height: fit-content;
+    padding: 25px;
+    background: white;
+    border-radius: 10px;
+    margin: 25px auto;
+    border: 1px solid #427AA1;
+    box-shadow: 0 4px 8px 0 rgba(66, 122, 161, 0.2), 0 6px 20px 0 rgba(66, 122, 161, 0.19);
+  }
+  
+  .bus-basket-item {
+    display: flex;
+    font-size: 1em;
+    line-height: 1.235em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-top: 1px dashed #427AA1;
+  }
+
+  .item-weight{
+    margin-bottom: 1px;
+  }
+
+  .business-basket-btn-grp{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .business-basket-edit-btn{
+    background: #679436;
+    color: white;
+    padding: 4px;
+    width: 70px;
+    border-radius: 10px;
+    font-size: 1em;
+    border:0;
+  }
+
+  .business-basket-edit-btn:hover{
+    background: #427AA1;
+  }
+
+  .business-basket-info-contain{
+    font-size: 1em;
+    line-height: 1.25em;
+    margin-bottom: 5px;
+  }
+
+  .basket-status{
+    font-weight: bold;
+  }
 }
+
+
+
+
+/* DESKTOP VIEW */
+@media screen  and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1){
+  .BusinessBasket {
+    max-width: 1000px;
+    width: 90%;
+    height: fit-content;
+    padding: 25px;
+    background: white;
+    border-radius: 10px;
+    margin: 25px auto;
+    border: 1px solid #427AA1;
+    box-shadow: 0 4px 8px 0 rgba(66, 122, 161, 0.2), 0 6px 20px 0 rgba(66, 122, 161, 0.19);
+  }
+  
+  .bus-basket-item {
+    display: flex;
+    font-size: 1em;
+    line-height: 1.235em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-top: 1px dashed #427AA1;
+  }
+
+  .item-weight{
+    margin-bottom: 1px;
+  }
+
+  .business-basket-btn-grp{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .business-basket-edit-btn{
+    background: #679436;
+    color: white;
+    padding: 4px;
+    width: 70px;
+    border-radius: 10px;
+    font-size: 1em;
+    border:0;
+  }
+
+  .business-basket-edit-btn:hover{
+    background: #427AA1;
+  }
+
+  .business-basket-info-contain{
+    font-size: 1em;
+    line-height: 1.25em;
+    margin-bottom: 5px;
+  }
+
+  .basket-status{
+    font-weight: bold;
+  }
+}
+
+
