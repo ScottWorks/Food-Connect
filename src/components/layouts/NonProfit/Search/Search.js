@@ -12,6 +12,7 @@ function Search(props) {
         onChange={(e) => props._handleChange('searchInput', e.target.value)}
       />
       <button onClick={() => props._searchBaskets()}>Search</button>
+      <button onClick={() => props._initializeComponent()}>Reset</button>
     </div>
   );
 }

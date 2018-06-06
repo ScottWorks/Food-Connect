@@ -277,7 +277,7 @@ class NonProfit extends React.Component {
           _cancelBasket={this.cancelBasket}
         />
         <h2>Available Baskets</h2>
-        <Search _searchInput={searchInput} _handleChange={this.handleChange} _searchBaskets={this.searchBaskets} />
+        <Search _searchInput={searchInput} _handleChange={this.handleChange} _initializeComponent={this.initializeComponent} _searchBaskets={this.searchBaskets} />
         <Sort _sortBaskets={this.sortBaskets} />
         <NonProfitBasketList
           _baskets={baskets}
