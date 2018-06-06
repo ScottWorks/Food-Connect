@@ -12,7 +12,7 @@
 
     .basket-cards-container{
         overflow: scroll;
-        height: 50vh;
+        height: 80%;
     }
 }
 
