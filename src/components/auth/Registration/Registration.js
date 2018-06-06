@@ -339,7 +339,7 @@ class Register extends Component {
                                     onChange={(e)=> this.setState({fein: e.target.value})}
                                     required='true' placeholder='Enter FEIN'
                                     type='number'
-                                    maxLength='9'
+                                    max='999999999'
                                     />
 
 
