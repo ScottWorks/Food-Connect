@@ -12,11 +12,32 @@ import StatChart from '../../components/Stats/StatChart'
 
 class Business extends React.Component {
 
+  constructor(props){
+    super(props);
+
+    this.state={
+      hideChart: true
+    }
+
+    this.checkIfMobile = this.checkIfMobile.bind(this);
+  }
+
   componentDidMount() {
     var temp = 1
     axios.get(`/api/basket/${temp}/${(new Date).getTime()}`).then(res => {
       this.props.setBasket(res.data)
     })
+    this.checkIfMobile;
+    window.addEventListener('resize', this.checkIfMobile)
+
+  }
+
+  componentWillUnmount(){
+    window.removeEventListener('resize', this.checkIfMobile)
+  }
+
+  checkIfMobile(){
+    this.setState({hideChart: !(window.innerWidth > 667)})
   }
 
   render() {
@@ -24,12 +45,19 @@ class Business extends React.Component {
       <div className="Business">
         <Header />
         <div className="bus-top-bar">
-          <div className='donut-container'>
+        {
+          this.state.hideChart ? null : (
+            <div className='donut-container'>
             <Donut/>
-          </div>
-          <div className='barchart-container'>
+          </div>)}
+
+          {
+            this.state.hideChart ? null : (
+              <div className='barchart-container'>
             <StatChart/>
-          </div>
+          </div>   
+            )
+          }
         </div>
         <div className='business-table-list-container'>
         <BusinessTable className='business-table-container'/>

@@ -13,7 +13,6 @@
 }
 
 /* TABLET VIEW */
-
 @media only screen and (min-device-width: 668px) and (max-device-width: 1199px) {
   .bus-top-bar {
     width: 100%;
@@ -38,7 +37,6 @@
 }
 
 /* DESKTOPS */
-
 @media screen and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1) {
   .bus-top-bar {
     width: 100%;
