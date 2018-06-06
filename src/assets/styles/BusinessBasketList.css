@@ -6,11 +6,25 @@
 
 /* TABLET VIEW */
 @media only screen and (min-device-width: 668px) and (max-device-width: 1199px){
+    .BusinessBasketList{
+        width: 100%;
+    }
 
+    .basket-cards-container{
+        overflow: scroll;
+        height: 50vh;
+    }
 }
 
 /* DESKTOP VIEW */
 @media screen  and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1){
+    .BusinessBasketList{
+        width: 100%;
+    }
 
+    .basket-cards-container{
+        overflow: scroll;
+        height: 90vh;
+    }
 }
 

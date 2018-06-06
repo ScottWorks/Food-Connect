@@ -27,8 +27,11 @@ class Business extends React.Component {
           {/* <Donut/>
           <StatChart/> */}
         </div>
-        <BusinessTable />
-        <BusinessBasketList />
+        <div className='business-table-list-container'>
+        <BusinessTable className='business-table-container'/>
+        <BusinessBasketList className='business-basket-list-container'/>
+
+        </div>
       </div>
     );
   }

@@ -35,7 +35,7 @@ function BusinessBasketList(props) {
       <div className='item-card-container'>
         {itemCards}
       </div>
-      <div>
+      <div className='basket-cards-container'>
         {basketCards}
       </div>
     </div>

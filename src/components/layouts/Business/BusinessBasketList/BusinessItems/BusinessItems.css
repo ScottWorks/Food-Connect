@@ -62,7 +62,7 @@
     height: 50px;
     padding: 25px;
     margin: 10px auto;
-    border: 1px dashed lightgrey;
+    border: 1px dashed #A5BE00;
     background: white;
     border-radius: 10px;
     display: flex;
@@ -112,6 +112,56 @@
 
 /* DESKTOP VIEW */
 @media screen  and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1){
+  .BusinessItem {
+    width: 60%;
+    height: 50px;
+    padding: 25px;
+    margin: 10px auto;
+    border: 1px dashed #A5BE00;
+    background: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1em;
+    line-height: 1.375em;
+  }
 
+  .business-items-details{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+  }
+
+  .business-items-details :nth-child(1){
+    width: 33%;
+    text-align: left;
+  }
+
+  .business-items-details :nth-child(2){
+    width: 33%;
+    text-align: center;
+  }
+
+  .business-items-details :nth-child(3){
+    width: 33%;
+    text-align: right;
+  }
+  
+  .business-item-delete-x {
+    text-align: right;
+    width: 10%;
+    height: 14px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    background: none;
+    font-weight: bold;
+    font-size: 1em;
+  }
+
+  .business-item-delete-x:hover{
+    color: red;
+  }
 }
 
