@@ -10,19 +10,15 @@ import './Business.css'
 import Donut from '../../components/Stats/Donut';
 import StatChart from '../../components/Stats/StatChart'
 import LoadingDots from '../../components/LoadingPages/LoadingDots/LoadingDots';
+import NewHeader from '../../components/Header/NewHeader';
 
 class Business extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: false
-    }
-  }
   constructor(props){
     super(props);
 
     this.state={
-      hideChart: true
+      hideChart: true,
+      loading: false
     }
 
     this.checkIfMobile = this.checkIfMobile.bind(this);
@@ -68,7 +64,8 @@ class Business extends React.Component {
     else {
     return (
       <div className="Business">
-        <Header />
+        {/* <Header /> */}
+        <NewHeader/>
         <div className="bus-top-bar">
         {
           this.state.hideChart ? null : (

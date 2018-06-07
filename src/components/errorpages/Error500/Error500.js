@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Error500.css"
-import NewHeader from "./NewHeader.js";
+// import NewHeader from "./NewHeader.js";
 
 function Error500() {
     return (

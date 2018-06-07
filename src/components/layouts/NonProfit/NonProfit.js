@@ -16,6 +16,7 @@ import './NonProfit.css';
 import MapContainer from '../../components/Map/googleMap';
 
 import LoadingDots from "../../components/LoadingPages/LoadingDots/LoadingDots.js"
+import NewHeader from '../../components/Header/NewHeader.js';
 
 class NonProfit extends React.Component {
   constructor() {
@@ -302,16 +303,19 @@ class NonProfit extends React.Component {
     else {
     return (
       <main className="mobile">
-        <Header />
+        {/* <Header /> */}
+        <NewHeader/>
         <div className='np-view-main'>
         <div className='np-view-col-1'>
           <div className='google-maps'>
-            <MapContainer 
-              mapCenter={{lat: nonProfitInfo.latitude, lng: nonProfitInfo.longitude}}
-              npName={nonProfitInfo.company_name}
-              address={nonProfitInfo.street_address}
-              city={`${nonProfitInfo.city} ${nonProfitInfo.state}`}
-            />
+          <MapContainer
+             markeers={this.state.markers}
+             mapCenter={{lat: nonProfitInfo.latitude, lng: nonProfitInfo.longitude}}
+             npName={nonProfitInfo.company_name}
+             address={nonProfitInfo.street_address}
+             city={`${nonProfitInfo.city} ${nonProfitInfo.state}`}
+             
+           />
           </div>
 
           <div className='np-wishlist-basket-container'>
