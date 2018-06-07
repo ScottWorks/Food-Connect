@@ -48,10 +48,18 @@
     }
 }
 
-/* FOR NON-RETINA / NON-HIGH RES DESKTOPS */
+
+
+/* TABLET VIEW */
+@media only screen and (min-device-width: 668px) and (max-device-width: 1199px){
+  
+}
+
+
+
+/* DEKSTOP VIEW*/
 @media screen and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1) {
     .footer_main {
-        
         background: #05668D;
         color: #EBF2FA;
         
