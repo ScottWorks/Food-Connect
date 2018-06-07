@@ -57,8 +57,10 @@ import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react'
               width: '400px',
               height: '400px',
               boxShadow: '0px 0px 3px rgba(0, 0, 0, 0.7)',
-              marginLeft: '0px',
-              marginTop: '70px'
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              marginTop: 'auto',
+              
           }
 
           let displayMarkers = markers.map( (marker, i) => {

@@ -72,22 +72,26 @@
 
   /* Column 1 (Map) */
   .np-view-col-1{
-    border: solid 2px yellow;
     width: 50%;
-    display: flex;
-    flex-direction: column;
+    padding: 10px 30px;
   }
 
-  .google-maps{
-    border: solid 2px red;
+  .np-wishlist-basket-container{
+    margin-top: 40px;
   }
 
-
+  .np-wishlist-basket-container h3{
+    font-size: 	1.75em;
+    line-height: 1.25em;
+    text-align: center;
+    padding: 10px;
+    background: #427AA1;
+    color: #EBF2FA; 
+  }
 
   /* Column 2 */
 
   .np-view-col-2{
-    border: solid 2px blue;
     width: 50%;
     padding: 10px 30px;
   }
