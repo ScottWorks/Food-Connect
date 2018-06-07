@@ -99,7 +99,36 @@
         font-size: 1em;
         line-height: 1.25em;
         width: 80px;
+        cursor: pointer;
     }
+
+    .wishlist-empty-container{
+        font-size: 1em;
+        line-height: 1.25em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .wishlist-empty-container p{
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .wishlist-empty-container button{
+        padding: 2px;
+        border: 0;     
+        background: #679436;
+        color: #EBF2FA;
+        border-radius: 3px;
+        font-size: 1em;
+        line-height: 1.25em;
+        width: 150px;
+        margin: 5px auto;
+        cursor: pointer;
+
+    }
+
 }
 
 /* TABLET VIEW */
@@ -126,6 +155,7 @@
         line-height: 1.375em;
         margin-right: 10px;
         width: 100px;
+        cursor: pointer;
     }
     .wishlist-add-container input {
         font-size: 1em;
@@ -170,6 +200,7 @@
         line-height: 1.375em;
         margin-left: 20px;
         width: 100px;
+        cursor: pointer;
     }
 
     .wishlist-items-container-btns :nth-child(2):hover{
@@ -217,6 +248,7 @@
         font-size: 1em;
         line-height: 1.375em;
         width: 80px;
+        cursor: pointer;
     }
 
 }

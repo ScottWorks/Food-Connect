@@ -46,12 +46,12 @@ class LandingPage extends Component {
                     >
                         <div className="FAQ_contents">
                             <h3>Frequently Asked Questions</h3>
-                            <h4>What do we do?</h4>
-                            <p>We uhhh take your expiring food, and give it to someone in need!</p>
-                            <h4>What is in it for me?</h4>
-                            <p>You get to help those in need, and receive a nifty tax refund.</p>
-                            <h4>What if I don't want to save people with my food?</h4>
-                            <p>Then you are a bad person...</p>
+                            <h4>FAQ 1</h4>
+                            <p>Lorem ipsum dolor amet meditation coloring book humblebrag ugh flannel snackwave synth tumeric, man braid pour-over etsy.</p>
+                            <h4>FAQ 2</h4>
+                            <p>Lorem ipsum dolor amet meditation coloring book humblebrag ugh flannel snackwave synth tumeric, man braid pour-over etsy.</p>
+                            <h4>FAQ 3</h4>
+                            <p>Lorem ipsum dolor amet meditation coloring book humblebrag ugh flannel snackwave synth tumeric, man braid pour-over etsy.</p>
                         </div>
                     </Modal>
                     <div className="landing_main_media">

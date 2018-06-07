@@ -60,7 +60,7 @@ class Footer extends Component {
                             <input value={this.state.formName} onChange={(e)=> this.handleInputChange(e)} name='formName' required='true' type='text' placeholder='Name'/>
                             <input value={this.state.formEmail} onChange={(e)=> this.handleInputChange(e)} name='formEmail' required='true' type='email' placeholder='Email'/>
                         
-                        <input value={this.state.subject} onChange={(e)=> this.handleInputChange(e)}  name='formSubject' required='true' type='text' placeholder='Subject'/>
+                        <input value={this.state.formSubject} onChange={(e)=> this.handleInputChange(e)}  name='formSubject' required='true' type='text' placeholder='Subject'/>
                         <textarea value={this.state.formMessage} onChange={(e)=> this.handleInputChange(e)}  name='formMessage' rows='5' className='message-input' required='true' type='' placeholder='Message'></textarea>
                         <input className='submit-input' onClick={(e)=>this.handleSendEmail(e)} type='submit' value='SUBMIT'/>
                     </form>

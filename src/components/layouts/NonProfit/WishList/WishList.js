@@ -89,7 +89,7 @@ class WishList extends React.Component {
         />
       </div>
     ) : (
-      <div>
+      <div className='wishlist-empty-container'>
         <p>Your Wish List is Empty : (</p>
         <button onClick={() => _createWishList()}>Create Wish List</button>
       </div>
