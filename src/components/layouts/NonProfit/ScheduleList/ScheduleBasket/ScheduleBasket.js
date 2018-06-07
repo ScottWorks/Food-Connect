@@ -1,17 +1,43 @@
 import React from 'react';
 import ContactInfoCard from '../../../../components/NonProfit/ContactInfoCard';
 import DateTimePicker from '../../../../components/NonProfit/DateTimePicker';
+import Dialog from 'material-ui/Dialog';
+
 import * as timeUtil from '../../../../../config/timeUtil';
+
 import '../../../../../assets/styles/ScheduleBasket.css';
 
 class ScheduleBasket extends React.Component {
   constructor() {
     super();
     this.state = {
-      update: false
+      update: false,
+      open: false
     };
 
+    this.handleModal = this.handleModal.bind(this);
+    this.sendConfirmation = this.sendConfirmation.bind(this)
     this.toggleReservationCard = this.toggleReservationCard.bind(this);
+  }
+
+  handleModal(state) {
+    this.setState({
+      open: state
+    });
+  }
+
+  sendConfirmation() {
+    const {
+      scheduledBasket,
+      _confirmPickup
+    } = this.props;
+
+    const fakePhoneNumber = '13033496264';
+    const basketID = scheduledBasket.basket_id;
+
+    _confirmPickup(fakePhoneNumber, basketID)
+
+    this.handleModal(false)
   }
 
   toggleReservationCard() {
@@ -30,9 +56,13 @@ class ScheduleBasket extends React.Component {
   }
 
   render() {
-    console.log(this.state.update)
     const { update, scheduledDate, scheduledTime } = this.state;
-    const { scheduledBasket, _scheduleBasket, _cancelBasket } = this.props;
+    const {
+      scheduledBasket,
+      _confirmPickup,
+      _scheduleBasket,
+      _cancelBasket
+    } = this.props;
 
     const fakePhoneNumber = '13033496264';
 
@@ -70,13 +100,23 @@ class ScheduleBasket extends React.Component {
 
     return (
       <section className="basket">
-        {reserveCard}
+        <div>
+        <button onClick={() => this.handleModal(true)}>
+          Confirm Pickup
+        </button>
+          <Dialog
+            modal={false}
+            open={this.state.open}
+            onRequestClose={() => this.handleModal(false)}
+          >
+            <h3>Are you sure?</h3>
+            <button onClick={() => this.handleModal(false)}>Cancel</button>
+            <button onClick={() => this.sendConfirmation()}>Submit</button>
+          </Dialog>
+            </div>
+          {reserveCard}
         <button onClick={() => this.toggleReservationCard()}>Update</button>
-        <button
-          onClick={() =>
-            _cancelBasket(fakePhoneNumber, scheduledBasket.basket_id)
-          }
-        >
+        <button onClick={() => _cancelBasket(fakePhoneNumber, basketID)}>
           Remove
         </button>
         <p>{formattedTime}</p>

@@ -19,7 +19,7 @@ class NonProfit extends React.Component {
   constructor() {
     super();
     this.state = {
-      nonProfitID: 9,
+      nonProfitID: 3,
       nonProfitInfo: {},
       baskets: [],
       wishList: [],
@@ -31,6 +31,7 @@ class NonProfit extends React.Component {
     this.getUserInfo = this.getUserInfo.bind(this);
     this.displayBusinessToMap = this.displayBusinessToMap.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.confirmPickup = this.confirmPickup.bind(this);
     this.scheduleBasket = this.scheduleBasket.bind(this);
     this.cancelBasket = this.cancelBasket.bind(this);
     this.createWishList = this.createWishList.bind(this);
@@ -108,6 +109,22 @@ class NonProfit extends React.Component {
     this.setState({
       [key]: value
     });
+  }
+
+  confirmPickup(phoneNumber, basketID) {
+    const message = `Basket ${basketID} has been picked up.`;
+
+    let promise = axios.put(`/api/basket/confirm/${basketID}`, {
+      phoneNumber,
+      message,
+      basketID
+    });
+
+    Promise.all([promise]).then(() => {
+      this.initializeComponent();
+    });
+
+    alert('Pickup Confirmed!');
   }
 
   scheduleBasket(scheduledTime, phoneNumber, message, basketID) {
@@ -282,6 +299,7 @@ class NonProfit extends React.Component {
         <h2>Scheduled Baskets</h2>
         <ScheduleList
           _scheduledBaskets={scheduledBaskets}
+          _confirmPickup={this.confirmPickup}
           _scheduleBasket={this.scheduleBasket}
           _cancelBasket={this.cancelBasket}
         />

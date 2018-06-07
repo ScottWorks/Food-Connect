@@ -1,25 +1,25 @@
 module.exports = {
   getUserInfo: (req, res, next) => {
-    const db = req.app.get('db')
-    const { userID } = req.params
+    const db = req.app.get('db');
+    const { userID } = req.params;
 
-    db
-    .np_getUserInfo([userID])
-    .then( userInfo => {
-      res.status(200).send(userInfo)
-    }, (userInfo) => console.log(userInfo))
-    .catch( () => {
-      res.sendStatus(500)
-    })
+    db.np_getUserInfo([userID])
+      .then(
+        (userInfo) => {
+          res.status(200).send(userInfo);
+        },
+        (userInfo) => console.log(userInfo)
+      )
+      .catch(() => {
+        res.sendStatus(500);
+      });
   },
 
   getScheduledBaskets: (req, res) => {
     const db = req.app.get('db');
     const { nonProfitID } = req.params;
-    
 
-    db
-      .np_getScheduledBaskets([nonProfitID])
+    db.np_getScheduledBaskets([nonProfitID])
       .then((scheduledBaskets) => {
         res.status(200).send(scheduledBaskets);
       })
@@ -33,10 +33,22 @@ module.exports = {
     const { currentLocalTime } = req.params;
     const { businessIDs } = req.body;
 
-    db
-      .np_getBaskets([currentLocalTime, businessIDs])
+    db.np_getBaskets([currentLocalTime, businessIDs])
       .then((baskets) => {
         res.status(200).send(baskets);
+      })
+      .catch(() => {
+        res.sendStatus(500);
+      });
+  },
+  confirmBasket: (req, res) => {
+    const db = req.app.get('db');
+    const { basketID } = req.params;
+    const status = 1;
+
+    db.np_confirmPickup([status, basketID])
+      .then(() => {
+        res.sendStatus(200);
       })
       .catch(() => {
         res.sendStatus(500);
@@ -48,8 +60,7 @@ module.exports = {
     const { scheduledTime, basketID } = req.body;
     const status = 2;
 
-    db
-      .np_scheduleBasket([nonProfitID, scheduledTime, status, basketID])
+    db.np_scheduleBasket([nonProfitID, scheduledTime, status, basketID])
       .then(() => {
         res.sendStatus(200);
       })
@@ -62,8 +73,7 @@ module.exports = {
     const { basketID } = req.params;
     const status = 0;
 
-    db
-      .np_cancelBasket([status, basketID])
+    db.np_cancelBasket([status, basketID])
       .then(() => {
         res.sendStatus(200);
       })
@@ -75,8 +85,7 @@ module.exports = {
     const db = req.app.get('db');
     const { nonProfitID } = req.params;
 
-    db
-      .np_getWishList([nonProfitID])
+    db.np_getWishList([nonProfitID])
       .then((wishlist) => {
         res.status(200).send(wishlist);
       })
@@ -88,8 +97,7 @@ module.exports = {
     const db = req.app.get('db');
     const { nonProfitID } = req.params;
 
-    db
-      .np_createWishList([nonProfitID])
+    db.np_createWishList([nonProfitID])
       .then(() => {
         res.sendStatus(200);
       })
@@ -102,8 +110,7 @@ module.exports = {
     const { updatedWishList } = req.body;
     const { nonProfitID } = req.params;
 
-    db
-      .np_modifyWishList([JSON.stringify(updatedWishList), nonProfitID])
+    db.np_modifyWishList([JSON.stringify(updatedWishList), nonProfitID])
       .then(() => {
         res.sendStatus(200);
       })

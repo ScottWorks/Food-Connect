@@ -8,7 +8,7 @@ const dotenv = require('dotenv');
 const session = require('express-session');
 dotenv.config();
 const checkForSession = require('./middlewares/checkForSessions');
-const inLine = require('./middlewares/middlewares')
+const inLine = require('./middlewares/middlewares');
 
 // Controllers
 const twilioController = require('./controllers/TwilioController'),
@@ -74,6 +74,12 @@ app.get(
   nonProfitController.getScheduledBaskets
 );
 app.post('/api/basket/:currentLocalTime', nonProfitController.getBaskets);
+app.put('/api/basket/confirm/:basketID', nonProfitController.confirmBasket); // TESTING ONLY!
+// app.put(
+//   '/api/basket/confirm/:basketID',
+//   twilioController.sendTwilioMessage,
+//   nonProfitController.confirmBasket
+// );
 app.put('/api/basket/update/:nonProfitID', nonProfitController.scheduleBasket); // TESTING ONLY!
 // app.put(
 //   '/api/basket/update/:nonProfitID',
