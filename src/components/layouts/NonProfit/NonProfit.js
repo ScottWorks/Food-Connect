@@ -284,46 +284,49 @@ class NonProfit extends React.Component {
     return (
       <main className="mobile">
         <Header />
-        <div>
-          <MapContainer
-            markeers={this.state.markers}
-            mapCenter={{
-              lat: nonProfitInfo.latitude,
-              lng: nonProfitInfo.longitude
-            }}
-            npName={nonProfitInfo.company_name}
-            address={nonProfitInfo.street_address}
-            city={`${nonProfitInfo.city} ${nonProfitInfo.state}`}
-          />
-        </div>
-        <div className="nonprofit_main">
-          <h2>Non Profit Page</h2>
-        </div>
-        <WishList
-          _wishList={wishList}
-          _createWishList={this.createWishList}
-          _addWishListItem={this.addWishListItem}
-          parent_editWishListItem={this.parent_editWishListItem}
-          _removeWishListItem={this.removeWishListItem}
-        />
-        <h2>Scheduled Baskets</h2>
+        <div className='np-view-main'>
+        <div className='np-view-col-1'>
+          <div className='google-maps'>
+            <MapContainer 
+              mapCenter={{lat: nonProfitInfo.latitude, lng: nonProfitInfo.longitude}}
+              npName={nonProfitInfo.company_name}
+              address={nonProfitInfo.street_address}
+              city={`${nonProfitInfo.city} ${nonProfitInfo.state}`}
+            />
+          </div>
+
+          <div className='np-wishlist-basket-container'>
+            <h3>Wish List</h3>
+              <WishList
+                _wishlist={this.wishList}
+                _createWishList={this.createWishList}
+                _addWishListItem={this.addWishListItem}
+                parent_editWishListItem={this.parent_editWishListItem}
+                _removeWishListItem={this.removeWishListItem}
+              />
+          </div>
+
+          </div>
+          
+          <div className='np-view-col-2'>
+        <div className='np-sched-basket-container'>
+        <h3>Scheduled Baskets</h3>
         <ScheduleList
           _scheduledBaskets={scheduledBaskets}
           _scheduleBasket={this.scheduleBasket}
           _cancelBasket={this.cancelBasket}
         />
-        <h2>Available Baskets</h2>
-        <Search
-          _searchInput={searchInput}
-          _initializeComponent={this.initializeComponent}
-          _handleChange={this.handleChange}
-          _searchBaskets={this.searchBaskets}
-        />
-        <Sort _sortBaskets={this.sortBaskets} />
+      </div>
+
+        <div className='np-avail-basket-container'>
+        <h3>Available Baskets</h3>
         <NonProfitBasketList
           _baskets={baskets}
           _scheduleBasket={this.scheduleBasket}
         />
+        </div>
+        </div>
+        </div>
       </main>
     );
   }

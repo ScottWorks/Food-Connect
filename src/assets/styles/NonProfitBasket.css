@@ -29,7 +29,7 @@
         font-size: 16px;
         margin-top: 5px;
         width: 6em;
-        background: #427AA1;
+        background: #679436;
         border: 1px #427AA1 solid;
         border-radius: 3px;
         padding: 2px;
@@ -49,6 +49,7 @@
     }
 }
 
+
 /* For Desktop */
 @media screen and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1) {
     .np-basket { 
@@ -57,11 +58,14 @@
         margin-top: 6px;
         margin-bottom: 6px;
         text-align: center;
-        width: 40%;
+        width: 100%;
+        font-size: 1em;
         line-height: 1.375em;
         margin-left: auto;
         margin-right: auto;
-        font-size: 1em;
+        padding-top: 10px;
+        padding-bottom: 10px;
+
     }
 
     .np-basket h2 {
@@ -77,12 +81,14 @@
     .reserve-btn {
         color: #EBF2FA;
         font-size: 1em;
+        line-height: 1.375em;
         margin-top: 5px;
-        width: 6em;
-        background: #427AA1;
+        width: 100px;
+        background: #679436;
         border: 1px #427AA1 solid;
         border-radius: 3px;
         padding: 2px;
+        cursor: pointer;
     }
 
     .details-collapse-btn{
@@ -90,11 +96,13 @@
         font-size: 1em;
         margin-top: 5px;
         margin-bottom: 5px;
-        width: 6em;
+        width: 100px;
         background: #679436;
         border: 1px #427AA1 solid;
         border-radius: 3px;
         padding: 2px;
-        font-size: 12px;
+        font-size: 1em;
+        line-height: 1.375em;
+        cursor: pointer;
     }
 }
