@@ -45,20 +45,20 @@ class NonProfit extends React.Component {
 
   componentDidMount = async () => {
     
-    await axios.get('/api/auth/me').then( user => {
-        if(typeof user.data.user_id === 'number' && user.data.acct_type === 'np') {
-          console.log('Validated!', user)
-        } else if (typeof user.data.user_id === 'number' && user.data.acct_type === 'b') {
-          window.location.assign('/#/business')
-        } else {
-          window.location.assign('/#/login')
-          console.log('Sorry, you are not allowed...')
-        }
-    }).catch( err => {
-      console.log(err)
-      window.location.assign('/#/login')
-      console.log('Sorry, you are not allowed...')
-    })
+    // await axios.get('/api/auth/me').then( user => {
+    //     if(typeof user.data.user_id === 'number' && user.data.acct_type === 'np') {
+    //       console.log('Validated!', user)
+    //     } else if (typeof user.data.user_id === 'number' && user.data.acct_type === 'b') {
+    //       window.location.assign('/#/business')
+    //     } else {
+    //       window.location.assign('/#/login')
+    //       console.log('Sorry, you are not allowed...')
+    //     }
+    // }).catch( err => {
+    //   console.log(err)
+    //   window.location.assign('/#/login')
+    //   console.log('Sorry, you are not allowed...')
+    // })
 
     this.initializeComponent();
     this.getUserInfo();
@@ -288,6 +288,7 @@ class NonProfit extends React.Component {
         <div className='np-view-col-1'>
           <div className='google-maps'>
             <MapContainer 
+              markeers={this.state.markers}
               mapCenter={{lat: nonProfitInfo.latitude, lng: nonProfitInfo.longitude}}
               npName={nonProfitInfo.company_name}
               address={nonProfitInfo.street_address}

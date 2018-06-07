@@ -39,7 +39,37 @@
 
    /* TABLET VIEW */
 @media only screen and (min-device-width: 668px) and (max-device-width: 1199px){
-  
+    .schedule-basket-btns{
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 100px;
+        margin-bottom: 5px;
+    }
+
+    .schedule-basket-btns button {
+        padding: 2px;
+        font-size: 1em;
+        line-height: 1.375em;
+        background: #679436;
+        border: 0;
+        color: #EBF2FA;
+        border-radius: 3px;
+        width: 100px;
+        cursor: pointer;
+    }
+    .schedule-basket-btns :nth-child(2):hover{
+        color: #EBF2FA;
+        background: firebrick;
+    }
+
+
+    .sched-basket-info-container{
+        font-size: 1em;
+        line-height: 1.375em;
+        text-align: center;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
 }
    
    /* For Desktop */

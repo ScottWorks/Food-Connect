@@ -59,7 +59,59 @@
 
 /* TABLET VIEW */
 @media only screen and (min-device-width: 668px) and (max-device-width: 1199px){
-  
+  .np-view-main{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 80px;
+  }
+
+  /* Column 1 (Map) */
+  .np-view-col-1{
+    width: 50%;
+    padding: 10px 30px;
+  }
+
+  .np-wishlist-basket-container{
+    margin-top: 40px;
+  }
+
+  .np-wishlist-basket-container h3{
+    font-size: 	1.5em;
+    line-height: 1.25em;
+    text-align: center;
+    padding: 10px;
+    background: #427AA1;
+    color: #EBF2FA; 
+  }
+
+  /* Column 2 Scheudled Baskets and Available Baskets*/
+
+  .np-view-col-2{
+    width: 50%;
+    padding: 10px 30px;
+    overflow: scroll;
+    height: 100vh;
+  }
+
+  .np-sched-basket-container h3{
+    font-size: 	1.5em;
+    line-height: 1.25em;
+    text-align: center;
+    padding: 10px;
+    background: #427AA1;
+    color: #EBF2FA; 
+  }
+
+  .np-avail-basket-container h3{
+    margin-top: 10px;
+    font-size: 	1.5em;
+    line-height: 1.25em;
+    text-align: center;
+    padding: 10px;
+    background: #427AA1;
+    color: #EBF2FA; 
+    
+  }
 }
 
 /* DESKTOP VIEW */
