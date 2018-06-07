@@ -388,7 +388,7 @@ class Register extends Component {
                                 />
                                 <input className='form-continue-button' onClick={(e)=>this.handleContinueClickPanel3(e)} type='submit' value='Continue'/>
                             </form>
-                            <button onClick={() => console.log(this.state.address)}>Test</button>                            
+        
                         </div>
                     </section>
 

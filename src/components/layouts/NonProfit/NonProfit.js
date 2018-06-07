@@ -298,7 +298,7 @@ class NonProfit extends React.Component {
           <div className='np-wishlist-basket-container'>
             <h3>Wish List</h3>
               <WishList
-                _wishlist={wishlist}
+                _wishlist={this.wishList}
                 _createWishList={this.createWishList}
                 _addWishListItem={this.addWishListItem}
                 parent_editWishListItem={this.parent_editWishListItem}

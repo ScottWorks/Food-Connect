@@ -11,6 +11,15 @@ import Donut from '../../components/Stats/Donut';
 import StatChart from '../../components/Stats/StatChart'
 
 class Business extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.state={
+      hideChart: true
+    }
+
+    this.checkIfMobile = this.checkIfMobile.bind(this);
+  }
 
   componentDidMount = async () => {
 
