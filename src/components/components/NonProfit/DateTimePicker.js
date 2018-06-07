@@ -2,6 +2,7 @@ import React from 'react';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 import * as timeUtil from '../../../config/timeUtil';
+import '../../../assets/styles/DateTimePicker.css'
 
 class DateTimePicker extends React.Component {
   constructor() {
@@ -51,7 +52,7 @@ class DateTimePicker extends React.Component {
     const { scheduledDate, scheduledTime } = this.state;
 
     return (
-      <div>
+      <div className='date-time-picker-contain'>
         <button onClick={() => this.reserveBasket()}>Submit</button>
         <DatePicker
           value={scheduledDate}
