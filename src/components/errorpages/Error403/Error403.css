@@ -1,5 +1,3 @@
-/* @import url('https://fonts.googleapis.com/css?family=Chango'); */
-
 a{
     text-decoration: none;
 }
@@ -31,6 +29,14 @@ a{
     margin-left: 5px;
     margin-right: 5px;
     margin-top: 10px;
+    animation-name: spin;
+    animation-duration: 5000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.error403_main img:hover{
+    animation: none;
 }
 
 .error403_subtext{
@@ -59,12 +65,23 @@ a{
     border-radius: 15px;
     text-transform: uppercase;
     background: #427AA1;
-    }
-    .error403_hr{
-        width: 70%;
-        margin-bottom: 35px;
-    }
+    box-shadow: 2px 2px rgb(5, 50, 82);
+}
 
+.error403_hr{
+    width: 70%;
+    margin-bottom: 25px;
+}
+
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
 }
 
 @media screen 
@@ -86,6 +103,14 @@ a{
         margin-left: 5px;
         margin-right: 5px;
         margin-top: 25px;
+        animation-name: spin;
+        animation-duration: 5000ms;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+    .error403_main img:hover{
+        animation: none;
     }
     
     .error403_subtext{
@@ -114,9 +139,11 @@ a{
         border-radius: 15px;
         text-transform: uppercase;
         background: #427AA1;
-        }
-        .error403_hr{
-            width: 40%;
-            margin-bottom: 45px;
-        }
+        box-shadow: 2px 2px rgb(5, 50, 82);
+    }
+
+    .error403_hr{
+        width: 40%;
+        margin-bottom: 45px;
+    }
   }

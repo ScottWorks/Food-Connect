@@ -15,6 +15,8 @@ import * as sortUtil from '../../../config/sortUtil';
 import './NonProfit.css';
 import MapContainer from '../../components/Map/googleMap';
 
+import LoadingDots from "../../components/LoadingPages/LoadingDots/LoadingDots.js"
+
 class NonProfit extends React.Component {
   constructor() {
     super();
@@ -24,7 +26,9 @@ class NonProfit extends React.Component {
       baskets: [],
       wishList: [],
       scheduledBaskets: [],
-      searchInput: ''
+      searchInput: '',
+      loading: true,
+      startTime: null
     };
 
     this.initializeComponent = this.initializeComponent.bind(this);
@@ -43,6 +47,7 @@ class NonProfit extends React.Component {
   }
 
   componentDidMount() {
+    this.setState({startTime:Date.now()})
     this.initializeComponent();
     this.getUserInfo();
   }
@@ -61,10 +66,20 @@ class NonProfit extends React.Component {
       .post(`/api/basket/${currentLocalTime}`, { businessIDs })
       .then((baskets) => {
         console.log(baskets);
+        //Logic for loading screen time
+        let currentTime = Date.now()
+        let elapsed = currentTime - this.state.startTime
+        if(elapsed < 2000){
+          setTimeout(()=> this.setState({loading:false}),2000)
+        }
+        else{
+          this.setState({loading:false})
+        }
+        
         this.setState({
           baskets: baskets.data
         });
-      });
+      }).catch(()=>{window.location.assign('/#/500')});
 
     let wishListPromise = axios
       .get(`/api/wishlist/${nonProfitID}`)
@@ -72,7 +87,7 @@ class NonProfit extends React.Component {
         this.setState({
           wishList: wishList.data[0]
         });
-      });
+      }).catch(()=>{window.location.assign('/#/500')});
 
     let schedulePromise = axios
       .get(`/api/scheduled/baskets/${nonProfitID}`)
@@ -80,7 +95,7 @@ class NonProfit extends React.Component {
         this.setState({
           scheduledBaskets: scheduledBaskets.data
         });
-      });
+      }).catch(()=>{window.location.assign('/#/500')});
 
     Promise.all([basketPromise, wishListPromise, schedulePromise]).then(() => {
       const { baskets, wishList } = this.state;
@@ -101,7 +116,7 @@ class NonProfit extends React.Component {
       this.setState({
         nonProfitInfo: userData.data[0]
       });
-    });
+    }).catch( ()=> {window.location.assign('/#/404')});
   }
 
   handleChange(key, value) {
@@ -255,50 +270,56 @@ class NonProfit extends React.Component {
       searchInput
     } = this.state;
 
-    return (
-      <main className="mobile">
-        <Header />
-        <div>
-          <MapContainer
-            mapCenter={{
-              lat: nonProfitInfo.latitude,
-              lng: nonProfitInfo.longitude
-            }}
-            npName={nonProfitInfo.company_name}
-            address={nonProfitInfo.street_address}
-            city={`${nonProfitInfo.city} ${nonProfitInfo.state}`}
+    var basketLength = baskets.length
+    if (this.state.loading) {
+      return <LoadingDots />
+    }
+    else {
+      return (
+        <main className="mobile">
+          <Header />
+          <div>
+            <MapContainer
+              mapCenter={{
+                lat: nonProfitInfo.latitude,
+                lng: nonProfitInfo.longitude
+              }}
+              npName={nonProfitInfo.company_name}
+              address={nonProfitInfo.street_address}
+              city={`${nonProfitInfo.city} ${nonProfitInfo.state}`}
+            />
+          </div>
+          <div className="nonprofit_main">
+            <h2>Non Profit Page</h2>
+          </div>
+          <WishList
+            _wishList={wishList}
+            _createWishList={this.createWishList}
+            _addWishListItem={this.addWishListItem}
+            parent_editWishListItem={this.parent_editWishListItem}
+            _removeWishListItem={this.removeWishListItem}
           />
-        </div>
-        <div className="nonprofit_main">
-          <h2>Non Profit Page</h2>
-        </div>
-        <WishList
-          _wishList={wishList}
-          _createWishList={this.createWishList}
-          _addWishListItem={this.addWishListItem}
-          parent_editWishListItem={this.parent_editWishListItem}
-          _removeWishListItem={this.removeWishListItem}
-        />
-        <h2>Scheduled Baskets</h2>
-        <ScheduleList
-          _scheduledBaskets={scheduledBaskets}
-          _scheduleBasket={this.scheduleBasket}
-          _cancelBasket={this.cancelBasket}
-        />
-        <h2>Available Baskets</h2>
-        <Search
-          _searchInput={searchInput}
-          _initializeComponent={this.initializeComponent}
-          _handleChange={this.handleChange}
-          _searchBaskets={this.searchBaskets}
-        />
-        <Sort _sortBaskets={this.sortBaskets} />
-        <NonProfitBasketList
-          _baskets={baskets}
-          _scheduleBasket={this.scheduleBasket}
-        />
-      </main>
-    );
+          <h2>Scheduled Baskets</h2>
+          <ScheduleList
+            _scheduledBaskets={scheduledBaskets}
+            _scheduleBasket={this.scheduleBasket}
+            _cancelBasket={this.cancelBasket}
+          />
+          <h2>Available Baskets</h2>
+          <Search
+            _searchInput={searchInput}
+            _initializeComponent={this.initializeComponent}
+            _handleChange={this.handleChange}
+            _searchBaskets={this.searchBaskets}
+          />
+          <Sort _sortBaskets={this.sortBaskets} />
+          <NonProfitBasketList
+            _baskets={baskets}
+            _scheduleBasket={this.scheduleBasket}
+          />
+        </main>
+      );
+    }
   }
 }
 

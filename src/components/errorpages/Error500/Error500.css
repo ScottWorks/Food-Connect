@@ -12,11 +12,13 @@ a{
     height: 100vh;
     width: 100vw;
     font-weight: bold;
+    background-image: url('http://static.trendme.net/pictures/items/trendmenet-BrokenGlass_Ilustracije_full_34_10948.png');
+    background-size: cover;
 }
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
 
-.error500_image{
+.error500_main{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,7 +28,7 @@ a{
     /* color: #427AA1; */
 }
 
-.error500_image img{
+.error500_main img{
     height: 100px;
     width: 100px;
     margin-left: 5px;
@@ -68,6 +70,31 @@ a{
     border-radius: 5px;
     text-transform: uppercase;
     background: #427AA1;
+    box-shadow: 2px 2px rgb(5, 50, 82);
+}
+
+#error500_5{
+    transform: rotate(0deg);
+    transform-origin: top left;
+    animation-name: broken5;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+}
+
+@keyframes broken5{
+    0% {
+        transform: rotate(20deg)
+    }
+    50% {
+        transform: rotate(-2deg)
+    }
+    60% {
+        transform: rotate(-2deg)
+    }
+    100% {
+        transform: rotate(20deg)
     }
 }
 
@@ -75,17 +102,18 @@ a{
   and (min-device-width: 1200px) 
   and (max-device-width: 1600px) 
   and (-webkit-min-device-pixel-ratio: 1) {
-    .error500_image{
+    .error500_main{
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 200px;
         font-weight: 400;
         margin-bottom: 30px;
-        /* color: #427AA1; */
+        background-image: url('http://static.trendme.net/pictures/items/trendmenet-BrokenGlass_Ilustracije_full_34_10948.png');
+        background-size: cover;
     }
     
-    .error500_image img{
+    .error500_main img{
         height: 300px;
         width: 300px;
         margin-left: 5px;
@@ -122,9 +150,19 @@ a{
         border-radius: 5px;
         text-transform: uppercase;
         background: #427AA1;
+        box-shadow: 2px 2px rgb(5, 50, 82);
         }
     .error500_hr{
         width: 40%;
         margin-bottom: 45px;
+    }
+
+    #error500_5{
+        transform: rotate(0deg);
+        transform-origin: top left;
+        animation-name: broken5;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
     }
   }

@@ -7,8 +7,8 @@ function Error500() {
     return (
         <div className="error500_body">
             {/* <NewHeader /> */}
-            <div className="error500_image">
-                500
+            <div className="error500_main">
+                <div id="error500_5">5</div>00
             </div>
             <div className="error500_subtext">Internal Server Error</div>
             <div className="error500_sub_subtext">Try refreshing the page, or contact us if the problem persists</div>

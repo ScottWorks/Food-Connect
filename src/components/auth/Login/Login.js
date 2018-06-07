@@ -31,7 +31,8 @@ export default class Auth extends Component {
     updateDevice(){
         this.setState({isMobile: window.innerWidth <= 667})
     }
-    handleClick() {
+    handleClick(e) {
+        e.preventDefault()
         axios.post('/api/auth/login',{ userName: this.state.userName, pw: this.state.pw }).then( res => {
             if(res.data === 'You are the chosen one!') {
                 window.location.assign('/#/business')
@@ -94,7 +95,7 @@ export default class Auth extends Component {
                         type='password'
                     />
                     
-                        <button type='submit' onClick={() => this.handleClick(userName, pw)}>LOGIN</button>
+                        <button type='submit' onClick={(e) => this.handleClick(e)}>LOGIN</button>
                     
                     </form>
 

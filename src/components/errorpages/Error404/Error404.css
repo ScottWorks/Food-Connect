@@ -32,6 +32,14 @@ a{
     width: 70px;
     margin-left: 5px;
     margin-right: 5px;
+    animation-name: spin;
+    animation-duration: 5000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.error404_main img:hover{
+    animation: none;
 }
 
 .error404_subtext{
@@ -56,10 +64,20 @@ a{
     border-radius: 15px;
     text-transform: uppercase;
     background: #427AA1;
+    box-shadow: 2px 2px rgb(5, 50, 82);
     }
     .error404_hr{
         width: 70%;
         margin-bottom: 25px;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
     }
 }
 
@@ -83,6 +101,14 @@ a{
         width: 150px;
         margin-left: 5px;
         margin-right: 5px;
+        animation-name: spin;
+        animation-duration: 5000ms;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+    .error404_main img:hover{
+        animation: none;
     }
     
     .error404_subtext{
@@ -111,6 +137,7 @@ a{
         border-radius: 15px;
         text-transform: uppercase;
         background: #427AA1;
+        box-shadow: 2px 2px rgb(5, 50, 82);
         }
 
         .error404_hr{
