@@ -26,7 +26,8 @@
 
     .reserve-btn, .np-basket-btn-submit {
         color: #EBF2FA;
-        font-size: 16px;
+        font-size: 1em;
+        line-height: 1.25em;
         margin-top: 5px;
         width: 6em;
         background: #679436;
@@ -37,7 +38,6 @@
 
     .details-collapse-btn{
         color: #EBF2FA;
-        font-size: 16px;
         margin-top: 5px;
         margin-bottom: 5px;
         width: 6em;
@@ -45,7 +45,8 @@
         border: 1px #427AA1 solid;
         border-radius: 3px;
         padding: 2px;
-        font-size: 12px;
+        font-size: 1em;
+        line-height: 1.25em;
     }
 }
 
@@ -93,6 +94,7 @@
     .details-collapse-btn{
         color: #EBF2FA;
         font-size: 1em;
+        line-height: 1.375em;
         margin-top: 5px;
         margin-bottom: 5px;
         width: 100px;
@@ -100,7 +102,6 @@
         border: 1px #427AA1 solid;
         border-radius: 3px;
         padding: 2px;
-        line-height: 1.375em;
         cursor: pointer;
     }
    }
@@ -157,7 +158,6 @@
         border: 1px #427AA1 solid;
         border-radius: 3px;
         padding: 2px;
-        font-size: 1em;
         line-height: 1.375em;
         cursor: pointer;
     }

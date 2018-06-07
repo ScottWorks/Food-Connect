@@ -607,7 +607,7 @@
         height: fit-content;
     }
     .landing_about_container p {
-        line-height: 20px;
+        line-height: 1.375em;
         text-align: center;
         margin-bottom: 10px;
     }
