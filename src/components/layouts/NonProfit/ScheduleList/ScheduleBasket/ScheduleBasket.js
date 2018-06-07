@@ -1,4 +1,6 @@
 import React from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+
 import ContactInfoCard from '../../../../components/NonProfit/ContactInfoCard';
 import DateTimePicker from '../../../../components/NonProfit/DateTimePicker';
 import Dialog from 'material-ui/Dialog';
@@ -6,6 +8,8 @@ import Dialog from 'material-ui/Dialog';
 import * as timeUtil from '../../../../../config/timeUtil';
 
 import '../../../../../assets/styles/ScheduleBasket.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { Div } from 'glamorous';
 
 class ScheduleBasket extends React.Component {
   constructor() {
@@ -16,7 +20,7 @@ class ScheduleBasket extends React.Component {
     };
 
     this.handleModal = this.handleModal.bind(this);
-    this.sendConfirmation = this.sendConfirmation.bind(this)
+    this.sendConfirmation = this.sendConfirmation.bind(this);
     this.toggleReservationCard = this.toggleReservationCard.bind(this);
   }
 
@@ -27,17 +31,14 @@ class ScheduleBasket extends React.Component {
   }
 
   sendConfirmation() {
-    const {
-      scheduledBasket,
-      _confirmPickup
-    } = this.props;
+    const { scheduledBasket, _confirmPickup } = this.props;
 
     const fakePhoneNumber = '13033496264';
     const basketID = scheduledBasket.basket_id;
 
-    _confirmPickup(fakePhoneNumber, basketID)
+    _confirmPickup(fakePhoneNumber, basketID);
 
-    this.handleModal(false)
+    this.handleModal(false);
   }
 
   toggleReservationCard() {
@@ -92,6 +93,7 @@ class ScheduleBasket extends React.Component {
       <DateTimePicker
         _basketID={basketID}
         _message={`Basket ${basketID} has been re-scheduled for pickup to `}
+        _toastMessage={'Pickup Rescheduled for '}
         _phoneNumber={scheduledBasket.phone_number}
         _scheduleBasket={_scheduleBasket}
         _toggleReservationCard={this.toggleReservationCard}
@@ -100,21 +102,24 @@ class ScheduleBasket extends React.Component {
 
     return (
       <section className="basket">
-        <div>
-        <button onClick={() => this.handleModal(true)}>
+        <button
+          onClick={({ confirmationToast }) =>
+            toast(
+              <div>
+                <h3>Are your sure?</h3>
+                <button onClick={confirmationToast}>Cancel</button>
+                <button onClick={() => this.sendConfirmation()}>Submit</button>
+              </div>,
+              {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 8000
+              }
+            )
+          }
+        >
           Confirm Pickup
         </button>
-          <Dialog
-            modal={false}
-            open={this.state.open}
-            onRequestClose={() => this.handleModal(false)}
-          >
-            <h3>Are you sure?</h3>
-            <button onClick={() => this.handleModal(false)}>Cancel</button>
-            <button onClick={() => this.sendConfirmation()}>Submit</button>
-          </Dialog>
-            </div>
-          {reserveCard}
+        {reserveCard}
         <button onClick={() => this.toggleReservationCard()}>Update</button>
         <button onClick={() => _cancelBasket(fakePhoneNumber, basketID)}>
           Remove

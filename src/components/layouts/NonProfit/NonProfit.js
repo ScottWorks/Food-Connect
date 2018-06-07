@@ -1,8 +1,9 @@
 import React from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
-// import Map from './Map/Map';
 import Header from '../../components/Header/Header.js';
+import MapContainer from '../../components/Map/googleMap';
 import NonProfitBasketList from './NonProfitBasketList/NonProfitBasketList';
 import ScheduleList from './ScheduleList/ScheduleList';
 import Search from './Search/Search';
@@ -13,7 +14,7 @@ import * as searchUtil from '../../../config/searchUtil';
 import * as sortUtil from '../../../config/sortUtil';
 
 import './NonProfit.css';
-import MapContainer from '../../components/Map/googleMap';
+import 'react-toastify/dist/ReactToastify.css';
 
 class NonProfit extends React.Component {
   constructor() {
@@ -41,6 +42,7 @@ class NonProfit extends React.Component {
     this.modifyWishListItem = this.modifyWishListItem.bind(this);
     this.sortBaskets = this.sortBaskets.bind(this);
     this.searchBaskets = this.searchBaskets.bind(this);
+    this.toastify = this.toastify.bind(this);
   }
 
   componentDidMount() {
@@ -122,12 +124,11 @@ class NonProfit extends React.Component {
 
     Promise.all([promise]).then(() => {
       this.initializeComponent();
+      this.toastify('Pickup Confirmed!');
     });
-
-    alert('Pickup Confirmed!');
   }
 
-  scheduleBasket(scheduledTime, phoneNumber, message, basketID) {
+  scheduleBasket(scheduledTime, phoneNumber, message, toastMessage, basketID) {
     const { nonProfitID } = this.state;
 
     let promise = axios.put(`/api/basket/update/${nonProfitID}`, {
@@ -139,9 +140,8 @@ class NonProfit extends React.Component {
 
     Promise.all([promise]).then(() => {
       this.initializeComponent();
+      this.toastify(toastMessage);
     });
-
-    alert('Reservation Successful!');
   }
 
   cancelBasket(phoneNumber, basketID) {
@@ -154,9 +154,8 @@ class NonProfit extends React.Component {
 
     Promise.all([promise]).then(() => {
       this.initializeComponent();
+      this.toastify('Reservation Canceled!');
     });
-
-    alert('Reservation Canceled!');
   }
 
   createWishList() {
@@ -212,7 +211,7 @@ class NonProfit extends React.Component {
               baskets: modifiedBaskets
             });
           } else {
-            alert('Add items to Wish List!');
+            this.toastify('Add items to Wish List!');
           }
           break;
 
@@ -260,7 +259,12 @@ class NonProfit extends React.Component {
     for (let i = 0; i < baskets.length; i++) {
       arr.push(baskets[i].business_id);
     }
-    console.log(arr.sort((a, b) => a - b));
+  }
+
+  toastify(message) {
+    toast(message, {
+      position: toast.POSITION.BOTTOM_CENTER
+    });
   }
 
   render() {
@@ -315,6 +319,7 @@ class NonProfit extends React.Component {
           _baskets={baskets}
           _scheduleBasket={this.scheduleBasket}
         />
+        <ToastContainer autoClose={5000} />
       </main>
     );
   }
