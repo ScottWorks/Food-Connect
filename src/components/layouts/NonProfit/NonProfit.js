@@ -23,7 +23,7 @@ class NonProfit extends React.Component {
   constructor() {
     super();
     this.state = {
-      nonProfitID: 3,
+      nonProfitID: 0,
       nonProfitInfo: {},
       baskets: [],
       wishList: [],
@@ -60,7 +60,10 @@ class NonProfit extends React.Component {
           typeof user.data.user_id === 'number' &&
           user.data.acct_type === 'np'
         ) {
-          console.log('Validated!', user);
+          console.log('Validated!', user.data.user_id);
+          this.setState({
+            nonProfitID: user.data.account_id
+          })
         } else if (
           typeof user.data.user_id === 'number' &&
           user.data.acct_type === 'b'
@@ -335,6 +338,7 @@ class NonProfit extends React.Component {
   }
 
   render() {
+    console.log(this.state.nonProfitID)
     const {
       nonProfitInfo,
       baskets,
