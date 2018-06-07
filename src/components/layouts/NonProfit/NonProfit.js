@@ -43,7 +43,23 @@ class NonProfit extends React.Component {
     this.searchBaskets = this.searchBaskets.bind(this);
   }
 
-  componentDidMount () {
+  componentDidMount = async () => {
+    
+    await axios.get('/api/auth/me').then( user => {
+        if(typeof user.data.user_id === 'number' && user.data.acct_type === 'np') {
+          console.log('Validated!', user)
+        } else if (typeof user.data.user_id === 'number' && user.data.acct_type === 'b') {
+          window.location.assign('/#/business')
+        } else {
+          window.location.assign('/#/login')
+          console.log('Sorry, you are not allowed...')
+        }
+    }).catch( err => {
+      console.log(err)
+      window.location.assign('/#/login')
+      console.log('Sorry, you are not allowed...')
+    })
+
     this.initializeComponent();
     this.getUserInfo();
   }
