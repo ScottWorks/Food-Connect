@@ -1,17 +1,44 @@
 import React from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+
 import ContactInfoCard from '../../../../components/NonProfit/ContactInfoCard';
 import DateTimePicker from '../../../../components/NonProfit/DateTimePicker';
+import Dialog from 'material-ui/Dialog';
+
 import * as timeUtil from '../../../../../config/timeUtil';
+
 import '../../../../../assets/styles/ScheduleBasket.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { Div } from 'glamorous';
 
 class ScheduleBasket extends React.Component {
   constructor() {
     super();
     this.state = {
-      update: false
+      update: false,
+      open: false
     };
 
+    this.handleModal = this.handleModal.bind(this);
+    this.sendConfirmation = this.sendConfirmation.bind(this);
     this.toggleReservationCard = this.toggleReservationCard.bind(this);
+  }
+
+  handleModal(state) {
+    this.setState({
+      open: state
+    });
+  }
+
+  sendConfirmation() {
+    const { scheduledBasket, _confirmPickup } = this.props;
+
+    const fakePhoneNumber = '13033496264';
+    const basketID = scheduledBasket.basket_id;
+
+    _confirmPickup(fakePhoneNumber, basketID);
+
+    this.handleModal(false);
   }
 
   toggleReservationCard() {
@@ -30,9 +57,13 @@ class ScheduleBasket extends React.Component {
   }
 
   render() {
-    console.log(this.state.update)
     const { update, scheduledDate, scheduledTime } = this.state;
-    const { scheduledBasket, _scheduleBasket, _cancelBasket } = this.props;
+    const {
+      scheduledBasket,
+      _confirmPickup,
+      _scheduleBasket,
+      _cancelBasket
+    } = this.props;
 
     const fakePhoneNumber = '13033496264';
 
@@ -62,6 +93,7 @@ class ScheduleBasket extends React.Component {
       <DateTimePicker
         _basketID={basketID}
         _message={`Basket ${basketID} has been re-scheduled for pickup to `}
+        _toastMessage={'Pickup Rescheduled for '}
         _phoneNumber={scheduledBasket.phone_number}
         _scheduleBasket={_scheduleBasket}
         _toggleReservationCard={this.toggleReservationCard}
@@ -70,21 +102,34 @@ class ScheduleBasket extends React.Component {
 
     return (
       <section className="basket">
-        {reserveCard}
-        <div className='schedule-basket-btns'>
-        <button onClick={() => this.toggleReservationCard()}>Update</button>
-          <button
-            onClick={() =>
-              _cancelBasket(fakePhoneNumber, scheduledBasket.basket_id)
-            }
+        <button
+          onClick={({ confirmationToast }) =>
+            toast(
+              <div>
+                <h3>Are your sure?</h3>
+                <button onClick={confirmationToast}>Cancel</button>
+                <button onClick={() => this.sendConfirmation()}>Submit</button>
+              </div>,
+              {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 8000
+              }
+            )
+          }
         >
-          Remove
+          Confirm Pickup
         </button>
+        {reserveCard}
+        <div className="schedule-basket-btns">
+          <button onClick={() => this.toggleReservationCard()}>Update</button>
+          <button onClick={() => _cancelBasket(fakePhoneNumber, basketID)}>
+            Remove
+          </button>
         </div>
-        <div className='sched-basket-info-container'>
-        <p>{formattedTime}</p>
-        <p>{scheduledBasket.company_name}</p>
-        <ContactInfoCard _contactInfo={contactInfo} />
+        <div className="sched-basket-info-container">
+          <p>{formattedTime}</p>
+          <p>{scheduledBasket.company_name}</p>
+          <ContactInfoCard _contactInfo={contactInfo} />
         </div>
       </section>
     );

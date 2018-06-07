@@ -1,8 +1,9 @@
 import React from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
-// import Map from './Map/Map';
 import Header from '../../components/Header/Header.js';
+import MapContainer from '../../components/Map/googleMap';
 import NonProfitBasketList from './NonProfitBasketList/NonProfitBasketList';
 import ScheduleList from './ScheduleList/ScheduleList';
 import Search from './Search/Search';
@@ -13,16 +14,16 @@ import * as searchUtil from '../../../config/searchUtil';
 import * as sortUtil from '../../../config/sortUtil';
 
 import './NonProfit.css';
-import MapContainer from '../../components/Map/googleMap';
+import 'react-toastify/dist/ReactToastify.css';
 
-import LoadingDots from "../../components/LoadingPages/LoadingDots/LoadingDots.js"
+import LoadingDots from '../../components/LoadingPages/LoadingDots/LoadingDots.js';
 import NewHeader from '../../components/Header/NewHeader.js';
 
 class NonProfit extends React.Component {
   constructor() {
     super();
     this.state = {
-      nonProfitID: 2,
+      nonProfitID: 3,
       nonProfitInfo: {},
       baskets: [],
       wishList: [],
@@ -37,6 +38,7 @@ class NonProfit extends React.Component {
     this.getUserInfo = this.getUserInfo.bind(this);
     this.displayBusinessToMap = this.displayBusinessToMap.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.confirmPickup = this.confirmPickup.bind(this);
     this.scheduleBasket = this.scheduleBasket.bind(this);
     this.cancelBasket = this.cancelBasket.bind(this);
     this.createWishList = this.createWishList.bind(this);
@@ -46,31 +48,40 @@ class NonProfit extends React.Component {
     this.modifyWishListItem = this.modifyWishListItem.bind(this);
     this.sortBaskets = this.sortBaskets.bind(this);
     this.searchBaskets = this.searchBaskets.bind(this);
+    this.toastify = this.toastify.bind(this);
   }
 
   componentDidMount = async () => {
-    this.setState({startTime:Date.now()})
-    await axios.get('/api/auth/me').then( user => {
-        if(typeof user.data.user_id === 'number' && user.data.acct_type === 'np') {
-          console.log('Validated!', user)
-        } else if (typeof user.data.user_id === 'number' && user.data.acct_type === 'b') {
-          window.location.assign('/#/business')
+    this.setState({ startTime: Date.now() });
+    await axios
+      .get('/api/auth/me')
+      .then((user) => {
+        if (
+          typeof user.data.user_id === 'number' &&
+          user.data.acct_type === 'np'
+        ) {
+          console.log('Validated!', user);
+        } else if (
+          typeof user.data.user_id === 'number' &&
+          user.data.acct_type === 'b'
+        ) {
+          window.location.assign('/#/business');
         } else {
-          window.location.assign('/#/login')
-          console.log('Sorry, you are not allowed...')
+          window.location.assign('/#/login');
+          console.log('Sorry, you are not allowed...');
         }
-    }).catch( err => {
-      console.log(err)
-      window.location.assign('/#/login')
-      console.log('Sorry, you are not allowed...')
-    })
+      })
+      .catch((err) => {
+        console.log(err);
+        window.location.assign('/#/login');
+        console.log('Sorry, you are not allowed...');
+      });
 
     this.initializeComponent();
     this.getUserInfo();
-  }
+  };
 
-
-  initializeComponent () {
+  initializeComponent() {
     const { nonProfitID } = this.state;
     const currentLocalTime = new Date().getTime();
     const businessIDs = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -81,19 +92,24 @@ class NonProfit extends React.Component {
       .then((baskets) => {
         console.log(baskets);
         //Logic for loading screen time
-        let currentTime = Date.now()
-        let elapsed = currentTime - this.state.startTime
-        if(elapsed < 2000){
-          setTimeout(()=> this.setState({loading:false}),2000)
+        let currentTime = Date.now();
+        let elapsed = currentTime - this.state.startTime;
+        if (elapsed < 2000) {
+          setTimeout(() => this.setState({ loading: false }), 2000);
+        } else {
+          this.setState({ loading: false });
         }
-        else{
-          this.setState({loading:false})
-        }
-        
-        this.setState({
-          baskets: baskets.data
-        }, () => this.displayBusinessToMap() );
-      }).catch(()=>{window.location.assign('/#/500')});
+
+        this.setState(
+          {
+            baskets: baskets.data
+          },
+          () => this.displayBusinessToMap()
+        );
+      })
+      .catch(() => {
+        window.location.assign('/#/500');
+      });
 
     let wishListPromise = axios
       .get(`/api/wishlist/${nonProfitID}`)
@@ -101,7 +117,10 @@ class NonProfit extends React.Component {
         this.setState({
           wishList: wishList.data[0]
         });
-      }).catch(()=>{window.location.assign('/#/500')});
+      })
+      .catch(() => {
+        window.location.assign('/#/500');
+      });
 
     let schedulePromise = axios
       .get(`/api/scheduled/baskets/${nonProfitID}`)
@@ -109,7 +128,10 @@ class NonProfit extends React.Component {
         this.setState({
           scheduledBaskets: scheduledBaskets.data
         });
-      }).catch(()=>{window.location.assign('/#/500')});      
+      })
+      .catch(() => {
+        window.location.assign('/#/500');
+      });
 
     Promise.all([basketPromise, wishListPromise, schedulePromise]).then(() => {
       const { baskets, wishList } = this.state;
@@ -126,11 +148,16 @@ class NonProfit extends React.Component {
 
   getUserInfo() {
     // change axios request to send user_id based on session after longin when routing and auth are fully implemented.
-    axios.get(`/api/nonprofit/${+this.state.nonProfitID}`).then((userData) => {
-      this.setState({
-        nonProfitInfo: userData.data[0]
+    axios
+      .get(`/api/nonprofit/${+this.state.nonProfitID}`)
+      .then((userData) => {
+        this.setState({
+          nonProfitInfo: userData.data[0]
+        });
+      })
+      .catch(() => {
+        window.location.assign('/#/404');
       });
-    }).catch( ()=> {window.location.assign('/#/404')});
   }
 
   handleChange(key, value) {
@@ -139,7 +166,22 @@ class NonProfit extends React.Component {
     });
   }
 
-  scheduleBasket(scheduledTime, phoneNumber, message, basketID) {
+  confirmPickup(phoneNumber, basketID) {
+    const message = `Basket ${basketID} has been picked up.`;
+
+    let promise = axios.put(`/api/basket/confirm/${basketID}`, {
+      phoneNumber,
+      message,
+      basketID
+    });
+
+    Promise.all([promise]).then(() => {
+      this.initializeComponent();
+      this.toastify('Pickup Confirmed!');
+    });
+  }
+
+  scheduleBasket(scheduledTime, phoneNumber, message, toastMessage, basketID) {
     const { nonProfitID } = this.state;
 
     let promise = axios.put(`/api/basket/update/${nonProfitID}`, {
@@ -151,9 +193,8 @@ class NonProfit extends React.Component {
 
     Promise.all([promise]).then(() => {
       this.initializeComponent();
+      this.toastify(toastMessage);
     });
-
-    alert('Reservation Successful!');
   }
 
   cancelBasket(phoneNumber, basketID) {
@@ -166,9 +207,8 @@ class NonProfit extends React.Component {
 
     Promise.all([promise]).then(() => {
       this.initializeComponent();
+      this.toastify('Reservation Canceled!');
     });
-
-    alert('Reservation Canceled!');
   }
 
   createWishList() {
@@ -224,7 +264,7 @@ class NonProfit extends React.Component {
               baskets: modifiedBaskets
             });
           } else {
-            alert('Add items to Wish List!');
+            this.toastify('Add items to Wish List!');
           }
           break;
 
@@ -269,21 +309,29 @@ class NonProfit extends React.Component {
     let arr = [];
     let { baskets } = this.state;
 
-    console.log(baskets)
+    console.log(baskets);
 
     for (let i = 0; i < baskets.length; i++) {
       arr.push(baskets[i].business_id);
     }
 
-    var uniq = [...new Set(arr)]
-    console.log(uniq)
+    var uniq = [...new Set(arr)];
+    console.log(uniq);
 
-   axios.post('/api/nonprofit/businesslocation', { businessID: uniq } ).then(locations => {
-     console.log(locations)
-     this.setState({
-       markers: locations.data
-     })
-   })
+    axios
+      .post('/api/nonprofit/businesslocation', { businessID: uniq })
+      .then((locations) => {
+        console.log(locations);
+        this.setState({
+          markers: locations.data
+        });
+      });
+  }
+
+  toastify(message) {
+    toast(message, {
+      position: toast.POSITION.BOTTOM_CENTER
+    });
   }
 
   render() {
@@ -296,64 +344,65 @@ class NonProfit extends React.Component {
       markers
     } = this.state;
 
-    var basketLength = baskets.length
+    var basketLength = baskets.length;
     if (this.state.loading) {
-      return <LoadingDots />
+      return <LoadingDots />;
+    } else {
+      return (
+        <main className="mobile">
+          <NewHeader />
+          <div className="np-view-main">
+            <div className="np-view-col-1">
+              <div className="google-maps">
+                <MapContainer
+                  markeers={this.state.markers}
+                  mapCenter={{
+                    lat: nonProfitInfo.latitude,
+                    lng: nonProfitInfo.longitude
+                  }}
+                  npName={nonProfitInfo.company_name}
+                  address={nonProfitInfo.street_address}
+                  city={`${nonProfitInfo.city} ${nonProfitInfo.state}`}
+                />
+              </div>
+
+              <div className="np-wishlist-basket-container">
+                <h3>Wish List</h3>
+                <WishList
+                  _wishlist={this.wishList}
+                  _createWishList={this.createWishList}
+                  _addWishListItem={this.addWishListItem}
+                  parent_editWishListItem={this.parent_editWishListItem}
+                  _removeWishListItem={this.removeWishListItem}
+                />
+              </div>
+            </div>
+
+            <div className="np-view-col-2">
+              <div className="np-sched-basket-container">
+                <h3>Scheduled Baskets</h3>
+                <ScheduleList
+                  _scheduledBaskets={scheduledBaskets}
+                  _confirmPickup={this.confirmPickup}
+                  _scheduleBasket={this.scheduleBasket}
+                  _cancelBasket={this.cancelBasket}
+                />
+              </div>
+
+              <div className="np-avail-basket-container">
+                <h3>Available Baskets</h3>
+                <NonProfitBasketList
+                  _baskets={baskets}
+                  _scheduleBasket={this.scheduleBasket}
+                />
+              </div>
+            </div>
+          </div>
+          <ToastContainer autoClose={5000} />
+        </main>
+      );
     }
-    else {
-    return (
-      <main className="mobile">
-        {/* <Header /> */}
-        <NewHeader/>
-        <div className='np-view-main'>
-        <div className='np-view-col-1'>
-          <div className='google-maps'>
-          <MapContainer
-             markeers={this.state.markers}
-             mapCenter={{lat: nonProfitInfo.latitude, lng: nonProfitInfo.longitude}}
-             npName={nonProfitInfo.company_name}
-             address={nonProfitInfo.street_address}
-             city={`${nonProfitInfo.city} ${nonProfitInfo.state}`}
-             
-           />
-          </div>
-
-          <div className='np-wishlist-basket-container'>
-            <h3>Wish List</h3>
-              <WishList
-                _wishlist={this.wishList}
-                _createWishList={this.createWishList}
-                _addWishListItem={this.addWishListItem}
-                parent_editWishListItem={this.parent_editWishListItem}
-                _removeWishListItem={this.removeWishListItem}
-              />
-          </div>
-
-          </div>
-          
-          <div className='np-view-col-2'>
-        <div className='np-sched-basket-container'>
-        <h3>Scheduled Baskets</h3>
-        <ScheduleList
-          _scheduledBaskets={scheduledBaskets}
-          _scheduleBasket={this.scheduleBasket}
-          _cancelBasket={this.cancelBasket}
-        />
-      </div>
-
-        <div className='np-avail-basket-container'>
-        <h3>Available Baskets</h3>
-        <NonProfitBasketList
-          _baskets={baskets}
-          _scheduleBasket={this.scheduleBasket}
-        />
-        </div>
-        </div>
-        </div>
-      </main>
-    );
   }
-}
 }
 
 export default NonProfit;
