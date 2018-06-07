@@ -2,26 +2,22 @@
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
   .bus-top-bar {
-    width: 0;
-    height: 0;
-    margin-top: 75px;
-    background: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: none;
   }
 }
 
 /* TABLET VIEW */
-
 @media only screen and (min-device-width: 668px) and (max-device-width: 1199px) {
   .bus-top-bar {
     width: 100%;
-    height: 250px;
-    margin-top: 75px;
+    height: 40vh;
+    margin-top: 100px;
+    border: 1px solid #A5BE00;
     background: white;
+    box-shadow: 0 4px 8px 0 rgba(66, 122, 161, 0.2), 0 6px 20px 0 rgba(66, 122, 161, 0.19);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
   }
   .business-table-list-container {
@@ -35,19 +31,34 @@
     border: 1px solid pink;
     width: 50%;
   }
+
+    .donut-container{
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    display: flex;
+  }
+
+  .barchart-container{
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    display: flex;
+  }
 }
 
 /* DESKTOPS */
-
 @media screen and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1) {
   .bus-top-bar {
     width: 100%;
-    height: 40vh;
-    margin-top: 75px;
+    height: 35vh;
+    margin-top: 70px;
     background: white;
+    border: 1px solid #A5BE00;
+    box-shadow: 0 4px 8px 0 rgba(66, 122, 161, 0.2), 0 6px 20px 0 rgba(66, 122, 161, 0.19);
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: space-between;
   }
   .business-table-list-container {
     display: flex;
@@ -64,9 +75,10 @@
     width: 100%;
     height: 100%;
   }
+
   .barchart-container{
     width: 100%;
-    border: 2px solid yellow;
+    height: 100%;
   }
 
 }
