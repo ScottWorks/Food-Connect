@@ -120,13 +120,17 @@ class ScheduleBasket extends React.Component {
           Confirm Pickup
         </button>
         {reserveCard}
-        <button onClick={() => this.toggleReservationCard()}>Update</button>
-        <button onClick={() => _cancelBasket(fakePhoneNumber, basketID)}>
-          Remove
-        </button>
-        <p>{formattedTime}</p>
-        <p>{scheduledBasket.company_name}</p>
-        <ContactInfoCard _contactInfo={contactInfo} />
+        <div className="schedule-basket-btns">
+          <button onClick={() => this.toggleReservationCard()}>Update</button>
+          <button onClick={() => _cancelBasket(fakePhoneNumber, basketID)}>
+            Remove
+          </button>
+        </div>
+        <div className="sched-basket-info-container">
+          <p>{formattedTime}</p>
+          <p>{scheduledBasket.company_name}</p>
+          <ContactInfoCard _contactInfo={contactInfo} />
+        </div>
       </section>
     );
   }

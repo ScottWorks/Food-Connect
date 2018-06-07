@@ -1,0 +1,103 @@
+.BusinessHistory {
+  max-width: 800px;
+  width: 90%;
+  min-width: 100vh;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 100px auto;
+}
+
+.BusinessHistory h1 {
+  font-size: 30px;
+  line-height: 30px;
+}
+
+.BusinessHistory-print-button {
+  width: 100%;
+  height: 20px;
+  margin: 25px 0;
+}
+
+.BusinessHistory-print-button button {
+  width: 45px;
+  height: 20px;
+  float: right;
+}
+
+.BusinessHistory-item-row {
+  width: 100%;
+  height: 20px;
+  padding: 4px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.BusinessHistory-item-row:nth-child(odd) {
+  background: white;
+}
+.BusinessHistory-item-row:nth-child(even) {
+  background: lightgray;
+}
+
+.BusinessHistory-column-names {
+  width: 100%;
+  height: 20px;
+  padding: 4px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.BusinessHistory-column-totals {
+  width: 100%;
+  height: 20px;
+  padding: 4px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.BusinessHistory-column {
+  width: 33.33%;
+  height: 20px;
+  padding: 4px 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.BusinessHistory-column {
+  width: 33.33%;
+  height: 20px;
+  padding: 4px 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.BusinessHistory-column {
+  width: 33.33%;
+  height: 20px;
+  padding: 4px 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #section-to-print, #section-to-print * {
+    visibility: visible;
+  }
+  #section-to-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}

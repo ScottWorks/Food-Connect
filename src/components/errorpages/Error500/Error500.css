@@ -1,0 +1,168 @@
+/* @import url('https://fonts.googleapis.com/css?family=Chango'); */
+
+a{
+    text-decoration: none;
+}
+
+.error500_body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    font-weight: bold;
+    background-image: url('http://static.trendme.net/pictures/items/trendmenet-BrokenGlass_Ilustracije_full_34_10948.png');
+    background-size: cover;
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+
+.error500_main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    margin-bottom: 20px;
+    font-weight: 400;
+    /* color: #427AA1; */
+}
+
+.error500_main img{
+    height: 100px;
+    width: 100px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.error500_subtext{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.error500_sub_subtext{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    margin-bottom: 20px;
+    width: 100vw;
+}
+
+.error500_hr{
+    width: 70%;
+    margin-bottom: 25px;
+}
+
+.home_button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #EBF2FA;
+    font-weight: bold;
+    font-size: 15px;
+    height: 40px;
+    width: 130px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    background: #427AA1;
+    box-shadow: 2px 2px rgb(5, 50, 82);
+}
+
+#error500_5{
+    transform: rotate(0deg);
+    transform-origin: top left;
+    animation-name: broken5;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+}
+
+@keyframes broken5{
+    0% {
+        transform: rotate(20deg)
+    }
+    50% {
+        transform: rotate(-2deg)
+    }
+    60% {
+        transform: rotate(-2deg)
+    }
+    100% {
+        transform: rotate(20deg)
+    }
+}
+
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    .error500_main{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 200px;
+        font-weight: 400;
+        margin-bottom: 30px;
+        background-image: url('http://static.trendme.net/pictures/items/trendmenet-BrokenGlass_Ilustracije_full_34_10948.png');
+        background-size: cover;
+    }
+    
+    .error500_main img{
+        height: 300px;
+        width: 300px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    
+    .error500_subtext{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 40px;
+        margin-bottom: 30px;
+        width: 500px;
+    }
+
+    .error500_sub_subtext{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        margin-bottom: 40px;
+        width: 700px;
+    }
+
+    .home_button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #EBF2FA;
+        font-weight: bold;
+        font-size: 15px;
+        height: 50px;
+        width: 150px;
+        border-radius: 5px;
+        text-transform: uppercase;
+        background: #427AA1;
+        box-shadow: 2px 2px rgb(5, 50, 82);
+        }
+    .error500_hr{
+        width: 40%;
+        margin-bottom: 45px;
+    }
+
+    #error500_5{
+        transform: rotate(0deg);
+        transform-origin: top left;
+        animation-name: broken5;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+  }

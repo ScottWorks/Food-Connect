@@ -82,7 +82,7 @@ class NonProfitBasket extends React.Component {
           className="reserve-btn"
           onClick={() => this.toggleReservationCard()}
         >
-          RESERVE
+          Reserve
         </button>
         <p>{currentBasket.company_name}</p>
         <p>{currentBasket.operating_hrs}</p>
@@ -92,7 +92,7 @@ class NonProfitBasket extends React.Component {
           className="details-collapse-btn"
           onClick={() => this.toggleDetailedCard()}
         >
-          {expanded ? 'COLLAPSE' : 'DETAILS'}
+          {expanded ? 'Collapse' : 'Details'}
         </button>
       </section>
     );

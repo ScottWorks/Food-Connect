@@ -16,6 +16,9 @@ import * as sortUtil from '../../../config/sortUtil';
 import './NonProfit.css';
 import 'react-toastify/dist/ReactToastify.css';
 
+import LoadingDots from '../../components/LoadingPages/LoadingDots/LoadingDots.js';
+import NewHeader from '../../components/Header/NewHeader.js';
+
 class NonProfit extends React.Component {
   constructor() {
     super();
@@ -25,7 +28,10 @@ class NonProfit extends React.Component {
       baskets: [],
       wishList: [],
       scheduledBaskets: [],
-      searchInput: ''
+      searchInput: '',
+      loading: true,
+      startTime: null,
+      markers: []
     };
 
     this.initializeComponent = this.initializeComponent.bind(this);
@@ -45,14 +51,35 @@ class NonProfit extends React.Component {
     this.toastify = this.toastify.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount = async () => {
+    this.setState({ startTime: Date.now() });
+    await axios
+      .get('/api/auth/me')
+      .then((user) => {
+        if (
+          typeof user.data.user_id === 'number' &&
+          user.data.acct_type === 'np'
+        ) {
+          console.log('Validated!', user);
+        } else if (
+          typeof user.data.user_id === 'number' &&
+          user.data.acct_type === 'b'
+        ) {
+          window.location.assign('/#/business');
+        } else {
+          window.location.assign('/#/login');
+          console.log('Sorry, you are not allowed...');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        window.location.assign('/#/login');
+        console.log('Sorry, you are not allowed...');
+      });
+
     this.initializeComponent();
     this.getUserInfo();
-  }
-
-  componentWillUpdate() {
-    this.displayBusinessToMap();
-  }
+  };
 
   initializeComponent() {
     const { nonProfitID } = this.state;
@@ -64,9 +91,24 @@ class NonProfit extends React.Component {
       .post(`/api/basket/${currentLocalTime}`, { businessIDs })
       .then((baskets) => {
         console.log(baskets);
-        this.setState({
-          baskets: baskets.data
-        });
+        //Logic for loading screen time
+        let currentTime = Date.now();
+        let elapsed = currentTime - this.state.startTime;
+        if (elapsed < 2000) {
+          setTimeout(() => this.setState({ loading: false }), 2000);
+        } else {
+          this.setState({ loading: false });
+        }
+
+        this.setState(
+          {
+            baskets: baskets.data
+          },
+          () => this.displayBusinessToMap()
+        );
+      })
+      .catch(() => {
+        window.location.assign('/#/500');
       });
 
     let wishListPromise = axios
@@ -75,6 +117,9 @@ class NonProfit extends React.Component {
         this.setState({
           wishList: wishList.data[0]
         });
+      })
+      .catch(() => {
+        window.location.assign('/#/500');
       });
 
     let schedulePromise = axios
@@ -83,6 +128,9 @@ class NonProfit extends React.Component {
         this.setState({
           scheduledBaskets: scheduledBaskets.data
         });
+      })
+      .catch(() => {
+        window.location.assign('/#/500');
       });
 
     Promise.all([basketPromise, wishListPromise, schedulePromise]).then(() => {
@@ -100,11 +148,16 @@ class NonProfit extends React.Component {
 
   getUserInfo() {
     // change axios request to send user_id based on session after longin when routing and auth are fully implemented.
-    axios.get(`/api/nonprofit/${+this.state.nonProfitID}`).then((userData) => {
-      this.setState({
-        nonProfitInfo: userData.data[0]
+    axios
+      .get(`/api/nonprofit/${+this.state.nonProfitID}`)
+      .then((userData) => {
+        this.setState({
+          nonProfitInfo: userData.data[0]
+        });
+      })
+      .catch(() => {
+        window.location.assign('/#/404');
       });
-    });
   }
 
   handleChange(key, value) {
@@ -256,9 +309,23 @@ class NonProfit extends React.Component {
     let arr = [];
     let { baskets } = this.state;
 
+    console.log(baskets);
+
     for (let i = 0; i < baskets.length; i++) {
       arr.push(baskets[i].business_id);
     }
+
+    var uniq = [...new Set(arr)];
+    console.log(uniq);
+
+    axios
+      .post('/api/nonprofit/businesslocation', { businessID: uniq })
+      .then((locations) => {
+        console.log(locations);
+        this.setState({
+          markers: locations.data
+        });
+      });
   }
 
   toastify(message) {
@@ -273,55 +340,68 @@ class NonProfit extends React.Component {
       baskets,
       wishList,
       scheduledBaskets,
-      searchInput
+      searchInput,
+      markers
     } = this.state;
 
-    return (
-      <main className="mobile">
-        <Header />
-        <div>
-          <MapContainer
-            mapCenter={{
-              lat: nonProfitInfo.latitude,
-              lng: nonProfitInfo.longitude
-            }}
-            npName={nonProfitInfo.company_name}
-            address={nonProfitInfo.street_address}
-            city={`${nonProfitInfo.city} ${nonProfitInfo.state}`}
-          />
-        </div>
-        <div className="nonprofit_main">
-          <h2>Non Profit Page</h2>
-        </div>
-        <WishList
-          _wishList={wishList}
-          _createWishList={this.createWishList}
-          _addWishListItem={this.addWishListItem}
-          parent_editWishListItem={this.parent_editWishListItem}
-          _removeWishListItem={this.removeWishListItem}
-        />
-        <h2>Scheduled Baskets</h2>
-        <ScheduleList
-          _scheduledBaskets={scheduledBaskets}
-          _confirmPickup={this.confirmPickup}
-          _scheduleBasket={this.scheduleBasket}
-          _cancelBasket={this.cancelBasket}
-        />
-        <h2>Available Baskets</h2>
-        <Search
-          _searchInput={searchInput}
-          _initializeComponent={this.initializeComponent}
-          _handleChange={this.handleChange}
-          _searchBaskets={this.searchBaskets}
-        />
-        <Sort _sortBaskets={this.sortBaskets} />
-        <NonProfitBasketList
-          _baskets={baskets}
-          _scheduleBasket={this.scheduleBasket}
-        />
-        <ToastContainer autoClose={5000} />
-      </main>
-    );
+    var basketLength = baskets.length;
+    if (this.state.loading) {
+      return <LoadingDots />;
+    } else {
+      return (
+        <main className="mobile">
+          <NewHeader />
+          <div className="np-view-main">
+            <div className="np-view-col-1">
+              <div className="google-maps">
+                <MapContainer
+                  markeers={this.state.markers}
+                  mapCenter={{
+                    lat: nonProfitInfo.latitude,
+                    lng: nonProfitInfo.longitude
+                  }}
+                  npName={nonProfitInfo.company_name}
+                  address={nonProfitInfo.street_address}
+                  city={`${nonProfitInfo.city} ${nonProfitInfo.state}`}
+                />
+              </div>
+
+              <div className="np-wishlist-basket-container">
+                <h3>Wish List</h3>
+                <WishList
+                  _wishlist={this.wishList}
+                  _createWishList={this.createWishList}
+                  _addWishListItem={this.addWishListItem}
+                  parent_editWishListItem={this.parent_editWishListItem}
+                  _removeWishListItem={this.removeWishListItem}
+                />
+              </div>
+            </div>
+
+            <div className="np-view-col-2">
+              <div className="np-sched-basket-container">
+                <h3>Scheduled Baskets</h3>
+                <ScheduleList
+                  _scheduledBaskets={scheduledBaskets}
+                  _confirmPickup={this.confirmPickup}
+                  _scheduleBasket={this.scheduleBasket}
+                  _cancelBasket={this.cancelBasket}
+                />
+              </div>
+
+              <div className="np-avail-basket-container">
+                <h3>Available Baskets</h3>
+                <NonProfitBasketList
+                  _baskets={baskets}
+                  _scheduleBasket={this.scheduleBasket}
+                />
+              </div>
+            </div>
+          </div>
+          <ToastContainer autoClose={5000} />
+        </main>
+      );
+    }
   }
 }
 

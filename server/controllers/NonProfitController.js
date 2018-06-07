@@ -1,4 +1,16 @@
 module.exports = {
+
+  getBusinessLoation: (req, res, next) => {
+    const db = req.app.get('db');
+    const {businessID} = req.body;
+
+    db.np_getBusinessLocation([businessID]).then( locations => {
+      res.status(200).send(locations)
+    }).catch( (err) => {
+      res.sendStatus(500)
+    })
+  },
+
   getUserInfo: (req, res, next) => {
     const db = req.app.get('db');
     const { userID } = req.params;
