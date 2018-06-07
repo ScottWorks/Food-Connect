@@ -87,6 +87,8 @@ app.put('/api/basket/cancel/:basketID', nonProfitController.cancelBasket); // TE
 //   nonProfitController.cancelBasket
 // );
 
+app.post('/api/nonprofit/businesslocation', nonProfitController.getBusinessLoation)
+
 // Non-Profit Wishlist Endpoints
 app.get('/api/wishlist/:nonProfitID', nonProfitController.getWishList);
 app.post('/api/wishlist/:nonProfitID', nonProfitController.createWishList);

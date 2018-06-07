@@ -39,19 +39,19 @@ class WishList extends React.Component {
     });
   }
 
-  addWishListItem() {
+  addWishListItem(e) {
     const { newItem } = this.state;
 
-    this.props._addWishListItem(newItem);
+    this.props._addWishListItem(e, newItem);
     this.setState({
       newItem: ''
     });
   }
 
-  editWishListItem(idx) {
+  editWishListItem(e, idx) {
     const { editItem } = this.state;
 
-    this.props.parent_editWishListItem(idx, editItem);
+    this.props.parent_editWishListItem(e, idx, editItem);
     this.setState({
       editItem: '',
       edit: false
@@ -61,13 +61,13 @@ class WishList extends React.Component {
   render() {
     const { newItem, edit, editItemIdx, editItem } = this.state;
     const {
-      _wishlist,
+      _wishList,
       _createWishList,
       _addWishListItem,
       _removeWishListItem
     } = this.props;
 
-    const wishlist = _wishlist ? (
+    const wishlist = _wishList ? (
       <div>
         <div className='wishlist-add-container'>
         <button onClick={() => this.addWishListItem()}>Add Item</button>
@@ -81,7 +81,7 @@ class WishList extends React.Component {
           _edit={edit}
           _editItemIdx={editItemIdx}
           _editItem={editItem}
-          _items={_wishlist.items}
+          _items={_wishList.items}
           _handleChange={this.handleChange}
           _toggleEdit={this.toggleEdit}
           child_editWishListItem={this.editWishListItem}

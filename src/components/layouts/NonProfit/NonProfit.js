@@ -2,85 +2,126 @@ import React from 'react';
 import axios from 'axios';
 
 // import Map from './Map/Map';
+import Header from '../../components/Header/Header.js';
 import NonProfitBasketList from './NonProfitBasketList/NonProfitBasketList';
 import ScheduleList from './ScheduleList/ScheduleList';
+import Search from './Search/Search';
+import Sort from './Sort/Sort';
 import WishList from './WishList/WishList';
-import Header from '../../components/Header/Header.js';
 
+import * as searchUtil from '../../../config/searchUtil';
 import * as sortUtil from '../../../config/sortUtil';
 
 import './NonProfit.css';
-import MapContainer from '../../components/Map/googleMap'
+import MapContainer from '../../components/Map/googleMap';
 
 class NonProfit extends React.Component {
   constructor() {
     super();
     this.state = {
-      nonProfitID: 9,
+      nonProfitID: 2,
+      nonProfitInfo: {},
       baskets: [],
+      wishList: [],
       scheduledBaskets: [],
-      wishlist: [],
-      nonProfitInfo: {}
+      searchInput: '',
+      markers: []
     };
 
-    this.getBaskets = this.getBaskets.bind(this);
-    this.getScheduledBaskets = this.getScheduledBaskets.bind(this);
+    this.initializeComponent = this.initializeComponent.bind(this);
+    this.getUserInfo = this.getUserInfo.bind(this);
+    this.displayBusinessToMap = this.displayBusinessToMap.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.scheduleBasket = this.scheduleBasket.bind(this);
     this.cancelBasket = this.cancelBasket.bind(this);
-    this.getWishList = this.getWishList.bind(this);
     this.createWishList = this.createWishList.bind(this);
     this.addWishListItem = this.addWishListItem.bind(this);
     this.parent_editWishListItem = this.parent_editWishListItem.bind(this);
     this.removeWishListItem = this.removeWishListItem.bind(this);
     this.modifyWishListItem = this.modifyWishListItem.bind(this);
-    this.getUserInfo = this.getUserInfo.bind(this);
-    this.displayBusinessToMap = this.displayBusinessToMap.bind(this);
+    this.sortBaskets = this.sortBaskets.bind(this);
+    this.searchBaskets = this.searchBaskets.bind(this);
   }
 
-  componentDidMount() {
-    this.getBaskets();
-    this.getScheduledBaskets();
-    this.getWishList();
-    this.getUserInfo();    
-  }
-
-  componentWillUpdate() {
-    this.displayBusinessToMap()    
-  }
-
-  getUserInfo() {
-    // change axios request to send user_id based on session after longin when routing and auth are fully implemented.
-    axios.get(`/api/nonprofit/${+this.state.nonProfitID}`).then( userData => {
-      this.setState({
-        nonProfitInfo: userData.data[0]
-      })
+  componentDidMount = async () => {
+    
+    await axios.get('/api/auth/me').then( user => {
+        if(typeof user.data.user_id === 'number' && user.data.acct_type === 'np') {
+          console.log('Validated!', user)
+        } else if (typeof user.data.user_id === 'number' && user.data.acct_type === 'b') {
+          window.location.assign('/#/business')
+        } else {
+          window.location.assign('/#/login')
+          console.log('Sorry, you are not allowed...')
+        }
+    }).catch( err => {
+      console.log(err)
+      window.location.assign('/#/login')
+      console.log('Sorry, you are not allowed...')
     })
+
+    this.initializeComponent();
+    this.getUserInfo();
   }
 
-  getBaskets() {
-    const currentLocalTime = new Date().getTime();
-    const businessIDs = [1, 2, 4, 6];
 
-    axios
+  initializeComponent () {
+    const { nonProfitID } = this.state;
+    const currentLocalTime = new Date().getTime();
+    const businessIDs = [1, 2, 3, 4, 5, 6, 7, 8];
+    // const businessIDs = [60, 70, 80];
+
+    let basketPromise = axios
       .post(`/api/basket/${currentLocalTime}`, { businessIDs })
       .then((baskets) => {
-        console.log(baskets)
+        console.log(baskets);
         this.setState({
           baskets: baskets.data
+        }, () => this.displayBusinessToMap() );
+      });
+
+    let wishListPromise = axios
+      .get(`/api/wishlist/${nonProfitID}`)
+      .then((wishList) => {
+        this.setState({
+          wishList: wishList.data[0]
         });
       });
-  }
 
-  getScheduledBaskets() {
-    const { nonProfitID } = this.state;
-
-    axios
+    let schedulePromise = axios
       .get(`/api/scheduled/baskets/${nonProfitID}`)
       .then((scheduledBaskets) => {
         this.setState({
           scheduledBaskets: scheduledBaskets.data
         });
+      });      
+
+    Promise.all([basketPromise, wishListPromise, schedulePromise]).then(() => {
+      const { baskets, wishList } = this.state;
+
+      if (baskets.length > 0) {
+        let modifiedBaskets = sortUtil.sortByWishList(baskets, wishList);
+
+        this.setState({
+          baskets: modifiedBaskets
+        });
+      }
+    });
+  }
+
+  getUserInfo() {
+    // change axios request to send user_id based on session after longin when routing and auth are fully implemented.
+    axios.get(`/api/nonprofit/${+this.state.nonProfitID}`).then((userData) => {
+      this.setState({
+        nonProfitInfo: userData.data[0]
       });
+    });
+  }
+
+  handleChange(key, value) {
+    this.setState({
+      [key]: value
+    });
   }
 
   scheduleBasket(scheduledTime, phoneNumber, message, basketID) {
@@ -94,8 +135,7 @@ class NonProfit extends React.Component {
     });
 
     Promise.all([promise]).then(() => {
-      this.getScheduledBaskets();
-      this.getBaskets();
+      this.initializeComponent();
     });
 
     alert('Reservation Successful!');
@@ -110,46 +150,37 @@ class NonProfit extends React.Component {
     });
 
     Promise.all([promise]).then(() => {
-      this.getScheduledBaskets();
-      this.getBaskets();
+      this.initializeComponent();
     });
 
     alert('Reservation Canceled!');
-  }
-
-  getWishList() {
-    const { nonProfitID } = this.state;
-
-    axios.get(`/api/wishlist/${nonProfitID}`).then((wishlist) => {
-      this.setState({
-        wishlist: wishlist.data[0]
-      });
-    });
   }
 
   createWishList() {
     const { nonProfitID } = this.state;
 
     axios.post(`/api/wishlist/${nonProfitID}`).then(() => {
-      this.getWishList();
+      this.initializeComponent();
     });
   }
 
-  addWishListItem(item) {
-    const updatedWishList = [...this.state.wishlist.items, { item: item }];
+  addWishListItem(e, item) {
+    e.preventDefault();
+    const updatedWishList = [...this.state.wishList.items, { item: item }];
 
     this.modifyWishListItem(updatedWishList);
   }
 
-  parent_editWishListItem(idx, item) {
-    const updatedWishList = [...this.state.wishlist.items];
+  parent_editWishListItem(e, idx, item) {
+    e.preventDefault();
+    const updatedWishList = [...this.state.wishList.items];
 
     updatedWishList.splice(idx, 1, { item: item });
     this.modifyWishListItem(updatedWishList);
   }
 
   removeWishListItem(idx) {
-    const updatedWishList = [...this.state.wishlist.items];
+    const updatedWishList = [...this.state.wishList.items];
 
     updatedWishList.splice(idx, 1);
     this.modifyWishListItem(updatedWishList);
@@ -161,28 +192,95 @@ class NonProfit extends React.Component {
     axios
       .put(`/api/wishlist/modify/${nonProfitID}`, { updatedWishList })
       .then(() => {
-        this.getWishList();
+        this.initializeComponent();
+      });
+  }
+
+  sortBaskets(sortType) {
+    const { baskets, wishList } = this.state;
+    let modifiedBaskets;
+
+    if (baskets.length > 0) {
+      switch (sortType) {
+        case 'wishlist':
+          if (wishList.items && wishList.items.length > 0) {
+            modifiedBaskets = sortUtil.sortByWishList(baskets, wishList);
+            this.setState({
+              baskets: modifiedBaskets
+            });
+          } else {
+            alert('Add items to Wish List!');
+          }
+          break;
+
+        case 'latest':
+          modifiedBaskets = sortUtil.sortRecent(baskets);
+          this.setState({
+            baskets: modifiedBaskets
+          });
+          break;
+
+        case 'oldest':
+          modifiedBaskets = sortUtil.sortOldest(baskets);
+          this.setState({
+            baskets: modifiedBaskets
+          });
+          break;
+      }
+    }
+  }
+
+  searchBaskets(e) {
+    e.preventDefault();
+    const { baskets, searchInput } = this.state;
+    const currentLocalTime = new Date().getTime();
+    const businessIDs = [1, 2, 3, 4, 5, 6, 7, 8];
+
+    axios
+      .post(`/api/basket/${currentLocalTime}`, { businessIDs })
+      .then((baskets) => {
+        let modifiedBaskets = searchUtil.searchBaskets(
+          baskets.data,
+          searchInput
+        );
+
+        this.setState({
+          baskets: modifiedBaskets
+        });
       });
   }
 
   displayBusinessToMap() {
-    let arr = []
-    let { baskets } = this.state
+    let arr = [];
+    let { baskets } = this.state;
 
-    for(let i = 0; i < baskets.length; i++) {
-      arr.push(baskets[i].business_id)
+    console.log(baskets)
+
+    for (let i = 0; i < baskets.length; i++) {
+      arr.push(baskets[i].business_id);
     }
-    console.log(arr.sort( (a,b) => a - b))
+
+    var uniq = [...new Set(arr)]
+    console.log(uniq)
+
+   axios.post('/api/nonprofit/businesslocation', { businessID: uniq } ).then(locations => {
+     console.log(locations)
+     this.setState({
+       markers: locations.data
+     })
+   })
   }
 
   render() {
-    const { baskets, scheduledBaskets, wishlist, nonProfitInfo } = this.state;
+    const {
+      nonProfitInfo,
+      baskets,
+      wishList,
+      scheduledBaskets,
+      searchInput,
+      markers
+    } = this.state;
 
-    // let sortedBasketsByWishListItems = sortUtil.sortByWishList(
-    //   baskets,
-    //   wishlist
-    // );
-    console.log(wishlist)
     return (
       <main className="mobile">
         <Header />
