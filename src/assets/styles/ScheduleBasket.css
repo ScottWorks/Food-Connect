@@ -1,6 +1,34 @@
 /* FOR MOBILE DEVICES */
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
-        
+    .schedule-basket-btns{
+        display: flex;
+        justify-content: space-evenly;
+        padding: 10px;
+        margin-bottom: 5px;
+    }
+
+    .schedule-basket-btns button {
+        padding: 1px;
+        font-size: 1em;
+        line-height: 1.25em;
+        background: #679436;
+        border: 0;
+        color: #EBF2FA;
+        border-radius: 5px;
+        width: 80px;
+    }
+
+    .schedule-basket-btns button:hover{
+
+    }
+
+    .sched-basket-info-container{
+        font-size: 1em;
+        line-height: 1.25em;
+        text-align: center;
+    }
+
+
    }
 
    /* TABLET VIEW */

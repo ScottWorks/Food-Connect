@@ -25,12 +25,11 @@
 
     .wishlist-add-container input:focus{
         border: #A5BE00 solid;
-            outline: 0;
+        outline: 0;
     }
 
     
     .wishlist-items-container{
-        
         display: flex;
         align-items: center;
         justify-content: space-between;

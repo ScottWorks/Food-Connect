@@ -7,6 +7,9 @@
 
   .np-wishlist-basket-container{
       margin-top: 70px;
+      width: 95%;
+      margin-left: auto;
+      margin-right: auto;
   }
 
   .np-wishlist-basket-container h3{
@@ -14,24 +17,33 @@
     line-height: 	1.13636364em;
     text-align: center;
     padding: 5px;
-    
+    border: 1px solid;
+    background: #427AA1;
+    color: #EBF2FA; 
   }
 
   .np-sched-basket-container{
-
+    margin-top: 5px;
+    width: 95%;
+      margin-left: auto;
+      margin-right: auto;
   }
 
   .np-sched-basket-container h3{
     font-size: 1.375em;
     line-height: 	1.13636364em;
     text-align: center;
-    
     padding: 5px;
+    background: #427AA1;
+    color: #EBF2FA; 
     
   }
 
   .np-avail-basket-container{
-
+    margin-top: 5px;
+    width: 95%;
+      margin-left: auto;
+      margin-right: auto;
   }
 
   .np-avail-basket-container h3{
@@ -39,6 +51,8 @@
     line-height: 	1.13636364em;
     text-align: center;
     padding: 5px;
+    background: #427AA1;
+    color: #EBF2FA; 
     
   }
 }
