@@ -74,6 +74,7 @@ class BusinessHistory extends React.Component {
         </div>
       )
     })
+    
     return (
       <div>
         <Header />
