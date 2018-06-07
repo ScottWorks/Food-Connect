@@ -87,10 +87,13 @@ module.exports = {
         ).catch(err)
     },
     validate: (req, res, next) => {
+        let user = req.session.user
+        console.log(req.session.user)
         if(req.session.user.user_id) {
-            res.status(200).send(req.session.user.acct_type)
+            res.status(200).send(user)
+        } else {
+        res.status(401).send( 'You are not Authorized')
         }
-        res.status(401).send('You are not Authorized')
     },
     logout: (req, res, next) => {
         req.session.destroy()

@@ -19,12 +19,13 @@ class NonProfit extends React.Component {
   constructor() {
     super();
     this.state = {
-      nonProfitID: 9,
+      nonProfitID: 2,
       nonProfitInfo: {},
       baskets: [],
       wishList: [],
       scheduledBaskets: [],
-      searchInput: ''
+      searchInput: '',
+      markers: []
     };
 
     this.initializeComponent = this.initializeComponent.bind(this);
@@ -42,16 +43,29 @@ class NonProfit extends React.Component {
     this.searchBaskets = this.searchBaskets.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount = async () => {
+    
+    await axios.get('/api/auth/me').then( user => {
+        if(typeof user.data.user_id === 'number' && user.data.acct_type === 'np') {
+          console.log('Validated!', user)
+        } else if (typeof user.data.user_id === 'number' && user.data.acct_type === 'b') {
+          window.location.assign('/#/business')
+        } else {
+          window.location.assign('/#/login')
+          console.log('Sorry, you are not allowed...')
+        }
+    }).catch( err => {
+      console.log(err)
+      window.location.assign('/#/login')
+      console.log('Sorry, you are not allowed...')
+    })
+
     this.initializeComponent();
     this.getUserInfo();
   }
 
-  componentWillUpdate() {
-    this.displayBusinessToMap();
-  }
 
-  initializeComponent() {
+  initializeComponent () {
     const { nonProfitID } = this.state;
     const currentLocalTime = new Date().getTime();
     const businessIDs = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -63,7 +77,7 @@ class NonProfit extends React.Component {
         console.log(baskets);
         this.setState({
           baskets: baskets.data
-        });
+        }, () => this.displayBusinessToMap() );
       });
 
     let wishListPromise = axios
@@ -80,7 +94,7 @@ class NonProfit extends React.Component {
         this.setState({
           scheduledBaskets: scheduledBaskets.data
         });
-      });
+      });      
 
     Promise.all([basketPromise, wishListPromise, schedulePromise]).then(() => {
       const { baskets, wishList } = this.state;
@@ -240,10 +254,21 @@ class NonProfit extends React.Component {
     let arr = [];
     let { baskets } = this.state;
 
+    console.log(baskets)
+
     for (let i = 0; i < baskets.length; i++) {
       arr.push(baskets[i].business_id);
     }
-    console.log(arr.sort((a, b) => a - b));
+
+    var uniq = [...new Set(arr)]
+    console.log(uniq)
+
+   axios.post('/api/nonprofit/businesslocation', { businessID: uniq } ).then(locations => {
+     console.log(locations)
+     this.setState({
+       markers: locations.data
+     })
+   })
   }
 
   render() {
@@ -252,7 +277,8 @@ class NonProfit extends React.Component {
       baskets,
       wishList,
       scheduledBaskets,
-      searchInput
+      searchInput,
+      markers
     } = this.state;
 
     return (
@@ -260,6 +286,7 @@ class NonProfit extends React.Component {
         <Header />
         <div>
           <MapContainer
+            markeers={this.state.markers}
             mapCenter={{
               lat: nonProfitInfo.latitude,
               lng: nonProfitInfo.longitude
