@@ -68,15 +68,16 @@ module.exports = {
             if(user.length !== 0) {
                 const validpassWord = bcrypt.compareSync(pw, user[0].user_pw)
                 if(validpassWord === true && user[0].acct_type === false) {
-                    req.session.user.user_id = user[0].user_id
-                    req.session.user.acct_type = 'np'
+                    req.session.user.user_id = user[0].user_id;
+                    req.session.user.acct_type = 'np';
+                    req.session.user.account_id = user[0].non_profit_id
                     res.status(200).send('You are also the chosen one!')
                 }
                   else if (validpassWord === true && user[0].acct_type === true) {
-                    req.session.user.user_id = user[0].user_id
-                    req.session.user.acct_type = 'b'
+                    req.session.user.user_id = user[0].user_id;
+                    req.session.user.acct_type = 'b';
+                    req.session.user.acct_id = user[0].business_id
                     res.status(200).send("You are the chosen one!")
-                    console.log(req.session)
                 } else {
                     res.status(401).send("Wrong Password")
                 }
@@ -88,7 +89,6 @@ module.exports = {
     },
     validate: (req, res, next) => {
         let user = req.session.user
-        console.log(req.session.user)
         if(req.session.user.user_id) {
             res.status(200).send(user)
         } else {
