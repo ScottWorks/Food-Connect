@@ -113,8 +113,9 @@ const DisplayWishList = ({
     return _items.map((elem, idx) => {
       if (_edit && idx === _editItemIdx) {
         return (
-          <div key={idx}>
+          <div className='editable-wishlist-container'key={idx}>
             <p>{elem.item}</p>
+            <div className='editable-wishlist-input'>
             <button onClick={() => child_editWishListItem(idx)}>Submit</button>
             <input
               value={_editItem}
@@ -122,6 +123,7 @@ const DisplayWishList = ({
               onChange={(e) => _handleChange('editItem', e.target.value)}
             />
             <button onClick={() => _toggleEdit(idx)}>Cancel</button>
+            </div>
           </div>
         );
       } else {

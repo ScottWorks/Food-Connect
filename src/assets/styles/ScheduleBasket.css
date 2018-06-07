@@ -66,10 +66,7 @@
         color: #EBF2FA;
         background: firebrick;
     }
-    .schedule-basket-btns :nth-child(1):hover{
-        color: #EBF2FA;
-        background: #05668D;
-    }
+
 
     .sched-basket-info-container{
         font-size: 1em;
