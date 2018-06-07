@@ -59,9 +59,10 @@ import blueIcon from '../../../assets/icons/map-blue.png'
               width: '400px',
               height: '400px',
               boxShadow: '0px 0px 3px rgba(0, 0, 0, 0.7)',
-              marginLeft: '10px',
-              marginTop: '70px',
-              marginBottom: '20px'
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              marginTop: 'auto',
+              
           }
 
           let displayMarkers = markeers.map( (markeer, i) => {

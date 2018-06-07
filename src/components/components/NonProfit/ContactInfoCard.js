@@ -1,10 +1,11 @@
 import React from 'react';
+import '../../../assets/styles/ContactInfoCard.css'
 
 function ContactInfoCard(props) {
   const { _contactInfo } = props;
 
   return (
-    <div>
+    <div className='contact-info-card-container'>
       <p>{_contactInfo.address}</p>
       <p>
         {_contactInfo.city}, {_contactInfo.state} {_contactInfo.zipCode}

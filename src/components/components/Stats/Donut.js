@@ -18,12 +18,12 @@ export default class Donut extends React.Component{
                 labels:['red', 'yellow', 'blue'] // TODO: Need to auto generate labels based on food
             }, 
             options:{
-                responsive: true,
+                responsive:true,
                 title: {
                     display: true,
                     position: "top",
                     text: "Pounds of Food Saved", // TODO:
-                    fontSize: 20,
+                    fontSize: 25,
                     fontColor: "#000000"
                 }
             }
@@ -32,8 +32,10 @@ export default class Donut extends React.Component{
 
     render(){
         return (
-            <Doughnut data={this.state.data} options={this.state.options}>
+            
+            <Doughnut height={100} weight={100}  data={this.state.data} options={this.state.options}>
             </Doughnut>
+            
         )
     }
 }
