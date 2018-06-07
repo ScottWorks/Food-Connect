@@ -101,6 +101,6 @@ module.exports = {
             let lbsPerMeal = lbsPerDay /3;
             let mealsSaved = poundsOfFoodSaved / lbsPerMeal;
 
-            return this.formatNumber(mealsSaved, 2, 3, ',', '.');
+            return this.formatNumber(mealsSaved, 0, 3, ',', '.');
       }
 }
