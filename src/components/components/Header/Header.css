@@ -19,7 +19,8 @@
   }
 
   #header_main h1 {
-    font-size: 45px;
+    font-size: 2em;
+    line-height: 1.25em;
     font-weight: bold;
     letter-spacing: 5px;
     color: #A5BE00;
@@ -133,7 +134,8 @@
   }
 
   #header_main h1 {
-    font-size: 45px;
+    font-size: 2.5em;
+    line-height: 1.125em;
     font-weight: bold;
     letter-spacing: 5px;
     color: #A5BE00;
@@ -248,7 +250,8 @@
     }
 
     #header_main h1 {
-      font-size: 45px;
+      font-size: 3em;
+      line-height: 1.05em;
       font-weight: bold;
       letter-spacing: 5px;
       color: #A5BE00;
