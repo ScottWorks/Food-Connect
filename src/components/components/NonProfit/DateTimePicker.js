@@ -1,6 +1,7 @@
 import React from 'react';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
+
 import * as timeUtil from '../../../config/timeUtil';
 import '../../../assets/styles/DateTimePicker.css'
 
@@ -24,19 +25,27 @@ class DateTimePicker extends React.Component {
 
   reserveBasket() {
     const { scheduledDate, scheduledTime } = this.state;
-    const { _basketID, _phoneNumber, _message, _parentToggle } = this.props;
+    const {
+      _basketID,
+      _phoneNumber,
+      _message,
+      _toastMessage,
+      _parentToggle
+    } = this.props;
     const fakePhoneNumber = '13033496264';
 
     let time = timeUtil.toEpoch(scheduledDate, scheduledTime);
 
-    let twilio_formattedTime = timeUtil.fromEpoch(time, 'ddd, MMM Do, h:mm a');
+    let formattedTime = timeUtil.fromEpoch(time, 'ddd, MMM Do, h:mm a');
 
-    let twilio_message = _message.concat(twilio_formattedTime);
+    let twilio_message = _message.concat(formattedTime);
+    let toast_message = _toastMessage.concat(formattedTime);
 
     this.props._scheduleBasket(
       time,
       fakePhoneNumber,
       twilio_message,
+      toast_message,
       _basketID
     );
 
