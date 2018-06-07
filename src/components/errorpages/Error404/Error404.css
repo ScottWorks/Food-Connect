@@ -1,0 +1,147 @@
+/* @import url('https://fonts.googleapis.com/css?family=Chango'); */
+
+a{
+    text-decoration: none;
+}
+
+.error404_body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    font-weight: bold;
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+
+.error404_main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    margin-bottom: 20px;
+    font-weight: 400;
+    /* color: #427AA1; */
+}
+
+.error404_main img{
+    margin-top: 15px;
+    height: 70px;
+    width: 70px;
+    margin-left: 5px;
+    margin-right: 5px;
+    animation-name: spin;
+    animation-duration: 5000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.error404_main img:hover{
+    animation: none;
+}
+
+.error404_subtext{
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.error404_sub_subtext{
+    font-size: 11px;
+    margin-bottom: 20px;
+}
+
+.home_button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #EBF2FA;
+    font-weight: bold;
+    font-size: 15px;
+    height: 30px;
+    width: 130px;
+    border-radius: 15px;
+    text-transform: uppercase;
+    background: #427AA1;
+    box-shadow: 2px 2px rgb(5, 50, 82);
+    }
+    .error404_hr{
+        width: 70%;
+        margin-bottom: 25px;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    .error404_main{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 200px;
+        margin-bottom: 30px;
+        /* color: #427AA1; */
+        font-weight: 400;
+    }
+    
+    .error404_main img{
+        margin-top: 25px;
+        height: 150px;
+        width: 150px;
+        margin-left: 5px;
+        margin-right: 5px;
+        animation-name: spin;
+        animation-duration: 5000ms;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+    .error404_main img:hover{
+        animation: none;
+    }
+    
+    .error404_subtext{
+        font-size: 35px;
+        margin-bottom: 30px;
+    }
+
+    .error404_sub_subtext{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 17px;
+        margin-bottom: 40px;
+        width: 100vw;
+    }
+
+    .home_button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #EBF2FA;
+        font-weight: bold;
+        font-size: 15px;
+        height: 50px;
+        width: 130px;
+        border-radius: 15px;
+        text-transform: uppercase;
+        background: #427AA1;
+        box-shadow: 2px 2px rgb(5, 50, 82);
+        }
+
+        .error404_hr{
+            width: 40%;
+            margin-bottom: 45px;
+        }
+  }
