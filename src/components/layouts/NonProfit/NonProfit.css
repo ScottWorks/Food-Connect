@@ -89,11 +89,13 @@
     color: #EBF2FA; 
   }
 
-  /* Column 2 */
+  /* Column 2 Scheudled Baskets and Available Baskets*/
 
   .np-view-col-2{
     width: 50%;
     padding: 10px 30px;
+    overflow: scroll;
+    height: 100vh;
   }
 
   .np-sched-basket-container h3{

@@ -1,6 +1,18 @@
 /* FOR MOBILE DEVICES */
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px){
+
+    .date-time-picker-contain{
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 95%;
+    }
+
     .date-time-picker-contain button{
+        margin-left: auto;
+        margin-right: auto;
         margin-top: 10px;
         padding: 2px;
         font-size: 1em;
@@ -27,7 +39,20 @@
 
    /* For Desktop */
    @media screen and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1){
+    .date-time-picker-contain{
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 95%;
+        
+    }
+
        .date-time-picker-contain button{
+        margin-left: auto;
+        margin-right: auto;
         padding: 2px;
         font-size: 1em;
         line-height: 1.375em;

@@ -55,11 +55,13 @@ class DateTimePicker extends React.Component {
       <div className='date-time-picker-contain'>
         <button onClick={() => this.reserveBasket()}>Submit</button>
         <DatePicker
+        textFieldStyle={{width: '100%'}}
           value={scheduledDate}
           onChange={(x, date) => this.handleChange('scheduledDate', date)}
           hintText="Date"
         />
         <TimePicker
+        textFieldStyle={{width: '100%'}}
           value={scheduledTime}
           onChange={(x, time) => this.handleChange('scheduledTime', time)}
           hintText="Time"
