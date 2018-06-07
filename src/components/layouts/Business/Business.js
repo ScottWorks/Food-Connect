@@ -12,7 +12,23 @@ import StatChart from '../../components/Stats/StatChart'
 
 class Business extends React.Component {
 
-  componentDidMount() {
+  componentDidMount = async () => {
+
+    await axios.get('/api/auth/me').then( user => {
+      if(typeof user.data.user_id === 'number' && user.data.acct_type === 'b') {
+        console.log('Validated!', user)
+      } else if (typeof user.data.user_id === 'number' && user.data.acct_type === 'np') {
+        window.location.assign('/#/nonprofit')
+      } else {
+        window.location.assign('/#/login')
+        console.log('Sorry, you are not allowed...')
+      }
+  }).catch( err => {
+    console.log(err)
+    window.location.assign('/#/login')
+    console.log('Sorry, you are not allowed...')
+  })
+
     var temp = 1
     axios.get(`/api/basket/${temp}/${(new Date).getTime()}`).then(res => {
       this.props.setBasket(res.data)
@@ -20,6 +36,7 @@ class Business extends React.Component {
   }
 
   render() {
+
     return (
       <div className="Business">
         <Header />

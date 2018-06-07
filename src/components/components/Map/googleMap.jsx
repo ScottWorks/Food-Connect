@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 // import Map from './map'
 import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react'
 // import SearchInput from './placesAutoComplete'
+import blueIcon from '../../../assets/icons/map-blue.png'
 
   export class Container extends Component {
       constructor(props) {
@@ -11,12 +12,13 @@ import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react'
               showingInfoWindow: false,
               activeMarker: {},
               selectedPlace: {},
-              markers:[]
           }
 
-          this.newLocation = this.newLocation.bind(this)
+        //   this.newLocation = this.newLocation.bind(this)
 
       }
+
+
 
       onMarkerClick = (props, marker, e) => {
           this.setState({
@@ -35,37 +37,39 @@ import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react'
           }
         }
 
-      newLocation = ( latLng ) => {
-          console.log(latLng)
-          let newPos = {
-              lat: Number(latLng.lat),
-              lng: Number(latLng.lng)
-          }
-         this.setState({
-             markers: [...this.state.markers, newPos],
-             lat: '',
-             lng: ''
-         })
-      }
+    //   newLocation = ( latLng ) => {
+    //       console.log(latLng)
+    //       let newPos = {
+    //           lat: Number(latLng.lat),
+    //           lng: Number(latLng.lng)
+    //       }
+    //      this.setState({
+    //          markers: [...this.state.markers, newPos],
+    //          lat: '',
+    //          lng: ''
+    //      })
+    //   }
    
 
       render() {
-          console.log(this.state)
-          const {markers} = this.state
+          console.log(this.props.markeers)
+          const {markeers} = this.props
 
           const style = {
               width: '400px',
               height: '400px',
               boxShadow: '0px 0px 3px rgba(0, 0, 0, 0.7)',
-              marginLeft: '0px',
-              marginTop: '70px'
+              marginLeft: '10px',
+              marginTop: '70px',
+              marginBottom: '20px'
           }
 
-          let displayMarkers = markers.map( (marker, i) => {
+          let displayMarkers = markeers.map( (markeer, i) => {
               return (
-              <Marker key={i} 
-                position={{lat: marker.lat, lng: marker.lng } } 
-                name={marker.name}
+              <Marker 
+                key={i} 
+                position={{lat: markeer.latitude, lng: markeer.longitude } } 
+                name={markeer.business_name}
                 onClick={this.onMarkerClick}
               /> 
             )
@@ -81,15 +85,18 @@ import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react'
                     style={style}
                     google={this.props.google}
                     initialCenter={this.props.mapCenter}           
-                    zoom={11}
+                    zoom={10}
                     onClick={this.onMapClicked}
                 >
                     <Marker
                         name={this.props.npName}
                         onClick={this.onMarkerClick}
-                        />
+                         icon={{
+                             url: "https://www.abracleaners.com/wp-content/uploads/2016/02/map_marker.png",
+                         }}
+                      />
                 {/* Displays 'Marker components' from an array of coordinates. Will render from an unknown array length. */}
-                {/* {displayMarkers} */}
+                {displayMarkers}
 
                 <InfoWindow
                     marker={this.state.activeMarker}
