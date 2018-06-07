@@ -17,17 +17,22 @@
         border-radius: 5px;
         width: 80px;
     }
-
-    .schedule-basket-btns button:hover{
-
+    .schedule-basket-btns :nth-child(2):hover{
+        color: #EBF2FA;
+        background: firebrick;
+    }
+    .schedule-basket-btns :nth-child(1):hover{
+        color: #EBF2FA;
+        background: #05668D;
     }
 
     .sched-basket-info-container{
         font-size: 1em;
         line-height: 1.25em;
         text-align: center;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
-
 
    }
 
@@ -38,5 +43,37 @@
    
    /* For Desktop */
    @media screen and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1) {
-   
+    .schedule-basket-btns{
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 100px;
+        margin-bottom: 5px;
+    }
+
+    .schedule-basket-btns button {
+        padding: 1px;
+        font-size: 1em;
+        line-height: 1.375em;
+        background: #679436;
+        border: 0;
+        color: #EBF2FA;
+        border-radius: 5px;
+        width: 80px;
+    }
+    .schedule-basket-btns :nth-child(2):hover{
+        color: #EBF2FA;
+        background: firebrick;
+    }
+    .schedule-basket-btns :nth-child(1):hover{
+        color: #EBF2FA;
+        background: #05668D;
+    }
+
+    .sched-basket-info-container{
+        font-size: 1em;
+        line-height: 1.375em;
+        text-align: center;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
    }

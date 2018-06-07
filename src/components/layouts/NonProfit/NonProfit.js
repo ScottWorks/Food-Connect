@@ -186,26 +186,31 @@ class NonProfit extends React.Component {
     return (
       <main className="mobile">
         <Header />
-        <div className='google-maps'>
-          <MapContainer 
-            mapCenter={{lat: nonProfitInfo.latitude, lng: nonProfitInfo.longitude}}
-            npName={nonProfitInfo.company_name}
-            address={nonProfitInfo.street_address}
-            city={`${nonProfitInfo.city} ${nonProfitInfo.state}`}
-          />
-        </div>
+        <div className='np-view-main'>
+        <div className='np-view-col-1'>
+          <div className='google-maps'>
+            <MapContainer 
+              mapCenter={{lat: nonProfitInfo.latitude, lng: nonProfitInfo.longitude}}
+              npName={nonProfitInfo.company_name}
+              address={nonProfitInfo.street_address}
+              city={`${nonProfitInfo.city} ${nonProfitInfo.state}`}
+            />
+          </div>
 
-        <div className='np-wishlist-basket-container'>
-        <h3>Wish List</h3>
-        <WishList
-          _wishlist={wishlist}
-          _createWishList={this.createWishList}
-          _addWishListItem={this.addWishListItem}
-          parent_editWishListItem={this.parent_editWishListItem}
-          _removeWishListItem={this.removeWishListItem}
-        />
-        </div>
+          <div className='np-wishlist-basket-container'>
+            <h3>Wish List</h3>
+              <WishList
+                _wishlist={wishlist}
+                _createWishList={this.createWishList}
+                _addWishListItem={this.addWishListItem}
+                parent_editWishListItem={this.parent_editWishListItem}
+                _removeWishListItem={this.removeWishListItem}
+              />
+          </div>
 
+          </div>
+          
+          <div className='np-view-col-2'>
         <div className='np-sched-basket-container'>
         <h3>Scheduled Baskets</h3>
         <ScheduleList
@@ -221,6 +226,8 @@ class NonProfit extends React.Component {
           _baskets={baskets}
           _scheduleBasket={this.scheduleBasket}
         />
+        </div>
+        </div>
         </div>
       </main>
     );

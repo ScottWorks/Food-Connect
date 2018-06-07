@@ -85,6 +85,7 @@ class ScheduleBasket extends React.Component {
         <p>{formattedTime}</p>
         <p>{scheduledBasket.company_name}</p>
         <ContactInfoCard _contactInfo={contactInfo} />
+        <hr/>
         </div>
       </section>
     );
