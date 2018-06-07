@@ -8,6 +8,8 @@ import Header from './../../components/Header/Header';
 
 import * as utilFunc from '../../../config/analyticsUtil';
 import { getTotalWeightSaved } from '../../../ducks/analyticsReducer';
+import NewHeader from './../../components/Header/NewHeader';
+
 
 class LandingPage extends Component {
   constructor(props) {
@@ -34,7 +36,8 @@ class LandingPage extends Component {
     render() {
         return (
             <div className="landing_main">
-                <Header handler={this.openModal} />
+                {/* <Header handler={this.openModal} /> */}
+                <NewHeader/>
                 <div className="landing_wrapper">
                     {/*Bringing in the Modal component.*/}
                     <Modal
