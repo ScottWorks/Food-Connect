@@ -21,14 +21,15 @@ class NonProfit extends React.Component {
   constructor() {
     super();
     this.state = {
-      nonProfitID: 9,
+      nonProfitID: 2,
       nonProfitInfo: {},
       baskets: [],
       wishList: [],
       scheduledBaskets: [],
       searchInput: '',
       loading: true,
-      startTime: null
+      startTime: null,
+      markers: []
     };
 
     this.initializeComponent = this.initializeComponent.bind(this);
@@ -46,17 +47,29 @@ class NonProfit extends React.Component {
     this.searchBaskets = this.searchBaskets.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount = async () => {
     this.setState({startTime:Date.now()})
+    await axios.get('/api/auth/me').then( user => {
+        if(typeof user.data.user_id === 'number' && user.data.acct_type === 'np') {
+          console.log('Validated!', user)
+        } else if (typeof user.data.user_id === 'number' && user.data.acct_type === 'b') {
+          window.location.assign('/#/business')
+        } else {
+          window.location.assign('/#/login')
+          console.log('Sorry, you are not allowed...')
+        }
+    }).catch( err => {
+      console.log(err)
+      window.location.assign('/#/login')
+      console.log('Sorry, you are not allowed...')
+    })
+
     this.initializeComponent();
     this.getUserInfo();
   }
 
-  componentWillUpdate() {
-    this.displayBusinessToMap();
-  }
 
-  initializeComponent() {
+  initializeComponent () {
     const { nonProfitID } = this.state;
     const currentLocalTime = new Date().getTime();
     const businessIDs = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -78,7 +91,7 @@ class NonProfit extends React.Component {
         
         this.setState({
           baskets: baskets.data
-        });
+        }, () => this.displayBusinessToMap() );
       }).catch(()=>{window.location.assign('/#/500')});
 
     let wishListPromise = axios
@@ -95,7 +108,7 @@ class NonProfit extends React.Component {
         this.setState({
           scheduledBaskets: scheduledBaskets.data
         });
-      }).catch(()=>{window.location.assign('/#/500')});
+      }).catch(()=>{window.location.assign('/#/500')});      
 
     Promise.all([basketPromise, wishListPromise, schedulePromise]).then(() => {
       const { baskets, wishList } = this.state;
@@ -255,10 +268,21 @@ class NonProfit extends React.Component {
     let arr = [];
     let { baskets } = this.state;
 
+    console.log(baskets)
+
     for (let i = 0; i < baskets.length; i++) {
       arr.push(baskets[i].business_id);
     }
-    console.log(arr.sort((a, b) => a - b));
+
+    var uniq = [...new Set(arr)]
+    console.log(uniq)
+
+   axios.post('/api/nonprofit/businesslocation', { businessID: uniq } ).then(locations => {
+     console.log(locations)
+     this.setState({
+       markers: locations.data
+     })
+   })
   }
 
   render() {
@@ -267,7 +291,8 @@ class NonProfit extends React.Component {
       baskets,
       wishList,
       scheduledBaskets,
-      searchInput
+      searchInput,
+      markers
     } = this.state;
 
     var basketLength = baskets.length
@@ -275,52 +300,56 @@ class NonProfit extends React.Component {
       return <LoadingDots />
     }
     else {
-      return (
-        <main className="mobile">
-          <Header />
-          <div>
-            <MapContainer
-              mapCenter={{
-                lat: nonProfitInfo.latitude,
-                lng: nonProfitInfo.longitude
-              }}
+    return (
+      <main className="mobile">
+        <Header />
+        <div className='np-view-main'>
+        <div className='np-view-col-1'>
+          <div className='google-maps'>
+            <MapContainer 
+              mapCenter={{lat: nonProfitInfo.latitude, lng: nonProfitInfo.longitude}}
               npName={nonProfitInfo.company_name}
               address={nonProfitInfo.street_address}
               city={`${nonProfitInfo.city} ${nonProfitInfo.state}`}
             />
           </div>
-          <div className="nonprofit_main">
-            <h2>Non Profit Page</h2>
+
+          <div className='np-wishlist-basket-container'>
+            <h3>Wish List</h3>
+              <WishList
+                _wishlist={this.wishList}
+                _createWishList={this.createWishList}
+                _addWishListItem={this.addWishListItem}
+                parent_editWishListItem={this.parent_editWishListItem}
+                _removeWishListItem={this.removeWishListItem}
+              />
           </div>
-          <WishList
-            _wishList={wishList}
-            _createWishList={this.createWishList}
-            _addWishListItem={this.addWishListItem}
-            parent_editWishListItem={this.parent_editWishListItem}
-            _removeWishListItem={this.removeWishListItem}
-          />
-          <h2>Scheduled Baskets</h2>
-          <ScheduleList
-            _scheduledBaskets={scheduledBaskets}
-            _scheduleBasket={this.scheduleBasket}
-            _cancelBasket={this.cancelBasket}
-          />
-          <h2>Available Baskets</h2>
-          <Search
-            _searchInput={searchInput}
-            _initializeComponent={this.initializeComponent}
-            _handleChange={this.handleChange}
-            _searchBaskets={this.searchBaskets}
-          />
-          <Sort _sortBaskets={this.sortBaskets} />
-          <NonProfitBasketList
-            _baskets={baskets}
-            _scheduleBasket={this.scheduleBasket}
-          />
-        </main>
-      );
-    }
+
+          </div>
+          
+          <div className='np-view-col-2'>
+        <div className='np-sched-basket-container'>
+        <h3>Scheduled Baskets</h3>
+        <ScheduleList
+          _scheduledBaskets={scheduledBaskets}
+          _scheduleBasket={this.scheduleBasket}
+          _cancelBasket={this.cancelBasket}
+        />
+      </div>
+
+        <div className='np-avail-basket-container'>
+        <h3>Available Baskets</h3>
+        <NonProfitBasketList
+          _baskets={baskets}
+          _scheduleBasket={this.scheduleBasket}
+        />
+        </div>
+        </div>
+        </div>
+      </main>
+    );
   }
+}
 }
 
 export default NonProfit;

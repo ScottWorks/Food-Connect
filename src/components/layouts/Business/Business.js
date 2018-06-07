@@ -18,15 +18,47 @@ class Business extends React.Component {
       loading: false
     }
   }
+  constructor(props){
+    super(props);
 
-  componentDidMount() {
+    this.state={
+      hideChart: true
+    }
+
+    this.checkIfMobile = this.checkIfMobile.bind(this);
+  }
+
+  componentDidMount = async () => {
+
+    await axios.get('/api/auth/me').then( user => {
+      if(typeof user.data.user_id === 'number' && user.data.acct_type === 'b') {
+        console.log('Validated!', user)
+      } else if (typeof user.data.user_id === 'number' && user.data.acct_type === 'np') {
+        window.location.assign('/#/nonprofit')
+      } else {
+        window.location.assign('/#/login')
+        console.log('Sorry, you are not allowed...')
+      }
+  }).catch( err => {
+    console.log(err)
+    window.location.assign('/#/login')
+    console.log('Sorry, you are not allowed...')
+  })
+
     var temp = 1
     axios.get(`/api/basket/${temp}/${(new Date).getTime()}`).then(res => {
       this.props.setBasket(res.data)
     })
-    // .then(this.setState = ({
-    //   loading: false
-    // }))
+    this.checkIfMobile;
+    window.addEventListener('resize', this.checkIfMobile)
+  }
+
+  componentWillUnmount(){
+    window.removeEventListener('resize', this.checkIfMobile)
+  }
+
+  checkIfMobile(){
+    this.setState({hideChart: (window.innerWidth < 667)})
   }
 
   render() {
@@ -34,24 +66,30 @@ class Business extends React.Component {
       return <LoadingDots />
     }
     else {
-      return (
-        <div className="Business">
-          <Header />
-          <div className="bus-top-bar">
+    return (
+      <div className="Business">
+        <Header />
+        <div className="bus-top-bar">
+        {
+          this.state.hideChart ? null : (
             <div className='donut-container'>
-              {/* <Donut/> */}
-            </div>
-            <div className='barchart-container'>
-              {/* <StatChart/> */}
-            </div>
-          </div>
-          <div className='business-table-list-container'>
-            <BusinessTable className='business-table-container' />
-            <BusinessBasketList className='business-basket-list-container' />
-          </div>
+            <Donut/>
+          </div>)}
+
+          {
+            this.state.hideChart ? null : (
+              <div className='barchart-container'>
+            <StatChart/>
+          </div>   
+            )
+          }
         </div>
-      );
-    }
+        <div className='business-table-list-container'>
+          <BusinessTable className='business-table-container'/>
+          <BusinessBasketList className='business-basket-list-container'/>
+        </div>
+      </div>
+    )};
   }
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../../../assets/styles/Wishlist.css'
 
 class WishList extends React.Component {
   constructor() {
@@ -68,14 +69,14 @@ class WishList extends React.Component {
 
     const wishlist = _wishList ? (
       <div>
-        <form onSubmit={(e) => this.addWishListItem(e)}>
-          <input
-            value={newItem}
-            type="text"
-            placeholder="Add Items..."
-            onChange={(e) => this.handleChange('newItem', e.target.value)}
-          />
-        </form>
+        <div className='wishlist-add-container'>
+        <button onClick={() => this.addWishListItem()}>Add Item</button>
+        <input
+          value={newItem}
+          type="text"
+          onChange={(e) => this.handleChange('newItem', e.target.value)}
+        />
+        </div>
         <DisplayWishList
           _edit={edit}
           _editItemIdx={editItemIdx}
@@ -88,7 +89,7 @@ class WishList extends React.Component {
         />
       </div>
     ) : (
-      <div>
+      <div className='wishlist-empty-container'>
         <p>Your Wish List is Empty : (</p>
         <button onClick={() => _createWishList()}>Create Wish List</button>
       </div>
@@ -112,25 +113,27 @@ const DisplayWishList = ({
     return _items.map((elem, idx) => {
       if (_edit && idx === _editItemIdx) {
         return (
-          <div key={idx}>
+          <div className='editable-wishlist-container'key={idx}>
             <p>{elem.item}</p>
-            <form onSubmit={(e) => this.child_editWishListItem(e, idx)}>
-              <input
-                value={_editItem}
-                type="text"
-                placeholder="Add Items..."
-                onChange={(e) => _handleChange('editItem', e.target.value)}
-              />
-            </form>
+            <div className='editable-wishlist-input'>
+            <button onClick={() => child_editWishListItem(idx)}>Submit</button>
+            <input
+              value={_editItem}
+              type="text"
+              onChange={(e) => _handleChange('editItem', e.target.value)}
+            />
             <button onClick={() => _toggleEdit(idx)}>Cancel</button>
+            </div>
           </div>
         );
       } else {
         return (
-          <div key={idx}>
+          <div className='wishlist-items-container' key={idx}>
             <p>{elem.item}</p>
-            <button onClick={() => _toggleEdit(idx)}>Edit</button>
-            <button onClick={() => _removeWishListItem(idx)}>Delete</button>
+            <div className='wishlist-items-container-btns'>
+              <button onClick={() => _toggleEdit(idx)}>Edit</button>
+              <button onClick={() => _removeWishListItem(idx)}>Delete</button>
+            </div>
           </div>
         );
       }

@@ -10,11 +10,13 @@ import Error404 from "../components/errorpages/Error404/Error404.js";
 import Error500 from "../components/errorpages/Error500/Error500.js";
 import LoadingPulse from '../components/components/LoadingPages/LoadingPulse/LoadingPulse.js';
 import LoadingDots from '../components/components/LoadingPages/LoadingDots/LoadingDots.js';
+import BusinessHistory from '../components/layouts/Business/BusinessHistory/BusinessHistory'
 
 
 export default (
   <Switch>
     <Route exact path='/' component={LandingPage} />
+    <Route path='/business/history' component={BusinessHistory} />
     <Route path='/business' component={Business} />
     <Route path='/nonprofit' component={NonProfit} />
     <Route path='/login' component={Login}/>

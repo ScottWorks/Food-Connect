@@ -71,17 +71,21 @@ class ScheduleBasket extends React.Component {
     return (
       <section className="basket">
         {reserveCard}
+        <div className='schedule-basket-btns'>
         <button onClick={() => this.toggleReservationCard()}>Update</button>
-        <button
-          onClick={() =>
-            _cancelBasket(fakePhoneNumber, scheduledBasket.basket_id)
-          }
+          <button
+            onClick={() =>
+              _cancelBasket(fakePhoneNumber, scheduledBasket.basket_id)
+            }
         >
           Remove
         </button>
+        </div>
+        <div className='sched-basket-info-container'>
         <p>{formattedTime}</p>
         <p>{scheduledBasket.company_name}</p>
         <ContactInfoCard _contactInfo={contactInfo} />
+        </div>
       </section>
     );
   }

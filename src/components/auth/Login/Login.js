@@ -32,7 +32,8 @@ export default class Auth extends Component {
         this.setState({isMobile: window.innerWidth <= 667})
     }
     handleClick(e) {
-        e.preventDefault()
+        e.preventDefault();
+        console.log()
         axios.post('/api/auth/login',{ userName: this.state.userName, pw: this.state.pw }).then( res => {
             if(res.data === 'You are the chosen one!') {
                 window.location.assign('/#/business')

@@ -47,9 +47,10 @@ export class StatChart extends React.Component{
 
 
     render() {
-        console.log(this.props.businessBaskets)
         return (
-            <Bar data={this.state.data} options = {this.state.options}/>
+            <div>
+            <Bar height={100} weight={100} data={this.state.data} options = {this.state.options}/>
+            </div>
         )
     }
 }
