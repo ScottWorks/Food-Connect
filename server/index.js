@@ -80,7 +80,7 @@ app.put('/api/basket/confirm/:basketID', nonProfitController.confirmBasket); // 
 //   twilioController.sendTwilioMessage,
 //   nonProfitController.confirmBasket
 // );
-app.put('/api/basket/update/:nonProfitID', nonProfitController.scheduleBasket); // TESTING ONLY!
+app.put('/api/basket/update/:nonProfitID', inLine.validateCredentials, nonProfitController.scheduleBasket); // TESTING ONLY!
 // app.put(
 //   '/api/basket/update/:nonProfitID',
 //   twilioController.sendTwilioMessage,
@@ -103,7 +103,7 @@ app.put(
   nonProfitController.modifyWishList
 );
 // Non-Profit User Endpoints
-app.get('/api/nonprofit/:userID', nonProfitController.getUserInfo);
+app.get('/api/nonprofit/:nonProfitID', nonProfitController.getUserInfo);
 
 // TWILIO
 app.post('/api/twilio', twilioController.sendTwilioMessage);

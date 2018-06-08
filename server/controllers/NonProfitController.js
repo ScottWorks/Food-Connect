@@ -13,9 +13,10 @@ module.exports = {
 
   getUserInfo: (req, res, next) => {
     const db = req.app.get('db');
-    const { userID } = req.params;
-
-    db.np_getUserInfo([userID])
+    const { nonProfitID } = req.params;
+    
+    console.log('param', +req.params.nonProfitID, 'session', req.session.user)
+    db.np_getUserInfo([nonProfitID])
       .then(
         (userInfo) => {
           res.status(200).send(userInfo);
@@ -71,7 +72,6 @@ module.exports = {
     const { nonProfitID } = req.params;
     const { scheduledTime, basketID } = req.body;
     const status = 2;
-
     db.np_scheduleBasket([nonProfitID, scheduledTime, status, basketID])
       .then(() => {
         res.sendStatus(200);
