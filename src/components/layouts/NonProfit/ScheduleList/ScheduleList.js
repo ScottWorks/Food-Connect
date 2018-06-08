@@ -3,12 +3,18 @@ import ScheduleBasket from './ScheduleBasket/ScheduleBasket';
 import './../../../../assets/styles/ScheduleList.css';
 
 function ScheduleList(props) {
-  const { _scheduledBaskets, _scheduleBasket, _cancelBasket } = props;
+  const {
+    _scheduledBaskets,
+    _confirmPickup,
+    _scheduleBasket,
+    _cancelBasket
+  } = props;
 
   return (
     <section>
       <DisplaySchedule
         _scheduledBaskets={_scheduledBaskets}
+        _confirmPickup={_confirmPickup}
         _scheduleBasket={_scheduleBasket}
         _cancelBasket={_cancelBasket}
       />
@@ -18,6 +24,7 @@ function ScheduleList(props) {
 
 const DisplaySchedule = ({
   _scheduledBaskets,
+  _confirmPickup,
   _scheduleBasket,
   _cancelBasket
 }) => {
@@ -26,6 +33,7 @@ const DisplaySchedule = ({
       <div className="scheduled-list-container" key={idx}>
         <ScheduleBasket
           scheduledBasket={elem}
+          _confirmPickup={_confirmPickup}
           _scheduleBasket={_scheduleBasket}
           _cancelBasket={_cancelBasket}
         />

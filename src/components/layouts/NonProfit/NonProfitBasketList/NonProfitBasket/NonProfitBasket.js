@@ -1,7 +1,9 @@
 import React from 'react';
 import ContactInfoCard from '../../../../components/NonProfit/ContactInfoCard';
 import DateTimePicker from '../../../../components/NonProfit/DateTimePicker';
+
 import * as timeUtil from '../../../../../config/timeUtil';
+
 import '../../../../../assets/styles/NonProfitBasket.css';
 
 class NonProfitBasket extends React.Component {
@@ -66,6 +68,7 @@ class NonProfitBasket extends React.Component {
       <DateTimePicker
         _basketID={basketID}
         _message={`Basket ${basketID} is scheduled for pickup on `}
+        _toastMessage={'Pickup Scheduled for '}
         _phoneNumber={currentBasket.phone_number}
         _scheduleBasket={_scheduleBasket}
         _toggleReservationCard={this.toggleReservationCard}

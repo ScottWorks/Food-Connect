@@ -4,18 +4,21 @@ import { connect } from 'react-redux'
 import { setBasket } from '../../../ducks/businessReducer'
 import BusinessTable from './BasketTable/BasketTable'
 import BusinessBasketList from './BusinessBasketList/BusinessBasketList'
-import Header from'../../components/Header/Header'
+import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import './Business.css'
 import Donut from '../../components/Stats/Donut';
 import StatChart from '../../components/Stats/StatChart'
+import LoadingDots from '../../components/LoadingPages/LoadingDots/LoadingDots';
+import NewHeader from '../../components/Header/NewHeader';
 
 class Business extends React.Component {
   constructor(props){
     super(props);
 
     this.state={
-      hideChart: true
+      hideChart: true,
+      loading: false
     }
 
     this.checkIfMobile = this.checkIfMobile.bind(this);
@@ -55,10 +58,14 @@ class Business extends React.Component {
   }
 
   render() {
-
+    if (this.state.loading) {
+      return <LoadingDots />
+    }
+    else {
     return (
       <div className="Business">
-        <Header />
+        {/* <Header /> */}
+        <NewHeader/>
         <div className="bus-top-bar">
         {
           this.state.hideChart ? null : (
@@ -79,8 +86,8 @@ class Business extends React.Component {
           <BusinessBasketList className='business-basket-list-container'/>
         </div>
       </div>
-    );
+    )};
   }
 }
 
-export default connect(null, {setBasket})(Business);
+export default connect(null, { setBasket })(Business);
