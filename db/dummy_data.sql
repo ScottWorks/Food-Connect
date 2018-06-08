@@ -109,40 +109,38 @@ INSERT INTO baskets (business_id, non_profit_id, pick_up_time, scheduled_time, s
 VALUES (1, null, 1, null, 0, '[{ "item": "Bagels", "weight": 65, "FMV": 50 }, { "item": "Cake", "weight": 45, "FMV": 50 }]');
 
 INSERT INTO baskets (business_id, non_profit_id, pick_up_time, scheduled_time, status, items)
-VALUES (1, 4, 1529797446475, 1529807446475, 0, '[{ "item": "Croissants", "weight": 65, "FMV": 50 }, { "item": "Bread", "weight": 45, "FMV": 50 }, { "item": "Pie", "weight": 65, "FMV": 50 }, { "item": "Rolls", "weight": 45, "FMV": 50 }]');
+VALUES (1, 4, 1529797446475, 1529807446475, 1, '[{ "item": "Croissants", "weight": 65, "FMV": 50 }, { "item": "Bread", "weight": 45, "FMV": 50 }, { "item": "Pie", "weight": 65, "FMV": 50 }, { "item": "Rolls", "weight": 45, "FMV": 50 }]');
 
 INSERT INTO baskets (business_id, non_profit_id, pick_up_time, scheduled_time, status, items)
-VALUES (1, null, 1528674446475, null, 1, '[{ "item": "Bagel", "weight": 15, "FMV": 5 }, { "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Croissants", "weight": 515, "FMV": 50 },{ "item": "Bread", "weight": 515, "FMV": 50 }, { "item": "Scones", "weight": 515, "FMV": 50 }]');
+VALUES (1, null, 1529678446475, null, 0, '[{ "item": "Bagel", "weight": 15, "FMV": 5 }, { "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Croissants", "weight": 515, "FMV": 50 },{ "item": "Bread", "weight": 515, "FMV": 50 }, { "item": "Scones", "weight": 515, "FMV": 50 }]');
 
 INSERT INTO baskets (business_id, non_profit_id, pick_up_time, scheduled_time, status, items)
-VALUES (2, null, 1528697446475, null, 0, '[{ "item": "Bagel", "weight": 5, "FMV": 50 }, { "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Croissants", "weight": 515, "FMV": 50 }, { "item": "Assorted Rolls", "weight": 515, "FMV": 50 }, { "item": "Bread", "weight": 515, "FMV": 50 },{ "item": "Muffins", "weight": 515, "FMV": 50 }, { "item": "Biscuits", "weight": 515, "FMV": 50 }, { "item": "Dough", "weight": 515, "FMV": 50 }, { "item": "Garlic Knots", "weight": 11, "FMV": 50 }, { "item": "Pretzels", "weight": 14, "FMV": 50 }]');
+VALUES (2, null, 1529999446475, null, 0, '[{ "item": "Bagel", "weight": 5, "FMV": 50 }, { "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Croissants", "weight": 515, "FMV": 50 }, { "item": "Assorted Rolls", "weight": 515, "FMV": 50 }, { "item": "Bread", "weight": 515, "FMV": 50 },{ "item": "Muffins", "weight": 515, "FMV": 50 }, { "item": "Biscuits", "weight": 515, "FMV": 50 }, { "item": "Dough", "weight": 515, "FMV": 50 }, { "item": "Garlic Knots", "weight": 11, "FMV": 50 }, { "item": "Pretzels", "weight": 14, "FMV": 50 }]');
 
 INSERT INTO baskets (business_id, non_profit_id, pick_up_time, scheduled_time, status, items)
-VALUES (3, null, 1528677446475, null, 0, '[{ "item": "Bagel", "weight": 15, "FMV": 5 }, { "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Croissants", "weight": 515, "FMV": 50 },{ "item": "Bread", "weight": 515, "FMV": 50 }, { "item": "Scones", "weight": 515, "FMV": 50 }]');
+VALUES (3, null, 1529767446475, null, 0, '[{ "item": "Bagel", "weight": 15, "FMV": 5 }, { "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Croissants", "weight": 515, "FMV": 50 },{ "item": "Bread", "weight": 515, "FMV": 50 }, { "item": "Scones", "weight": 515, "FMV": 50 }]');
 
 INSERT INTO baskets (business_id, non_profit_id, pick_up_time, scheduled_time, status, items)
 VALUES (3, null, 1525597446475, null, 0, '[{ "item": "Bagel", "weight": 15, "FMV": 5 }, { "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Croissants", "weight": 515, "FMV": 50 },{ "item": "Bread", "weight": 515, "FMV": 50 }, { "item": "Scones", "weight": 515, "FMV": 50 }]');
 
 INSERT INTO baskets (business_id, non_profit_id, pick_up_time, scheduled_time, status, items)
-VALUES (4, null, 1528877446475, null, 0, '[{ "item": "Bagel", "weight": 225, "FMV": 50 }, { "item": "Donuts", "weight": 53, "FMV": 50 }, { "item": "Croissants", "weight": 55, "FMV": 50 }, { "item": "Dough", "weight": 515, "FMV": 50 }, { "item": "Garlic Knots", "weight": 11, "FMV": 50 }, { "item": "Pretzels", "weight": 14, "FMV": 50 }]');
+VALUES (4, null, 1529757446475, null, 0, '[{ "item": "Bagel", "weight": 225, "FMV": 50 }, { "item": "Donuts", "weight": 53, "FMV": 50 }, { "item": "Croissants", "weight": 55, "FMV": 50 }, { "item": "Dough", "weight": 515, "FMV": 50 }, { "item": "Garlic Knots", "weight": 11, "FMV": 50 }, { "item": "Pretzels", "weight": 14, "FMV": 50 }]');
 
 INSERT INTO baskets (business_id, non_profit_id, pick_up_time, scheduled_time, status, items)
-VALUES (4, null, 1528674446475, null, 1, '[{ "item": "Bagel", "weight": 15, "FMV": 5 }, { "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Croissants", "weight": 515, "FMV": 50 },{ "item": "Bread", "weight": 515, "FMV": 50 }, { "item": "Scones", "weight": 515, "FMV": 50 }]');
+VALUES (4, null, 1528674446475, null, 0, '[{ "item": "Bagel", "weight": 15, "FMV": 5 }, { "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Croissants", "weight": 515, "FMV": 50 },{ "item": "Bread", "weight": 515, "FMV": 50 }, { "item": "Scones", "weight": 515, "FMV": 50 }]');
+
 
 INSERT INTO baskets (business_id, non_profit_id, pick_up_time, scheduled_time, status, items)
-VALUES (4, 6, 1528674446475, 1528684446475, 0, '[{ "item": "Bagel", "weight": 5, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Croissants", "weight": 515, "FMV": 50 }, { "item": "Assorted Rolls", "weight": 515, "FMV": 50 }, { "item": "Bread", "weight": 515, "FMV": 50 },{ "item": "Muffins", "weight": 515, "FMV": 50 }, { "item": "Biscuits", "weight": 515, "FMV": 50 }, { "item": "Dough", "weight": 515, "FMV": 50 }, { "item": "Garlic Knots", "weight": 11, "FMV": 50 }, { "item": "Pretzels", "weight": 14, "FMV": 50 }]');
+VALUES (4, null, 1528884446475, null, 0, '[{ "item": "Croissants", "weight": 8, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Bagels", "weight": 515, "FMV": 50 }]');
 
 INSERT INTO baskets (business_id, non_profit_id, pick_up_time, scheduled_time, status, items)
-VALUES (4, null, 1528674446475, null, 0, '[{ "item": "Croissants", "weight": 8, "FMV": 50 },{ "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Bagels", "weight": 515, "FMV": 50 }]');
-
-INSERT INTO baskets (business_id, non_profit_id, pick_up_time, scheduled_time, status, items)
-VALUES (4, null, 1528674446475, null, 1, '[{ "item": "Bagel", "weight": 5, "FMV": 50 }, { "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Croissants", "weight": 515, "FMV": 50 }, { "item": "Assorted Rolls", "weight": 515, "FMV": 50 }, { "item": "Bread", "weight": 515, "FMV": 50 },{ "item": "Muffins", "weight": 515, "FMV": 50 }, { "item": "Biscuits", "weight": 515, "FMV": 50 }, { "item": "Dough", "weight": 515, "FMV": 50 }, { "item": "Garlic Knots", "weight": 11, "FMV": 50 }, { "item": "Pretzels", "weight": 14, "FMV": 50 }]');
+VALUES (4, null, 1528774446475, null, 0, '[{ "item": "Bagel", "weight": 5, "FMV": 50 }, { "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Croissants", "weight": 515, "FMV": 50 }, { "item": "Assorted Rolls", "weight": 515, "FMV": 50 }, { "item": "Bread", "weight": 515, "FMV": 50 },{ "item": "Muffins", "weight": 515, "FMV": 50 }, { "item": "Biscuits", "weight": 515, "FMV": 50 }, { "item": "Dough", "weight": 515, "FMV": 50 }, { "item": "Garlic Knots", "weight": 11, "FMV": 50 }, { "item": "Pretzels", "weight": 14, "FMV": 50 }]');
 
 INSERT INTO baskets (business_id, non_profit_id, pick_up_time, scheduled_time, status, items)
 VALUES (5, null, 1526677446475, null, 0, '[{ "item": "Bagel", "weight": 5, "FMV": 50 }, { "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Croissants", "weight": 515, "FMV": 50 }, { "item": "Assorted Rolls", "weight": 515, "FMV": 50 }, { "item": "Bread", "weight": 515, "FMV": 50 },{ "item": "Muffins", "weight": 515, "FMV": 50 }, { "item": "Biscuits", "weight": 515, "FMV": 50 }, { "item": "Dough", "weight": 515, "FMV": 50 }, { "item": "Garlic Knots", "weight": 11, "FMV": 50 }, { "item": "Pretzels", "weight": 14, "FMV": 50 }]');
 
 INSERT INTO baskets (business_id, non_profit_id, pick_up_time, scheduled_time, status, items)
-VALUES (6, null, 1527877446475, null, 0, '[{ "item": "Croissants", "weight": 8, "FMV": 50 }]');
+VALUES (6, null, 1528757446475, null, 0, '[{ "item": "Croissants", "weight": 8, "FMV": 50 }]');
 
 INSERT INTO baskets (business_id, non_profit_id, pick_up_time, scheduled_time, status, items)
 VALUES (6, null, 1527777446475, null, 0, '[{ "item": "Bagel", "weight": 15, "FMV": 5 }, { "item": "Donuts", "weight": 515, "FMV": 50 },{ "item": "Croissants", "weight": 515, "FMV": 50 },{ "item": "Bread", "weight": 515, "FMV": 50 }, { "item": "Scones", "weight": 515, "FMV": 50 }]');

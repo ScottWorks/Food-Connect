@@ -2,5 +2,5 @@ SELECT ba.basket_id, ba.scheduled_time, ba.items, bu.company_name, bu.street_add
 FROM baskets AS ba
 JOIN businesses AS bu
 ON ba.business_id = bu.business_id
-WHERE non_profit_id = $1
+WHERE ba.non_profit_id = $1 AND ba.status = 2
 ORDER BY scheduled_time DESC

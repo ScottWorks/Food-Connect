@@ -32,6 +32,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
+    "react-toastify": "^4.0.2",
     "redux": "^4.0.0",
     "redux-promise-middleware": "^5.1.1",
     "twilio": "^3.17.1"
