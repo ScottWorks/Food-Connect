@@ -70,7 +70,7 @@ module.exports = {
                 if(validpassWord === true && user[0].acct_type === false) {
                     req.session.user.user_id = user[0].user_id;
                     req.session.user.acct_type = 'np';
-                    req.session.user.account_id = user[0].non_profit_id
+                    req.session.user.acct_id = user[0].non_profit_id
                     res.status(200).send('You are also the chosen one!')
                 }
                   else if (validpassWord === true && user[0].acct_type === true) {

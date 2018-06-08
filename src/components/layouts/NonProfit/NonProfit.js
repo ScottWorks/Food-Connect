@@ -62,7 +62,7 @@ class NonProfit extends React.Component {
         ) {
           console.log('Validated!', user.data.user_id);
           this.setState({
-            nonProfitID: user.data.account_id
+            nonProfitID: user.data.acct_id
           })
         } else if (
           typeof user.data.user_id === 'number' &&
