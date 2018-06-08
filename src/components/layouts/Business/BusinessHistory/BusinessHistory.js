@@ -83,7 +83,7 @@ class BusinessHistory extends React.Component {
           id="section-to-print"
         >
           <div className="BusinessHistory-print-button">
-            <h1>Non-profit donations 2018</h1>
+            <h1>Non-Profit Donations 2018</h1>
             <button
               onClick={() => window.print()}
             >Print</button>
