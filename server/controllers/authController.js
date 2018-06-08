@@ -39,6 +39,7 @@ module.exports = {
             //     res.status(200).send(group.data)
             // })
             console.log('New business added to DB!')
+            console.log(group[0])
 
            await db.check_username([userName]).then(user => {
                 if (user.length !== 0) {
