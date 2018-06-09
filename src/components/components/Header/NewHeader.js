@@ -25,8 +25,6 @@ class Header extends Component {
     }
 
     render() {
-        
-        console.log(`Window Location: ${window.location.href}`)
         return (
             <div id="header_main">
                 <Link to="/"><img alt="scone" src={Scone} id="header_img" /></Link>

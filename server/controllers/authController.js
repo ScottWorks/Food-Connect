@@ -17,15 +17,14 @@ module.exports = {
 
            await db.check_username([userName]).then(user => {
                 if (user.length !== 0) {
-                    console.log('Please choose a different username.')
-                    res.status(200).send('Username taken. Please choose another, and try again.')
+                    res.status(409).send('Username taken. Please choose another, and try again.')
 
                 } else {
                     const salt = bcrypt.genSaltSync(10)
                     const hash = bcrypt.hashSync(pw, salt)
 
                     db.register_np_admin([userName, hash, group[0].non_profit_id]).then(user => {
-                        console.log('Np user created!')
+                        res.status(200).send("User Created")
                     })
                 }
             })

@@ -56,7 +56,9 @@ class Register extends Component {
                 panel4HeaderState:'panel-header',
                 panel4BodyState:'panel-body-collapsed',
                 panel4ButtonState: 'true'
-            }
+            },
+            validUserName:true,
+            validPassword:true
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -125,7 +127,9 @@ class Register extends Component {
             phoneNumber: '',
             userName: '',
             pw: '',
-            pwView: false
+            pwView: false,
+            validUserName:true,
+            validPassword:true
         })
         
     }
@@ -158,14 +162,18 @@ class Register extends Component {
             }
 
         if(this.state.pw !== this.state.pwConfirm){
-            alert('Passwords Do Not Match')
+            this.setState({validPassword: false})
         } else {
 
             const { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, latitude, longitude, userName, pw, fein, operating_hours } = this.state
             axios.post('/api/auth/register', { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, latitude, longitude, userName, pw, fein, operating_hours }).then(account => {
-                console.log(account.data)
+                window.location.assign('/#/login');
+                this.clearInputs();
     
-            }, this.clearInputs(), window.location.assign('/#/login'))
+            }).catch(err => {
+                if(err.response.status === 409)
+                this.setState({validUserName: false})
+            })
             
         }
     }
@@ -416,6 +424,9 @@ class Register extends Component {
                                     value={this.state.userName} className='form-input-box' required='true' 
                                     type='text' placeholder='Username'/>
 
+                           
+
+
                                 <div className='password_div'>
                                     <input type={(this.state.pwShowHide1) ? "text" : "password"}
                                         onChange={(e)=>this.setState({pw: e.target.value})}
@@ -433,6 +444,17 @@ class Register extends Component {
                                         className="password_icon" /> : <img src={showPassword} onClick={() => this.seePassword(2)} 
                                         className="password_icon" />}
                                 </div>
+
+                                {
+    this.state.validUserName ? null :    (<div className='error-registration'>
+    User name taken.<br/>Please choose another.
+</div>)
+}
+                                {
+    this.state.validPassword ? null :    (<div className='error-registration'>
+    Passwords do not match.<br/>Try again.
+</div>)
+}
 
                                 <input  onClick={(e) => this.registerOrganization(e)} 
                                     className='form-continue-button' type='submit' value='Register'/>
