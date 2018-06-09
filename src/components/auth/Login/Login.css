@@ -208,6 +208,13 @@
         background: linear-gradient(135deg, rgba(5,102,141,1) 0%, rgba(66,122,161,1) 45%, rgba(235,242,250,1) 88%, rgba(235,242,250,1) 100%);
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#05668d', endColorstr='#ebf2fa', GradientType=1 );
     }
+    .pw-error-login{
+        font-size: 1em;
+        line-height: 1.375em;
+        padding-top: 5px;
+        text-align: center;
+        color: red;
+    }
 }
 
 /* For Desktop */
@@ -322,5 +329,13 @@
         background: -ms-linear-gradient(-45deg, rgba(5,102,141,1) 0%, rgba(66,122,161,1) 45%, rgba(235,242,250,1) 88%, rgba(235,242,250,1) 100%);
         background: linear-gradient(135deg, rgba(5,102,141,1) 0%, rgba(66,122,161,1) 45%, rgba(235,242,250,1) 88%, rgba(235,242,250,1) 100%);
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#05668d', endColorstr='#ebf2fa', GradientType=1 );
+    }
+
+    .pw-error-login{
+        font-size: 1em;
+        line-height: 1.375em;
+        padding-top: 5px;
+        text-align: center;
+        color: red;
     }
 }
