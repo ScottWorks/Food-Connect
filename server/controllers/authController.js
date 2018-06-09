@@ -82,7 +82,6 @@ module.exports = {
                 } else {
                     res.status(401).send("Wrong Password")
                 }
-                // res.status(401).send('Please create an account before logging in.')
               }
               else if(user.length === 0){
                 res.status(401).send('Please create an account before logging in.')

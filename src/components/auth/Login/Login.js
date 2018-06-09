@@ -18,6 +18,7 @@ export default class Auth extends Component {
             invalid: false,
         }
         this.updateDevice = this.updateDevice.bind(this);
+        this.clearInputs = this.clearInputs.bind(this);
     }
 
     componentDidMount(){
@@ -47,9 +48,15 @@ export default class Auth extends Component {
                 this.setState({invalid: true});
             } else if (err.response.data === 'Please create an account before logging in.'){
                 alert('Please Create an Account');
+                this.clearInputs();
             }
         })
     }
+
+    clearInputs(){
+        this.setState({userName: '', pw: '', invalid: false})
+    }
+
 
     render() {
         
@@ -87,12 +94,14 @@ export default class Auth extends Component {
                     </div>
                     <h2>Username</h2>
                     <input required='true' 
+                    value={this.state.userName}
                     name='username'
                         onChange={(e) => this.setState({ userName: e.target.value })}
                         type='text'
                     />
                     <h2>Password</h2>
                     <input
+                    value={this.state.pw}
                     required='true' 
                         onChange={(e) => this.setState({ pw: e.target.value })}
                         type='password'
@@ -100,7 +109,7 @@ export default class Auth extends Component {
                     
                         <button type='submit' onClick={(e) => this.handleClick(e)}>LOGIN</button>
                         {
-
+                            this.state.invalid ? <div className='pw-error-login'>Incorrect Password<br/>Please Try Again</div> : null
                         }
                     
                     </form>

@@ -87,6 +87,14 @@
     .particles-js {
         display: none;
     }
+
+    .pw-error-login{
+        font-size: 1em;
+        line-height: 1.25em;
+        padding-top: 5px;
+        text-align: center;
+        color: red;
+    }
 }
 
 /* TABLET VIEW */
