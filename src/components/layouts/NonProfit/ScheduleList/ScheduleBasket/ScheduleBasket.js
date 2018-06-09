@@ -102,7 +102,7 @@ class ScheduleBasket extends React.Component {
 
     return (
       <section className="basket">
-      <div class='confirm-pickup-btn'>
+      <div className='confirm-pickup-btn'>
         <button
           onClick={({ confirmationToast }) =>
             toast(

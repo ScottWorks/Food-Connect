@@ -25,6 +25,8 @@ class Header extends Component {
     }
 
     render() {
+        
+        console.log(`Window Location: ${window.location.href}`)
         return (
             <div id="header_main">
                 <Link to="/"><img alt="scone" src={Scone} id="header_img" /></Link>
@@ -35,7 +37,6 @@ class Header extends Component {
                     <Link to="/login"><li>Login</li></Link>
                     <Link to="/business"><li>Business</li></Link>
                     <Link to="/nonprofit"><li>Non-Profit</li></Link>
-                    <Link to="/"><li>Logout</li></Link>
                 </ul>
 
                 <div className={this.state.className} onClick={() => this.toggleHamburger()}>

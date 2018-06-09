@@ -18,7 +18,9 @@ class Business extends React.Component {
 
     this.state={
       hideChart: true,
-      loading: false
+      loading: false,
+      businessID:'',
+      nonProfitInfo:{}
     }
 
     this.checkIfMobile = this.checkIfMobile.bind(this);
@@ -29,6 +31,9 @@ class Business extends React.Component {
     await axios.get('/api/auth/me').then( user => {
       if(typeof user.data.user_id === 'number' && user.data.acct_type === 'b') {
         console.log('Validated!', user)
+        this.setState({
+          businessID: user.data.acct_id
+        })
       } else if (typeof user.data.user_id === 'number' && user.data.acct_type === 'np') {
         window.location.assign('/#/nonprofit')
       } else {
@@ -41,8 +46,8 @@ class Business extends React.Component {
     console.log('Sorry, you are not allowed...')
   })
 
-    var temp = 1
-    axios.get(`/api/basket/${temp}/${(new Date).getTime()}`).then(res => {
+    
+    axios.get(`/api/basket/${this.state.businessID}/${(new Date).getTime()}`).then(res => {
       this.props.setBasket(res.data)
     })
     this.checkIfMobile;
@@ -65,7 +70,7 @@ class Business extends React.Component {
     return (
       <div className="Business">
         {/* <Header /> */}
-        <NewHeader/>
+        <NewHeader businessID = {this.state.businessID}/>
         <div className="bus-top-bar">
         {
           this.state.hideChart ? null : (

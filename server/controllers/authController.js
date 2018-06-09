@@ -60,9 +60,10 @@ module.exports = {
     },
     login: (req, res, next) => {
         let err = 'Default Err'
-        // console.log(req.body)
+        console.log(req.body)
         const { userName, pw } = req.body;
         const db = req.app.get('db');
+
 
         db.check_username([userName]).then( user => {
             if(user.length !== 0) {
@@ -83,8 +84,10 @@ module.exports = {
                 }
                 // res.status(401).send('Please create an account before logging in.')
               }
+              else if(user.length === 0){
+                res.status(401).send('Please create an account before logging in.')
+              }
             }
-
         ).catch(err)
     },
     validate: (req, res, next) => {

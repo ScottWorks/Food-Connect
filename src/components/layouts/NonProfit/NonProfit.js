@@ -339,7 +339,7 @@ class NonProfit extends React.Component {
   }
 
   render() {
-    console.log(this.state.nonProfitID)
+    
     const {
       nonProfitInfo,
       baskets,
@@ -355,7 +355,7 @@ class NonProfit extends React.Component {
     } else {
       return (
         <main className="mobile">
-          <NewHeader />
+          <NewHeader npInfo={this.state.nonProfitInfo}/>
           <div className="np-view-main">
             <div className="np-view-col-1">
               <div className="google-maps">

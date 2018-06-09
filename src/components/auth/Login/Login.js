@@ -14,7 +14,8 @@ export default class Auth extends Component {
         this.state = {
             userName: '',
             pw: '',
-            isMobile: true
+            isMobile: true,
+            invalid: false,
         }
         this.updateDevice = this.updateDevice.bind(this);
     }
@@ -33,19 +34,20 @@ export default class Auth extends Component {
     }
     handleClick(e) {
         e.preventDefault();
-        console.log()
         axios.post('/api/auth/login',{ userName: this.state.userName, pw: this.state.pw }).then( res => {
+            console.log(res)
             if(res.data === 'You are the chosen one!') {
                 window.location.assign('/#/business')
             }
             if(res.data === 'You are also the chosen one!') {
                 window.location.assign('/#/nonprofit')
             }
-            if(res.data === 'Wrong Password') {
-                alert('Wrong Password. Please try again.')
+        }).catch(err=>{
+            if(err.response.data === 'Wrong Password') {
+                this.setState({invalid: true});
+            } else if (err.response.data === 'Please create an account before logging in.'){
+                alert('Please Create an Account');
             }
-            if(res.data === 'Please create an account before logging in.')
-                alert('Please create an account before logging in.')
         })
     }
 
@@ -97,6 +99,9 @@ export default class Auth extends Component {
                     />
                     
                         <button type='submit' onClick={(e) => this.handleClick(e)}>LOGIN</button>
+                        {
+
+                        }
                     
                     </form>
 
