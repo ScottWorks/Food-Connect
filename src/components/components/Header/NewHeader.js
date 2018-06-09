@@ -35,6 +35,7 @@ class Header extends Component {
                     <Link to="/login"><li>Login</li></Link>
                     <Link to="/business"><li>Business</li></Link>
                     <Link to="/nonprofit"><li>Non-Profit</li></Link>
+                    <Link to="/"><li>Logout</li></Link>
                 </ul>
 
                 <div className={this.state.className} onClick={() => this.toggleHamburger()}>

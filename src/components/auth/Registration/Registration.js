@@ -4,7 +4,7 @@ import SearchInput from '../../components/PredictiveInput/placesAutocomplete'
 // import {connect} from 'react-redux'
 import './registration.css'
 import Modal from 'react-modal';
-import Header from "../../components/Header/Header.js";
+import Header from "../../components/Header/NewHeader.js";
 import Footer from "../../components/Footer/Footer.js";
 import showPassword from "../../../assets/icons/showpassword.png";
 import hidePassword from "../../../assets/icons/hidepassword.png";

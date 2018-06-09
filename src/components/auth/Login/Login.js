@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Modal from 'react-modal';
-import Header from "../../components/Header/Header.js";
+import Header from "../../components/Header/NewHeader.js";
 import Footer from "../../components/Footer/Footer.js";
 import "./Login.css"
 import {Link} from 'react-router-dom';

@@ -139,13 +139,14 @@ class NonProfit extends React.Component {
     Promise.all([basketPromise, wishListPromise, schedulePromise]).then(() => {
       const { baskets, wishList } = this.state;
 
+      if(wishList){
       if (baskets.length > 0) {
         let modifiedBaskets = sortUtil.sortByWishList(baskets, wishList);
 
         this.setState({
           baskets: modifiedBaskets
         });
-      }
+      }}
     });
   }
 

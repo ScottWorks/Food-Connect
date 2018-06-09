@@ -1,5 +1,12 @@
 /* FOR MOBILE DEVICES */
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    .confirm-pickup-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
     .schedule-basket-btns{
         display: flex;
         justify-content: space-evenly;
@@ -33,6 +40,19 @@
         text-align: center;
         padding-top: 5px;
         padding-bottom: 5px;
+    }
+
+    .confirm-pickup-btn button {
+        background: #679436;
+        border: 0;
+        border-radius: 5px;
+        color: #EBF2FA;
+        padding: 1px;
+        font-size: 1em;
+        line-height: 1.25em;
+        cursor: pointer;
+        width: 130px;
+        margin-top: 5px;
     }
 
    }
@@ -104,5 +124,10 @@
         text-align: center;
         padding-top: 5px;
         padding-bottom: 5px;
+    }
+
+    .basket>button {
+        background: #679436;
+        border: 0;
     }
    }
