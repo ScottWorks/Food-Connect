@@ -64,8 +64,7 @@ class LandingPage extends Component {
                         </div>
                     </div>
                     <section className="landing_hexmap">
-                        <div className="landing_hexmap_title">HexMap Title</div>
-                        <div className="landing_hexmap_container"><h3></h3></div>
+                        <img src='src/assets/images/info-graph.png' alt='info-graph'/>
                     </section>
                     <hr/>
                     <section className="landing_about">

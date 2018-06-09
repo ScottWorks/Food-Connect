@@ -19,8 +19,8 @@
     }
   
     #header_main h1 {
-        position: absolute;
-        margin-left: 34%;
+      position: absolute;
+      margin-left: 34%;
       font-size: 30px;
       font-weight: bold;
       letter-spacing: 5px;
@@ -78,13 +78,13 @@
         display: flex;
         align-items: center;
         margin-top: 61px;
-      height: 40%;
-      width: 50%;
+      height: 100%;
+      width: 100%;
       position: fixed;
       z-index: 1;
       top: 0;
       right:0;
-      background: rgba(0,0,0,.6);
+      background: rgba(0,0,0,1);
       overflow-x: hidden;
       transition: 0.5s;
       padding-top: 50px;
@@ -120,10 +120,15 @@
     }
   }
   
+
+/* TABLET VIEW */
+@media only screen and (min-device-width: 668px) and (max-device-width: 1199px){
+
+}
+
   /* FOR NON-RETINA / NON-HIGH RES DESKTOPS */
   @media screen 
     and (min-device-width: 1200px) 
-    and (max-device-width: 1600px) 
     and (-webkit-min-device-pixel-ratio: 1) { 
       #header_main {
         position: fixed;
