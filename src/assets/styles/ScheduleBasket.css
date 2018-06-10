@@ -90,6 +90,27 @@
         padding-top: 5px;
         padding-bottom: 5px;
     }
+
+
+    .confirm-pickup-btn button {
+        background: #679436;
+        border: 0;
+        border-radius: 3px;
+        color: #EBF2FA;
+        padding: 1px;
+        font-size: 1em;
+        line-height: 1.25em;
+        cursor: pointer;
+        width: 130px;
+        margin-top: 5px;
+    }
+
+    .confirm-pickup-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
    
    /* For Desktop */
@@ -129,5 +150,26 @@
     .basket>button {
         background: #679436;
         border: 0;
+    }
+
+
+    .confirm-pickup-btn button {
+        background: #679436;
+        border: 0;
+        border-radius: 3px;
+        color: #EBF2FA;
+        padding: 1px;
+        font-size: 1em;
+        line-height: 1.25em;
+        cursor: pointer;
+        width: 130px;
+        margin-top: 5px;
+    }
+
+    .confirm-pickup-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
    }

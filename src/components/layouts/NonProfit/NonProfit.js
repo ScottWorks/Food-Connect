@@ -31,7 +31,8 @@ class NonProfit extends React.Component {
       searchInput: '',
       loading: true,
       startTime: null,
-      markers: []
+      markers: [],
+      businessIDs: []
     };
 
     this.initializeComponent = this.initializeComponent.bind(this);
@@ -88,13 +89,23 @@ class NonProfit extends React.Component {
   initializeComponent() {
     const { nonProfitID } = this.state;
     const currentLocalTime = new Date().getTime();
-    const businessIDs = [22];
-    // const businessIDs = [60, 70, 80];
-
-    let basketPromise = axios
+    let basketPromise = axios.get('/api/business/all').then(businesses => {
+      let businessIDs = []
+      for(var ids in businesses.data){
+        businessIDs.push(~~ids);
+      }
+      
+      console.log(businessIDs)
+      let currentTime = Date.now();
+      let elapsed = currentTime - this.state.startTime;
+      if (elapsed < 2000) {
+        setTimeout(() => this.setState({ loading: false }), 2000);
+      } else {
+        this.setState({ loading: false });
+      }
+      axios
       .post(`/api/basket/${currentLocalTime}`, { businessIDs })
       .then((baskets) => {
-        console.log(baskets);
         //Logic for loading screen time
         let currentTime = Date.now();
         let elapsed = currentTime - this.state.startTime;
@@ -110,10 +121,38 @@ class NonProfit extends React.Component {
           },
           () => this.displayBusinessToMap()
         );
-      })
-      .catch(() => {
+      }).catch(() => {
         window.location.assign('/#/500');
       });
+      
+    }).catch(()=> {
+      window.location.assign('/#/500');
+    })
+    
+    
+    // axios
+    //   .post(`/api/basket/${currentLocalTime}`, { businessIDs })
+    //   .then((baskets) => {
+    //     console.log(baskets);
+    //     //Logic for loading screen time
+    //     let currentTime = Date.now();
+    //     let elapsed = currentTime - this.state.startTime;
+    //     if (elapsed < 2000) {
+    //       setTimeout(() => this.setState({ loading: false }), 2000);
+    //     } else {
+    //       this.setState({ loading: false });
+    //     }
+
+    //     this.setState(
+    //       {
+    //         baskets: baskets.data
+    //       },
+    //       () => this.displayBusinessToMap()
+    //     );
+    //   })
+    //   .catch(() => {
+    //     window.location.assign('/#/500');
+    //   });
 
     let wishListPromise = axios
       .get(`/api/wishlist/${nonProfitID}`)

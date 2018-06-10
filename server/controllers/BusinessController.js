@@ -40,5 +40,13 @@ module.exports =  {
   },
   updateBusinessInfo: (req, res) => {
 
+  },
+
+  getAllBusinesses:(req, res) => {
+    const db= req.app.get('db');
+    
+    db.business_all().then(businessIDs=> {
+      res.status(200).send(businessIDs)
+    }).catch(()=> res.sendStatus(500))
   }
 }

@@ -4,6 +4,7 @@ import _ from 'lodash'
 import flatten from 'lodash/flatten'
 import Header from '../../../components/Header/NewHeader'
 import './BusinessHistory.css'
+import * as utilFunc from '../../../../config/analyticsUtil'
 
 class BusinessHistory extends React.Component {
   constructor() {
@@ -87,10 +88,10 @@ class BusinessHistory extends React.Component {
             <p>{e.item}</p>
           </div>
           <div className="BusinessHistory-column">
-            <p>{e.weight}</p>
+            <p>{utilFunc.formatNumber(e.weight, 0, 3, ',', '.') }</p>
           </div>
           <div className="BusinessHistory-column">
-            <p>{e.FMV}</p>
+            <p>${utilFunc.formatNumber(e.FMV, 2, 3, ',', '.')}</p>
           </div>
         </div>
       )
@@ -101,7 +102,6 @@ class BusinessHistory extends React.Component {
         <Header acctType = {this.state.businessInfo.acct_type}/>
         <div 
           className="BusinessHistory"
-          id="section-to-print"
         >
           <div className="BusinessHistory-print-button">
             <h1>Non-Profit Donations 2018</h1>
@@ -126,10 +126,10 @@ class BusinessHistory extends React.Component {
               <p>{`Totals: ${this.state.allItems.length}`}</p>
             </div>
             <div className="BusinessHistory-column">
-              <p>{this.state.totalWeight}</p>
+              <p>{utilFunc.formatNumber(this.state.totalWeight, 0, 3, ',', '.')}</p>
             </div>
             <div className="BusinessHistory-column">
-              <p>{this.state.totalFMV}</p>
+              <p>${utilFunc.formatNumber(this.state.totalFMV, 2, 3, ',', '.')}</p>
             </div>
           </div>
         </div>
