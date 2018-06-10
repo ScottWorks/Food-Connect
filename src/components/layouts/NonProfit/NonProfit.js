@@ -88,7 +88,7 @@ class NonProfit extends React.Component {
   initializeComponent() {
     const { nonProfitID } = this.state;
     const currentLocalTime = new Date().getTime();
-    const businessIDs = [1, 2, 3, 4, 5, 6, 7, 8];
+    const businessIDs = [22];
     // const businessIDs = [60, 70, 80];
 
     let basketPromise = axios

@@ -2,8 +2,10 @@ import React from 'react'
 
 import {Doughnut} from 'react-chartjs-2';
 import * as utilFunc  from '../../../config/analyticsUtil';
+import {connect} from 'react-redux';
+import {getBusinessBasketsCompleted} from '../../../ducks/analyticsReducer'
 
-export default class Donut extends React.Component{
+export class Donut extends React.Component{
     constructor(props) {
         super(props);
 
@@ -30,6 +32,10 @@ export default class Donut extends React.Component{
         }
     }
 
+    componentDidMount = async() => {
+        await this.props.getBusinessBasketsCompleted(this.props.businessID);
+    }
+
     render(){
         return (
             
@@ -39,3 +45,11 @@ export default class Donut extends React.Component{
         )
     }
 }
+
+function mapStateToProps(state){
+    return {
+        businessBaskets: state.analyticsReducer.businessBaskets
+    }
+}
+
+export default connect(mapStateToProps, {getBusinessBasketsCompleted})(Donut);

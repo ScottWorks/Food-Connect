@@ -41,15 +41,16 @@ export class StatChart extends React.Component{
         }
     }
 
-    componentDidMount(){
-        this.props.getBusinessBasketsCompleted(4);
+    componentDidMount = async()=>{
+        await this.props.getBusinessBasketsCompleted(this.props.businessID);
     }
 
 
     render() {
+        console.log(this.props.businessBaskets)
         return (
             <div>
-            <Bar height={100} weight={100} data={this.state.data} options = {this.state.options}/>
+                <Bar height={100} weight={100} data={this.state.data} options = {this.state.options}/>
             </div>
         )
     }

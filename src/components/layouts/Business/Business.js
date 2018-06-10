@@ -49,6 +49,7 @@ class Business extends React.Component {
 
     
     axios.get(`/api/basket/${this.state.businessID}/${(new Date).getTime()}`).then(res => {
+      console.log(`Baskets: ${res}`)
       this.props.setBasket(res.data)
     })
     this.checkIfMobile;
@@ -76,20 +77,20 @@ class Business extends React.Component {
         {
           this.state.hideChart ? null : (
             <div className='donut-container'>
-            <Donut/>
+            <Donut businessID={this.state.businessID}/>
           </div>)}
 
           {
             this.state.hideChart ? null : (
               <div className='barchart-container'>
-            <StatChart/>
+            <StatChart businessID={this.state.businessID}/>
           </div>   
             )
           }
         </div>
         <div className='business-table-list-container'>
-          <BusinessTable className='business-table-container'/>
-          <BusinessBasketList className='business-basket-list-container'/>
+          <BusinessTable businessID={this.state.businessID} className='business-table-container'/>
+          <BusinessBasketList businessID={this.state.businessID} className='business-basket-list-container'/>
         </div>
       </div>
     )};
