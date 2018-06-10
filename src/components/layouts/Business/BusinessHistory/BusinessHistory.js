@@ -5,6 +5,7 @@ import flatten from 'lodash/flatten'
 import Header from '../../../components/Header/NewHeader'
 import './BusinessHistory.css'
 import * as utilFunc from '../../../../config/analyticsUtil'
+import * as generalUtil from '../../../../config/generalUtil'
 
 class BusinessHistory extends React.Component {
   constructor() {
@@ -46,9 +47,9 @@ class BusinessHistory extends React.Component {
       let totalFMV = 0
       let itemArr = _.flatten([...itemArrFlat])
       for(let i = itemArr.length - 1; i >= 0; i--) {
-        itemArr[i].item = this.itemNameConverter(itemArr[i].item)
+        itemArr[i].item = generalUtil.itemNameConverter(itemArr[i].item)
         for(let j = 0; j < itemArr.length; j++) {
-          itemArr[j].item = this.itemNameConverter(itemArr[j].item)
+          itemArr[j].item = generalUtil.itemNameConverter(itemArr[j].item)
           if(itemArr[i].item === itemArr[j].item && i !== j) {
             itemArr[i].weight = Number(itemArr[i].weight)
             itemArr[i].FMV = Number(itemArr[i].FMV)
@@ -67,23 +68,11 @@ class BusinessHistory extends React.Component {
     })
   }
 
-
-
-
-  itemNameConverter(str) {
-    let myStr = str.toUpperCase()
-    if (myStr.indexOf(' ') === -1) {
-      if(myStr[myStr.length - 1] !== 'S') {
-        return myStr + 'S'
-      }
-    }
-    return myStr
-  }
-
   render() {
-    var displayAllItems = this.state.allItems.map(e => {
+
+    var displayAllItems = this.state.allItems.map((e, index) => {
       return (
-        <div className="BusinessHistory-item-row">
+        <div key={e+index} className="BusinessHistory-item-row">
           <div className="BusinessHistory-column">
             <p>{e.item}</p>
           </div>

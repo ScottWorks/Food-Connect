@@ -12,11 +12,11 @@ export class StatChart extends React.Component{
             data: {
                 datasets: [
                     {
-                        data: [1000,2038,32048],
-                        backgroundColor: utilFunc.generateRandomColors(3)
+                        data: [],
+                        backgroundColor: utilFunc.generateRandomColors(this.props.numColors)
                     }
                 ],
-                labels:['red', 'yellow', 'blue']
+                labels:[]
             },
             options: {
                 responsive: true,
@@ -41,8 +41,21 @@ export class StatChart extends React.Component{
         }
     }
 
-    componentDidMount = async()=>{
-        await this.props.getBusinessBasketsCompleted(this.props.businessID);
+    componentDidMount(){
+        let labels=[]
+        let data = []
+        let dataCopy = Object.assign({}, this.state.data)
+        
+        for(var i=0; i < this.props.allItems.length ; i++){
+            labels.push(this.props.allItems[i].item);
+        }
+        for(var i=0; i < this.props.allItems.length ; i++){
+            data.push(~~this.props.allItems[i].FMV);
+        }
+
+        dataCopy.datasets[0].data = data;
+        dataCopy.labels = labels;
+        this.setState({data: dataCopy})
     }
 
 
