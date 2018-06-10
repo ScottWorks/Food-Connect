@@ -24,7 +24,7 @@ class NonProfit extends React.Component {
     super();
     this.state = {
       nonProfitID: 0,
-      nonProfitInfo: {},
+      acct_type: '',
       baskets: [],
       wishList: [],
       scheduledBaskets: [],
@@ -62,7 +62,8 @@ class NonProfit extends React.Component {
         ) {
           console.log('Validated!', user.data.user_id);
           this.setState({
-            nonProfitID: user.data.acct_id
+            nonProfitID: user.data.acct_id,
+            acct_type: user.data.acct_type
           })
         } else if (
           typeof user.data.user_id === 'number' &&
@@ -355,7 +356,7 @@ class NonProfit extends React.Component {
     } else {
       return (
         <main className="mobile">
-          <NewHeader npInfo={this.state.nonProfitInfo}/>
+          <NewHeader acctType = {this.state.acct_type}/>
           <div className="np-view-main">
             <div className="np-view-col-1">
               <div className="google-maps">

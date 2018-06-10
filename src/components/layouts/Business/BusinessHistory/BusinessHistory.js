@@ -2,23 +2,41 @@ import React from 'react'
 import axios from 'axios'
 import _ from 'lodash'
 import flatten from 'lodash/flatten'
-import Header from '../../../components/Header/Header'
+import Header from '../../../components/Header/NewHeader'
 import './BusinessHistory.css'
 
 class BusinessHistory extends React.Component {
   constructor() {
     super()
     this.state = {
+      businessID:'',
       allItems: [],
       totalWeight: 0,
-      totalFMV: 0
+      totalFMV: 0,
+      businessInfo:''
     }
   }
 
-  componentDidMount() {
-    var temp = 1
+  componentDidMount = async ()=> {
+    await axios.get('/api/auth/me').then( user => {
+      if(typeof user.data.user_id === 'number' && user.data.acct_type === 'b') {
+        console.log('Validated!', user)
+        this.setState({
+          businessID: user.data.acct_id,
+          businessInfo: user.data
+        })
+      }  else {
+        window.location.assign('/#/login')
+        console.log('Sorry, you are not allowed...')
+      }
+  }).catch( err => {
+    window.location.assign('/#/login')
+    console.log('Sorry, you are not allowed...')
+  })
+
+
     var itemArrFlat = []
-    axios.get(`/api/all/basket/${temp}`).then(res => {
+    axios.get(`/api/all/basket/${this.state.businessID}`).then(res => {
       for (let i = 0; i < res.data.length; i++) {
         let itemArr = res.data[i].items.slice()
         itemArrFlat.push(itemArr)
@@ -47,6 +65,9 @@ class BusinessHistory extends React.Component {
       this.setState({allItems: itemArr, totalWeight, totalFMV})
     })
   }
+
+
+
 
   itemNameConverter(str) {
     let myStr = str.toUpperCase()
@@ -77,7 +98,7 @@ class BusinessHistory extends React.Component {
     
     return (
       <div>
-        <Header />
+        <Header acctType = {this.state.businessInfo.acct_type}/>
         <div 
           className="BusinessHistory"
           id="section-to-print"

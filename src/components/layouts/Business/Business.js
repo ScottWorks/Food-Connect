@@ -20,7 +20,8 @@ class Business extends React.Component {
       hideChart: true,
       loading: false,
       businessID:'',
-      nonProfitInfo:{}
+      nonProfitInfo:{},
+      businessInfo:''
     }
 
     this.checkIfMobile = this.checkIfMobile.bind(this);
@@ -32,7 +33,8 @@ class Business extends React.Component {
       if(typeof user.data.user_id === 'number' && user.data.acct_type === 'b') {
         console.log('Validated!', user)
         this.setState({
-          businessID: user.data.acct_id
+          businessID: user.data.acct_id,
+          businessInfo: user.data
         })
       } else if (typeof user.data.user_id === 'number' && user.data.acct_type === 'np') {
         window.location.assign('/#/nonprofit')
@@ -41,7 +43,6 @@ class Business extends React.Component {
         console.log('Sorry, you are not allowed...')
       }
   }).catch( err => {
-    console.log(err)
     window.location.assign('/#/login')
     console.log('Sorry, you are not allowed...')
   })
@@ -70,7 +71,7 @@ class Business extends React.Component {
     return (
       <div className="Business">
         {/* <Header /> */}
-        <NewHeader businessID = {this.state.businessID}/>
+        <NewHeader acctType = {this.state.businessInfo.acct_type}/>
         <div className="bus-top-bar">
         {
           this.state.hideChart ? null : (
