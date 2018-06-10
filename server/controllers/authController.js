@@ -17,15 +17,14 @@ module.exports = {
 
            await db.check_username([userName]).then(user => {
                 if (user.length !== 0) {
-                    console.log('Please choose a different username.')
-                    res.status(200).send('Username taken. Please choose another, and try again.')
+                    res.status(409).send('Username taken. Please choose another, and try again.')
 
                 } else {
                     const salt = bcrypt.genSaltSync(10)
                     const hash = bcrypt.hashSync(pw, salt)
 
                     db.register_np_admin([userName, hash, group[0].non_profit_id]).then(user => {
-                        console.log('Np user created!')
+                        res.status(200).send("User Created")
                     })
                 }
             })
@@ -60,9 +59,10 @@ module.exports = {
     },
     login: (req, res, next) => {
         let err = 'Default Err'
-        // console.log(req.body)
+        console.log(req.body)
         const { userName, pw } = req.body;
         const db = req.app.get('db');
+
 
         db.check_username([userName]).then( user => {
             if(user.length !== 0) {
@@ -81,10 +81,11 @@ module.exports = {
                 } else {
                     res.status(401).send("Wrong Password")
                 }
-                // res.status(401).send('Please create an account before logging in.')
+              }
+              else if(user.length === 0){
+                res.status(401).send('Please create an account before logging in.')
               }
             }
-
         ).catch(err)
     },
     validate: (req, res, next) => {

@@ -35,6 +35,36 @@
    /* TABLET VIEW */
    @media only screen and (min-device-width: 668px) and (max-device-width: 1199px){
   
+    .date-time-picker-contain{
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 95%;
+        
+    }
+
+       .date-time-picker-contain button{
+        margin-left: auto;
+        margin-right: auto;
+        padding: 2px;
+        font-size: 1em;
+        line-height: 1.375em;
+        background: #679436;
+        border: 0;
+        color: #EBF2FA;
+        border-radius: 3px;
+        width: 100px;
+        cursor: pointer;
+
+       }
+
+       .date-time-picker-contain button:hover{
+        color: #EBF2FA;
+        background: #05668D;
+       }
 }
 
    /* For Desktop */

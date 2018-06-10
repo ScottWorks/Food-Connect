@@ -64,8 +64,7 @@ class LandingPage extends Component {
                         </div>
                     </div>
                     <section className="landing_hexmap">
-                        <div className="landing_hexmap_title">HexMap Title</div>
-                        <div className="landing_hexmap_container"><h3></h3></div>
+                        <img src='src/assets/images/info-graph.png' alt='info-graph'/>
                     </section>
                     <hr/>
                     <section className="landing_about">
@@ -84,7 +83,7 @@ class LandingPage extends Component {
                                 <p className='landing_stats_p'>{utilFunc.formatNumber(Number(this.props.landingTotalSavedByWeight),0,3,',','.')}</p>
                                 <h3>Pounds of<br/> Food Saved</h3>
                             </div>
-                            {/* <hr className="vertical_line"/> TODO: */}
+                            
                             <div className='landing_stats_column'>
                                 <p className='landing_stats_p'>{utilFunc.getMealsSaved(this.props.landingTotalSavedByWeight)}</p>
                                 <h3>Number of<br/> Meals Saved</h3>
