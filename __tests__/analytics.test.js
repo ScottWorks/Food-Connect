@@ -514,9 +514,9 @@ test('Should return an array of 10 colors', ()=> {
   * Should correctly return a string representing total amount of meals saved
   */
  
-  test('Should return 5,4829.73', ()=> {
+  test('Should return 5,4890', ()=> {
       let testValue = 10000;
       let result = analyticFunctions.getMealsSaved(testValue);
 
-      expect(result).toBe("5,489.73")
+      expect(result).toBe("5,490")
   });

@@ -1,0 +1,1 @@
+Select business_id from businesses

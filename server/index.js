@@ -8,7 +8,7 @@ const dotenv = require('dotenv');
 const session = require('express-session');
 dotenv.config();
 const checkForSession = require('./middlewares/checkForSessions');
-const inLine = require('./middlewares/middlewares')
+const inLine = require('./middlewares/middlewares');
 
 // Controllers
 const twilioController = require('./controllers/TwilioController'),
@@ -64,7 +64,7 @@ app.delete('/api/basket/:basketID', BusinessController.deleteBusinessBasket);
 
 // Busines Endpoints
 app.get('/api/business/', BusinessController.getBusinessInfo);
-app.post('/api/business');
+app.get('/api/business/all', BusinessController.getAllBusinesses);
 app.put('/api/business/:businessID', BusinessController.updateBusinessInfo);
 
 // NON-PROFIT ENDPOINTS
@@ -74,7 +74,13 @@ app.get(
   nonProfitController.getScheduledBaskets
 );
 app.post('/api/basket/:currentLocalTime', nonProfitController.getBaskets);
-app.put('/api/basket/update/:nonProfitID', nonProfitController.scheduleBasket); // TESTING ONLY!
+app.put('/api/basket/confirm/:basketID', nonProfitController.confirmBasket); // TESTING ONLY!
+// app.put(
+//   '/api/basket/confirm/:basketID',
+//   twilioController.sendTwilioMessage,
+//   nonProfitController.confirmBasket
+// );
+app.put('/api/basket/update/:nonProfitID', inLine.validateCredentials, nonProfitController.scheduleBasket); // TESTING ONLY!
 // app.put(
 //   '/api/basket/update/:nonProfitID',
 //   twilioController.sendTwilioMessage,
@@ -97,7 +103,7 @@ app.put(
   nonProfitController.modifyWishList
 );
 // Non-Profit User Endpoints
-app.get('/api/nonprofit/:userID', nonProfitController.getUserInfo);
+app.get('/api/nonprofit/:nonProfitID', nonProfitController.getUserInfo);
 
 // TWILIO
 app.post('/api/twilio', twilioController.sendTwilioMessage);

@@ -9,7 +9,6 @@
     "body-parser": "^1.18.3",
     "chart.js": "^2.7.2",
     "cors": "^2.8.4",
-    "cypress": "^2.1.0",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
@@ -33,6 +32,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
+    "react-toastify": "^4.0.2",
     "redux": "^4.0.0",
     "redux-promise-middleware": "^5.1.1",
     "twilio": "^3.17.1"
@@ -41,8 +41,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "cypress open"
   },
   "main": "./server/index.js",
-  "proxy": "http://localhost:4000"
+  "proxy": "http://localhost:4000",
+  "devDependencies": {
+    "cypress": "^2.1.0"
+  }
 }
