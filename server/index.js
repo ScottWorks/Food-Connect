@@ -64,7 +64,7 @@ app.delete('/api/basket/:basketID', BusinessController.deleteBusinessBasket);
 
 // Busines Endpoints
 app.get('/api/business/', BusinessController.getBusinessInfo);
-app.post('/api/business');
+app.get('/api/business/all', BusinessController.getAllBusinesses);
 app.put('/api/business/:businessID', BusinessController.updateBusinessInfo);
 
 // NON-PROFIT ENDPOINTS
