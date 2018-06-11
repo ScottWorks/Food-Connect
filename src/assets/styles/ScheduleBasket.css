@@ -97,7 +97,7 @@
         border: 0;
         border-radius: 3px;
         color: #EBF2FA;
-        padding: 1px;
+        padding: 2px;
         font-size: 1em;
         line-height: 1.25em;
         cursor: pointer;
@@ -115,9 +115,16 @@
    
    /* For Desktop */
    @media screen and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1) {
+    .basket{
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
     .schedule-basket-btns{
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
+        align-items: center;
         padding: 10px 100px;
         margin-bottom: 5px;
     }
@@ -147,6 +154,10 @@
         padding-bottom: 5px;
     }
 
+    .sched-basket-info-container p{
+        text-align: left;
+    }
+
     .basket>button {
         background: #679436;
         border: 0;
@@ -158,7 +169,7 @@
         border: 0;
         border-radius: 3px;
         color: #EBF2FA;
-        padding: 1px;
+        padding: 2px;
         font-size: 1em;
         line-height: 1.25em;
         cursor: pointer;
