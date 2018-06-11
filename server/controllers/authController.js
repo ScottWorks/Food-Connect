@@ -42,7 +42,6 @@ module.exports = {
             //     res.status(200).send(group.data)
             // })
             console.log('New business added to DB!')
-            console.log(group[0])
 
            await db.check_username([userName]).then(user => {
                 if (user.length !== 0) {
@@ -64,7 +63,6 @@ module.exports = {
     },
     login: (req, res, next) => {
         let err = 'Default Err'
-        console.log(req.body)
         const { userName, pw } = req.body;
         const db = req.app.get('db');
 
