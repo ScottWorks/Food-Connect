@@ -18,15 +18,26 @@ class Business extends React.Component {
 
     this.state={
       hideChart: true,
-      loading: false
+      loading: true,
+      startTime: null
     }
 
     this.checkIfMobile = this.checkIfMobile.bind(this);
   }
 
   componentDidMount = async () => {
-
+    this.setState({startTime:Date.now()})
+    
     await axios.get('/api/auth/me').then( user => {
+      let currentTime = Date.now()
+      let elapsed = currentTime - this.state.startTime
+      if(elapsed < 2000){
+        setTimeout(()=> 
+        this.setState({loading:false}),2000)
+      }
+      else{
+        this.setState({loading:false})
+      }
       if(typeof user.data.user_id === 'number' && user.data.acct_type === 'b') {
         console.log('Validated!', user)
       } else if (typeof user.data.user_id === 'number' && user.data.acct_type === 'np') {
@@ -37,14 +48,14 @@ class Business extends React.Component {
       }
   }).catch( err => {
     console.log(err)
-    window.location.assign('/#/login')
+    window.location.assign('/#/403')
     console.log('Sorry, you are not allowed...')
   })
 
     var temp = 1
     axios.get(`/api/basket/${temp}/${(new Date).getTime()}`).then(res => {
       this.props.setBasket(res.data)
-    })
+    }).catch(()=>{window.location.assign('/#/500')})
     this.checkIfMobile;
     window.addEventListener('resize', this.checkIfMobile)
   }

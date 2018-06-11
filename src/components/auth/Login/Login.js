@@ -6,6 +6,7 @@ import Footer from "../../components/Footer/Footer.js";
 import "./Login.css"
 import {Link} from 'react-router-dom';
 import Particles from 'react-particles-js';
+import NewHeader from "../../components/Header/NewHeader.js";
 
 export default class Auth extends Component {
     constructor() {
@@ -76,7 +77,8 @@ export default class Auth extends Component {
         const { userName, pw } = this.state
         return (
             <div className='login-container'>
-                <Header />
+                {/* <Header /> */}
+                <NewHeader/>
                 <div className='login_wrapper'>
 
                     <form className='login-form'>

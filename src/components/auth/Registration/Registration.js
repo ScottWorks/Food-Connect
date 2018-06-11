@@ -8,6 +8,7 @@ import Header from "../../components/Header/Header.js";
 import Footer from "../../components/Footer/Footer.js";
 import showPassword from "../../../assets/icons/showpassword.png";
 import hidePassword from "../../../assets/icons/hidepassword.png";
+import NewHeader from "../../components/Header/NewHeader.js";
 
 
 class Register extends Component {
@@ -319,7 +320,8 @@ class Register extends Component {
     render() {
         return (
             <div className="registration_main">
-                <Header />
+                {/* <Header /> */}
+                <NewHeader/>
                 <div className="registration_wrapper">
                     <section className='question-panel'>
                         <div onClick={()=>this.handlePanelHeader1Click()}
