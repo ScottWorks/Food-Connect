@@ -4,7 +4,7 @@ module.exports = {
 
         for (var i = 0; i < basket.length; i++) {
             if (basket[i].hasOwnProperty('weight')) {
-                sum += basket[i]['weight']
+                sum += ~~basket[i]['weight']
             }
         }
         return sum;
@@ -15,7 +15,7 @@ module.exports = {
 
         for (var i = 0; i < arrayOfBaskets.length; i++) {
             let basketTotal = this.sumTotalBasketWeight(arrayOfBaskets[i].items)
-            sum += basketTotal;
+            sum += ~~basketTotal;
         }
         return sum;
     },
@@ -25,7 +25,7 @@ module.exports = {
 
         for (var i = 0; i < basket.length; i++) {
             if (basket[i].hasOwnProperty('FMV')) {
-                sum += basket[i]['FMV']
+                sum += ~~basket[i]['FMV']
             }
         }
         return sum;
@@ -36,7 +36,7 @@ module.exports = {
 
         for (var i = 0; i < arrayOfBaskets.length; i++) {
             let basketTotal = this.sumTotalBasketFMV(arrayOfBaskets[i]);
-            sum += basketTotal;
+            sum += ~~basketTotal;
         }
         return sum;
     },
@@ -82,7 +82,7 @@ module.exports = {
 
      formatNumber(num, decLen, len, sectionDelim, decimalDelim) {
         let regex = '\\d(?=(\\d{' + (len || 3) + '})+' + (decLen > 0 ? '\\D' : '$') + ')';
-        let number = Number(num).toFixed(Math.max(0, ~~decLen));
+        let number = (Number(num)).toFixed(Math.max(0, ~~decLen));
 
     return (decimalDelim ? number.replace('.', decimalDelim) : number).replace(new RegExp(regex, 'g'), '$&' + (sectionDelim || ','));
      },
