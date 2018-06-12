@@ -32,7 +32,7 @@ export class Container extends Component {
   };
 
   render() {
-    console.log(this.props.markeers);
+    // console.log(this.props.markeers);
     const { markeers } = this.props;
 
     const style = {

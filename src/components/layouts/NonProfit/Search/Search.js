@@ -17,8 +17,8 @@ function Search(props) {
           placeholder="Search an Item..."
           onChange={(e) => _handleChange('searchInput', e.target.value)}
         />
+        <button onClick={() => _initializeComponent()}>Reset</button>
       </form>
-      <button onClick={() => _initializeComponent()}>Reset</button>
     </div>
   );
 }

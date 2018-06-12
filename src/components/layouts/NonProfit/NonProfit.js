@@ -90,7 +90,7 @@ class NonProfit extends React.Component {
     let basketPromise = axios
       .post(`/api/basket/${currentLocalTime}`, { businessIDs })
       .then((baskets) => {
-        console.log(baskets);
+        // console.log(baskets);
         //Logic for loading screen time
         let currentTime = Date.now();
         let elapsed = currentTime - this.state.startTime;
@@ -309,19 +309,19 @@ class NonProfit extends React.Component {
     let arr = [];
     let { baskets } = this.state;
 
-    console.log(baskets);
+    // console.log(baskets);
 
     for (let i = 0; i < baskets.length; i++) {
       arr.push(baskets[i].business_id);
     }
 
     var uniq = [...new Set(arr)];
-    console.log(uniq);
+    // console.log(uniq);
 
     axios
       .post('/api/nonprofit/businesslocation', { businessID: uniq })
       .then((locations) => {
-        console.log(locations);
+        // console.log(locations);
         this.setState({
           markers: locations.data
         });
@@ -369,7 +369,7 @@ class NonProfit extends React.Component {
               <div className="np-wishlist-basket-container">
                 <h3>Wish List</h3>
                 <WishList
-                  _wishlist={this.wishList}
+                  _wishList={wishList}
                   _createWishList={this.createWishList}
                   _addWishListItem={this.addWishListItem}
                   parent_editWishListItem={this.parent_editWishListItem}
@@ -391,6 +391,13 @@ class NonProfit extends React.Component {
 
               <div className="np-avail-basket-container">
                 <h3>Available Baskets</h3>
+                <Search
+                  _searchInput={searchInput}
+                  _initializeComponent={this.initializeComponent}
+                  _handleChange={this.handleChange}
+                  _searchBaskets={this.searchBaskets}
+                />
+                <Sort _sortBaskets={this.sortBaskets} />
                 <NonProfitBasketList
                   _baskets={baskets}
                   _scheduleBasket={this.scheduleBasket}

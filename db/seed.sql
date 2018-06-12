@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS users;
+-- DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS wishList;
 DROP TABLE IF EXISTS baskets;
 DROP TABLE IF EXISTS nonProfits;
@@ -61,12 +61,12 @@ CREATE TABLE wishlist
     items JSONB
 );
 
-CREATE TABLE users
-(
-    user_id SERIAL PRIMARY KEY,
-    user_name VARCHAR(45),
-    user_pw TEXT,
-    business_id INTEGER REFERENCES businesses(business_id),
-    non_profit_id INTEGER REFERENCES nonProfits(non_profit_id),
-    acct_type BOOLEAN
-);
+-- CREATE TABLE users
+-- (
+--     user_id SERIAL PRIMARY KEY,
+--     user_name VARCHAR(45),
+--     user_pw TEXT,
+--     business_id INTEGER REFERENCES businesses(business_id),
+--     non_profit_id INTEGER REFERENCES nonProfits(non_profit_id),
+--     acct_type BOOLEAN
+-- );
