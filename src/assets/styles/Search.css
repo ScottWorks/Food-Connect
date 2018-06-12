@@ -1,0 +1,101 @@
+/* FOR MOBILE DEVICES */
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px){
+    .search-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 3px 0px;
+    }
+
+    .search-container button{
+        background: #679436;
+        border: 0;
+        border-radius: 3px;
+        color: #EBF2FA;
+        padding: 2px;
+        font-size: 1em;
+        line-height: 1.25em;
+        cursor: pointer;
+        width: 100px;
+        margin-left: 10px;
+        
+    }
+
+    .search-container input{
+        font-size: 1em;
+        line-height: 1.25em;
+    }
+
+    .search-container input:focus{
+        border: #A5BE00 solid;
+        outline: 0;
+    }
+    
+}
+
+/* TABLET VIEW */
+@media only screen and (min-device-width: 668px) and (max-device-width: 1199px){
+    .search-container{
+        display: flex;
+        align-items: center;
+        padding: 4px 0px;
+    }
+
+    .search-container button{
+        background: #679436;
+        border: 0;
+        border-radius: 3px;
+        color: #EBF2FA;
+        padding: 2px;
+        font-size: 1em;
+        line-height: 1.375em;
+        cursor: pointer;
+        width: 100px;
+        margin-left: 10px;
+        
+    }
+
+    .search-container input{
+        font-size: 1em;
+        line-height: 1.375em;
+    }
+
+    .search-container input:focus{
+        border: #A5BE00 solid;
+        outline: 0;
+    }
+}
+
+/* DESKTOP VIEW */
+@media screen and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1) {
+    .search-container{
+        display: flex;
+        align-items: center;
+        padding: 4px 0px;
+    }
+
+    .search-container button{
+        background: #679436;
+        border: 0;
+        border-radius: 3px;
+        color: #EBF2FA;
+        padding: 2px;
+        font-size: 1em;
+        line-height: 1.375em;
+        cursor: pointer;
+        width: 100px;
+        margin-left: 10px;
+        
+    }
+
+    .search-container input{
+        font-size: 1em;
+        line-height: 1.375em;
+    }
+
+    .search-container input:focus{
+        border: #A5BE00 solid;
+        outline: 0;
+    }
+    
+}

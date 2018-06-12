@@ -398,13 +398,14 @@ class NonProfit extends React.Component {
 
               <div className="np-avail-basket-container">
                 <h3>Available Baskets</h3>
+                <div className='sort-filter-container'>
                 <Search
                   _searchInput={searchInput}
                   _initializeComponent={this.initializeComponent}
                   _handleChange={this.handleChange}
                   _searchBaskets={this.searchBaskets}
                 />
-                <Sort _sortBaskets={this.sortBaskets} />
+                <Sort _sortBaskets={this.sortBaskets} /></div>
                 <NonProfitBasketList
                   _baskets={baskets}
                   _scheduleBasket={this.scheduleBasket}
