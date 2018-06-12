@@ -102,7 +102,6 @@ class Business extends React.Component {
 
     
     axios.get(`/api/basket/${this.state.businessID}/${(new Date).getTime()}`).then(res => {
-      console.log(`Baskets: ${res}`)
       this.props.setBasket(res.data)
     })
     this.checkIfMobile;
