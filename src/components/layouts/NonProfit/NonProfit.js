@@ -267,7 +267,7 @@ class NonProfit extends React.Component {
     if (baskets.length > 0) {
       switch (sortType) {
         case 'wishlist':
-          if (wishList.items && wishList.items.length > 0) {
+          if (wishList && wishList.items.length > 0) {
             modifiedBaskets = sortUtil.sortByWishList(baskets, wishList);
             this.setState({
               baskets: modifiedBaskets
@@ -318,19 +318,15 @@ class NonProfit extends React.Component {
     let arr = [];
     let { baskets } = this.state;
 
-    // console.log(baskets);
-
     for (let i = 0; i < baskets.length; i++) {
       arr.push(baskets[i].business_id);
     }
 
     var uniq = [...new Set(arr)];
-    // console.log(uniq);
 
     axios
       .post('/api/nonprofit/businesslocation', { businessID: uniq })
       .then((locations) => {
-        // console.log(locations);
         this.setState({
           markers: locations.data
         });
@@ -398,14 +394,15 @@ class NonProfit extends React.Component {
 
               <div className="np-avail-basket-container">
                 <h3>Available Baskets</h3>
-                <div className='sort-filter-container'>
-                <Search
-                  _searchInput={searchInput}
-                  _initializeComponent={this.initializeComponent}
-                  _handleChange={this.handleChange}
-                  _searchBaskets={this.searchBaskets}
-                />
-                <Sort _sortBaskets={this.sortBaskets} /></div>
+                <div className="sort-filter-container">
+                  <Search
+                    _searchInput={searchInput}
+                    _initializeComponent={this.initializeComponent}
+                    _handleChange={this.handleChange}
+                    _searchBaskets={this.searchBaskets}
+                  />
+                  <Sort _sortBaskets={this.sortBaskets} />
+                </div>
                 <NonProfitBasketList
                   _baskets={baskets}
                   _scheduleBasket={this.scheduleBasket}
