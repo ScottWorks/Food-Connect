@@ -5,7 +5,7 @@ function sortByWishList(baskets, wishList) {
     matchedItems = [],
     sortedBaskets = [...baskets];
 
-  if (wishList.items.length > 0) {
+  if (wishList && wishList.items.length > 0) {
     baskets.forEach((basket) => {
       let flag = false,
         basketItems = basket.items;

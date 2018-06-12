@@ -1,5 +1,9 @@
 /* FOR MOBILE DEVICES */
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    .basket{
+        display: flex;
+        flex-direction: row-reverse;
+    }
     .confirm-pickup-btn {
         display: flex;
         flex-direction: column;
@@ -9,9 +13,10 @@
 
     .schedule-basket-btns{
         display: flex;
-        justify-content: space-evenly;
-        padding: 10px;
-        margin-bottom: 5px;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
     }
 
     .schedule-basket-btns button {
@@ -21,7 +26,7 @@
         background: #679436;
         border: 0;
         color: #EBF2FA;
-        border-radius: 5px;
+        border-radius: 3px;
         width: 80px;
         cursor: pointer;
     }
@@ -45,7 +50,7 @@
     .confirm-pickup-btn button {
         background: #679436;
         border: 0;
-        border-radius: 5px;
+        border-radius: 3px;
         color: #EBF2FA;
         padding: 1px;
         font-size: 1em;
@@ -53,6 +58,9 @@
         cursor: pointer;
         width: 130px;
         margin-top: 5px;
+    }
+    .sched-basket-info-container p{
+        text-align: left;
     }
 
    }
@@ -97,7 +105,7 @@
         border: 0;
         border-radius: 3px;
         color: #EBF2FA;
-        padding: 1px;
+        padding: 2px;
         font-size: 1em;
         line-height: 1.25em;
         cursor: pointer;
@@ -115,9 +123,16 @@
    
    /* For Desktop */
    @media screen and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1) {
+    .basket{
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
     .schedule-basket-btns{
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
+        align-items: center;
         padding: 10px 100px;
         margin-bottom: 5px;
     }
@@ -147,6 +162,10 @@
         padding-bottom: 5px;
     }
 
+    .sched-basket-info-container p{
+        text-align: left;
+    }
+
     .basket>button {
         background: #679436;
         border: 0;
@@ -158,9 +177,9 @@
         border: 0;
         border-radius: 3px;
         color: #EBF2FA;
-        padding: 1px;
+        padding: 2px;
         font-size: 1em;
-        line-height: 1.25em;
+        line-height: 1.375em;
         cursor: pointer;
         width: 130px;
         margin-top: 5px;

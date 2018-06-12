@@ -117,7 +117,7 @@ export default class Auth extends Component {
                     </form>
 
                     <section className='register-text'>
-                        <p>New to Crumb? <Link to='/register'>Please Register</Link></p>
+                        <p>New to Food-Connect? <Link to='/register'>Please Register</Link></p>
                     </section>
                 </div>
 
@@ -126,7 +126,7 @@ export default class Auth extends Component {
                     this.state.isMobile ? null : (
                         <div className='particles-side-container'>
                             <Particles params={particlesParams} className='particles-js'/>
-                            <h1>crumb</h1>
+                            <h1>food-connect</h1>
                         </div>
                     )
                 }
