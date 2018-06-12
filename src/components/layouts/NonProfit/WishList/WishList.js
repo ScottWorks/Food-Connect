@@ -117,16 +117,14 @@ const DisplayWishList = ({
       if (_edit && idx === _editItemIdx) {
         return (
           <div className="editable-wishlist-container" key={idx}>
-            <p>{elem.item}</p>
             <div className="editable-wishlist-input">
               {/* <button onClick={() => child_editWishListItem(idx)}>
                 Submit
               </button> */}
               <form onSubmit={(e) => child_editWishListItem(e, idx)}>
                 <input
-                  value={_editItem}
                   type="text"
-                  placeholder="Add Items..."
+                  placeholder={elem.item}
                   onChange={(e) => _handleChange('editItem', e.target.value)}
                 />
               </form>
