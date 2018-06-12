@@ -45,7 +45,7 @@ export class Container extends Component {
     };
 
     let displayMarkers = markeers.map((markeer, i) => {
-      console.log(markeer)
+      console.log(markeer);
       return (
         <Marker
           key={i}
@@ -87,7 +87,7 @@ export class Container extends Component {
           <InfoWindow
             marker={this.state.activeMarker}
             visible={this.state.showingInfoWindow}
-            >
+          >
             <div>
               {console.log(this.state.activeMarker)}
               <h1

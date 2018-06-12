@@ -65,7 +65,7 @@ class NonProfit extends React.Component {
           this.setState({
             nonProfitID: user.data.acct_id,
             acct_type: user.data.acct_type
-          })
+          });
         } else if (
           typeof user.data.user_id === 'number' &&
           user.data.acct_type === 'b'
@@ -89,24 +89,15 @@ class NonProfit extends React.Component {
   initializeComponent() {
     const { nonProfitID } = this.state;
     const currentLocalTime = new Date().getTime();
-    let basketPromise = axios.get('/api/business/all').then(businesses => {
-      let businessIDs = []
-      for(var ids in businesses.data){
-        businessIDs.push(~~ids);
-      }
-      
-      console.log(businessIDs)
-      let currentTime = Date.now();
-      let elapsed = currentTime - this.state.startTime;
-      if (elapsed < 2000) {
-        setTimeout(() => this.setState({ loading: false }), 2000);
-      } else {
-        this.setState({ loading: false });
-      }
-      axios
-      .post(`/api/basket/${currentLocalTime}`, { businessIDs })
-      .then((baskets) => {
-        //Logic for loading screen time
+    let basketPromise = axios
+      .get('/api/business/all')
+      .then((businesses) => {
+        let businessIDs = [];
+        for (var ids in businesses.data) {
+          businessIDs.push(~~ids);
+        }
+
+        console.log(businessIDs);
         let currentTime = Date.now();
         let elapsed = currentTime - this.state.startTime;
         if (elapsed < 2000) {
@@ -114,22 +105,34 @@ class NonProfit extends React.Component {
         } else {
           this.setState({ loading: false });
         }
+        axios
+          .post(`/api/basket/${currentLocalTime}`, { businessIDs })
+          .then((baskets) => {
+            // console.log(baskets);
+            //Logic for loading screen time
+            let currentTime = Date.now();
+            let elapsed = currentTime - this.state.startTime;
+            if (elapsed < 2000) {
+              setTimeout(() => this.setState({ loading: false }), 2000);
+            } else {
+              this.setState({ loading: false });
+            }
 
-        this.setState(
-          {
-            baskets: baskets.data
-          },
-          () => this.displayBusinessToMap()
-        );
-      }).catch(() => {
+            this.setState(
+              {
+                baskets: baskets.data
+              },
+              () => this.displayBusinessToMap()
+            );
+          })
+          .catch(() => {
+            window.location.assign('/#/500');
+          });
+      })
+      .catch(() => {
         window.location.assign('/#/500');
       });
-      
-    }).catch(()=> {
-      window.location.assign('/#/500');
-    })
-    
-    
+
     // axios
     //   .post(`/api/basket/${currentLocalTime}`, { businessIDs })
     //   .then((baskets) => {
@@ -179,14 +182,15 @@ class NonProfit extends React.Component {
     Promise.all([basketPromise, wishListPromise, schedulePromise]).then(() => {
       const { baskets, wishList } = this.state;
 
-      if(wishList){
-      if (baskets.length > 0) {
-        let modifiedBaskets = sortUtil.sortByWishList(baskets, wishList);
+      if (wishList) {
+        if (baskets.length > 0) {
+          let modifiedBaskets = sortUtil.sortByWishList(baskets, wishList);
 
-        this.setState({
-          baskets: modifiedBaskets
-        });
-      }}
+          this.setState({
+            baskets: modifiedBaskets
+          });
+        }
+      }
     });
   }
 
@@ -353,19 +357,19 @@ class NonProfit extends React.Component {
     let arr = [];
     let { baskets } = this.state;
 
-    console.log(baskets);
+    // console.log(baskets);
 
     for (let i = 0; i < baskets.length; i++) {
       arr.push(baskets[i].business_id);
     }
 
     var uniq = [...new Set(arr)];
-    console.log(uniq);
+    // console.log(uniq);
 
     axios
       .post('/api/nonprofit/businesslocation', { businessID: uniq })
       .then((locations) => {
-        console.log(locations);
+        // console.log(locations);
         this.setState({
           markers: locations.data
         });
@@ -379,7 +383,6 @@ class NonProfit extends React.Component {
   }
 
   render() {
-    
     const {
       nonProfitInfo,
       baskets,
@@ -395,7 +398,7 @@ class NonProfit extends React.Component {
     } else {
       return (
         <main className="mobile">
-          <NewHeader acctType = {this.state.acct_type}/>
+          <NewHeader acctType={this.state.acct_type} />
           <div className="np-view-main">
             <div className="np-view-col-1">
               <div className="google-maps">
@@ -414,7 +417,7 @@ class NonProfit extends React.Component {
               <div className="np-wishlist-basket-container">
                 <h3>Wish List</h3>
                 <WishList
-                  _wishlist={this.wishList}
+                  _wishList={wishList}
                   _createWishList={this.createWishList}
                   _addWishListItem={this.addWishListItem}
                   parent_editWishListItem={this.parent_editWishListItem}
@@ -436,6 +439,13 @@ class NonProfit extends React.Component {
 
               <div className="np-avail-basket-container">
                 <h3>Available Baskets</h3>
+                <Search
+                  _searchInput={searchInput}
+                  _initializeComponent={this.initializeComponent}
+                  _handleChange={this.handleChange}
+                  _searchBaskets={this.searchBaskets}
+                />
+                <Sort _sortBaskets={this.sortBaskets} />
                 <NonProfitBasketList
                   _baskets={baskets}
                   _scheduleBasket={this.scheduleBasket}
