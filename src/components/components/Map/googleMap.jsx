@@ -32,7 +32,7 @@ export class Container extends Component {
   };
 
   render() {
-    // console.log(this.props.markeers);
+    console.log(this.state.activeMarker);
     const { markeers } = this.props;
 
     const style = {
@@ -45,11 +45,14 @@ export class Container extends Component {
     };
 
     let displayMarkers = markeers.map((markeer, i) => {
+      console.log(markeer);
       return (
         <Marker
           key={i}
           position={{ lat: markeer.latitude, lng: markeer.longitude }}
-          name={markeer.business_name}
+          name={markeer.company_name}
+          city={`${markeer.city} ${markeer.state}`}
+          address={markeer.street_address}
           onClick={this.onMarkerClick}
         />
       );
@@ -66,10 +69,12 @@ export class Container extends Component {
           google={this.props.google}
           initialCenter={this.props.mapCenter}
           zoom={10}
-          onClick={this.onMapClicked}
+          // onClick={this.onMapClicked}
         >
           <Marker
             name={this.props.npName}
+            address={this.props.address}
+            city={this.props.city}
             onClick={this.onMarkerClick}
             icon={{
               url:
@@ -84,6 +89,7 @@ export class Container extends Component {
             visible={this.state.showingInfoWindow}
           >
             <div>
+              {console.log(this.state.activeMarker)}
               <h1
                 style={{
                   fontWeight: '700',
@@ -91,13 +97,11 @@ export class Container extends Component {
                   marginBottom: '3px'
                 }}
               >
-                {this.props.npName}
+                {this.state.activeMarker.name}
               </h1>
-              <h4>{this.props.address}</h4>
-              <h4>{this.props.city}</h4>
-              <h4>{`You have ${
-                this.props.scheduledBaskets
-              } pickup(s) scheduled.`}</h4>
+              <h4>{this.state.activeMarker.address}</h4>
+              <h4>{this.state.activeMarker.city}</h4>
+              <h4>There are items available for pickup!</h4>
             </div>
           </InfoWindow>
         </Map>

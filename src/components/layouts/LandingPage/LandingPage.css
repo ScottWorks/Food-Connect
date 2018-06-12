@@ -83,8 +83,7 @@
     }
     .landing_hexmap_container {
         /* background-color: green; */
-        background-image: url('https://www.supplychain247.com/images/article/Council_on_Foreign_Relations_food_waste_map.jpg');
-        background-size: cover;
+        
         width: 90%;
         height: 220px;
     }
@@ -607,7 +606,7 @@
         height: fit-content;
     }
     .landing_about_container p {
-        line-height: 20px;
+        line-height: 1.375em;
         text-align: center;
         margin-bottom: 10px;
     }

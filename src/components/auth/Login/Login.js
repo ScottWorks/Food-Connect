@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Modal from 'react-modal';
-import Header from "../../components/Header/Header.js";
+import Header from "../../components/Header/NewHeader.js";
 import Footer from "../../components/Footer/Footer.js";
 import "./Login.css"
 import {Link} from 'react-router-dom';
@@ -14,9 +14,11 @@ export default class Auth extends Component {
         this.state = {
             userName: '',
             pw: '',
-            isMobile: true
+            isMobile: true,
+            invalid: false,
         }
         this.updateDevice = this.updateDevice.bind(this);
+        this.clearInputs = this.clearInputs.bind(this);
     }
 
     componentDidMount(){
@@ -33,21 +35,28 @@ export default class Auth extends Component {
     }
     handleClick(e) {
         e.preventDefault();
-        console.log()
         axios.post('/api/auth/login',{ userName: this.state.userName, pw: this.state.pw }).then( res => {
+            console.log(res)
             if(res.data === 'You are the chosen one!') {
                 window.location.assign('/#/business')
             }
             if(res.data === 'You are also the chosen one!') {
                 window.location.assign('/#/nonprofit')
             }
-            if(res.data === 'Wrong Password') {
-                alert('Wrong Password. Please try again.')
+        }).catch(err=>{
+            if(err.response.data === 'Wrong Password') {
+                this.setState({invalid: true});
+            } else if (err.response.data === 'Please create an account before logging in.'){
+                alert('Please Create an Account');
+                this.clearInputs();
             }
-            if(res.data === 'Please create an account before logging in.')
-                alert('Please create an account before logging in.')
         })
     }
+
+    clearInputs(){
+        this.setState({userName: '', pw: '', invalid: false})
+    }
+
 
     render() {
         
@@ -85,23 +94,28 @@ export default class Auth extends Component {
                     </div>
                     <h2>Username</h2>
                     <input required='true' 
+                    value={this.state.userName}
                     name='username'
                         onChange={(e) => this.setState({ userName: e.target.value })}
                         type='text'
                     />
                     <h2>Password</h2>
                     <input
+                    value={this.state.pw}
                     required='true' 
                         onChange={(e) => this.setState({ pw: e.target.value })}
                         type='password'
                     />
                     
                         <button type='submit' onClick={(e) => this.handleClick(e)}>LOGIN</button>
+                        {
+                            this.state.invalid ? <div className='pw-error-login'>Incorrect Password<br/>Please Try Again</div> : null
+                        }
                     
                     </form>
 
                     <section className='register-text'>
-                        <p>New to Crumb? <Link to='/register'>Please Register</Link></p>
+                        <p>New to Food-Connect? <Link to='/register'>Please Register</Link></p>
                     </section>
                 </div>
 
@@ -110,7 +124,7 @@ export default class Auth extends Component {
                     this.state.isMobile ? null : (
                         <div className='particles-side-container'>
                             <Particles params={particlesParams} className='particles-js'/>
-                            <h1>crumb</h1>
+                            <h1>food-connect</h1>
                         </div>
                     )
                 }

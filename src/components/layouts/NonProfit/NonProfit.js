@@ -23,15 +23,16 @@ class NonProfit extends React.Component {
   constructor() {
     super();
     this.state = {
-      nonProfitID: 3,
-      nonProfitInfo: {},
+      nonProfitID: 0,
+      acct_type: '',
       baskets: [],
       wishList: [],
       scheduledBaskets: [],
       searchInput: '',
       loading: true,
       startTime: null,
-      markers: []
+      markers: [],
+      businessIDs: []
     };
 
     this.initializeComponent = this.initializeComponent.bind(this);
@@ -60,7 +61,11 @@ class NonProfit extends React.Component {
           typeof user.data.user_id === 'number' &&
           user.data.acct_type === 'np'
         ) {
-          console.log('Validated!', user);
+          console.log('Validated!', user.data.user_id);
+          this.setState({
+            nonProfitID: user.data.acct_id,
+            acct_type: user.data.acct_type
+          });
         } else if (
           typeof user.data.user_id === 'number' &&
           user.data.acct_type === 'b'
@@ -84,14 +89,15 @@ class NonProfit extends React.Component {
   initializeComponent() {
     const { nonProfitID } = this.state;
     const currentLocalTime = new Date().getTime();
-    const businessIDs = [1, 2, 3, 4, 5, 6, 7, 8];
-    // const businessIDs = [60, 70, 80];
-
     let basketPromise = axios
-      .post(`/api/basket/${currentLocalTime}`, { businessIDs })
-      .then((baskets) => {
-        // console.log(baskets);
-        //Logic for loading screen time
+      .get('/api/business/all')
+      .then((businesses) => {
+        let businessIDs = [];
+        for (var ids in businesses.data) {
+          businessIDs.push(~~ids);
+        }
+
+        console.log(businessIDs);
         let currentTime = Date.now();
         let elapsed = currentTime - this.state.startTime;
         if (elapsed < 2000) {
@@ -99,17 +105,57 @@ class NonProfit extends React.Component {
         } else {
           this.setState({ loading: false });
         }
+        axios
+          .post(`/api/basket/${currentLocalTime}`, { businessIDs })
+          .then((baskets) => {
+            // console.log(baskets);
+            //Logic for loading screen time
+            let currentTime = Date.now();
+            let elapsed = currentTime - this.state.startTime;
+            if (elapsed < 2000) {
+              setTimeout(() => this.setState({ loading: false }), 2000);
+            } else {
+              this.setState({ loading: false });
+            }
 
-        this.setState(
-          {
-            baskets: baskets.data
-          },
-          () => this.displayBusinessToMap()
-        );
+            this.setState(
+              {
+                baskets: baskets.data
+              },
+              () => this.displayBusinessToMap()
+            );
+          })
+          .catch(() => {
+            window.location.assign('/#/500');
+          });
       })
       .catch(() => {
         window.location.assign('/#/500');
       });
+
+    // axios
+    //   .post(`/api/basket/${currentLocalTime}`, { businessIDs })
+    //   .then((baskets) => {
+    //     console.log(baskets);
+    //     //Logic for loading screen time
+    //     let currentTime = Date.now();
+    //     let elapsed = currentTime - this.state.startTime;
+    //     if (elapsed < 2000) {
+    //       setTimeout(() => this.setState({ loading: false }), 2000);
+    //     } else {
+    //       this.setState({ loading: false });
+    //     }
+
+    //     this.setState(
+    //       {
+    //         baskets: baskets.data
+    //       },
+    //       () => this.displayBusinessToMap()
+    //     );
+    //   })
+    //   .catch(() => {
+    //     window.location.assign('/#/500');
+    //   });
 
     let wishListPromise = axios
       .get(`/api/wishlist/${nonProfitID}`)
@@ -136,12 +182,14 @@ class NonProfit extends React.Component {
     Promise.all([basketPromise, wishListPromise, schedulePromise]).then(() => {
       const { baskets, wishList } = this.state;
 
-      if (baskets.length > 0) {
-        let modifiedBaskets = sortUtil.sortByWishList(baskets, wishList);
+      if (wishList) {
+        if (baskets.length > 0) {
+          let modifiedBaskets = sortUtil.sortByWishList(baskets, wishList);
 
-        this.setState({
-          baskets: modifiedBaskets
-        });
+          this.setState({
+            baskets: modifiedBaskets
+          });
+        }
       }
     });
   }
@@ -350,7 +398,7 @@ class NonProfit extends React.Component {
     } else {
       return (
         <main className="mobile">
-          <NewHeader />
+          <NewHeader acctType={this.state.acct_type} />
           <div className="np-view-main">
             <div className="np-view-col-1">
               <div className="google-maps">
