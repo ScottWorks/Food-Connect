@@ -49,12 +49,12 @@ class LandingPage extends Component {
                     >
                         <div className="FAQ_contents">
                             <h3>Frequently Asked Questions</h3>
-                            <h4>FAQ 1</h4>
-                            <p>Lorem ipsum dolor amet meditation coloring book humblebrag ugh flannel snackwave synth tumeric, man braid pour-over etsy.</p>
-                            <h4>FAQ 2</h4>
-                            <p>Lorem ipsum dolor amet meditation coloring book humblebrag ugh flannel snackwave synth tumeric, man braid pour-over etsy.</p>
-                            <h4>FAQ 3</h4>
-                            <p>Lorem ipsum dolor amet meditation coloring book humblebrag ugh flannel snackwave synth tumeric, man braid pour-over etsy.</p>
+                            <h4>Who We Are?</h4>
+                            <p>Food-Connect is developed the follow people: Reagan Foronda, Jacob Madsen, Courtney Scott, Tayt Low, and Noah Brown.</p>
+                            <h4>What is Food-Connect?</h4>
+                            <p>Food-Connect acts as both a network that connects parties as well as a marketplace that facilitates the transactions between businesses and non-profits.</p>
+                            <h4>Who is Food-Connect For?</h4>
+                            <p>Food-Connect is for Non-Profits and Businesses who are eagered to help reduce food waste while simultaneously helping those that are in need.</p>
                         </div>
                     </Modal>
                     <div className="landing_main_media">
@@ -70,9 +70,10 @@ class LandingPage extends Component {
                     <section className="landing_about">
                         <h2 className="landing_about_title">About Us</h2>
                         <div className="landing_about_container">
-                            <p>Lorem ipsum dolor amet ethical bushwick etsy street art hammock fixie cloud bread la croix prism flexitarian man braid meh cliche.</p>
-                            <p>Actually skateboard chillwave edison bulb literally, live-edge chambray wayfarers craft beer poke pitchfork lo-fi vice flexitarian put a bird on it. Distillery godard PBR palo santo everyday carry live-edge lyft you probably haven't heard of them, kinfolk tumblr freegan raw denim pickled.</p>
-                            <p>Fashion axe skateboard prism jean shorts iceland woke 8-bit tumblr hoodie franzen pork belly austin.</p><p>Oh. You need a little dummy text for your mockup?</p><p> How quaint.</p>
+                            <p>It is estimated that in the United States nearly 41 million people face challenges with food insecurity. Additionally, 72 billion pounds of food goes to waste each year prior to reaching consumers.The goal of Food-Connect is to provide a platform for fast and efficient distribution of food donations to non-profit organizations that interacts directly with families in need.</p>
+                                
+                                <p>Food-Connect will act as both a network that connects parties as well as a marketplace that facilitates the transactions between businesses and non-profits. As a business you can create a “basket” of items to be donated to local food pantries, these “baskets” are then advertised to non-profits who can reserve and schedule the “basket(s)” for pickup. For every “basket” donation an invoice is generated and automatically sent to the business for tax purposes.</p><p> While larger players do an excellent job at redistributing larger scale donations there are still gaps in lower scale operations, we hope to fill those gaps and create a better ecosystem for everyone.</p>
+
                         </div>
                     </section>
                     <hr/>
