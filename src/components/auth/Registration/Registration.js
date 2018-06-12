@@ -348,7 +348,7 @@ class Register extends Component {
                                     onChange={this.handleChange}  value='business' id='business'/>
                                 <label  htmlFor='business'>Business</label></div>
 
-                                <input className='form-continue-button' type='submit' onClick={(e)=> this.handleContinueClickPanel1(e)}
+                                <input id="button1" className='form-continue-button' type='submit' onClick={(e)=> this.handleContinueClickPanel1(e)}
                                     value='Continue'/>
                             </form>     
                         </div>
@@ -363,16 +363,16 @@ class Register extends Component {
                         <div className={this.state.panel2State.panel2BodyState}>
                             <h2>Tell us a little more about your organization.</h2>
                             <form className='registration-form'>
-                                <input className='form-input-box'
+                                <input id='input1' className='form-input-box'
                                     onChange={(e) => this.setState({organizationName: e.target.value})}
                                     required='true' placeholder='Enter Organization Name' 
                                     type='text'/>
-                                <input className='form-input-box' 
+                                <input id='input2' className='form-input-box' 
                                     onChange={(e)=> this.setState({specificType: e.target.value})}
                                     required='true' placeholder={`Enter Type of ${this.state.organizationType}`}
                                     type='text'/>
 
-                                    <input className='form-input-box' 
+                                    <input id='input3' className='form-input-box' 
                                     onChange={(e)=> this.setState({fein: e.target.value})}
                                     required='true' placeholder='Enter FEIN'
                                     type='number'
@@ -380,7 +380,7 @@ class Register extends Component {
                                     />
 
 
-                                <input className='form-continue-button' type='submit' value='Continue' onClick={(e)=>this.handleContinueClickPanel2(e)}/>
+                                <input id="button2" className='form-continue-button' type='submit' value='Continue' onClick={(e)=>this.handleContinueClickPanel2(e)}/>
                             </form>
                         </div>
                     </section>
@@ -396,7 +396,7 @@ class Register extends Component {
                                     getAddress={this.getAddressFromAutoComplete}
                                     getlatLng={this.getLatLngFromAutoComplete}
                                 />
-                                <input className='form-continue-button' onClick={(e)=>this.handleContinueClickPanel3(e)} type='submit' value='Continue'/>
+                                <input id="button3" className='form-continue-button' onClick={(e)=>this.handleContinueClickPanel3(e)} type='submit' value='Continue'/>
                             </form>
         
                         </div>
@@ -409,20 +409,20 @@ class Register extends Component {
                         <div className={this.state.panel4State.panel4BodyState}>
                             <h2>Tell us the details</h2>
                             <form className='registration-form'>
-                                <input onChange={(e)=>this.setState({firstName:e.target.value})} 
+                                <input id='input4' onChange={(e)=>this.setState({firstName:e.target.value})} 
                                     value={this.state.firstName} className='form-input-box' required='true'
                                     type='text' placeholder='First Name'/>
-                                <input onChange={(e)=>this.setState({lastName: e.target.value})} 
+                                <input id='input5' onChange={(e)=>this.setState({lastName: e.target.value})} 
                                     value={this.state.lastName} className='form-input-box' required='true'
                                     type='text' placeholder='Last Name'/>
-                                <input onChange={(e)=>this.setState({phoneNumber: e.target.value})} 
+                                <input id='input6' onChange={(e)=>this.setState({phoneNumber: e.target.value})} 
                                     value={this.state.phoneNumber} className='form-input-box' required='true' 
                                     type='text' placeholder='Phone Number'/>
-                                <input onChange={(e)=>this.setState({operating_hours: e.target.value})} 
+                                <input id='input7' onChange={(e)=>this.setState({operating_hours: e.target.value})} 
                                     value={this.state.operating_hours} className='form-input-box' required='true' 
                                     type='text' placeholder='Business Hours'/>
 
-                                <input onChange={(e)=>this.setState({userName: e.target.value})} 
+                                <input id='input8' onChange={(e)=>this.setState({userName: e.target.value})} 
                                     value={this.state.userName} className='form-input-box' required='true' 
                                     type='text' placeholder='Username'/>
 
@@ -430,7 +430,7 @@ class Register extends Component {
 
 
                                 <div className='password_div'>
-                                    <input type={(this.state.pwShowHide1) ? "text" : "password"}
+                                    <input id='input9' type={(this.state.pwShowHide1) ? "text" : "password"}
                                         onChange={(e)=>this.setState({pw: e.target.value})}
                                         className='form-input-box' required='true' placeholder='Password'/>
                                     {!this.state.pwShowHide1 ? <img src={hidePassword} onClick={() => this.seePassword(1)} 
@@ -439,7 +439,7 @@ class Register extends Component {
                                 </div>
                                     
                                 <div className='password_div'>
-                                    <input type={(this.state.pwShowHide2) ? "text" : "password"}
+                                    <input id='input10' type={(this.state.pwShowHide2) ? "text" : "password"}
                                         className='form-input-box' required='true'
                                         onChange={(e)=>this.setState({pwConfirm: e.target.value})}placeholder='Confirm Password'/>
                                     {!this.state.pwShowHide2 ? <img src={hidePassword} onClick={() => this.seePassword(2)} 
@@ -458,7 +458,7 @@ class Register extends Component {
 </div>)
 }
 
-                                <input  onClick={(e) => this.registerOrganization(e)} 
+                                <input id='button4' onClick={(e) => this.registerOrganization(e)} 
                                     className='form-continue-button' type='submit' value='Register'/>
                             </form>
                         </div>
