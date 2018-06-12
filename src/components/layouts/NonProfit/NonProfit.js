@@ -148,7 +148,8 @@ class NonProfit extends React.Component {
           let modifiedBaskets = sortUtil.sortByWishList(baskets, wishList);
 
           this.setState({
-            baskets: modifiedBaskets
+            baskets: modifiedBaskets,
+            searchInput: ''
           });
         }
       }
