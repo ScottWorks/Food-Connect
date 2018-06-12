@@ -60,12 +60,7 @@ class WishList extends React.Component {
 
   render() {
     const { newItem, edit, editItemIdx, editItem } = this.state;
-    const {
-      _wishList,
-      _createWishList,
-      _addWishListItem,
-      _removeWishListItem
-    } = this.props;
+    const { _wishList, _createWishList, _removeWishListItem } = this.props;
 
     const wishlist = _wishList ? (
       <div>

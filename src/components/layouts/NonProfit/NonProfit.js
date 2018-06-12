@@ -2,8 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 
-import Header from '../../components/Header/Header.js';
+import LoadingDots from '../../components/LoadingPages/LoadingDots/LoadingDots.js';
 import MapContainer from '../../components/Map/googleMap';
+import NewHeader from '../../components/Header/NewHeader.js';
 import NonProfitBasketList from './NonProfitBasketList/NonProfitBasketList';
 import ScheduleList from './ScheduleList/ScheduleList';
 import Search from './Search/Search';
@@ -15,9 +16,6 @@ import * as sortUtil from '../../../config/sortUtil';
 
 import './NonProfit.css';
 import 'react-toastify/dist/ReactToastify.css';
-
-import LoadingDots from '../../components/LoadingPages/LoadingDots/LoadingDots.js';
-import NewHeader from '../../components/Header/NewHeader.js';
 
 class NonProfit extends React.Component {
   constructor() {
@@ -335,7 +333,7 @@ class NonProfit extends React.Component {
 
   searchBaskets(e) {
     e.preventDefault();
-    const { baskets, searchInput } = this.state;
+    const { searchInput } = this.state;
     const currentLocalTime = new Date().getTime();
     const businessIDs = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -388,11 +386,9 @@ class NonProfit extends React.Component {
       baskets,
       wishList,
       scheduledBaskets,
-      searchInput,
-      markers
+      searchInput
     } = this.state;
 
-    var basketLength = baskets.length;
     if (this.state.loading) {
       return <LoadingDots />;
     } else {
