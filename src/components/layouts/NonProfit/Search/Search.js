@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../../../assets/styles/Search.css'
 
 function Search(props) {
   const {
@@ -9,7 +10,7 @@ function Search(props) {
   } = props;
 
   return (
-    <div>
+    <div className='search-container'>
       <form onSubmit={(e) => _searchBaskets(e)}>
         <input
           value={_searchInput}
