@@ -171,8 +171,8 @@ class Register extends Component {
                 this.clearInputs();
     
             }).catch(err => {
-                if(err.response.status === 409)
-                this.setState({validUserName: false})
+                    window.location.assign('/#/500')
+                    this.setState({validUserName: false})                    
             })
             
         }

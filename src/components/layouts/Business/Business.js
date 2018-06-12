@@ -30,7 +30,7 @@ class Business extends React.Component {
       allItems: []
     }
 
-    this.checkIfMobile = this.checkIfMobile.bind(this);
+    // this.checkIfMobile = this.checkIfMobile.bind(this);
   }
 
   componentDidMount = async () => {
@@ -97,24 +97,24 @@ class Business extends React.Component {
       }
   }).catch( err => {
     window.location.assign('/#/login')
-    console.log('Sorry, you are not allowed...')
+    console.log('Sorry, you are not allowed...')  
   })
 
     
     axios.get(`/api/basket/${this.state.businessID}/${(new Date).getTime()}`).then(res => {
       this.props.setBasket(res.data)
     })
-    this.checkIfMobile;
-    window.addEventListener('resize', this.checkIfMobile)
+    // this.checkIfMobile;
+    // window.addEventListener('resize', this.checkIfMobile)
   }
 
-  componentWillUnmount(){
-    window.removeEventListener('resize', this.checkIfMobile)
-  }
+  // componentWillUnmount(){
+  //   window.removeEventListener('resize', this.checkIfMobile)
+  // }
 
-  checkIfMobile(){
-    this.setState({hideChart: (window.innerWidth < 667)})
-  }
+  // checkIfMobile(){
+  //   this.setState({hideChart: (window.innerWidth < 667)})
+  // }
 
   render() {
     if (this.state.loading) {
@@ -126,26 +126,21 @@ class Business extends React.Component {
         {/* <Header /> */}
         <NewHeader acctType = {this.state.businessInfo.acct_type}/>
         <div className="bus-top-bar">
-        {
-          this.state.hideChart ? null : (
-            <div className='donut-container'>
+       
+          <div className='donut-container'>
             <Donut numColors={this.state.allItems.length} totalWeight={this.state.totalWeight} totalFMV={this.state.totalFMV} allItems={this.state.allItems} businessID={this.state.businessID}/>
-          </div>)}
+          </div>
 
-          {
-            this.state.hideChart ? null : (
               <div className='barchart-container'>
             <StatChart numColors={this.state.allItems.length} allItems={this.state.allItems} totalWeight={this.state.totalWeight} totalFMV={this.state.totalFMV} businessID={this.state.businessID}/>
           </div>   
-            )
-          }
         </div>
         <div className='business-table-list-container'>
           <BusinessTable businessID={this.state.businessID} className='business-table-container'/>
           <BusinessBasketList businessID={this.state.businessID} className='business-basket-list-container'/>
         </div>
       </div>
-    )};
+    )}
   }
 }
 
