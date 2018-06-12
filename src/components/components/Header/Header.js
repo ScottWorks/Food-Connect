@@ -37,7 +37,7 @@ class Header extends Component {
         return (
             <div id="header_main">
                 <Link to="/"><img alt="scone" src={Scone} id="header_img" /></Link>
-                <h1>CRUMB</h1>
+                <h1>Food-Connect</h1>
                 <ul className={this.state.menuName}>
                 <div className='close-btn'>
                     <div className={this.state.className } onClick={()=>this.toggleHamburger()}>

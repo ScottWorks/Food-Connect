@@ -40,7 +40,7 @@ class Header extends Component {
         return (
             <div id="header_main">
                 <Link to="/"><img alt="scone" src={Scone} id="header_img" /></Link>
-                <h1>CRUMB</h1>
+                <h1>FOOD-CONNECT</h1>
                 {/* Conditionally render menu based on who is logged in */}
                 {
                     this.state.acct_type === null ? (<div><ul className={this.state.menuName}>
@@ -55,8 +55,8 @@ class Header extends Component {
                     this.props.acctType === 'b' ? (<div>
                         <ul className={this.state.menuName}>
                         <Link to="/"><li>Home</li></Link>
-                        <Link to='/business/history'><li>History</li></Link>
                         <Link to='/business'><li>Dashboard</li></Link>
+                        <Link to='/business/history'><li>History</li></Link>
                         <li className='logout-btn' onClick={()=>this.handleLogOut()}>Logout</li>
                     </ul></div>) : null
                 } {
