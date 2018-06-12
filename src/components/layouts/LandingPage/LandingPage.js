@@ -63,16 +63,14 @@ class LandingPage extends Component {
                         <Link to="/register"><div className="landing_signup_button">Sign Up</div></Link>
                         </div>
                     </div>
-                    <section className="landing_hexmap">
-                        <img src='src/assets/images/info-graph.png' alt='info-graph'/>
-                    </section>
+                    {/* <section className="landing_hexmap">
+                    </section> */}
                     <hr/>
                     <section className="landing_about">
                         <h2 className="landing_about_title">About Us</h2>
                         <div className="landing_about_container">
                             <p>It is estimated that in the United States nearly 41 million people face challenges with food insecurity. Additionally, 72 billion pounds of food goes to waste each year prior to reaching consumers.The goal of Food-Connect is to provide a platform for fast and efficient distribution of food donations to non-profit organizations that interacts directly with families in need.</p>
-                                
-                                <p>Food-Connect will act as both a network that connects parties as well as a marketplace that facilitates the transactions between businesses and non-profits. As a business you can create a “basket” of items to be donated to local food pantries, these “baskets” are then advertised to non-profits who can reserve and schedule the “basket(s)” for pickup. For every “basket” donation an invoice is generated and automatically sent to the business for tax purposes.</p><p> While larger players do an excellent job at redistributing larger scale donations there are still gaps in lower scale operations, we hope to fill those gaps and create a better ecosystem for everyone.</p>
+                            <p>Food-Connect will act as both a network that connects parties as well as a marketplace that facilitates the transactions between businesses and non-profits. As a business you can create a “basket” of items to be donated to local food pantries, these “baskets” are then advertised to non-profits who can reserve and schedule the “basket(s)” for pickup. For every “basket” donation an invoice is generated and automatically sent to the business for tax purposes.</p><p> While larger players do an excellent job at redistributing larger scale donations there are still gaps in lower scale operations, we hope to fill those gaps and create a better ecosystem for everyone.</p>
 
                         </div>
                     </section>
