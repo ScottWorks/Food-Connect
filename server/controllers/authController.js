@@ -3,7 +3,11 @@ const axios = require('axios')
 
 module.exports = {
     register: async (req, res, next) => {
-        const { organizationType, organizationName, specificType, streetAddress, city, statee, zip, firstName, lastName, phoneNumber, latitude, longitude, userName, pw, fein, operating_hours } = req.body
+        const { 
+            organizationType, organizationName, specificType, 
+            streetAddress, city, statee, zip, firstName, lastName, 
+            phoneNumber, latitude, longitude, userName, pw, fein, 
+            operating_hours } = req.body
         const db = req.app.get('db')
 
         let group;
@@ -59,7 +63,6 @@ module.exports = {
     },
     login: (req, res, next) => {
         let err = 'Default Err'
-        console.log(req.body)
         const { userName, pw } = req.body;
         const db = req.app.get('db');
 
