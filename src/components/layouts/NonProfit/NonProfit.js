@@ -87,73 +87,36 @@ class NonProfit extends React.Component {
   initializeComponent() {
     const { nonProfitID } = this.state;
     const currentLocalTime = new Date().getTime();
-    let basketPromise = axios
-      .get('/api/business/all')
-      .then((businesses) => {
-        let businessIDs = [];
-        for (var ids in businesses.data) {
-          businessIDs.push(~~ids);
-        }
 
-        console.log(businessIDs);
-        let currentTime = Date.now();
-        let elapsed = currentTime - this.state.startTime;
-        if (elapsed < 2000) {
-          setTimeout(() => this.setState({ loading: false }), 2000);
-        } else {
-          this.setState({ loading: false });
-        }
-        axios
-          .post(`/api/basket/${currentLocalTime}`, { businessIDs })
-          .then((baskets) => {
-            // console.log(baskets);
-            //Logic for loading screen time
-            let currentTime = Date.now();
-            let elapsed = currentTime - this.state.startTime;
-            if (elapsed < 2000) {
-              setTimeout(() => this.setState({ loading: false }), 2000);
-            } else {
-              this.setState({ loading: false });
-            }
+    let basketPromise = axios.get('/api/business/all').then((businesses) => {
+      let businessIDs = [];
+      for (var ids in businesses.data) {
+        businessIDs.push(~~ids);
+      }
 
-            this.setState(
-              {
-                baskets: baskets.data
-              },
-              () => this.displayBusinessToMap()
-            );
-          })
-          .catch(() => {
-            window.location.assign('/#/500');
-          });
-      })
-      .catch(() => {
-        window.location.assign('/#/500');
-      });
+      axios
+        .post(`/api/basket/${currentLocalTime}`, { businessIDs })
+        .then((baskets) => {
+          //Logic for loading screen time
+          let currentTime = Date.now();
+          let elapsed = currentTime - this.state.startTime;
+          if (elapsed < 2000) {
+            setTimeout(() => this.setState({ loading: false }), 2000);
+          } else {
+            this.setState({ loading: false });
+          }
 
-    // axios
-    //   .post(`/api/basket/${currentLocalTime}`, { businessIDs })
-    //   .then((baskets) => {
-    //     console.log(baskets);
-    //     //Logic for loading screen time
-    //     let currentTime = Date.now();
-    //     let elapsed = currentTime - this.state.startTime;
-    //     if (elapsed < 2000) {
-    //       setTimeout(() => this.setState({ loading: false }), 2000);
-    //     } else {
-    //       this.setState({ loading: false });
-    //     }
-
-    //     this.setState(
-    //       {
-    //         baskets: baskets.data
-    //       },
-    //       () => this.displayBusinessToMap()
-    //     );
-    //   })
-    //   .catch(() => {
-    //     window.location.assign('/#/500');
-    //   });
+          this.setState(
+            {
+              baskets: baskets.data
+            },
+            () => this.displayBusinessToMap()
+          );
+        })
+        .catch(() => {
+          window.location.assign('/#/500');
+        });
+    });
 
     let wishListPromise = axios
       .get(`/api/wishlist/${nonProfitID}`)
