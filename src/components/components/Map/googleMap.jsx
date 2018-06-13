@@ -32,7 +32,6 @@ export class Container extends Component {
   };
 
   render() {
-    console.log(this.state.activeMarker);
     const { markeers } = this.props;
 
     const style = {
@@ -45,7 +44,6 @@ export class Container extends Component {
     };
 
     let displayMarkers = markeers.map((markeer, i) => {
-      console.log(markeer);
       return (
         <Marker
           key={i}
@@ -89,7 +87,6 @@ export class Container extends Component {
             visible={this.state.showingInfoWindow}
           >
             <div>
-              {console.log(this.state.activeMarker)}
               <h1
                 style={{
                   fontWeight: '700',

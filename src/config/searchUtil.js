@@ -2,6 +2,7 @@ function searchBaskets(baskets, keyword) {
   let idx = 0,
     matchedItems = [],
     sortedBaskets = [...baskets];
+  console.log(baskets, keyword);
 
   if (keyword && baskets.length > 0) {
     matchedItems = baskets.filter((basket) => {
