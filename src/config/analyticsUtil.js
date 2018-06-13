@@ -61,16 +61,6 @@ module.exports = {
         return colors;
     },
 
-
-    /* 
-     *  Create Data set based on completed baskets
-     * @param Array basketHistory = Array of basket objects
-     */
-    createDataSet(basketHistory){
-        
-    },
-
-
     /*
      * Function to format a number to a particular pattern
      * @param integer num = number to format

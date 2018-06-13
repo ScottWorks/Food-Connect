@@ -1,11 +1,11 @@
-import React from 'react';
-import axios from 'axios';
-import _ from 'lodash';
-import flatten from 'lodash/flatten';
-import Header from '../../../components/Header/Header';
-import './BusinessHistory.css';
-import * as utilFunc from '../../../../config/analyticsUtil';
-import * as generalUtil from '../../../../config/generalUtil';
+import React from 'react'
+import axios from 'axios'
+import _ from 'lodash'
+import Header from '../../../components/Header/Header'
+import './BusinessHistory.css'
+import * as utilFunc from '../../../../config/analyticsUtil'
+import * as generalUtil from '../../../../config/generalUtil'
+
 
 class BusinessHistory extends React.Component {
   constructor() {
@@ -66,8 +66,8 @@ class BusinessHistory extends React.Component {
             i--;
           }
         }
-        totalWeight += itemArr[i].weight;
-        totalFMV += itemArr[i].FMV;
+        totalWeight += ~~itemArr[i].weight;
+        totalFMV += ~~itemArr[i].FMV;
       }
       this.setState({ allItems: itemArr, totalWeight, totalFMV });
     });
@@ -81,7 +81,7 @@ class BusinessHistory extends React.Component {
             <p>{e.item}</p>
           </div>
           <div className="BusinessHistory-column">
-            <p>{utilFunc.formatNumber(e.weight, 0, 3, ',', '.')}</p>
+            <p>{utilFunc.formatNumber(e.weight, 0, 3, ',', '.')} lb</p>
           </div>
           <div className="BusinessHistory-column">
             <p>${utilFunc.formatNumber(e.FMV, 2, 3, ',', '.')}</p>
@@ -92,11 +92,17 @@ class BusinessHistory extends React.Component {
 
     return (
       <div>
-        <Header acctType={this.state.businessInfo.acct_type} />
-        <div className="BusinessHistory">
+        <Header acctType = {this.state.businessInfo.acct_type}/>
+        <div 
+          className="BusinessHistory"
+          id="section-to-print"
+        >
           <div className="BusinessHistory-print-button">
             <h1>Non-Profit Donations 2018</h1>
-            <button onClick={() => window.print()}>Print</button>
+            <button
+              id="dont-print-section"
+              onClick={() => window.print()}
+            >Print</button>
           </div>
           <div className="BusinessHistory-column-names">
             <div className="BusinessHistory-column">
@@ -115,9 +121,7 @@ class BusinessHistory extends React.Component {
               <p>{`Totals: ${this.state.allItems.length}`}</p>
             </div>
             <div className="BusinessHistory-column">
-              <p>
-                {utilFunc.formatNumber(this.state.totalWeight, 0, 3, ',', '.')}
-              </p>
+              <p>{utilFunc.formatNumber(this.state.totalWeight, 0, 3, ',', '.')} lb</p>
             </div>
             <div className="BusinessHistory-column">
               <p>

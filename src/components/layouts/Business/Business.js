@@ -20,19 +20,21 @@ class Business extends React.Component {
 
     this.state = {
       hideChart: true,
-      loading: false,
+      loading: true,
       businessID: '',
       nonProfitInfo: {},
       businessInfo: '',
       totalWeight: 0,
       totalFMV: 0,
-      allItems: []
+      allItems: [],
+      startTime: null
     };
 
-    this.checkIfMobile = this.checkIfMobile.bind(this);
+    // this.checkIfMobile = this.checkIfMobile.bind(this);
   }
 
   componentDidMount = async () => {
+    this.setState({ startTime: Date.now() });
     await axios
       .get('/api/auth/me')
       .then((user) => {
@@ -114,17 +116,9 @@ class Business extends React.Component {
       .then((res) => {
         this.props.setBasket(res.data);
       });
-    this.checkIfMobile;
-    window.addEventListener('resize', this.checkIfMobile);
+      
   };
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.checkIfMobile);
-  }
-
-  checkIfMobile() {
-    this.setState({ hideChart: window.innerWidth < 667 });
-  }
 
   render() {
     if (this.state.loading) {
@@ -134,7 +128,6 @@ class Business extends React.Component {
         <div className="Business">
           <Header acctType={this.state.businessInfo.acct_type} />
           <div className="bus-top-bar">
-            {this.state.hideChart ? null : (
               <div className="donut-container">
                 <Donut
                   numColors={this.state.allItems.length}
@@ -144,9 +137,8 @@ class Business extends React.Component {
                   businessID={this.state.businessID}
                 />
               </div>
-            )}
 
-            {this.state.hideChart ? null : (
+
               <div className="barchart-container">
                 <StatChart
                   numColors={this.state.allItems.length}
@@ -156,7 +148,7 @@ class Business extends React.Component {
                   businessID={this.state.businessID}
                 />
               </div>
-            )}
+
           </div>
           <div className="business-table-list-container">
             <BusinessTable

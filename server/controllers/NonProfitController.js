@@ -45,11 +45,9 @@ module.exports = {
     const db = req.app.get('db');
     const { currentLocalTime } = req.params;
     const { businessIDs } = req.body;
-    console.log(businessIDs)
 
     db.np_getBaskets([currentLocalTime, businessIDs])
       .then((baskets) => {
-        console.log(baskets)
         res.status(200).send(baskets);
       })
       .catch(() => {

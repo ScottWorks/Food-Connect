@@ -66,6 +66,7 @@ class LandingPage extends Component {
           </Modal>
           <div className="landing_main_media">
             <div className="landing-overlay">
+            <h1 className='main-title'>Food-Connect</h1>
               <Link to="/login">
                 <div className="landing_login_button">Login</div>
               </Link>

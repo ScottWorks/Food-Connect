@@ -112,7 +112,7 @@
       color: #EBF2FA;
     }
   
-    .open-menu a:hover {
+    .open-menu li:hover {
       color: #A5BE00
     }
   
@@ -233,7 +233,7 @@
     color: #EBF2FA;
   }
 
-  .open-menu a:hover {
+  .open-menu li:hover {
     color: #A5BE00
   }
 
@@ -287,8 +287,10 @@
     
       .bar-1, .bar-2, .bar-3 {
         width: 35px;
-        height: 5px;
+        height: 4px;
         background-color: #EBF2FA;
+        margin: 6px;
+        margin-right: 10px;
         transition: 0.4s;
       }
     
@@ -357,7 +359,7 @@
         color: #EBF2FA;
       }
     
-      .open-menu a:hover {
+      .open-menu li:hover {
         color: #A5BE00
       }
     
