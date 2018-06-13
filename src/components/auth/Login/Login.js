@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import Auth from './Auth';
-import Header from '../../components/Header/NewHeader.js';
 
 import Particles from 'react-particles-js';
 
@@ -54,7 +53,6 @@ export default class Login extends Component {
 
     return (
       <div className="login-container">
-        <Header />
         <Auth />
         {this.state.isMobile ? null : (
           <div className="particles-side-container">

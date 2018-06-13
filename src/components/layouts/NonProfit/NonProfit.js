@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import LoadingDots from '../../components/LoadingPages/LoadingDots/LoadingDots.js';
 import MapContainer from '../../components/Map/googleMap';
-import NewHeader from '../../components/Header/NewHeader.js';
+import Header from '../../components/Header/Header.js';
 import NonProfitBasketList from './NonProfitBasketList/NonProfitBasketList';
 import ScheduleList from './ScheduleList/ScheduleList';
 import Search from './Search/Search';
@@ -354,7 +354,7 @@ class NonProfit extends React.Component {
     } else {
       return (
         <main className="mobile">
-          <NewHeader acctType={this.state.acct_type} />
+          <Header acctType={this.state.acct_type} />
           <div className="np-view-main">
             <div className="np-view-col-1">
               <div className="google-maps">
