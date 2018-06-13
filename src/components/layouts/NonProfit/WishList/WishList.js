@@ -4,6 +4,7 @@ import '../../../../assets/styles/Wishlist.css';
 class WishList extends React.Component {
   constructor() {
     super();
+    
     this.state = {
       newItem: '',
       edit: false,
@@ -60,12 +61,7 @@ class WishList extends React.Component {
 
   render() {
     const { newItem, edit, editItemIdx, editItem } = this.state;
-    const {
-      _wishList,
-      _createWishList,
-      _addWishListItem,
-      _removeWishListItem
-    } = this.props;
+    const { _wishList, _createWishList, _removeWishListItem } = this.props;
 
     const wishlist = _wishList ? (
       <div>
