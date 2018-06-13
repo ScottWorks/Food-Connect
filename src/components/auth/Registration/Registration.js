@@ -170,7 +170,7 @@ class Register extends Component {
                 window.location.assign('/#/login');
                 this.clearInputs();
     
-            }).catch(err => {
+            }).catch(err => {   
                     window.location.assign('/#/500')
                     this.setState({validUserName: false})                    
             })
@@ -374,7 +374,6 @@ class Register extends Component {
                                     onChange={(e)=> this.setState({fein: e.target.value})}
                                     required='true' placeholder='Enter FEIN'
                                     type='number'
-                                    max='999999999'
                                     />
 
 

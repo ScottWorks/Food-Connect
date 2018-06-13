@@ -4,6 +4,7 @@ import '../../../../assets/styles/Wishlist.css';
 class WishList extends React.Component {
   constructor() {
     super();
+    
     this.state = {
       newItem: '',
       edit: false,
