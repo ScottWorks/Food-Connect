@@ -105,7 +105,6 @@ export default function reducer(state = initialState, action) {
     case SAVE_BASKET + '_FULFILLED':
       var newSaveBasketsArr = state.baskets.slice()
       newSaveBasketsArr.push(action.payload)
-      console.log(newSaveBasketsArr)
       return Object.assign({}, state, {
         baskets: newSaveBasketsArr,
         items: [],
@@ -122,7 +121,6 @@ export default function reducer(state = initialState, action) {
       if(!state.editingBasket) {
         var otherBaskets = state.baskets.slice()
         var selectedBasket = otherBaskets.splice(action.payload, 1)[0]
-        console.log(selectedBasket.pick_up_time)
         return Object.assign({}, state, {
           items: selectedBasket.items, 
           pick_up_time: selectedBasket.pick_up_time,

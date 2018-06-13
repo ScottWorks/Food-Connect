@@ -294,7 +294,7 @@ class Register extends Component {
             this.setState({panel1State: tempPanel1State, panel2State: tempPanel2State, panel4State: tempPanel4State})
             
         }
-        console.log(this.state.address)        
+                
     }
 
     handlePanelHeader4Click(){
