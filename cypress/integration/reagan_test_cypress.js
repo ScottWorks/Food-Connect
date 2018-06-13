@@ -28,7 +28,7 @@ it('Test Login', ()=> {
     cy.url().should('eq', 'http://localhost:3000/#/nonprofit');
 });
 
-// Test Add to Wishlist
+Test Add to Wishlist
 it('Test Adding to Wishlist', ()=> {
     cy.get('.wishlist-add-container').get('form').get('input[placeholder="Add Items..."]').type('Bread').type('{enter}')
 })
@@ -48,7 +48,7 @@ it('Test Login', ()=> {
 /*
  * Test Login Page
  * Can login to Business View
- * And Click on Make a Basket
+ * And Click on Make a Basket Button
  */
 
  it('Test Make a Basket Click', ()=> {
@@ -57,5 +57,5 @@ it('Test Login', ()=> {
     cy.get('.login-form').get('input[name="username"]').next().next().type('test');
     cy.get('.login-form').get('button[type="submit"]').click();
     cy.url().should('eq', 'http://localhost:3000/#/business', {timeout: 10000});
-    cy.get('.BaksetTable')
+    cy.get('.save-make-basket-btn').click();
  })
