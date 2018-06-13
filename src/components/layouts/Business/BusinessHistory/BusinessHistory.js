@@ -66,8 +66,8 @@ class BusinessHistory extends React.Component {
             i--;
           }
         }
-        totalWeight += itemArr[i].weight;
-        totalFMV += itemArr[i].FMV;
+        totalWeight += ~~itemArr[i].weight;
+        totalFMV += ~~itemArr[i].FMV;
       }
       this.setState({ allItems: itemArr, totalWeight, totalFMV });
     });

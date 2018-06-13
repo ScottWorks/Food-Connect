@@ -67,7 +67,6 @@ class BasketTable extends React.Component {
     } else {
       this.props.makeBasket(basketObj);
     }
-    console.log(this.props.businessID)
   }
 
   render() {
