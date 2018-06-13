@@ -20,19 +20,21 @@ class Business extends React.Component {
 
     this.state = {
       hideChart: true,
-      loading: false,
+      loading: true,
       businessID: '',
       nonProfitInfo: {},
       businessInfo: '',
       totalWeight: 0,
       totalFMV: 0,
-      allItems: []
+      allItems: [],
+      startTime: null
     };
 
     // this.checkIfMobile = this.checkIfMobile.bind(this);
   }
 
   componentDidMount = async () => {
+    this.setState({ startTime: Date.now() });
     await axios
       .get('/api/auth/me')
       .then((user) => {
