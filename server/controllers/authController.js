@@ -31,7 +31,7 @@ module.exports = {
                         res.status(200).send("User Created")
                     })
                 }
-            })
+            }).catch()
 
         }
 
@@ -56,7 +56,7 @@ module.exports = {
                         console.log('Business user created!')
                     })
                 }
-            })
+            }).catch()
 
         }
 
