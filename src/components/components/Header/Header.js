@@ -53,17 +53,11 @@ class Header extends Component {
               <Link to="/">
                 <li>Home</li>
               </Link>
-              <Link to="/register">
+              <Link onClick={()=> this.toggleHamburger()} to="/register">
                 <li>Sign Up</li>
               </Link>
               <Link to="/login">
                 <li>Login</li>
-              </Link>
-              <Link to="/business">
-                <li>Business</li>
-              </Link>
-              <Link to="/nonprofit">
-                <li>Non-Profit</li>
               </Link>
             </ul>
           </div>
@@ -77,7 +71,7 @@ class Header extends Component {
               <Link to="/business">
                 <li>Dashboard</li>
               </Link>
-              <Link to="/business/history">
+              <Link onClick={()=> this.toggleHamburger()} to="/business/history">
                 <li>History</li>
               </Link>
               <li className="logout-btn" onClick={() => this.handleLogOut()}>
