@@ -56,7 +56,10 @@ export default class Login extends Component {
         <Auth />
         {this.state.isMobile ? null : (
           <div className="particles-side-container">
-            <Particles params={particlesParams} className="particles-js" />
+            <Particles 
+              params={particlesParams} 
+              className="particles-js" 
+            />
             <h1>food-connect</h1>
           </div>
         )}
