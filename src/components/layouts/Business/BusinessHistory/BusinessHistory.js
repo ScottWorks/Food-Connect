@@ -1,24 +1,43 @@
 import React from 'react'
 import axios from 'axios'
 import _ from 'lodash'
-import flatten from 'lodash/flatten'
-import Header from '../../../components/Header/Header'
+import Header from '../../../components/Header/NewHeader'
 import './BusinessHistory.css'
+import * as utilFunc from '../../../../config/analyticsUtil'
+import * as generalUtil from '../../../../config/generalUtil'
 
 class BusinessHistory extends React.Component {
   constructor() {
     super()
     this.state = {
+      businessID:'',
       allItems: [],
       totalWeight: 0,
-      totalFMV: 0
+      totalFMV: 0,
+      businessInfo:''
     }
   }
 
-  componentDidMount() {
-    var temp = 1
+  componentDidMount = async ()=> {
+    await axios.get('/api/auth/me').then( user => {
+      if(typeof user.data.user_id === 'number' && user.data.acct_type === 'b') {
+        console.log('Validated!', user)
+        this.setState({
+          businessID: user.data.acct_id,
+          businessInfo: user.data
+        })
+      }  else {
+        window.location.assign('/#/login')
+        console.log('Sorry, you are not allowed...')
+      }
+  }).catch( err => {
+    window.location.assign('/#/login')
+    console.log('Sorry, you are not allowed...')
+  })
+
+
     var itemArrFlat = []
-    axios.get(`/api/all/basket/${temp}`).then(res => {
+    axios.get(`/api/all/basket/${this.state.businessID}`).then(res => {
       for (let i = 0; i < res.data.length; i++) {
         let itemArr = res.data[i].items.slice()
         itemArrFlat.push(itemArr)
@@ -27,9 +46,9 @@ class BusinessHistory extends React.Component {
       let totalFMV = 0
       let itemArr = _.flatten([...itemArrFlat])
       for(let i = itemArr.length - 1; i >= 0; i--) {
-        itemArr[i].item = this.itemNameConverter(itemArr[i].item)
+        itemArr[i].item = generalUtil.itemNameConverter(itemArr[i].item)
         for(let j = 0; j < itemArr.length; j++) {
-          itemArr[j].item = this.itemNameConverter(itemArr[j].item)
+          itemArr[j].item = generalUtil.itemNameConverter(itemArr[j].item)
           if(itemArr[i].item === itemArr[j].item && i !== j) {
             itemArr[i].weight = Number(itemArr[i].weight)
             itemArr[i].FMV = Number(itemArr[i].FMV)
@@ -48,28 +67,19 @@ class BusinessHistory extends React.Component {
     })
   }
 
-  itemNameConverter(str) {
-    let myStr = str.toUpperCase()
-    if (myStr.indexOf(' ') === -1) {
-      if(myStr[myStr.length - 1] !== 'S') {
-        return myStr + 'S'
-      }
-    }
-    return myStr
-  }
-
   render() {
-    var displayAllItems = this.state.allItems.map(e => {
+
+    var displayAllItems = this.state.allItems.map((e, index) => {
       return (
-        <div className="BusinessHistory-item-row">
+        <div key={e+index} className="BusinessHistory-item-row">
           <div className="BusinessHistory-column">
             <p>{e.item}</p>
           </div>
           <div className="BusinessHistory-column">
-            <p>{e.weight}</p>
+            <p>{utilFunc.formatNumber(e.weight, 0, 3, ',', '.')} lb</p>
           </div>
           <div className="BusinessHistory-column">
-            <p>{e.FMV}</p>
+            <p>${utilFunc.formatNumber(e.FMV, 2, 3, ',', '.')}</p>
           </div>
         </div>
       )
@@ -77,14 +87,15 @@ class BusinessHistory extends React.Component {
     
     return (
       <div>
-        <Header />
+        <Header acctType = {this.state.businessInfo.acct_type}/>
         <div 
           className="BusinessHistory"
           id="section-to-print"
         >
           <div className="BusinessHistory-print-button">
-            <h1>Non-profit donations 2018</h1>
+            <h1>Non-Profit Donations 2018</h1>
             <button
+              id="dont-print-section"
               onClick={() => window.print()}
             >Print</button>
           </div>
@@ -99,16 +110,16 @@ class BusinessHistory extends React.Component {
               <p>Fair Market Value</p>
             </div>
           </div>
-            {displayAllItems}
+          {displayAllItems}
           <div className="BusinessHistory-column-totals">
             <div className="BusinessHistory-column">
               <p>{`Totals: ${this.state.allItems.length}`}</p>
             </div>
             <div className="BusinessHistory-column">
-              <p>{this.state.totalWeight}</p>
+              <p>{utilFunc.formatNumber(this.state.totalWeight, 0, 3, ',', '.')} lb</p>
             </div>
             <div className="BusinessHistory-column">
-              <p>{this.state.totalFMV}</p>
+              <p>${utilFunc.formatNumber(this.state.totalFMV, 2, 3, ',', '.')}</p>
             </div>
           </div>
         </div>

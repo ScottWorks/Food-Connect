@@ -57,7 +57,7 @@ class BasketTable extends React.Component {
 
   prepBasket() {
     let basketObj = {
-      business_id: 1, //Change this!!!
+      business_id: this.props.businessID, 
       pick_up_time: this.props.pick_up_time,
       status: 0,
       items: JSON.stringify(this.props.items)
@@ -67,9 +67,11 @@ class BasketTable extends React.Component {
     } else {
       this.props.makeBasket(basketObj);
     }
+    console.log(this.props.businessID)
   }
 
   render() {
+    
     return (
       <div className="BasketTable">
         <div>

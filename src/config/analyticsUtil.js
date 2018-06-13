@@ -82,7 +82,7 @@ module.exports = {
 
      formatNumber(num, decLen, len, sectionDelim, decimalDelim) {
         let regex = '\\d(?=(\\d{' + (len || 3) + '})+' + (decLen > 0 ? '\\D' : '$') + ')';
-        let number = num.toFixed(Math.max(0, ~~decLen));
+        let number = Number(num).toFixed(Math.max(0, ~~decLen));
 
     return (decimalDelim ? number.replace('.', decimalDelim) : number).replace(new RegExp(regex, 'g'), '$&' + (sectionDelim || ','));
      },
@@ -101,6 +101,6 @@ module.exports = {
             let lbsPerMeal = lbsPerDay /3;
             let mealsSaved = poundsOfFoodSaved / lbsPerMeal;
 
-            return this.formatNumber(mealsSaved, 2, 3, ',', '.');
+            return this.formatNumber(mealsSaved, 0, 3, ',', '.');
       }
 }
