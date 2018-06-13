@@ -4,6 +4,8 @@ import {Doughnut} from 'react-chartjs-2';
 import * as utilFunc  from '../../../config/analyticsUtil';
 import {connect} from 'react-redux';
 import {getBusinessBasketsCompleted} from '../../../ducks/analyticsReducer'
+import './Donut.css'
+import { equal } from 'assert';
 
 export class Donut extends React.Component{
     constructor(props) {
@@ -45,14 +47,40 @@ export class Donut extends React.Component{
         }
 
         dataCopy.datasets[0].data = data;
+        dataCopy.datasets[0].backgroundColor = utilFunc.generateRandomColors(this.props.numColors) 
         dataCopy.labels = labels;
+
         this.setState({data: dataCopy})
     }
 
+    componentWillReceiveProps(nextProps){
+        if(nextProps !== this.props){
+            let labels=[]
+            let data = []
+            let dataCopy = Object.assign({}, this.state.data)
+            
+            for(var i=0; i < nextProps.allItems.length ; i++){
+                labels.push(nextProps.allItems[i].item);
+            }
+            for(var i=0; i < nextProps.allItems.length ; i++){
+                data.push(~~nextProps.allItems[i].weight);
+            }
+    
+            dataCopy.datasets[0].data = data;
+            dataCopy.datasets[0].backgroundColor = utilFunc.generateRandomColors(nextProps.numColors) 
+            dataCopy.labels = labels;
+    
+            this.setState({data: dataCopy})
+        }
+    }
+
     render(){
+        
         return (
-            <Doughnut height={100} weight={100}  data={this.state.data} options={this.state.options}>
-            </Doughnut>
+            <div className='donut-chart'>
+                <Doughnut height={100} weight={100}  data={this.state.data} options={this.state.options}>
+                </Doughnut>
+            </div>
         )
     }
 }

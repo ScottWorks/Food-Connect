@@ -2,7 +2,7 @@
 import React from 'react'
 import axios from 'axios'
 import _ from 'lodash'
-import Header from '../../../components/Header/NewHeader'
+import Header from '../../../components/Header/Header'
 import './BusinessHistory.css'
 import * as utilFunc from '../../../../config/analyticsUtil'
 import * as generalUtil from '../../../../config/generalUtil'
@@ -67,8 +67,8 @@ class BusinessHistory extends React.Component {
             i--;
           }
         }
-        totalWeight += itemArr[i].weight;
-        totalFMV += itemArr[i].FMV;
+        totalWeight += ~~itemArr[i].weight;
+        totalFMV += ~~itemArr[i].FMV;
       }
       this.setState({ allItems: itemArr, totalWeight, totalFMV });
     });
