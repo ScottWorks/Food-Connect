@@ -12,7 +12,7 @@ export default class Auth extends Component {
     this.state = {
       userName: '',
       pw: '',
-        invalid: false
+      invalid: false
     };
     this.clearInputs = this.clearInputs.bind(this);
   }
@@ -50,46 +50,51 @@ export default class Auth extends Component {
   }
 
   render() {
-
     const { userName, pw } = this.state;
     return (
-        <div className="login_wrapper">
-          <form className="login-form">
-            <div className="login-in-header">
-              <h2>Please Sign In</h2>
+      <div className="login_wrapper">
+        <form className="login-form">
+          <div className="login-in-header">
+            <h2>Please Sign In</h2>
+          </div>
+          <h2>Username</h2>
+          <input
+            required="true"
+            value={this.state.userName}
+            name="username"
+            onChange={(e) => this.setState({ userName: e.target.value })}
+            type="text"
+          />
+          <h2>Password</h2>
+          <input
+            value={this.state.pw}
+            required="true"
+            onChange={(e) => this.setState({ pw: e.target.value })}
+            type="password"
+          />
+
+          <button type="submit" onClick={(e) => this.handleClick(e)}>
+            LOGIN
+          </button>
+          {this.state.invalid ? (
+            <div className="pw-error-login">
+              Incorrect Password<br />Please Try Again
             </div>
-            <h2>Username</h2>
-            <input
-              required="true"
-              value={this.state.userName}
-              name="username"
-              onChange={(e) => this.setState({ userName: e.target.value })}
-              type="text"
-            />
-            <h2>Password</h2>
-            <input
-              value={this.state.pw}
-              required="true"
-              onChange={(e) => this.setState({ pw: e.target.value })}
-              type="password"
-            />
+          ) : null}
+        </form>
 
-            <button type="submit" onClick={(e) => this.handleClick(e)}>
-              LOGIN
-            </button>
-            {this.state.invalid ? (
-              <div className="pw-error-login">
-                Incorrect Password<br />Please Try Again
-              </div>
-            ) : null}
-          </form>
+        <section className="register-text">
+          <p>
+            New to Food-Connect? <Link to="/register">Please Register</Link>
+          </p>
+        </section>
 
-          <section className="register-text">
-            <p>
-              New to Food-Connect? <Link to="/register">Please Register</Link>
-            </p>
-          </section>
+        <div className="link-homepage-container">
+          <Link to="/">
+            <button className="link-homepage-button">GO BACK</button>
+          </Link>
         </div>
+      </div>
     );
   }
 }

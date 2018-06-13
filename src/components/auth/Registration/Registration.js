@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import SearchInput from '../../components/PredictiveInput/placesAutocomplete';
 // import {connect} from 'react-redux'
-import './registration.css';
+import './Registration.css';
 import Modal from 'react-modal';
 import Footer from '../../components/Footer/Footer.js';
 import showPassword from '../../../assets/icons/showpassword.png';
 import hidePassword from '../../../assets/icons/hidepassword.png';
+
+import { Link } from 'react-router-dom';
 
 class Register extends Component {
   constructor() {
@@ -626,6 +628,11 @@ class Register extends Component {
               </form>
             </div>
           </section>
+          <div className="link-homepage-container">
+            <Link to="/">
+              <button className="link-homepage-button">GO BACK</button>
+            </Link>
+          </div>
         </div>
       </div>
     );
