@@ -244,6 +244,14 @@
     margin-left: 0px;
     margin-right: 0px;
   }
+
+  .main-title {
+    font-size: 2.5em;
+    padding-bottom: 20px;
+    line-height: 1.0em;
+    color: #A5BE00;
+    font-weight: bold;
+  }
 }
 
 /* TABLET VIEW */
@@ -493,6 +501,14 @@
     margin-left: 0px;
     margin-right: 0px;
   }
+
+  .main-title {
+    font-size: 4em;
+    padding-bottom: 30px;
+    line-height: 1.05em;
+    color: #A5BE00;
+    font-weight: bold;
+  }
 }
 
 /* DESKTOP VIEW */
@@ -738,5 +754,12 @@
     margin-top: 70px;
     margin-left: 0px;
     margin-right: 0px;
+  }
+  .main-title {
+    font-size: 4em;
+    padding-bottom: 30px;
+    line-height: 1.05em;
+    color: #A5BE00;
+    font-weight: bold;
   }
 }
