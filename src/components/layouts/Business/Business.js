@@ -20,7 +20,7 @@ class Business extends React.Component {
 
     this.state = {
       hideChart: true,
-      loading: false,
+      loading: true,
       businessID: '',
       nonProfitInfo: {},
       businessInfo: '',
@@ -34,7 +34,7 @@ class Business extends React.Component {
   }
 
   componentDidMount = async () => {
-    this.setState({startTime:Date.now()})
+    this.setState({ startTime: Date.now() });
     await axios
       .get('/api/auth/me')
       .then((user) => {
