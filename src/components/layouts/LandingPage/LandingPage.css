@@ -177,7 +177,7 @@
     background-size: cover;
     width: 100%;
     height: 95%;
-    border-radius: 5px;
+    border-radius: 3px;
   }
   .landing_getstarted_button {
     display: flex;
@@ -434,7 +434,7 @@
     background-size: cover;
     width: 100%;
     height: 100%;
-    border-radius: 5px;
+    border-radius: 3px;
   }
   .landing_getstarted_button {
     display: flex;
@@ -539,8 +539,10 @@
     justify-content: center;
     width: 100vw;
     height: 70vh;
-    background: url('../../../assets//images/baked-2313462_640.jpg') center
-      no-repeat;
+    background-image: url('../../../assets//images/baked-2313462_640.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
   }
   .landing_login_button {
@@ -597,8 +599,7 @@
     justify-content: center;
     align-items: center;
     height: 280px;
-    background: url('../../../assets/images/info-graph.png') center no-repeat;
-    background-size: contain;
+    background: url('../../../assets/images/info-graph.png');
   }
   .landing_hexmap_title {
     margin-top: 20px;
@@ -690,12 +691,14 @@
   .landing_getstarted_container {
     display: flex;
     justify-content: center;
-    background: url('../../../assets//images/market-3176255_1920.jpg') center
-      no-repeat;
+    background-image: url('../../../assets//images/market-3176255_1920.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
     height: 100%;
-    border-radius: 5px;
+    border-radius: 3px;
   }
   .landing_getstarted_button {
     display: flex;
@@ -746,7 +749,7 @@
   }
 
   hr {
-    margin-top: 18px;
+    margin: 18px auto;
     border: 0;
     width: 80vw;
     height: 1px;
