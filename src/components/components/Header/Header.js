@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Logo from './../../../assets/images/logo.svg';
+import Logo from './../../../assets/images/logo-3.svg';
 import './Header.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -43,7 +43,7 @@ class Header extends Component {
     return (
       <div id="header_main">
         <Link to="/">
-          <img alt="scone" src={Logo} id="header_img" />
+          <img alt="logo" src={Logo} id="header_img" />
         </Link>
         <h1>FOOD-CONNECT</h1>
         {/* Conditionally render menu based on who is logged in */}
