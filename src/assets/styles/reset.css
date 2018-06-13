@@ -35,6 +35,8 @@ body {
 	line-height: 1;
 	background: #EBF2FA;
 	font-family: 'Oxygen', sans-serif;
+}
+body, html {
 	max-width: 100%;
 	overflow-x: hidden;
 }
