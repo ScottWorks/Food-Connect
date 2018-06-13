@@ -53,7 +53,7 @@ class Header extends Component {
               <Link to="/">
                 <li>Home</li>
               </Link>
-              <Link to="/register">
+              <Link onClick={()=> this.toggleHamburger()} to="/register">
                 <li>Sign Up</li>
               </Link>
               <Link to="/login">
