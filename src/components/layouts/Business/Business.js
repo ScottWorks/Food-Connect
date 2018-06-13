@@ -114,7 +114,7 @@ class Business extends React.Component {
       .then((res) => {
         this.props.setBasket(res.data);
       });
-
+      
   };
 
 

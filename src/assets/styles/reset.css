@@ -35,6 +35,8 @@ body {
 	line-height: 1;
 	background: #EBF2FA;
 	font-family: 'Oxygen', sans-serif;
+	max-width: 100%;
+	overflow-x: hidden;
 }
 ol, ul {
 	list-style: none;
@@ -54,4 +56,8 @@ table {
 
 a {
 	text-decoration: none;
+}
+
+textarea:focus, input:focus, button:focus {
+	outline: none;
 }
