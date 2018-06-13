@@ -2,8 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 
-import Header from '../../components/Header/Header.js';
+import LoadingDots from '../../components/LoadingPages/LoadingDots/LoadingDots.js';
 import MapContainer from '../../components/Map/googleMap';
+import Header from '../../components/Header/Header.js';
 import NonProfitBasketList from './NonProfitBasketList/NonProfitBasketList';
 import ScheduleList from './ScheduleList/ScheduleList';
 import Search from './Search/Search';
@@ -15,9 +16,6 @@ import * as sortUtil from '../../../config/sortUtil';
 
 import './NonProfit.css';
 import 'react-toastify/dist/ReactToastify.css';
-
-import LoadingDots from '../../components/LoadingPages/LoadingDots/LoadingDots.js';
-import NewHeader from '../../components/Header/NewHeader.js';
 
 class NonProfit extends React.Component {
   constructor() {
@@ -89,73 +87,36 @@ class NonProfit extends React.Component {
   initializeComponent() {
     const { nonProfitID } = this.state;
     const currentLocalTime = new Date().getTime();
-    let basketPromise = axios
-      .get('/api/business/all')
-      .then((businesses) => {
-        let businessIDs = [];
-        for (var ids in businesses.data) {
-          businessIDs.push(~~ids);
-        }
 
-        console.log(businessIDs);
-        let currentTime = Date.now();
-        let elapsed = currentTime - this.state.startTime;
-        if (elapsed < 2000) {
-          setTimeout(() => this.setState({ loading: false }), 2000);
-        } else {
-          this.setState({ loading: false });
-        }
-        axios
-          .post(`/api/basket/${currentLocalTime}`, { businessIDs })
-          .then((baskets) => {
-            // console.log(baskets);
-            //Logic for loading screen time
-            let currentTime = Date.now();
-            let elapsed = currentTime - this.state.startTime;
-            if (elapsed < 2000) {
-              setTimeout(() => this.setState({ loading: false }), 2000);
-            } else {
-              this.setState({ loading: false });
-            }
+    let basketPromise = axios.get('/api/business/all').then((businesses) => {
+      let businessIDs = [];
+      for (var ids in businesses.data) {
+        businessIDs.push(~~ids);
+      }
 
-            this.setState(
-              {
-                baskets: baskets.data
-              },
-              () => this.displayBusinessToMap()
-            );
-          })
-          .catch(() => {
-            window.location.assign('/#/500');
-          });
-      })
-      .catch(() => {
-        window.location.assign('/#/500');
-      });
+      axios
+        .post(`/api/basket/${currentLocalTime}`, { businessIDs })
+        .then((baskets) => {
+          //Logic for loading screen time
+          let currentTime = Date.now();
+          let elapsed = currentTime - this.state.startTime;
+          if (elapsed < 2000) {
+            setTimeout(() => this.setState({ loading: false }), 2000);
+          } else {
+            this.setState({ loading: false });
+          }
 
-    // axios
-    //   .post(`/api/basket/${currentLocalTime}`, { businessIDs })
-    //   .then((baskets) => {
-    //     console.log(baskets);
-    //     //Logic for loading screen time
-    //     let currentTime = Date.now();
-    //     let elapsed = currentTime - this.state.startTime;
-    //     if (elapsed < 2000) {
-    //       setTimeout(() => this.setState({ loading: false }), 2000);
-    //     } else {
-    //       this.setState({ loading: false });
-    //     }
-
-    //     this.setState(
-    //       {
-    //         baskets: baskets.data
-    //       },
-    //       () => this.displayBusinessToMap()
-    //     );
-    //   })
-    //   .catch(() => {
-    //     window.location.assign('/#/500');
-    //   });
+          this.setState(
+            {
+              baskets: baskets.data
+            },
+            () => this.displayBusinessToMap()
+          );
+        })
+        .catch(() => {
+          window.location.assign('/#/500');
+        });
+    });
 
     let wishListPromise = axios
       .get(`/api/wishlist/${nonProfitID}`)
@@ -187,7 +148,8 @@ class NonProfit extends React.Component {
           let modifiedBaskets = sortUtil.sortByWishList(baskets, wishList);
 
           this.setState({
-            baskets: modifiedBaskets
+            baskets: modifiedBaskets,
+            searchInput: ''
           });
         }
       }
@@ -306,7 +268,7 @@ class NonProfit extends React.Component {
     if (baskets.length > 0) {
       switch (sortType) {
         case 'wishlist':
-          if (wishList.items && wishList.items.length > 0) {
+          if (wishList && wishList.items.length > 0) {
             modifiedBaskets = sortUtil.sortByWishList(baskets, wishList);
             this.setState({
               baskets: modifiedBaskets
@@ -335,7 +297,7 @@ class NonProfit extends React.Component {
 
   searchBaskets(e) {
     e.preventDefault();
-    const { baskets, searchInput } = this.state;
+    const { searchInput } = this.state;
     const currentLocalTime = new Date().getTime();
     const businessIDs = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -357,19 +319,15 @@ class NonProfit extends React.Component {
     let arr = [];
     let { baskets } = this.state;
 
-    // console.log(baskets);
-
     for (let i = 0; i < baskets.length; i++) {
       arr.push(baskets[i].business_id);
     }
 
     var uniq = [...new Set(arr)];
-    // console.log(uniq);
 
     axios
       .post('/api/nonprofit/businesslocation', { businessID: uniq })
       .then((locations) => {
-        // console.log(locations);
         this.setState({
           markers: locations.data
         });
@@ -388,17 +346,15 @@ class NonProfit extends React.Component {
       baskets,
       wishList,
       scheduledBaskets,
-      searchInput,
-      markers
+      searchInput
     } = this.state;
 
-    var basketLength = baskets.length;
     if (this.state.loading) {
       return <LoadingDots />;
     } else {
       return (
         <main className="mobile">
-          <NewHeader acctType={this.state.acct_type} />
+          <Header acctType={this.state.acct_type} />
           <div className="np-view-main">
             <div className="np-view-col-1">
               <div className="google-maps">
@@ -439,14 +395,15 @@ class NonProfit extends React.Component {
 
               <div className="np-avail-basket-container">
                 <h3>Available Baskets</h3>
-                <div className='sort-filter-container'>
-                <Search
-                  _searchInput={searchInput}
-                  _initializeComponent={this.initializeComponent}
-                  _handleChange={this.handleChange}
-                  _searchBaskets={this.searchBaskets}
-                />
-                <Sort _sortBaskets={this.sortBaskets} /></div>
+                <div className="sort-filter-container">
+                  <Search
+                    _searchInput={searchInput}
+                    _initializeComponent={this.initializeComponent}
+                    _handleChange={this.handleChange}
+                    _searchBaskets={this.searchBaskets}
+                  />
+                  <Sort _sortBaskets={this.sortBaskets} />
+                </div>
                 <NonProfitBasketList
                   _baskets={baskets}
                   _scheduleBasket={this.scheduleBasket}
