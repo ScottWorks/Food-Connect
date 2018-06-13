@@ -34,7 +34,8 @@ export class StatChart extends React.Component{
                         ticks: {
                             callback: function (value, index, values) {
                                 return "$" + utilFunc.formatNumber(value, 2, 3, ',', '.');
-                            }
+                            },
+                            beginAtZero: true
                         }
                     }]
                 }
