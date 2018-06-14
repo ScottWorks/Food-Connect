@@ -102,32 +102,41 @@ class ScheduleBasket extends React.Component {
 
     return (
       <section className="basket">
-
         {reserveCard}
         <div className="schedule-basket-btns">
           <button onClick={() => this.toggleReservationCard()}>Update</button>
           <button onClick={() => _cancelBasket(fakePhoneNumber, basketID)}>
             Remove
           </button>
-          <div className='confirm-pickup-btn'>
-        <button
-          onClick={({ confirmationToast }) =>
-            toast(
-              <div>
-                <h3>Are your sure?</h3>
-                <button onClick={confirmationToast}>Cancel</button>
-                <button onClick={() => this.sendConfirmation()}>Submit</button>
-              </div>,
-              {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 8000
+          <div className="confirm-pickup-btn">
+            <button
+              onClick={({ confirmationToast }) =>
+                toast(
+                  <div>
+                    <h3>Are your sure?</h3>
+                    <button
+                      className="confirmation-button"
+                      onClick={confirmationToast}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      className="confirmation-button"
+                      onClick={() => this.sendConfirmation()}
+                    >
+                      Submit
+                    </button>
+                  </div>,
+                  {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 8000
+                  }
+                )
               }
-            )
-          }
-        >
-          Confirm Pickup
-        </button>
-        </div>
+            >
+              Confirm Pickup
+            </button>
+          </div>
         </div>
         <div className="sched-basket-info-container">
           <p>{formattedTime}</p>

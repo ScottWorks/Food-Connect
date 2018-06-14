@@ -82,7 +82,7 @@ class NonProfitBasket extends React.Component {
           className="reserve-btn"
           onClick={() => this.toggleReservationCard()}
         >
-          Reserve
+          {reserve ? 'Cancel' : 'Reserve'}
         </button>
         <p>{currentBasket.company_name}</p>
         <p>{currentBasket.operating_hrs}</p>

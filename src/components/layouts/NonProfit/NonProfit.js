@@ -22,6 +22,7 @@ class NonProfit extends React.Component {
     super();
     this.state = {
       nonProfitID: 0,
+      businessIDs: [],
       acct_type: '',
       baskets: [],
       wishList: [],
@@ -93,6 +94,10 @@ class NonProfit extends React.Component {
       for (var ids in businesses.data) {
         businessIDs.push(~~ids);
       }
+
+      this.setState({
+        businessIDs: businessIDs
+      });
 
       axios
         .post(`/api/basket/${currentLocalTime}`, { businessIDs })
@@ -297,9 +302,8 @@ class NonProfit extends React.Component {
 
   searchBaskets(e) {
     e.preventDefault();
-    const { searchInput } = this.state;
+    const { businessIDs, searchInput } = this.state;
     const currentLocalTime = new Date().getTime();
-    const businessIDs = [1, 2, 3, 4, 5, 6, 7, 8];
 
     axios
       .post(`/api/basket/${currentLocalTime}`, { businessIDs })
