@@ -46,7 +46,7 @@ class Footer extends Component {
     clearEmailForm(){
         this.setState({formEmail: ''});
         this.setState({formName: ''});
-        this.setState({subject: ''})
+        this.setState({formSubject: ''})
         this.setState({formMessage: ''});
     }
 
@@ -62,7 +62,7 @@ class Footer extends Component {
                         
                         <input value={this.state.formSubject} onChange={(e)=> this.handleInputChange(e)}  name='formSubject' required='true' type='text' placeholder='Subject'/>
                         <textarea value={this.state.formMessage} onChange={(e)=> this.handleInputChange(e)}  name='formMessage' rows='5' className='message-input' required='true' type='' placeholder='Message'></textarea>
-                        <input className='submit-input' onClick={(e)=>this.handleSendEmail(e)} type='submit' value='SUBMIT'/>
+                        <input className='submit-input' onClick={(e)=>this.handleSendEmail(e)} type='submit' value='Submit'/>
                     </form>
                     
                 </section>

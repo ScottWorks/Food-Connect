@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Oxygen:400,700');
 /* FOR MOBILE DEVICES */
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
   .landing_main {
@@ -254,6 +255,9 @@
     line-height: 1.0em;
     color: #A5BE00;
     font-weight: bold;
+  }
+  textarea{
+    font-family: 'Oxygen', sans-serif;
   }
 }
 
@@ -515,6 +519,10 @@
     color: #A5BE00;
     font-weight: bold;
   }
+
+  textarea{
+    font-family: 'Oxygen', sans-serif;
+  }
 }
 
 /* DESKTOP VIEW */
@@ -771,5 +779,9 @@
     line-height: 1.05em;
     color: #A5BE00;
     font-weight: bold;
+  }
+
+  textarea{
+    font-family: 'Oxygen', sans-serif;
   }
 }
