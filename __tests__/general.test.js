@@ -40,3 +40,45 @@ test('If a blank string is given, do not add an S', ()=>{
 
     expect(result).toBe(' ');
 });
+
+test('If invalid email - should return false', ()=> {
+    let testEmail = 'jdkjf';
+
+    let result = generalFunctions.validateEmail(testEmail);
+    expect(result).toBeFalsy();
+})
+
+test('If invalid emial - should return false', ()=> {
+    let testEmail = 'xnkdjl@'
+
+    let result = generalFunctions.validateEmail(testEmail);
+    expect(result).toBeFalsy();
+})
+
+test('If invalid emial - should return false', ()=> {
+    let testEmail = 'xnkdjl@.......com'
+
+    let result = generalFunctions.validateEmail(testEmail);
+    expect(result).toBeFalsy();
+})
+
+test('If invalid email - should return false', ()=> {
+    let testEmail = 'xnkdjl@.com'
+
+    let result = generalFunctions.validateEmail(testEmail);
+    expect(result).toBeFalsy();
+})
+
+test('If valid email - should return true', ()=> {
+    let testEmail = 'hello_world@world.com'
+
+    let result = generalFunctions.validateEmail(testEmail);
+    expect(result).toBeTruthy();
+})
+
+test('If valid email - should return true', ()=> {
+    let testEmail = 'hello_worl324XLKJDJ_LKJSDFLKJSD@worldLSDIJF98980KJLN.com'
+
+    let result = generalFunctions.validateEmail(testEmail);
+    expect(result).toBeTruthy();
+})
