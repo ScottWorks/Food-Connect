@@ -316,7 +316,6 @@
 }
 
 
-
 @media print {
   .BusinessHistory {
     max-width: 800px;
@@ -416,9 +415,9 @@
     align-items: center;
   }
 
-
   body * {
     visibility: hidden;
+    overflow: hidden;
   }
   #section-to-print, #section-to-print * {
     visibility: visible;
@@ -427,6 +426,9 @@
     position: absolute;
     left: 0;
     top: 0;
+  }
+  .BusinessHistory-item-row-container {
+    width: 100%;
   }
   #dont-print-section {
     visibility: hidden;
