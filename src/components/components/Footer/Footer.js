@@ -43,9 +43,11 @@ class Footer extends Component {
             })
     
             this.clearEmailForm()
+        } else {
+            alert('Please Enter a Valid Email');
         }
 
-        alert('Please Enter a Valid Email');
+        
     }
 
     clearEmailForm(){
