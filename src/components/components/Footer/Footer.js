@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // import {Link} from "react-router-dom";
 import './Footer.css'
 import axios from 'axios'
+import * as generalUtil from '../../../config/generalUtil';
 
 class Footer extends Component {
     constructor(props) {
@@ -25,22 +26,26 @@ class Footer extends Component {
     }
 
     handleSendEmail(e){
-        e.preventDefault();
-        let email = {
-            toEmail: 'devmtngrpproject@gmail.com',
-            fromEmail: this.state.formEmail,
-            subject: `${this.state.formName} - ${this.state.formSubject}`,
-            message: this.state.formMessage
+        if(generalUtil.validateEmail(this.state.formEmail)){
+            e.preventDefault();
+            let email = {
+                toEmail: 'devmtngrpproject@gmail.com',
+                fromEmail: this.state.formEmail,
+                subject: `${this.state.formName} - ${this.state.formSubject}`,
+                message: this.state.formMessage
+            }
+    
+            axios.post(`/api/email`, email).then((result) => {
+                this.clearEmailForm()
+                
+            }).catch((err) => {
+                console.log(`Error while sending email: ${err}`);
+            })
+    
+            this.clearEmailForm()
         }
 
-        axios.post(`/api/email`, email).then((result) => {
-            this.clearEmailForm()
-            
-        }).catch((err) => {
-            console.log(`Error while sending email: ${err}`);
-        })
-
-        this.clearEmailForm()
+        alert('Please Enter a Valid Email');
     }
 
     clearEmailForm(){
