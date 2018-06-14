@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
 require('dotenv').load();
+const emailValidate = require('../../src/config/generalUtil');
 
 const {
     EMAIL_USER,
@@ -10,6 +11,9 @@ const {
 module.exports = {
     sendEmail : (req, res) => {
         const {toEmail, fromEmail, subject, message}  = req.body
+        if(!emailValidate(fromEmail)){
+            res.status(500).send('Server Error');
+        } else {
         const smtpTransport = nodemailer.createTransport({
 
             service: "Gmail",
@@ -30,8 +34,8 @@ module.exports = {
             if(error) {
                 console.log(error);
             } else {
-                res.satus(200).send(response);
+                res.status(200).send(response);
             }
-        })
+        })}
     }
 }

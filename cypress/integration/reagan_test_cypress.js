@@ -1,15 +1,16 @@
-/*
- * Test Registration Page
+/* 
+ * Can Visit Registration Page and continue on to the next Registration form Panel
  */
 
-//  Can Visit Registration Page and continue on to the next Registration form Panel
 it('Test Registration Page', ()=> {
     cy.visit('http://localhost:3000/#/register');
     cy.get('.registration-form').get('#non-profit').check().get('input').contains('Continue').click();
 
 });
 
-// //  Can Visit Registration Page and continue on to the next Registration form Panel
+/*
+ * Can Visit Registration Page and continue on to the next Registration form Panel
+ */
 it('Test Registration Page', ()=> {
     cy.visit('http://localhost:3000/#/register');
     cy.get('.registration-form').get('#non-profit').check().get('input').contains('Continue').click();
@@ -28,7 +29,9 @@ it('Test Login', ()=> {
     cy.url().should('eq', 'http://localhost:3000/#/nonprofit');
 });
 
-Test Add to Wishlist
+/*
+ *  Test Add to Wishlist
+ */
 it('Test Adding to Wishlist', ()=> {
     cy.get('.wishlist-add-container').get('form').get('input[placeholder="Add Items..."]').type('Bread').type('{enter}')
 })
@@ -37,6 +40,7 @@ it('Test Adding to Wishlist', ()=> {
  * Test Login Page
  * Can login to Business View
  */
+
 it('Test Login', ()=> {
     cy.visit('http://localhost:3000/#/login');
     cy.get('.login-form').get('input[name="username"]').type('Mark')
@@ -58,4 +62,16 @@ it('Test Login', ()=> {
     cy.get('.login-form').get('button[type="submit"]').click();
     cy.url().should('eq', 'http://localhost:3000/#/business', {timeout: 10000});
     cy.get('.save-make-basket-btn').click();
+ })
+
+/* 
+ * Test Go-Back Buotton on Login
+ * Should got back to the Landing page
+ */
+
+ it('Test Go Back Button', ()=> {
+     cy.visit('http://localhost:3000/#/', {timeout: 10000})
+     cy.get('.landing_login_button').click();
+     cy.get('.link-homepage-button').click();
+     cy.url().should('eq', 'http://localhost:3000/#/', {timeout: 20000});
  })
