@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Scone from './../../../assets/images/scone.png';
+import Logo from './../../../assets/images/banana.png';
 import './Header.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -43,7 +43,7 @@ class Header extends Component {
     return (
       <div id="header_main">
         <Link to="/">
-          <img alt="scone" src={Scone} id="header_img" />
+          <img alt="logo" src={Logo} id="header_img" />
         </Link>
         <h1>FOOD-CONNECT</h1>
         {/* Conditionally render menu based on who is logged in */}
@@ -53,17 +53,11 @@ class Header extends Component {
               <Link to="/">
                 <li>Home</li>
               </Link>
-              <Link to="/register">
+              <Link onClick={()=> this.toggleHamburger()} to="/register">
                 <li>Sign Up</li>
               </Link>
               <Link to="/login">
                 <li>Login</li>
-              </Link>
-              <Link to="/business">
-                <li>Business</li>
-              </Link>
-              <Link to="/nonprofit">
-                <li>Non-Profit</li>
               </Link>
             </ul>
           </div>
@@ -77,7 +71,7 @@ class Header extends Component {
               <Link to="/business">
                 <li>Dashboard</li>
               </Link>
-              <Link to="/business/history">
+              <Link onClick={()=> this.toggleHamburger()} to="/business/history">
                 <li>History</li>
               </Link>
               <li className="logout-btn" onClick={() => this.handleLogOut()}>

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Oxygen:400,700');
 /* FOR MOBILE DEVICES */
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
   .landing_main {
@@ -18,8 +19,10 @@
     justify-content: center;
     width: 100vw;
     height: 200px;
-    background: url('../../../assets//images/baked-2313462_640.jpg') center
-      no-repeat;
+    background-image: url('../../../assets//images/baked-2313462_640.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
   }
   .landing_login_button {
@@ -171,9 +174,10 @@
   .landing_getstarted_container {
     display: flex;
     justify-content: center;
-    background: url('../../../assets//images/market-3176255_1920.jpg') center
-      no-repeat;
-    background-size: cover;
+    background-image: url('../../../assets//images/market-3176255_1920.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
     width: 100%;
     height: 95%;
     border-radius: 3px;
@@ -226,7 +230,7 @@
   }
 
   hr {
-    margin-top: 10px;
+    margin: 10px auto;
     border: 0;
     width: 90vw;
     height: 1px;
@@ -252,6 +256,9 @@
     color: #A5BE00;
     font-weight: bold;
   }
+  textarea{
+    font-family: 'Oxygen', sans-serif;
+  }
 }
 
 /* TABLET VIEW */
@@ -274,8 +281,10 @@
     justify-content: center;
     width: 100vw;
     height: 50vh;
-    background: url('../../../assets//images/baked-2313462_640.jpg') center
-      no-repeat;
+    background-image: url('../../../assets//images/baked-2313462_640.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
   }
   .landing_login_button {
@@ -425,9 +434,10 @@
   .landing_getstarted_container {
     display: flex;
     justify-content: center;
-    background: url('../../../assets//images/market-3176255_1920.jpg') center
-      no-repeat;
-    background-size: cover;
+    background-image: url('../../../assets//images/market-3176255_1920.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
     width: 100%;
     height: 100%;
     border-radius: 3px;
@@ -483,7 +493,7 @@
   }
 
   hr {
-    margin-top: 18px;
+    margin: 18px auto;
     border: 0;
     width: 80vw;
     height: 1px;
@@ -508,6 +518,10 @@
     line-height: 1.05em;
     color: #A5BE00;
     font-weight: bold;
+  }
+
+  textarea{
+    font-family: 'Oxygen', sans-serif;
   }
 }
 
@@ -741,6 +755,7 @@
   }
 
   hr {
+    display: block;
     margin: 18px auto;
     border: 0;
     width: 80vw;
@@ -764,5 +779,9 @@
     line-height: 1.05em;
     color: #A5BE00;
     font-weight: bold;
+  }
+
+  textarea{
+    font-family: 'Oxygen', sans-serif;
   }
 }

@@ -7,7 +7,7 @@
     padding: 25px;
     background: white;
     border-radius: 3px;
-    margin: 10px auto;
+    margin: 25px auto;
     border: 1px solid #427AA1;
     box-shadow: 0 4px 8px 0 rgba(66, 122, 161, 0.2), 0 6px 20px 0 rgba(66, 122, 161, 0.19);
   }
@@ -85,7 +85,7 @@
     padding: 25px;
     background: white;
     border-radius: 3px;
-    margin: 10px auto;
+    margin: 25px auto;
     border: 1px solid #427AA1;
     box-shadow: 0 4px 8px 0 rgba(66, 122, 161, 0.2), 0 6px 20px 0 rgba(66, 122, 161, 0.19);
   }
@@ -147,7 +147,7 @@
     padding: 25px;
     background: white;
     border-radius: 3px;
-    margin: 10px auto;
+    margin: 25px auto;
     border: 1px solid #427AA1;
     box-shadow: 0 4px 8px 0 rgba(66, 122, 161, 0.2), 0 6px 20px 0 rgba(66, 122, 161, 0.19);
   }
@@ -182,9 +182,14 @@
     border:0;
   }
 
+  .business-basket-btn-grp :nth-child(2):hover{
+    background: firebrick
+  }
+
   .business-basket-edit-btn:hover{
     background: #427AA1;
   }
+
 
   .business-basket-info-contain{
     font-size: 1em;
