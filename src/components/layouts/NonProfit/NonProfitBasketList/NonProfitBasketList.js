@@ -5,6 +5,8 @@ import '../../../../assets/styles/NonProfitBasketList.css';
 function NonProfitBasketList(props) {
   const { _baskets, _scheduleBasket } = props;
 
+  console.log(_baskets);
+
   return (
     <section className="np-bucket-list">
       <DisplayBaskets _baskets={_baskets} _scheduleBasket={_scheduleBasket} />
