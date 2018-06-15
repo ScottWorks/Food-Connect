@@ -141,7 +141,7 @@ export class Container extends Component {
               {!this.state.pointDistance ? (
                 <h4>These are not the droids you are looking for</h4>
               ) : (
-                <h4>{`${this.state.pointDistance} m`}</h4>
+                <h4>{`${this.state.pointDistance} mi`}</h4>
               )}
             </div>
           </InfoWindow>

@@ -88,20 +88,25 @@ class NonProfit extends React.Component {
     const { nonProfitID } = this.state;
     const currentLocalTime = new Date().getTime();
 
-    let basketPromise = axios.get('/api/business/all').then((businesses) => {
+    let businessPromise = axios.get('/api/business/all').then((businesses) => {
       let businessIDs = [];
       for (var ids in businesses.data) {
         businessIDs.push(~~ids);
       }
-
       this.setState({
         businessIDs: businessIDs
       });
 
-      axios
-        .post(`/api/basket/${currentLocalTime}`, { businessIDs })
-        .then((baskets) => {
-          //Logic for loading screen time
+        let basketsPromise = axios
+          .post(`/api/basket/${currentLocalTime}`, { businessIDs })
+
+        let wishListPromise = axios
+        .get(`/api/wishlist/${nonProfitID}`)
+    
+        let schedulePromise = axios
+          .get(`/api/scheduled/baskets/${nonProfitID}`)
+        
+        Promise.all([wishListPromise, schedulePromise, basketsPromise]).then(([wishlistResp, scheduleResp, basketsResp]) => {
           let currentTime = Date.now();
           let elapsed = currentTime - this.state.startTime;
           if (elapsed < 2000) {
@@ -110,56 +115,32 @@ class NonProfit extends React.Component {
             this.setState({ loading: false });
           }
 
-          this.setState(
-            {
-              baskets: baskets.data
-            },
-            () => this.displayBusinessToMap()
-          );
-        })
-        .catch(() => {
+          this.setState({
+            wishList: wishlistResp.data[0],
+            scheduledBaskets: scheduleResp.data,
+            baskets: basketsResp.data
+          },
+            () => {
+              this.displayBusinessToMap()
+              const { baskets, wishList } = this.state;
+  
+              if (wishList) {
+                if (baskets.length > 0) {
+                  let modifiedBaskets = sortUtil.sortByWishList(baskets, wishList);
+        
+                  this.setState({
+                    baskets: modifiedBaskets,
+                    searchInput: ''
+                  });
+                }
+              }
+            })
+        }).catch(() => {
           window.location.assign('/#/500');
         });
-    });
-
-    let wishListPromise = axios
-      .get(`/api/wishlist/${nonProfitID}`)
-      .then((wishList) => {
-        this.setState({
-          wishList: wishList.data[0]
-        });
-      })
-      .catch(() => {
-        window.location.assign('/#/500');
       });
-
-    let schedulePromise = axios
-      .get(`/api/scheduled/baskets/${nonProfitID}`)
-      .then((scheduledBaskets) => {
-        this.setState({
-          scheduledBaskets: scheduledBaskets.data
-        });
-      })
-      .catch(() => {
-        window.location.assign('/#/500');
-      });
-
-    Promise.all([basketPromise, wishListPromise, schedulePromise]).then(() => {
-      const { baskets, wishList } = this.state;
-
-      if (wishList) {
-        if (baskets.length > 0) {
-          let modifiedBaskets = sortUtil.sortByWishList(baskets, wishList);
-
-          this.setState({
-            baskets: modifiedBaskets,
-            searchInput: ''
-          });
-        }
-      }
-    });
-  }
-
+    }
+      
   getUserInfo() {
     // change axios request to send user_id based on session after longin when routing and auth are fully implemented.
     axios
