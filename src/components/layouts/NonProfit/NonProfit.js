@@ -30,8 +30,7 @@ class NonProfit extends React.Component {
       searchInput: '',
       loading: true,
       startTime: null,
-      markers: [],
-      businessIDs: []
+      markers: []
     };
 
     this.initializeComponent = this.initializeComponent.bind(this);
