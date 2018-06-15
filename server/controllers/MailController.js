@@ -11,7 +11,7 @@ const {
 module.exports = {
     sendEmail : (req, res) => {
         const {toEmail, fromEmail, subject, message}  = req.body
-        if(!emailValidate(fromEmail)){
+        if(!emailValidate.validateEmail((fromEmail))){
             res.status(500).send('Server Error');
         } else {
         const smtpTransport = nodemailer.createTransport({
