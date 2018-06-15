@@ -74,7 +74,7 @@ export default class Auth extends Component {
           />
 
           <button type="submit" onClick={(e) => this.handleClick(e)}>
-            LOGIN
+            Login
           </button>
           {this.state.invalid ? (
             <div className="pw-error-login">
@@ -91,7 +91,7 @@ export default class Auth extends Component {
 
         <div className="link-homepage-container">
           <Link to="/">
-            <button className="link-homepage-button">GO BACK</button>
+            <button className="link-homepage-button">Go Back</button>
           </Link>
         </div>
       </div>

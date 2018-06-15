@@ -1,5 +1,21 @@
 /* FOR MOBILE DEVICES */
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+  .confirmation-button {
+    width: 120px;
+    padding: 10px;
+    margin: 10px 10px 10px 0px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 3px;
+    background: #679436;
+    color: #ebf2fa;
+    border: 0;
+  }
+
+  .confirmation-button:hover {
+    background: #427aa1;
+  }
+
   .basket {
     display: flex;
     flex-direction: row-reverse;
@@ -67,6 +83,22 @@
 
 /* TABLET VIEW */
 @media only screen and (min-device-width: 668px) and (max-device-width: 1199px) {
+  .confirmation-button {
+    width: 120px;
+    padding: 10px;
+    margin: 10px 10px 10px 0px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 3px;
+    background: #679436;
+    color: #ebf2fa;
+    border: 0;
+  }
+
+  .confirmation-button:hover {
+    background: #427aa1;
+  }
+
   .schedule-basket-btns {
     display: flex;
     justify-content: space-between;
@@ -121,6 +153,22 @@
 
 /* For Desktop */
 @media screen and (min-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 1) {
+  .confirmation-button {
+    width: 120px;
+    padding: 10px;
+    margin: 10px 10px 10px 0px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 3px;
+    background: #679436;
+    color: #ebf2fa;
+    border: 0;
+  }
+
+  .confirmation-button:hover {
+    background: #427aa1;
+  }
+
   .basket {
     display: flex;
     flex-direction: row-reverse;
